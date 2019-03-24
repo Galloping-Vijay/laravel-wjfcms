@@ -6,6 +6,7 @@ use App\Exceptions\EloquentUserProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,7 +27,8 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         //$this->registerPolicies();
-
+        // API 认证路由注册
+        Passport::routes();
         // 通过自定义的 EloquentUserProvider 覆盖系统默认的
         Auth::provider('eloquent', function ($app, $config) {
             return new EloquentUserProvider($app->make('hash'), $config['model']);
