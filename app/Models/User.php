@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class);
     }
 
+    /**
+     * Instructions:
+     * Author: vijay <1937832819@qq.com>
+     * @return mixed|string
+     */
     public function generateToken()
     {
         $this->api_token = substr(md5(uniqid()), 0,30).substr(md5(uniqid()), 0,30);

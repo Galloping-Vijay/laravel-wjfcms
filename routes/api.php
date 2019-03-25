@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,18 @@ Route::get('test', function (Request $request) {
 
 
 Route::post('register', 'Auth\RegisterController@register');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout');
 
-Route::get('articles', 'APi\ArticleController@index');
-Route::get('articles/{article}', 'Api\ArticleController@show');
-Route::post('articles', 'Api\ArticleController@store');
-Route::put('articles/{article}', 'Api\ArticleController@update');
-Route::delete('articles/{article}', 'Api\ArticleController@delete');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('articles', 'APi\ArticleController@index');
+    Route::get('articles/{article}', 'APi\ArticleController@show');
+    Route::post('articles', 'APi\ArticleController@store');
+    Route::put('articles/{article}', 'APi\ArticleController@update');
+    Route::delete('articles/{article}', 'APi\ArticleController@delete');
+});
+
+Route::middleware('auth:api')
+    ->get('/user', function (Request $request) {
+        return $request->user();
+    });
