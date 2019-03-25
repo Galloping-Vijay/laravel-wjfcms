@@ -18,11 +18,13 @@ class UsersTableSeeder extends Seeder
                 'name' => Str::random(10),
                 'email' => '1@gmail.com',
                 'password' => bcrypt('12345'),
+                'api_token'=>Str::random(10),
             ],
             [
                 'name' => Str::random(10),
                 'email' => '2@gmail.com',
                 'password' => bcrypt('12345'),
+                'api_token'=>Str::random(10),
             ]
         ]);
     }

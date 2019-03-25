@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "06400e9727e8dbf9f293bcfe0d43789e",
+    "content-hash": "e12bd0bb08dce458b9027815f2e07f02",
     "packages": [
         {
             "name": "caouecs/laravel-lang",
@@ -577,6 +577,50 @@
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
             "time": "2017-06-27T22:17:23+00:00"
+        },
+        {
+            "name": "galloping-vijay/tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Galloping-Vijay/tools.git",
+                "reference": "00560880686506320b06e7b1ef794f1e055141cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Galloping-Vijay/tools/zipball/00560880686506320b06e7b1ef794f1e055141cf",
+                "reference": "00560880686506320b06e7b1ef794f1e055141cf",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "vijay\\curl\\": "src/curl",
+                    "vijay\\queue\\": "src/queue",
+                    "vijay\\visitor\\": "src/visitor"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "vijay",
+                    "email": "1937832819@qq.com"
+                }
+            ],
+            "description": "A PHP gadget, including curl request, queue encapsulation, etc.",
+            "time": "2018-08-18T03:58:27+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -5826,7 +5870,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "galloping-vijay/tools": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
