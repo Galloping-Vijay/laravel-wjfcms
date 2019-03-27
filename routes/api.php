@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// 为了方便测试，我们先忽略 CSRF 校验
+\Laravel\Passport\Passport::$ignoreCsrfToken = true;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -35,11 +37,4 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('articles', 'APi\ArticleController@store');
     Route::put('articles/{article}', 'APi\ArticleController@update');
     Route::delete('articles/{article}', 'APi\ArticleController@delete');
-});
-
-// 为了方便测试，我们先忽略 CSRF 校验
-//\Laravel\Passport\Passport::$ignoreCsrfToken = true;
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });

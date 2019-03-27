@@ -30,8 +30,8 @@ class AuthServiceProvider extends ServiceProvider
         // API 认证路由注册
         Passport::routes();
         // 通过自定义的 EloquentUserProvider 覆盖系统默认的
-        Auth::provider('eloquent', function ($app, $config) {
+        /*Auth::provider('eloquent', function ($app, $config) {
             return new EloquentUserProvider($app->make('hash'), $config['model']);
-        });
+        });*/
     }
 }
