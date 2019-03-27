@@ -37,7 +37,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('articles/{article}', 'APi\ArticleController@delete');
 });
 
-Route::middleware('auth:api')
-    ->get('/user', function (Request $request) {
-        return $request->user();
-    });
+// 为了方便测试，我们先忽略 CSRF 校验
+//\Laravel\Passport\Passport::$ignoreCsrfToken = true;
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
