@@ -10,7 +10,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasApiTokens;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'api_token'
     ];
 
     /**
@@ -51,9 +51,10 @@ class User extends Authenticatable
      */
     public function generateToken()
     {
-        $this->api_token = substr(md5(uniqid()), 0,30).substr(md5(uniqid()), 0,30);
-        $this->save();
-
+        if (empty($this->api_token)) {
+            $this->api_token = substr(md5(uniqid()), 0, 30) . substr(md5(uniqid()), 0, 30);
+            $this->save();
+        }
         return $this->api_token;
     }
 }

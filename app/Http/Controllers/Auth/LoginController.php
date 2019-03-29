@@ -81,6 +81,8 @@ class LoginController extends Controller
                 return $this->sendLockoutResponse($request);
             }
             if ($this->attemptLogin($request)) {
+                $user = $this->guard()->user();
+                $user->generateToken();
                 return $this->sendLoginResponse($request);
             }
             $this->incrementLoginAttempts($request);

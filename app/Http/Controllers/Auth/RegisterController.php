@@ -45,7 +45,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -60,16 +60,19 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $api_tolen = substr(md5(uniqid()), 0, 30) . substr(md5(uniqid()), 0, 30);
+        $createData = [
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]);
+            'api_token' => $api_tolen
+        ];
+        return User::create($createData);
     }
 
     public function register(Request $request)
@@ -95,7 +98,7 @@ class RegisterController extends Controller
             ?: redirect($this->redirectPath());
     }
 
-    protected function registered(Request $request,User $user)
+    protected function registered(Request $request, $user)
     {
         $user->generateToken();
         if (strpos($request->path(), 'api') !== false) {//api接口操作
