@@ -95,11 +95,10 @@ class RegisterController extends Controller
             ?: redirect($this->redirectPath());
     }
 
-    protected function registered(Request $request, $user)
+    protected function registered(Request $request,User $user)
     {
-        if (strpos($request->path(), 'api') !== false) {//api接口退出操作
-            $user->generateToken();
-
+        $user->generateToken();
+        if (strpos($request->path(), 'api') !== false) {//api接口操作
             return response()->json(['data' => $user->toArray()], 201);
         }
     }
