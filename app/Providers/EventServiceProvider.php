@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\UserEventSubscriber;
 use App\Models\User;
 use App\Observers\UserObserver;
 use Illuminate\Support\Facades\Event;
@@ -23,6 +24,14 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     /**
+     * Author: vijay <1937832819@qq.com>
+     * @var array
+     */
+    protected $subscribe = [
+        UserEventSubscriber::class
+    ];
+
+    /**
      * Register any events for your application.
      *
      * @return void
@@ -30,9 +39,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
-        parent::boot();
-        User::observe(UserObserver::class);
     }
 }

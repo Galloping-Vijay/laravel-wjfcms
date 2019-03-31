@@ -44,6 +44,15 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class);
     }
 
+    public function pointLogs()
+    {
+        return $this->hasMany(PointLog::class);
+    }
+
+    protected $dispatchesEvents = [
+
+    ];
+
     /**
      * Instructions:
      * Author: vijay <1937832819@qq.com>
