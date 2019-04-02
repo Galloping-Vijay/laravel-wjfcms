@@ -13,14 +13,16 @@ class CreatePointLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('point_logs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->tinyInteger('type')->unsigned()->comment('操作类型');
-            $table->smallInteger('value')->comment('积分变动值');
-            $table->timestamps();
-            $table->index('user_id');
-        });
+        if (!Schema::hasTable('point_logs')) {
+            Schema::create('point_logs', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->unsigned();
+                $table->tinyInteger('type')->unsigned()->comment('操作类型');
+                $table->smallInteger('value')->comment('积分变动值');
+                $table->timestamps();
+                $table->index('user_id');
+            });
+        }
     }
 
     /**
