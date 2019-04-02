@@ -19,7 +19,8 @@
         "league/csv": "^9.2",
         "nesbot/carbon": "1.26.3",
         "overtrue/laravel-lang": "~3.0",
-        "tymon/jwt-auth": "^0.5.12"
+        "tymon/jwt-auth": "^0.5.12",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
