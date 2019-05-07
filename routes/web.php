@@ -10,11 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
 
 // Home 模块
 Route::namespace('Home')->group(function () {
@@ -66,15 +70,32 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
 });
 
 // 后台登录页面
+/*Route::get('admin/login/index', 'Admin\LoginController@showLoginForm')->name('admin.login');
+Route::post('admin/login/index', 'Admin\LoginController@login');
+Route::get('admin/register/index', 'Admin\RegisterController@showRegistrationForm')->name('admin.register');
+Route::post('admin/register/index', 'Admin\RegisterController@register');
+Route::post('admin/logout/index', 'Admin\LoginController@logout')->name('admin.logout');
+Route::get('admin', 'AdminController@index')->name('admin.home');*/
+
 Route::namespace('Admin')->prefix('admin')->group(function () {
     Route::redirect('/', url('admin/login/index'));
     Route::prefix('login')->group(function () {
         // 登录页面
-        Route::get('index', 'LoginController@index')->middleware('admin.login');
+        Route::get('index', 'LoginController@showLoginForm')->middleware('admin.login');
+        Route::get('/', 'LoginController@showLoginForm')->middleware('admin.login');
+        Route::post('/', 'Admin\LoginController@login');
+        Route::post('login', 'Admin\LoginController@login');
         // 退出
         Route::get('logout', 'LoginController@logout');
     });
+    //注册
+    Route::prefix('register')->group(function () {
+        Route::get('/', 'RegisterController@showRegistrationForm')->name('admin.register');
+        Route::get('index', 'RegisterController@showRegistrationForm')->name('admin.register');
+        Route::post('index', 'RegisterController@register');
+    });
 });
+
 
 // Admin 模块
 Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(function () {
@@ -304,3 +325,4 @@ Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(func
         Route::get('forceDelete/{id}', 'NavController@forceDelete');
     });
 });
+
