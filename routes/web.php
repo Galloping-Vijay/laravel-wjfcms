@@ -14,8 +14,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('test',function(){
+    pr(22);
 });
 
 Auth::routes();
@@ -42,8 +42,6 @@ Route::namespace('Home')->group(function () {
     Route::post('search', 'IndexController@search');
     // feed
     Route::get('feed', 'IndexController@feed');
-    // 用于测试
-    Route::get('test', 'IndexController@test');
     // 推荐博客
     Route::prefix('site')->group(function () {
         Route::get('/', 'SiteController@index');
@@ -70,36 +68,22 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
 });
 
 // 后台登录页面
-/*Route::get('admin/login/index', 'Admin\LoginController@showLoginForm')->name('admin.login');
-Route::post('admin/login/index', 'Admin\LoginController@login');
-Route::get('admin/register/index', 'Admin\RegisterController@showRegistrationForm')->name('admin.register');
-Route::post('admin/register/index', 'Admin\RegisterController@register');
-Route::post('admin/logout/index', 'Admin\LoginController@logout')->name('admin.logout');
-Route::get('admin', 'AdminController@index')->name('admin.home');*/
-
 Route::namespace('Admin')->prefix('admin')->group(function () {
-    Route::redirect('/', url('admin/login/index'));
-    Route::prefix('login')->group(function () {
-        // 登录页面
-        Route::get('index', 'LoginController@showLoginForm')->middleware('admin.login');
-        Route::get('/', 'LoginController@showLoginForm')->middleware('admin.login');
-        Route::post('/', 'Admin\LoginController@login');
-        Route::post('login', 'Admin\LoginController@login');
-        // 退出
-        Route::get('logout', 'LoginController@logout');
-    });
+    // 登录页面
+    Route::get('login', 'LoginController@showLoginForm')->name('admin.login');
+    Route::post('login', 'LoginController@login');
+    // 退出
+    Route::post('logout', 'LoginController@logout')->name('admin.logout');
     //注册
-    Route::prefix('register')->group(function () {
-        Route::get('/', 'RegisterController@showRegistrationForm')->name('admin.register');
-        Route::get('index', 'RegisterController@showRegistrationForm')->name('admin.register');
-        Route::post('index', 'RegisterController@register');
-    });
+    Route::get('register', 'RegisterController@showRegistrationForm')->name('admin.register');
+    Route::post('register', 'RegisterController@register');
 });
 
 
 // Admin 模块
 Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(function () {
     // 首页控制器
+    Route::get('/', 'IndexController@index')->name('admin.home');
     Route::prefix('index')->group(function () {
         // 后台首页
         Route::get('index', 'IndexController@index');

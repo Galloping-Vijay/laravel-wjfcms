@@ -23,7 +23,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/admin/index/index') }}">
+            <a class="navbar-brand" href="{{ url('/admin') }}">
                 {{ config('app.name', 'Laravel') }} Admin
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -43,11 +43,11 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.login.index') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
                         </li>
                         <li class="nav-item">
                             @if (Route::has('admin.register'))
-                                <a class="nav-link" href="{{ route('admin.register.index') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('admin.register') }}">{{ __('Register') }}</a>
                             @endif
                         </li>
                     @else
