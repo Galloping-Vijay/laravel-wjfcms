@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 .idea/
+/public/webhooks.php
 .env
 .phpunit.result.cache
 Homestead.json
