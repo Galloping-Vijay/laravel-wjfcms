@@ -84,7 +84,6 @@
                 , method: 'POST'
                 ,data: obj.field
                 ,done: function(res){
-
                     //请求成功后，写入 access_token
                     layui.data(setter.tableName, {
                         key: setter.request.tokenName

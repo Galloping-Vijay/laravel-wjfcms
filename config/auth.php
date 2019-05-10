@@ -42,13 +42,13 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'users',
             'hash' => false,
         ],
         //后台用户登录
         'admin' => [
-            'driver' => 'session',
+            'driver' => 'jwt',
             'provider' => 'admins',
         ],
     ],

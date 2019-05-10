@@ -71,7 +71,7 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
 Route::namespace('Admin')->prefix('admin')->group(function () {
     // 登录页面
     Route::get('login', 'LoginController@showLoginForm')->name('admin.login');
-    Route::post('login', 'LoginController@login');
+    Route::post('login', 'LoginController@ajaxLogin');
     // 退出
     Route::post('logout', 'LoginController@logout')->name('admin.logout');
     //注册

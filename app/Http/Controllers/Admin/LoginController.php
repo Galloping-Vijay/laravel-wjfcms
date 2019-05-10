@@ -46,7 +46,7 @@ class LoginController extends Controller
     /**
      * Handle a login request to the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -73,6 +73,31 @@ class LoginController extends Controller
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Illuminate\Validation\ValidationException
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/10
+     * Time: 21:10
+     */
+    public function ajaxLogin(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if ($this->attemptLogin($request)) {
+            $user = $this->guard()->user();
+            $user->generateToken();
+
+            return response()->json([
+                'data' => $user->toArray(),
+            ]);
+        }
 
         return $this->sendFailedLoginResponse($request);
     }
