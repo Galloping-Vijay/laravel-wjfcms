@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('test',function(){
-    pr(22);
+    pr(2);
 });
 
 Auth::routes();
@@ -83,10 +83,11 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
 // Admin 模块
 Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(function () {
     // 首页控制器
-    Route::get('/', 'IndexController@index')->name('admin.home');
+    Route::get('/', 'IndexController@index')->name('admin.index');
     Route::prefix('index')->group(function () {
         // 后台首页
         Route::get('index', 'IndexController@index');
+        Route::get('main', 'IndexController@main');
         // 更新系统
         Route::get('upgrade', 'IndexController@upgrade');
     });

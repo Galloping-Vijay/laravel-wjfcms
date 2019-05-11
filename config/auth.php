@@ -48,7 +48,7 @@ return [
         ],
         //后台用户登录
         'admin' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'admins',
         ],
     ],

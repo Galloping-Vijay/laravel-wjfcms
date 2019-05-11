@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\JWT;
 
 class LoginController extends Controller
 {
@@ -79,27 +84,40 @@ class LoginController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|void
      * @throws \Illuminate\Validation\ValidationException
      * Description:
      * User: VIjay
-     * Date: 2019/5/10
-     * Time: 21:10
+     * Date: 2019/5/11
+     * Time: 21:26
      */
     public function ajaxLogin(Request $request)
     {
         $this->validateLogin($request);
 
-        if ($this->attemptLogin($request)) {
-            $user = $this->guard()->user();
-            $user->generateToken();
+        /* If the class is using the ThrottlesLogins trait, we can automatically throttle
+         the login attempts for this application. We'll key this by the username and
+         the IP address of the client making these requests into this application.*/
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
 
-            return response()->json([
-                'data' => $user->toArray(),
-            ]);
+            return $this->sendLockoutResponse($request);
         }
+        $data = [
+            'code' => 1,
+            'msg' => '登录失败',
+            'data' => []
+        ];
+        if ($this->attemptLogin($request)) {
+            $data = [
+                'code' => 0,
+                'msg' => '登录成功',
+                'data' => []
+            ];
 
-        return $this->sendFailedLoginResponse($request);
+        }
+        return response($data);
     }
 
     // 退出后跳转页面

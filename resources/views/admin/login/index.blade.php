@@ -96,7 +96,7 @@
                         ,icon: 1
                         ,time: 1000
                     }, function(){
-                        location.href = '../'; //后台主页
+                        location.href = '/admin/index/index'; //后台主页
                     });
                 }
             });
@@ -105,10 +105,10 @@
 
 
         //实际使用时记得删除该代码
-        layer.msg('为了方便演示，用户名密码可随意输入', {
-            offset: '15px'
-            ,icon: 1
-        });
+        // layer.msg('为了方便演示，用户名密码可随意输入', {
+        //     offset: '15px'
+        //     ,icon: 1
+        // });
 
     });
 </script>
