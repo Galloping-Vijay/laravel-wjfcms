@@ -82,6 +82,20 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+        $data = [
+            'code' => 0,
+            'msg' => '操作成功',
+            'data' => []
+        ];
+
+        return response($data);
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|void
