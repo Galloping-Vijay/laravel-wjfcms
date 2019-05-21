@@ -25,7 +25,8 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('admin.index.index');
+        // 获取当前通过认证的用户...
+        return view('admin.index.index', ['admin' => Auth::user()]);
     }
 
     public function main()
