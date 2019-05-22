@@ -19,7 +19,7 @@ class CreatePermissionTables extends Migration
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('')->comment('权限名称');
-            $table->string('guard_name');
+            $table->string('guard_name')->default('');
             $table->tinyInteger('sort_order')->default('0')->comment('排序');
             $table->string('url')->default('')->comment('权限地址');
             $table->integer('level')->default('0')->comment('级别');
@@ -34,7 +34,7 @@ class CreatePermissionTables extends Migration
             $table->string('name')->default('')->comment('角色名称');
             $table->string('description')->default('')->comment('角色描述');
             $table->tinyInteger('status')->default('1')->comment('角色状态');
-            $table->string('guard_name');
+            $table->string('guard_name')->default('');
             $table->timestamps();
         });
 
