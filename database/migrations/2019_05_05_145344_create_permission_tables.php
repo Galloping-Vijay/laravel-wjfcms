@@ -27,6 +27,7 @@ class CreatePermissionTables extends Migration
             $table->integer('parent_id')->default('0')->comment('父类id');
             $table->tinyInteger('display_menu')->default('0')->comment('菜单是否显示');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {
@@ -36,6 +37,7 @@ class CreatePermissionTables extends Migration
             $table->tinyInteger('status')->default('1')->comment('角色状态');
             $table->string('guard_name')->default('');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames) {

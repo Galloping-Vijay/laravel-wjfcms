@@ -23,6 +23,7 @@ class CreateAdminsTable extends Migration
                 $table->string('email',50)->default('')->comment('邮箱');
                 $table->tinyInteger('sex')->default('-1')->comment('性别-1:保密,0:男,1:女');
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
     }
