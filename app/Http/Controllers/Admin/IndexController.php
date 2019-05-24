@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Models\Permissions;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,16 +19,30 @@ class IndexController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/24
+     * Time: 22:42
      */
     public function index()
     {
-        // 获取当前通过认证的用户...
-        return view('admin.index.index', ['admin' => Auth::user()]);
+        $user = Auth::user();
+        $permissions = $user->permissions;
+        $menu = Permissions::getMenuTree($permissions->toArray());
+        return view('admin.index.index', [
+            'admin' => $user,
+            'menu' => $menu
+        ]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/24
+     * Time: 22:40
+     */
     public function main()
     {
         return view('admin.index.main');

@@ -6,38 +6,23 @@ class Permissions extends Base
 {
 
     /**
-     * Instructions:
-     * Author: Vijay  <1937832819@qq.com>
-     * Time: 2019/4/15 15:59
-     * @param string $role_ids 例:1,2
-     * @param int $pid
-     * @param int $display_menu
-     * @return array
-     */
-    public static function menu(string $role_ids = '', int $pid = 0, int $display_menu = 1): array
-    {
-        if (empty($role_ids)) return [];
-        $sql = "select p.id,p.name,p.description,p.level,p.parent_id,p.icon from " . config('database.prefix') . "permission_role pr left join " . config('database.prefix') . "permissions p on p.id=pr.permission_id where pr.role_id IN (" . $role_ids . ") and display_menu=" . $display_menu . " order by sort_order asc";
-        $resSql = Db::query($sql);
-        if (empty($resSql)) return [];
-        $resArr = self::getSubclass($resSql, $pid);
-        return $resArr;
-    }
-
-    /**
-     * Instructions:获取Tree结构
-     * Author: Vijay  <1937832819@qq.com>
-     * Time: 2019/4/15 15:59
      * @param array $data
      * @param int $parent_id
      * @return array
+     * Description:获取菜单树结构
+     * User: VIjay
+     * Date: 2019/5/24
+     * Time: 22:38
      */
-    public static function getSubclass(array $data = [], int $parent_id = 0): array
+    public static function getMenuTree(array $data = [], int $parent_id = 0): array
     {
         $resArr = [];
         foreach ($data as $key => &$val) {
+            if($val['display_menu'] ==0){
+                continue;
+            }
             if ($val['parent_id'] == $parent_id) {
-                $val['child'] = self::getSubclass($data, $val['id']);
+                $val['child'] = self::getMenuTree($data, $val['id']);
                 $resArr[] = $val;
             }
         }
