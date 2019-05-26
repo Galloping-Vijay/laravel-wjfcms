@@ -7,6 +7,7 @@ use App\Http\Traits\TraitResource;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -37,48 +38,90 @@ class AdminController extends Controller
             $where = [];
             $account = $request->input('account', '');
             $username = $request->input('username', '');
-            if (!empty($account)) {
+            $sex = $request->input('sex', '');
+            $status = $request->input('status', '');
+            $delete = $request->input('delete', 0);
+            if ($account != '') {
                 $where[] = ['account', 'like', '%' . $account . '%'];
             }
-            if (!empty($username)) {
+            if ($username != '') {
                 $where[] = ['username', 'like', '%' . $username . '%'];
             }
-            $list = self::$model::where($where)->get();
+            if ($sex != '') {
+                $where[] = ['sex', '=', $sex];
+            }
+            if ($status != '') {
+                $where[] = ['status', '=', $status];
+            }
+            switch ($delete) {
+                case '1'://只查软删除
+                    $list = self::$model::onlyTrashed()->where($where)->get();
+                    break;
+                case '2'://全部数据
+                    $list = self::$model::withTrashed()->where($where)->get();
+                    break;
+                default://正常数据
+                    $list = self::$model::where($where)->get();
+                    break;
+            }
             $res = self::getPageData($list, $page, $limit);
             return self::resJson(0, '获取成功', $res['data'], [
                     'count' => $res['count']]
             );
         }
         return view('admin.' . self::$controlName . '.index', [
-            'control_name' => self::$controlName
+            'control_name' => self::$controlName,
+            'sex_list' => Admin::$sex,
+            'delete_list' => Admin::$delete,
+            'status_list' => Admin::$status,
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/26
+     * Time: 21:30
+     */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'account' => 'required|unique:admins|max:255',
-            'username' => 'required',
-            'password' => 'required',
-        ]);
+        $data = $request->input();
+        Validator::make(
+            $data, [
+                'username' => 'required|string|max:255',
+                'account' => 'required|max:100|unique:admins',
+                'password' => 'required|string|min:6',
+            ]
+        )->validate();
         $model = new self::$model;
-        $model->account = $request->account;
-        $model->username = $request->username;
-        $model->password = Hash::make($request->password);
-        $model->save();
+        $data['password'] = Hash::make($request->password);
+        $model::create($data);
         return $this->resJson(0, '操作成功');
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/26
+     * Time: 21:49
+     */
     public function update(Request $request, $id)
     {
-        $info = self::find($id);
+        $info = self::$model::find($id);
         if (empty($info)) {
             return $this->resJson(1, '没有该条记录');
         }
-        $res = $info->edit($request->param());
-        if ($res === false) {
-            $this->resJson(1, $info->getError());
+        $data = $request->input();
+        if (isset($request->password)) {
+            $data['password'] = Hash::make($request->password);
         }
-        $this->resJson(0, '操作成功');
+        $res = $info->update($data);
+        return $this->resJson(0, '操作成功', $res);
     }
+
 }

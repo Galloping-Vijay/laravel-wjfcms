@@ -7,33 +7,46 @@
             <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">文章ID</label>
+                        <label class="layui-form-label">账号</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="account" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">作者</label>
+                        <label class="layui-form-label">昵称</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">标题</label>
+                        <label class="layui-form-label">性别</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <select name="sex">
+                                <option value="">全部</option>
+                                @foreach($sex_list as $key=>$sex)
+                                    <option value="{{ $key }}">{{ $sex }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">文章标签</label>
+                        <label class="layui-form-label">状态</label>
                         <div class="layui-input-inline">
-                            <select name="label">
-                                <option value="">请选择标签</option>
-                                <option value="0">美食</option>
-                                <option value="1">新闻</option>
-                                <option value="2">八卦</option>
-                                <option value="3">体育</option>
-                                <option value="4">音乐</option>
+                            <select name="status">
+                                <option value="">全部</option>
+                                @foreach($status_list as $sk=>$sv)
+                                    <option value="{{ $sk }}">{{ $sv }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">是否删除</label>
+                        <div class="layui-input-inline">
+                            <select name="delete">
+                                @foreach($delete_list as $dk=>$dv)
+                                    <option value="{{ $dk }}">{{ $dv }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -70,10 +83,17 @@
                     @{{#  } }}
                 </script>
                 <script type="text/html" id="table-list">
-                    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i
-                                class="layui-icon layui-icon-edit"></i>编辑</a>
-                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i
-                                class="layui-icon layui-icon-delete"></i>删除</a>
+                    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
+                        <i class="layui-icon layui-icon-edit"></i>编辑</a>
+                    @{{#  if(d.deleted_at == null){ }}
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+                        <i class="layui-icon layui-icon-delete"></i>删除</a>
+                    @{{#  } else { }}
+                    <a class="layui-btn layui-btn-xs" lay-event="restore">
+                        <i class="layui-icon layui-icon-delete"></i>恢复数据</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="force_del">
+                        <i class="layui-icon layui-icon-delete"></i>彻底删除</a>
+                    @{{#  } }}
                 </script>
             </div>
         </div>
@@ -92,29 +112,30 @@
                 , admin = layui.admin
                 , form = layui.form;
             var control_name = $('input[name="control_name"]').val();
+            var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
+            //表格数据
             table.render({
                 elem: '#LAY-app-list'
                 , url: '/admin/' + control_name + '/index'
                 , method: 'post'
                 , where: {}
                 , headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': csrf_token
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 100, title: 'ID', sort: true}
-                    , {field: 'account', title: '账号', minWidth: 100}
+                    , {field: 'id', width: 80, title: 'ID', sort: true}
+                    , {field: 'account', title: '账号'}
                     , {field: 'username', title: '昵称'}
                     , {field: 'tel', title: '电话'}
                     , {field: 'email', title: '邮箱'}
-                    , {field: 'sex', title: '性别', templet: '#sexTpl', minWidth: 80, align: 'center'}
-                    , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 80, align: 'center'}
-                    , {title: '操作', minWidth: 150, align: 'center', fixed: 'right', toolbar: '#table-list'}
+                    , {field: 'sex', title: '性别', templet: '#sexTpl', align: 'center'}
+                    , {field: 'status', width: 80, title: '状态', templet: '#statusTpl', align: 'center'}
+                    , {title: '操作', width: 250, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
                 , page: true
                 , limit: 10
-                , text: '对不起，加载出现异常！'
             });
 
             //监听搜索
@@ -128,14 +149,17 @@
 
             //监听指定开关
             form.on('switch(table-button-status)', function (data) {
+                var id = $(this).data('id');
                 var field = {
-                    id: $(this).data('id')
-                    , status: this.checked ? 1 : 0
+                    status: this.checked ? 1 : 0
                 };
                 admin.req({
-                    url: '/admin/' + control_name + '/update'
+                    url: '/admin/' + control_name + '/update/' + id
                     , data: field
                     , method: 'POST'
+                    , headers: {
+                        'X-CSRF-TOKEN': csrf_token
+                    }
                     , done: function (res) {
                         if (res.code === 0) {
                             layer.msg(res.msg, {
@@ -155,7 +179,7 @@
             table.on('tool(LAY-app-list)', function (obj) {
                 var data = obj.data;
                 if (obj.event === 'del') {
-                    layer.confirm('确定删除此文章？', function (index) {
+                    layer.confirm('确定删除?', function (index) {
                         obj.del();
                         layer.close(index);
                     });
@@ -163,9 +187,9 @@
                     layer.open({
                         type: 2
                         , title: '编辑文章'
-                        , content: '../../../views/app/content/listform.html?id=' + data.id
+                        , content: '/admin/' + control_name + '/edit/' + data.id
                         , maxmin: true
-                        , area: ['550px', '550px']
+                        , area: ['450px', '400px']
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
                             var iframeWindow = window['layui-layer-iframe' + index]
@@ -174,23 +198,46 @@
                             //监听提交
                             iframeWindow.layui.form.on('submit(layuiadmin-app-form-edit)', function (data) {
                                 var field = data.field; //获取提交的字段
-
                                 //提交 Ajax 成功后，静态更新表格中的数据
-                                //$.ajax({});
-                                obj.update({
-                                    label: field.label
-                                    , title: field.title
-                                    , author: field.author
-                                    , status: field.status
-                                }); //数据更新
+                                admin.req({
+                                    url: '/admin/' + control_name + '/update/' + data.id
+                                    , data: field
+                                    , method: 'POST'
+                                    , headers: {
+                                        'X-CSRF-TOKEN': csrf_token
+                                    }
+                                    , done: function (res) {
+                                        if (res.code === 0) {
+                                            //登入成功的提示与跳转
+                                            layer.msg('操作成功', {
+                                                offset: '15px'
+                                                , icon: 1
+                                                , time: 1000
+                                            }, function () {
+                                                obj.update({
+                                                    account: field.account
+                                                    , username: field.username
+                                                    , tel: field.tel
+                                                    , sex: field.sex
+                                                    , status: field.status
+                                                });
+                                                table.reload('LAY-app-list');
+                                                layer.close(index); //关闭弹层
+                                            });
+                                        } else {
+                                            layer.msg('操作失败');
+                                        }
 
-                                form.render();
-                                layer.close(index); //关闭弹层
+                                    }
+                                });
                             });
-
                             submit.trigger('click');
                         }
                     });
+                } else if (obj.event === 'restore') {
+                    layer.msg(obj.event);
+                } else if (obj.event === 'force_del') {
+                    layer.msg(obj.event);
                 }
             });
 
@@ -220,25 +267,55 @@
                 add: function () {
                     layer.open({
                         type: 2
-                        , title: '添加文章'
-                        , content: 'listform.html'
+                        , title: '添加'
+                        , content: '/admin/' + control_name + '/create'
                         , maxmin: true
-                        , area: ['550px', '550px']
+                        , area: ['450px', '400px']
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
                             //点击确认触发 iframe 内容中的按钮提交
-                            var submit = layero.find('iframe').contents().find("#layuiadmin-app-form-submit");
-                            submit.click();
+                            var iframeWindow = window['layui-layer-iframe' + index]
+                                , submit = layero.find('iframe').contents().find("#layuiadmin-app-form-add");
+                            //监听提交
+                            iframeWindow.layui.form.on('submit(layuiadmin-app-form-add)', function (data) {
+                                var field = data.field;
+                                //提交 Ajax 成功后，静态更新表格中的数据
+                                admin.req({
+                                    url: '/admin/' + control_name + '/store'
+                                    , data: field
+                                    , method: 'POST'
+                                    , headers: {
+                                        'X-CSRF-TOKEN': csrf_token
+                                    }
+                                    , done: function (res) {
+                                        if (res.code === 0) {
+                                            //登入成功的提示与跳转
+                                            layer.msg('操作成功', {
+                                                offset: '15px'
+                                                , icon: 1
+                                                , time: 1000
+                                            }, function () {
+                                                table.reload('LAY-app-list');
+                                                layer.close(index); //关闭弹层
+                                            });
+                                        } else {
+                                            layer.msg('操作失败');
+                                        }
+
+                                    }
+                                });
+                            });
+                            submit.trigger('click');
                         }
                     });
                 }
             };
-
             $('.layui-btn.layuiadmin-btn-list').on('click', function () {
                 var type = $(this).data('type');
                 active[type] ? active[type].call(this) : '';
             });
 
-        });
+        })
+        ;
     </script>
 @endsection

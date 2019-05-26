@@ -4,9 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use phpDocumentor\Reflection\Types\Self_;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -15,6 +12,34 @@ class Admin extends Authenticatable
     use SoftDeletes;
     use Notifiable;
     use HasRoles;
+
+    protected $error = null;
+
+    /**
+     * @var array
+     */
+    public static $sex = [
+        -1 => '保密',
+        0 => '男',
+        1 => '女'
+    ];
+
+    /**
+     * @var array
+     */
+    public static $status = [
+        0 => '禁用',
+        1 => '正常'
+    ];
+
+    /**
+     * @var array
+     */
+    public static $delete = [
+        0 => '正常',
+        1 => '软删除',
+        2 => '全部'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -35,31 +60,14 @@ class Admin extends Authenticatable
     ];
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return null
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/26
+     * Time: 20:38
      */
-    protected function validator(array $data)
+    public function getError()
     {
-        return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'account' => 'required|unique:admins|max:255',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
-
-    public function plus($data)
-    {
-        $this->validator($data)->validate();
-        $createData = [
-            'account' => $data['account'],
-            'username' => $data['username'],
-            'password' => Hash::make($data['password']),
-            'tel' => $data['tel'] ?? '',
-            'email' => $data['email'] ?? '',
-            'sex' => $data['sex'] ?? '',
-        ];
-        self::create($createData);
+        return $this->error;
     }
 }

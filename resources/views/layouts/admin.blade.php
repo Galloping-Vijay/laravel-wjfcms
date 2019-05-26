@@ -5,7 +5,8 @@
     <title>wjfcms-laravel - @yield('title','后台管理系统')</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/layui/css/layui.css') }}" media="all">
@@ -13,13 +14,14 @@
     <script src="{{ asset('static/layuiadmin/layui/layui.js') }}"></script>
     @yield('header')
     <style>
-        .footer{
+        .footer {
             padding: 30px 0;
             line-height: 30px;
             text-align: center;
             color: #666;
             font-weight: 300;
         }
+
         .footer a {
             padding: 0 5px;
             color: initial;
@@ -34,7 +36,7 @@
 @section('footer')
     <div class="layui-footer footer footer-index">
         <div class="layui-main">
-            <p>© 2017~2020 <a href="http://www.yuemeet.com" target="_blank">超级码力网络有限公司</a> 版权所有</p>
+            <p>© 2017~2020 <a href="http://www.yuemeet.com" target="_blank">厦门超级码力网络有限公司</a> 版权所有</p>
             <p>
                 GitHub <a href="https://github.com/Galloping-Vijay/laravel-wjfcms" target="_blank">laravel-wjfcms</a>
             </p>

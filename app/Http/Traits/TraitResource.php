@@ -58,53 +58,67 @@ trait TraitResource
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/26
+     * Time: 21:30
      */
     public function store(Request $request)
     {
-//        $model = new self::$model;
-//        $res = $model->plus($request);
-//        if ($res === false) {
-//            $this->resJson(1, $model->getError());
-//        }
-//        $this->resJson(0, '操作成功');
+        $model = new self::$model;
+        $model::create($request->input());
+        return $this->resJson(0, '操作成功');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/26
+     * Time: 21:30
      */
     public function show($id)
     {
-        //
+        $info = self::$model::find($id);
+        return $this->resJson(0, '操作成功', $info);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/26
+     * Time: 21:32
      */
     public function edit($id)
     {
-        //
+        $info = self::$model::find($id);
+        return view('admin.' . self::$controlName . '.edit', [
+            'info' => $info
+        ]);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * Description:
+     * User: VIjay
+     * Date: 2019/5/26
+     * Time: 21:20
      */
     public function update(Request $request, $id)
     {
-        //
+        $info = self::$model::find($id);
+        if (empty($info)) {
+            return $this->resJson(1, '没有该条记录');
+        }
+        $res = $info->update($request->input());
+        return $this->resJson(0, '操作成功', $res);
     }
 
     /**
