@@ -54,13 +54,13 @@ class AdminController extends Controller
                 $where[] = ['status', '=', $status];
             }
             switch ($delete) {
-                case '1'://只查软删除
+                case '1':
                     $list = self::$model::onlyTrashed()->where($where)->get();
                     break;
-                case '2'://全部数据
+                case '2':
                     $list = self::$model::withTrashed()->where($where)->get();
                     break;
-                default://正常数据
+                default:
                     $list = self::$model::where($where)->get();
                     break;
             }
