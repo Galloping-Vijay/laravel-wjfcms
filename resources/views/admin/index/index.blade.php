@@ -91,17 +91,49 @@
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-                    <li data-name="home" class="layui-nav-item layui-nav-itemed">
-                        <a href="javascript:;" lay-tips="主页" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
-                            <cite>主页</cite>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd data-name="console" class="layui-this">
-                                <a lay-href="/admin/index/main">控制台</a>
-                            </dd>
-                        </dl>
-                    </li>
+                    @foreach ($menus as $menu)
+                        @if(!empty($menu['child']))
+                            <li data-name="{{ $menu['name'] }}" class="layui-nav-item layui-nav-itemed">
+                                <a href="javascript:;" lay-tips="{{ $menu['name'] }}" lay-direction="2">
+                                    <i class="layui-icon {{ $menu['icon'] }}"></i>
+                                    <cite>{{ $menu['name'] }}</cite>
+                                </a>
+                                <dl class="layui-nav-child">
+                            @foreach ($menu['child'] as $son)
+                                @if(!empty($son['child']))
+                                            <dd data-name="grid">
+                                                <a href="javascript:;">{{ $son['name'] }}</a>
+                                                <dl class="layui-nav-child">
+                                    @foreach ($son['child'] as $grandson)
+                                                    <dd data-name="list">
+                                                        <a lay-href="{{ $grandson['url'] }}">{{ $grandson['name'] }}</a>
+                                                    </dd>
+                                    @endforeach
+                                                </dl>
+                                            </dd>
+                                @else
+                                    @if($loop->parent->first)
+                                        <dd data-name="{{ $son['name'] }}" class="layui-this">
+                                            <a lay-href="{{ $son['url'] }}">{{ $son['name'] }}</a>
+                                        </dd>
+                                    @else
+                                        <dd data-name="{{ $son['name'] }}">
+                                            <a lay-href="{{ $son['url'] }}">{{ $son['name'] }}</a>
+                                        </dd>
+                                    @endif
+                                @endif
+                            @endforeach
+                                </dl>
+                            </li>
+                        @else
+                            <li data-name="{{ $menu['name'] }}" class="layui-nav-item">
+                                <a href="javascript:;" lay-href="{{ $menu['url'] }}" lay-tips="{{ $menu['name'] }}" lay-direction="2">
+                                    <i class="layui-icon layui-icon-auz"></i>
+                                    <cite>{{ $menu['name'] }}</cite>
+                                </a>
+                            </li>
+                        @endif
+                    @endforeach
                 </ul>
             </div>
         </div>

@@ -15,7 +15,7 @@ class PermissionstableSeeder extends Seeder
         $data = [
             [
                 'id' => '1',
-                'url' => 'admin/index',
+                'url' => '/admin/index',
                 'name' => '后台管理',
                 'guard_name'=>'admin',
                 'display_menu' => 1,
@@ -41,8 +41,8 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '3',
-                'url' => '/amdin/index/main',
-                'name' => '后台管理主页',
+                'url' => '/admin/index/main',
+                'name' => '控制台',
                 'guard_name'=>'admin',
                 'display_menu' => 1,
                 'parent_id' => 1,
@@ -54,7 +54,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '4',
-                'url' => 'admin/role',
+                'url' => '/admin/role',
                 'name' => '角色管理',
                 'guard_name'=>'admin',
                 'display_menu' => 1,
@@ -67,7 +67,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '5',
-                'url' => 'admin/permission',
+                'url' => '/admin/permission',
                 'name' => '权限管理',
                 'guard_name'=>'admin',
                 'display_menu' => 1,
@@ -80,7 +80,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '6',
-                'url' => 'admin/admin',
+                'url' => '/admin/admin',
                 'name' => '用户管理',
                 'guard_name'=>'admin',
                 'display_menu' => 1,
@@ -93,7 +93,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '7',
-                'url' => 'admin/role/index',
+                'url' => '/admin/role/index',
                 'name' => '角色列表',
                 'guard_name'=>'admin',
                 'display_menu' => 1,
@@ -106,7 +106,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '8',
-                'url' => 'admin/role/show',
+                'url' => '/admin/role/show',
                 'name' => '查看角色',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -119,7 +119,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '9',
-                'url' => 'admin/role/create',
+                'url' => '/admin/role/create',
                 'name' => '创建角色',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -132,7 +132,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '10',
-                'url' => 'admin/role/store',
+                'url' => '/admin/role/store',
                 'name' => '保存角色',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -145,7 +145,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '11',
-                'url' => 'admin/role/edit',
+                'url' => '/admin/role/edit',
                 'name' => '编辑角色',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -158,7 +158,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '12',
-                'url' => 'admin/role/update',
+                'url' => '/admin/role/update',
                 'name' => '修改角色',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -171,7 +171,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '13',
-                'url' => 'admin/role/destroy',
+                'url' => '/admin/role/destroy',
                 'name' => '删除角色',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -184,7 +184,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '14',
-                'url' => 'admin/permission/index',
+                'url' => '/admin/permission/index',
                 'name' => '权限列表',
                 'guard_name'=>'admin',
                 'display_menu' => 1,
@@ -197,7 +197,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '15',
-                'url' => 'admin/permission/show',
+                'url' => '/admin/permission/show',
                 'name' => '查看权限',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -210,7 +210,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '16',
-                'url' => 'admin/permission/create',
+                'url' => '/admin/permission/create',
                 'name' => '创建权限',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -223,7 +223,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '17',
-                'url' => 'admin/permission/store',
+                'url' => '/admin/permission/store',
                 'name' => '保存权限',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -236,7 +236,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '18',
-                'url' => 'admin/permission/edit',
+                'url' => '/admin/permission/edit',
                 'name' => '编辑权限',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -249,7 +249,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '19',
-                'url' => 'admin/permission/update',
+                'url' => '/admin/permission/update',
                 'name' => '修改权限',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -262,7 +262,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '20',
-                'url' => 'admin/permission/destroy',
+                'url' => '/admin/permission/destroy',
                 'name' => '删除权限',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -275,7 +275,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '21',
-                'url' => 'admin/admin/index',
+                'url' => '/admin/admin/index',
                 'name' => '管理员列表',
                 'guard_name'=>'admin',
                 'display_menu' => 1,
@@ -288,7 +288,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '22',
-                'url' => 'admin/admin/show',
+                'url' => '/admin/admin/show',
                 'name' => '查看管理员',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -301,7 +301,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '23',
-                'url' => 'admin/admin/create',
+                'url' => '/admin/admin/create',
                 'name' => '创建管理员',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -314,7 +314,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '24',
-                'url' => 'admin/admin/store',
+                'url' => '/admin/admin/store',
                 'name' => '保存管理员',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -327,7 +327,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '25',
-                'url' => 'admin/admin/edit',
+                'url' => '/admin/admin/edit',
                 'name' => '编辑管理员',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -340,7 +340,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '26',
-                'url' => 'admin/admin/update',
+                'url' => '/admin/admin/update',
                 'name' => '修改管理员',
                 'guard_name'=>'admin',
                 'display_menu' => 0,
@@ -353,7 +353,7 @@ class PermissionstableSeeder extends Seeder
             ],
             [
                 'id' => '27',
-                'url' => 'admin/admin/destroy',
+                'url' => '/admin/admin/destroy',
                 'name' => '删除管理员',
                 'guard_name'=>'admin',
                 'display_menu' => 0,

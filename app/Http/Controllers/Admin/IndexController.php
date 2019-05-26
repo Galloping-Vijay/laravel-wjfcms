@@ -32,7 +32,7 @@ class IndexController extends Controller
         $menu = Permissions::getMenuTree($permissions->toArray());
         return view('admin.index.index', [
             'admin' => $user,
-            'menu' => $menu
+            'menus' => $menu
         ]);
     }
 

@@ -14,7 +14,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('test',function(){
+Route::get('test', function () {
     pr(2);
 });
 
@@ -90,6 +90,65 @@ Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(func
         Route::get('main', 'IndexController@main');
         // 更新系统
         Route::get('upgrade', 'IndexController@upgrade');
+    });
+    //权限管理
+    Route::prefix('permission')->group(function () {
+        // 列表
+        Route::any('index', 'PermissionController@index');
+        // 创建
+        Route::get('create', 'PermissionController@create');
+        Route::post('store', 'PermissionController@store');
+        // 展示
+        Route::get('show/{id}', 'PermissionController@show');
+        // 编辑
+        Route::get('edit/{id}', 'PermissionController@edit');
+        Route::post('update/{id}', 'PermissionController@update');
+        // 删除
+        Route::get('destroy/{id}', 'PermissionController@destroy');
+        // 恢复删除
+        Route::get('restore/{id}', 'PermissionController@restore');
+        // 彻底删除
+        Route::get('forceDelete/{id}', 'PermissionController@forceDelete');
+    });
+
+    //角色管理
+    Route::prefix('role')->group(function () {
+        // 列表
+        Route::any('index', 'RoleController@index');
+        // 创建
+        Route::get('create', 'RoleController@create');
+        Route::post('store', 'RoleController@store');
+        // 展示
+        Route::get('show/{id}', 'RoleController@show');
+        // 编辑
+        Route::get('edit/{id}', 'RoleController@edit');
+        Route::post('update/{id}', 'RoleController@update');
+        // 删除
+        Route::get('destroy/{id}', 'RoleController@destroy');
+        // 恢复删除
+        Route::get('restore/{id}', 'RoleController@restore');
+        // 彻底删除
+        Route::get('forceDelete/{id}', 'RoleController@forceDelete');
+    });
+
+    //管理员管理
+    Route::prefix('admin')->group(function () {
+        // 列表
+        Route::any('index', 'AdminController@index');
+        // 创建
+        Route::get('create', 'AdminController@create');
+        Route::post('store', 'AdminController@store');
+        // 展示
+        Route::get('show/{id}', 'AdminController@show');
+        // 编辑
+        Route::get('edit/{id}', 'AdminController@edit');
+        Route::post('update/{id}', 'AdminController@update');
+        // 删除
+        Route::get('destroy/{id}', 'AdminController@destroy');
+        // 恢复删除
+        Route::get('restore/{id}', 'AdminController@restore');
+        // 彻底删除
+        Route::get('forceDelete/{id}', 'AdminController@forceDelete');
     });
 
     // 文章管理
@@ -168,21 +227,6 @@ Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(func
         Route::get('replaceView', 'CommentController@replaceView');
         // 批量替换功能
         Route::post('replace', 'CommentController@replace');
-    });
-
-    // 管理员
-    Route::prefix('user')->group(function () {
-        // 管理员列表
-        Route::get('index', 'UserController@index');
-        // 编辑管理员
-        Route::get('edit/{id}', 'UserController@edit');
-        Route::post('update/{id}', 'UserController@update');
-        // 删除管理员
-        Route::get('destroy/{id}', 'UserController@destroy');
-        // 恢复删除的管理员
-        Route::get('restore/{id}', 'UserController@restore');
-        // 彻底删除管理员
-        Route::get('forceDelete/{id}', 'UserController@forceDelete');
     });
 
     // 第三方用户管理
