@@ -112,7 +112,7 @@ Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(func
         // 彻底删除
         Route::post('forceDelete', 'AdminController@forceDelete');
     });
-    
+
     //权限管理
     Route::prefix('permission')->group(function () {
         // 列表

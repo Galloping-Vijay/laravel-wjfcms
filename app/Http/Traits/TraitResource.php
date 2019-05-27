@@ -1,6 +1,6 @@
 <?php
 /**
- * Description:
+ * Description:资源操作
  * Created by PhpStorm.
  * User: VIjay
  * Date: 2019/5/26
@@ -25,12 +25,12 @@ trait TraitResource
     private static $model = null;
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * Description:展示列表
      * User: VIjay
-     * Date: 2019/5/26
-     * Time: 14:01
+     * Date: 2019/5/27
+     * Time: 22:28
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -46,11 +46,11 @@ trait TraitResource
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * Description:
      * User: VIjay
-     * Date: 2019/5/26
-     * Time: 17:31
+     * Date: 2019/5/27
+     * Time: 22:28
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -58,12 +58,12 @@ trait TraitResource
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:
      * User: VIjay
-     * Date: 2019/5/26
-     * Time: 21:30
+     * Date: 2019/5/27
+     * Time: 22:28
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -73,12 +73,12 @@ trait TraitResource
     }
 
     /**
-     * @param $id
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:
      * User: VIjay
-     * Date: 2019/5/26
-     * Time: 21:30
+     * Date: 2019/5/27
+     * Time: 22:28
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -87,12 +87,12 @@ trait TraitResource
     }
 
     /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * Description:
      * User: VIjay
-     * Date: 2019/5/26
-     * Time: 21:32
+     * Date: 2019/5/27
+     * Time: 22:29
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
