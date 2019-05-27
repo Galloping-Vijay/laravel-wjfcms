@@ -103,16 +103,15 @@ class AdminController extends Controller
 
     /**
      * @param Request $request
-     * @param $id
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:
      * User: VIjay
      * Date: 2019/5/26
      * Time: 21:49
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $info = self::$model::find($id);
+        $info = self::$model::find($request->id);
         if (empty($info)) {
             return $this->resJson(1, '没有该条记录');
         }

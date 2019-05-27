@@ -91,6 +91,28 @@ Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(func
         // 更新系统
         Route::get('upgrade', 'IndexController@upgrade');
     });
+
+    //管理员管理
+    Route::prefix('admin')->group(function () {
+        // 列表
+        Route::any('index', 'AdminController@index');
+        // 创建
+        Route::get('create', 'AdminController@create');
+        Route::post('store', 'AdminController@store');
+        // 展示
+        Route::get('show/{id}', 'AdminController@show');
+        // 编辑
+        Route::get('edit/{id}', 'AdminController@edit');
+        // 更新
+        Route::post('update', 'AdminController@update');
+        // 删除
+        Route::post('destroy', 'AdminController@destroy');
+        // 恢复删除
+        Route::post('restore', 'AdminController@restore');
+        // 彻底删除
+        Route::post('forceDelete', 'AdminController@forceDelete');
+    });
+    
     //权限管理
     Route::prefix('permission')->group(function () {
         // 列表
@@ -129,26 +151,6 @@ Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(func
         Route::get('restore/{id}', 'RoleController@restore');
         // 彻底删除
         Route::get('forceDelete/{id}', 'RoleController@forceDelete');
-    });
-
-    //管理员管理
-    Route::prefix('admin')->group(function () {
-        // 列表
-        Route::any('index', 'AdminController@index');
-        // 创建
-        Route::get('create', 'AdminController@create');
-        Route::post('store', 'AdminController@store');
-        // 展示
-        Route::get('show/{id}', 'AdminController@show');
-        // 编辑
-        Route::get('edit/{id}', 'AdminController@edit');
-        Route::post('update/{id}', 'AdminController@update');
-        // 删除
-        Route::get('destroy/{id}', 'AdminController@destroy');
-        // 恢复删除
-        Route::get('restore/{id}', 'AdminController@restore');
-        // 彻底删除
-        Route::get('forceDelete/{id}', 'AdminController@forceDelete');
     });
 
     // 文章管理

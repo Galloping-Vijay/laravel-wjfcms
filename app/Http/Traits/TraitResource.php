@@ -104,16 +104,15 @@ trait TraitResource
 
     /**
      * @param Request $request
-     * @param $id
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:
      * User: VIjay
      * Date: 2019/5/26
      * Time: 21:20
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $info = self::$model::find($id);
+        $info = self::$model::find($request->id);
         if (empty($info)) {
             return $this->resJson(1, '没有该条记录');
         }
@@ -122,48 +121,53 @@ trait TraitResource
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * Description:删除
+     * User: VIjay
+     * Date: 2019/5/27
+     * Time: 22:11
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
-    }
-
-    public function restore($id)
-    {
-
-    }
-
-    public function forceDelete($id)
-    {
-
+        $res = self::$model::destroy($request->id);
+        return $this->resJson(0, '操作成功', $res);
     }
 
     /**
-     * @return null|string
-     * Description:
+     * Description:恢复数据
      * User: VIjay
-     * Date: 2019/5/26
-     * Time: 14:47
+     * Date: 2019/5/27
+     * Time: 22:18
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    protected static function getViewName()
+    public function restore(Request $request)
     {
-        return self::$controlName;
+        $info = self::$model::onlyTrashed()->find($request->id);
+        if (empty($info)) {
+            return $this->resJson(1, '没有该条记录');
+        }
+        $res = $info->restore();
+        return $this->resJson(0, '操作成功', $res);
     }
 
     /**
-     * @return null|string
-     * Description:
+     * Description:彻底删除
      * User: VIjay
-     * Date: 2019/5/26
-     * Time: 14:46
+     * Date: 2019/5/27
+     * Time: 22:18
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    protected static function getModel()
+    public function forceDelete(Request $request)
     {
-        return self::$model;
+        $info = self::$model::onlyTrashed()->find($request->id);
+        if (empty($info)) {
+            return $this->resJson(1, '没有该条记录');
+        }
+        $res = $info->forceDelete();
+        return $this->resJson(0, '操作成功', $res);
     }
 
     /**
@@ -195,13 +199,13 @@ trait TraitResource
     }
 
     /**
-     * @param int $code
-     * @param string $msg
-     * @param null $data
-     * @param array $additional
-     * @param array $header
+     * @param int $code 返回状态码
+     * @param string $msg 返回信息
+     * @param null $data 返回数据
+     * @param array $additional 附加数据
+     * @param array $header 头信息
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     * Description:
+     * Description:返回json数据
      * User: VIjay
      * Date: 2019/5/26
      * Time: 16:41
@@ -219,7 +223,6 @@ trait TraitResource
             }
         }
         $result['create_time'] = date('Y-m-d H:i:s', time());
-
         return response($result)->withHeaders($header);
     }
 }

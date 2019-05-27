@@ -6,6 +6,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">昵称</label>
             <div class="layui-input-inline">
+                <input type="hidden" name="id" value="{{ $info->id }}">
                 <input type="text" name="username" value="{{ $info->username }}" lay-verify="required" placeholder="请输入昵称" autocomplete="off"
                        class="layui-input">
             </div>
@@ -20,6 +21,14 @@
             <label class="layui-form-label">邮箱</label>
             <div class="layui-input-inline">
                 <input type="email" name="email" value="{{ $info->email }}" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="0" title="男" {{ $info->sex==0?'checked':'' }}>
+                <input type="radio" name="sex" value="1" title="女" {{ $info->sex==1?'checked':'' }}>
+                <input type="radio" name="sex" value="-1" title="保密"  {{ $info->sex==-1?'checked':'' }}>
             </div>
         </div>
         <div class="layui-form-item">

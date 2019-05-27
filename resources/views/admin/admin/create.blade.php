@@ -4,20 +4,6 @@
     <div class="layui-form" lay-filter="layuiadmin-app-list" id="layuiadmin-app-form-list"
          style="padding: 20px 30px 0 0;">
         <div class="layui-form-item">
-            <label class="layui-form-label">账号</label>
-            <div class="layui-input-inline">
-                <input type="text" name="account" lay-verify="required" placeholder="请输入账号" autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-inline">
-                <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input"
-                       lay-verify="required">
-            </div>
-        </div>
-        <div class="layui-form-item">
             <label class="layui-form-label">昵称</label>
             <div class="layui-input-inline">
                 <input type="text" name="username" lay-verify="required" placeholder="请输入昵称" autocomplete="off"
@@ -34,6 +20,28 @@
             <label class="layui-form-label">邮箱</label>
             <div class="layui-input-inline">
                 <input type="email" name="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="0" title="男">
+                <input type="radio" name="sex" value="1" title="女">
+                <input type="radio" name="sex" value="-1" title="保密" checked="">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">账号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="account" lay-verify="required" placeholder="请输入账号" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input"
+                       lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
@@ -66,10 +74,10 @@
             var $ = layui.$
                 , form = layui.form;
             //监听指定开关
-            form.on('switch(status)', function(){
-                if(this.checked){
+            form.on('switch(status)', function () {
+                if (this.checked) {
                     $("input[name='status']").val('1');
-                }else{
+                } else {
                     $("input[name='status']").val('0');
                 }
             });
