@@ -61,8 +61,12 @@
             <div class="layui-card-body">
                 <!-- 按钮组 -->
                 <div style="padding-bottom: 10px;">
-                    <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
-                    <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
+                    @can('删除管理员')
+                        <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
+                    @endcan
+                    @can('创建管理员')
+                            <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
+                    @endcan
                 </div>
                 <!-- 表格 -->
                 <table id="LAY-app-list" lay-filter="LAY-app-list"></table>
@@ -71,7 +75,8 @@
                 <!-- 模板渲染 -->
                 <script type="text/html" id="statusTpl">
                     @{{#  if(d.deleted_at == null){ }}
-                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="table-button-status" data-id="@{{ d.id }}" lay-text="ON|OFF" @{{ d.status?'checked':'' }}>
+                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="table-button-status"
+                           data-id="@{{ d.id }}" lay-text="ON|OFF" @{{ d.status?'checked':'' }}>
                     @{{#  } }}
                 </script>
                 <script type="text/html" id="sexTpl">

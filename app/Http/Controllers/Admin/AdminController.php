@@ -13,9 +13,6 @@ class AdminController extends Controller
 {
     use TraitResource;
 
-    /**
-     * AdminController constructor.
-     */
     public function __construct()
     {
         self::$model = Admin::class;

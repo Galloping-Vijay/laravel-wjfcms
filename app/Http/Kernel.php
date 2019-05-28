@@ -41,6 +41,11 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+        //后台中间件
+        'admin' => [
+            'admin.auth',
+            'auth:admin',
+        ]
     ];
 
     /**

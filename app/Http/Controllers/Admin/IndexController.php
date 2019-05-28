@@ -28,7 +28,7 @@ class IndexController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $permissions = $user->permissions;
+        $permissions = $user->getAllPermissions();
         $menu = Permissions::getMenuTree($permissions->toArray());
         return view('admin.index.index', [
             'admin' => $user,

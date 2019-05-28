@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 class ModelHasPermissions extends Seeder
 {
     /**
+     * //如果根据角色来管理权限,最好不要运行这个迁移文件
      * Run the database seeds.
      *
      * @return void

@@ -16,6 +16,7 @@ class PermissionController extends Controller
      */
     public function __construct()
     {
+        self::middleware('auth:admin');
         self::$model = Permissions::class;
         self::$controlName = 'permission';
     }

@@ -81,9 +81,16 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
 
 
 // Admin 模块
-Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(function () {
+Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function () {
     // 首页控制器
     Route::get('/', 'IndexController@index')->name('admin.index');
+    //测试
+    Route::prefix('test')->group(function () {
+        Route::get('index', 'TestController@index');
+        Route::get('/', 'TestController@index');
+        Route::get('cc', 'TestController@cc');
+    });
+
     Route::prefix('index')->group(function () {
         // 后台首页
         Route::get('index', 'IndexController@index');
