@@ -16,7 +16,6 @@ class PermissionController extends Controller
      */
     public function __construct()
     {
-        self::middleware('auth:admin');
         self::$model = Permissions::class;
         self::$controlName = 'permission';
     }
@@ -38,7 +37,9 @@ class PermissionController extends Controller
             $data = self::getPageData($list, $page, $limit);
             self::resJson(0, '获取成功', $data);
         }
-        return view('admin.' . self::$controlName . '.index');
+        return view('admin.' . self::$controlName . '.index', [
+            'control_name' => self::$controlName,
+        ]);
     }
 
 }

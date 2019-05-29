@@ -90,7 +90,7 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::get('/', 'TestController@index');
         Route::get('cc', 'TestController@cc');
     });
-
+    //首页管理
     Route::prefix('index')->group(function () {
         // 后台首页
         Route::get('index', 'IndexController@index');
@@ -131,13 +131,14 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::get('show/{id}', 'PermissionController@show');
         // 编辑
         Route::get('edit/{id}', 'PermissionController@edit');
-        Route::post('update/{id}', 'PermissionController@update');
+        // 更新
+        Route::post('update', 'PermissionController@update');
         // 删除
-        Route::get('destroy/{id}', 'PermissionController@destroy');
+        Route::post('destroy', 'PermissionController@destroy');
         // 恢复删除
-        Route::get('restore/{id}', 'PermissionController@restore');
+        Route::post('restore', 'PermissionController@restore');
         // 彻底删除
-        Route::get('forceDelete/{id}', 'PermissionController@forceDelete');
+        Route::post('forceDelete', 'PermissionController@forceDelete');
     });
 
     //角色管理
@@ -151,13 +152,14 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::get('show/{id}', 'RoleController@show');
         // 编辑
         Route::get('edit/{id}', 'RoleController@edit');
-        Route::post('update/{id}', 'RoleController@update');
+        // 更新
+        Route::post('update', 'RoleController@update');
         // 删除
-        Route::get('destroy/{id}', 'RoleController@destroy');
+        Route::post('destroy', 'RoleController@destroy');
         // 恢复删除
-        Route::get('restore/{id}', 'RoleController@restore');
+        Route::post('restore', 'RoleController@restore');
         // 彻底删除
-        Route::get('forceDelete/{id}', 'RoleController@forceDelete');
+        Route::post('forceDelete', 'RoleController@forceDelete');
     });
 
     // 文章管理
