@@ -6,6 +6,22 @@ use Spatie\Permission\Models\Permission as BasePermission;
 
 class Permissions extends BasePermission
 {
+    /**
+     * @var array
+     */
+    public static $display_menu = [
+        0 => '不显示',
+        1 => '显示'
+    ];
+
+    /**
+     * @var array
+     */
+    public static $delete = [
+        0 => '正常',
+        1 => '软删除',
+        2 => '全部'
+    ];
 
     /**
      * @param array $data
@@ -20,7 +36,7 @@ class Permissions extends BasePermission
     {
         $resArr = [];
         foreach ($data as $key => &$val) {
-            if($val['display_menu'] ==0){
+            if ($val['display_menu'] == 0) {
                 continue;
             }
             if ($val['parent_id'] == $parent_id) {

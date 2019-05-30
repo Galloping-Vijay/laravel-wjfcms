@@ -7,34 +7,24 @@
             <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">账号</label>
+                        <label class="layui-form-label">名称</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="account" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">昵称</label>
+                        <label class="layui-form-label">权限组</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="guard_name" placeholder="请输入" autocomplete="off"
+                                   class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">性别</label>
+                        <label class="layui-form-label">菜单是否显示</label>
                         <div class="layui-input-inline">
-                            <select name="sex">
+                            <select name="display_menu">
                                 <option value="">全部</option>
-                                @foreach($sex_list as $key=>$sex)
-                                    <option value="{{ $key }}">{{ $sex }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">状态</label>
-                        <div class="layui-input-inline">
-                            <select name="status">
-                                <option value="">全部</option>
-                                @foreach($status_list as $sk=>$sv)
+                                @foreach($display_menu as $sk=>$sv)
                                     <option value="{{ $sk }}">{{ $sv }}</option>
                                 @endforeach
                             </select>
@@ -58,34 +48,25 @@
                 </div>
             </div>
 
-            <div class="layui-card-body">
+            <div class="layui-card-body" style="min-height: 600px">
                 <!-- 按钮组 -->
                 <div style="padding-bottom: 10px;">
-                    @can('删除管理员')
+                    @can('删除权限')
                         <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
                     @endcan
-                    @can('创建管理员')
+                    @can('创建权限')
                         <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
                     @endcan
                 </div>
                 <!-- 表格 -->
-                <table id="LAY-app-list" lay-filter="LAY-app-list"></table>
+                <table id="LAY-app-list" lay-filter="LAY-app-list" ></table>
                 <!-- 控制名 -->
                 <input type="hidden" name="control_name" value="{{ $control_name }}">
                 <!-- 模板渲染 -->
                 <script type="text/html" id="statusTpl">
                     @{{#  if(d.deleted_at == null){ }}
-                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="table-button-status"
-                           data-id="@{{ d.id }}" lay-text="ON|OFF" @{{ d.status?'checked':'' }}>
-                    @{{#  } }}
-                </script>
-                <script type="text/html" id="sexTpl">
-                    @{{#  if(d.sex=='-1'){ }}
-                    <button class="layui-btn layui-btn-xs layui-btn ayui-btn-primary">保密</button>
-                    @{{#  } else if(d.sex=='0'){ }}
-                    <button class="layui-btn layui-btn-xs layui-btn layui-btn-warm">男</button>
-                    @{{#  } else { }}
-                    <button class="layui-btn layui-btn-xs layui-btn-danger">女</button>
+                    <input type="checkbox" name="display_menu" lay-skin="switch" lay-filter="table-button-status"
+                           data-id="@{{ d.id }}" lay-text="ON|OFF" @{{ d.display_menu?'checked':'' }}>
                     @{{#  } }}
                 </script>
                 <script type="text/html" id="table-list">
@@ -117,79 +98,51 @@
             base: "/static/layuiadmin/"
         }).extend({
             index: 'lib/index'
-        }).use(['index', 'table', 'admin'], function () {
+        }).use(['index', 'table', 'admin', 'treeGrid'], function () {
             var table = layui.table
                 , $ = layui.$
                 , admin = layui.admin
+                , treeGrid = layui.treeGrid
                 , form = layui.form;
             var control_name = $('input[name="control_name"]').val();
             var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
-            //表格数据
-            table.render({
-                elem: '#LAY-app-list'
+            //表格数据树
+            ptable = treeGrid.render({
+                id: 'LAY-app-list'
+                , elem: '#LAY-app-list'
+                , idField: 'id'
                 , url: '/admin/' + control_name + '/index'
-                , method: 'post'
-                , where: {}
+                , cellMinWidth: 100
+                , treeId: 'id'//树形id字段名称
+                , treeUpId: 'parent_id'//树形父id字段名称
+                , treeShowName: 'name'//以树形式显示的字段
                 , headers: {
                     'X-CSRF-TOKEN': csrf_token
                 }
+                , where: {_token: csrf_token}
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
                     , {field: 'id', width: 80, title: 'ID', sort: true}
-                    , {field: 'account', title: '账号'}
-                    , {field: 'username', title: '昵称'}
-                    , {field: 'tel', title: '电话'}
-                    , {field: 'email', title: '邮箱'}
-                    , {field: 'sex', title: '性别', templet: '#sexTpl', align: 'center'}
-                    , {field: 'status', width: 80, title: '状态', templet: '#statusTpl', align: 'center'}
+                    , {field: 'sort_order', width: 80, title: '排序', edit: 'text', sort: true}
+                    , {field: 'name', title: '名称'}
+                    , {field: 'guard_name', title: '权限组'}
+                    , {field: 'url', title: '权限地址'}
+                    , {field: 'icon', title: '图标'}
+                    , {field: 'display_menu', width: 80, title: '显示菜单', templet: '#statusTpl', align: 'center'}
                     , {title: '操作', width: 250, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
-                , page: true
-                , limit: 10
+                , page: false
+                , done: function (res, curr, count) {
+                    //如果是异步请求数据方式，res即为你接口返回的信息。
+                }
             });
-
-            //监听搜索
-            form.on('submit(LAY-app-search)', function (data) {
-                var field = data.field;
-                //执行重载
-                table.reload('LAY-app-list', {
-                    where: field
-                });
-            });
-
-            //监听指定开关
-            form.on('switch(table-button-status)', function (data) {
-                var field = {
-                    status: this.checked ? 1 : 0,
-                    id: $(this).data('id')
-                };
-                admin.req({
-                    url: '/admin/' + control_name + '/update'
-                    , data: field
-                    , method: 'POST'
-                    , headers: {
-                        'X-CSRF-TOKEN': csrf_token
-                    }
-                    , done: function (res) {
-                        if (res.code === 0) {
-                            layer.msg(res.msg, {
-                                offset: '15px'
-                                , icon: 1
-                                , time: 1000
-                            }, function () {
-                            });
-                        } else {
-                            layer.msg(res.msg);
-                        }
-                    }
-                });
-            });
-
             //监听工具条
-            table.on('tool(LAY-app-list)', function (obj) {
+            treeGrid.on('tool(LAY-app-list)', function (obj) {
                 if (obj.event === 'del') {
                     layer.confirm('确定删除数据吗?', function (index) {
+                        layer.msg('111');
+                        return false;
                         admin.req({
                             url: '/admin/' + control_name + '/destroy'
                             , data: {id: obj.data.id}
@@ -250,7 +203,7 @@
                                                     , username: field.username
                                                     , tel: field.tel
                                                     , sex: field.sex
-                                                    , status: field.status
+                                                    , display_menu: field.display_menu
                                                 });
                                                 table.reload('LAY-app-list');
                                                 layer.close(index); //关闭弹层
@@ -374,6 +327,43 @@
                         });
                     });
                 }
+            });
+
+            //监听搜索
+            form.on('submit(LAY-app-search)', function (data) {
+                var field = data.field;
+                //执行重载
+                table.reload('LAY-app-list', {
+                    where: field
+                });
+            });
+
+            //监听指定开关
+            form.on('switch(table-button-status)', function (data) {
+                var field = {
+                    display_menu: this.checked ? 1 : 0,
+                    id: $(this).data('id')
+                };
+                admin.req({
+                    url: '/admin/' + control_name + '/update'
+                    , data: field
+                    , method: 'POST'
+                    , headers: {
+                        'X-CSRF-TOKEN': csrf_token
+                    }
+                    , done: function (res) {
+                        if (res.code === 0) {
+                            layer.msg(res.msg, {
+                                offset: '15px'
+                                , icon: 1
+                                , time: 1000
+                            }, function () {
+                            });
+                        } else {
+                            layer.msg(res.msg);
+                        }
+                    }
+                });
             });
 
             //按钮组
