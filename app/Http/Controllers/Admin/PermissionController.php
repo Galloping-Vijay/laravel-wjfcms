@@ -73,8 +73,10 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        $superclass_id = request()->input('superclass_id', 0);
         return view('admin.' . self::$controlName . '.create', [
-            'guard_name_list' => Permissions::$guard_name_list
+            'guard_name_list' => Permissions::$guard_name_list,
+            'superclass_id' => $superclass_id
         ]);
     }
 

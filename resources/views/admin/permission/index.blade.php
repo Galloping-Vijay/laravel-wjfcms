@@ -71,7 +71,8 @@
                 </script>
                 <script type="text/html" id="table-list">
                     @{{#  if(d.deleted_at == null){ }}
-                    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="submenu"><i class="layui-icon layui-icon-add-circle-fine"></i> 添加子菜单</a>
+                    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="submenu"><i
+                                class="layui-icon layui-icon-add-circle-fine"></i> 添加子菜单</a>
                     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
                         <i class="layui-icon layui-icon-edit"></i>编辑
                     </a>
@@ -200,7 +201,7 @@
                 } else if (obj.event === 'edit') {
                     layer.open({
                         type: 2
-                        , title: '编辑文章'
+                        , title: '编辑'
                         , content: '/admin/' + control_name + '/edit/' + obj.data.id
                         , maxmin: true
                         , area: ['450px', '400px']
@@ -248,60 +249,45 @@
                             submit.trigger('click');
                         }
                     });
-                } else if (obj.event === 'account') {
-                    var html = '<div style="margin-top: 5%" class="layui-form-item"> <label class="layui-form-label">登录账号：</label> <div class="layui-input-inline"> <input type="text" name="account_val" value="' + obj.data.account + '" lay-verify="required" placeholder="请输入账号" class="layui-input"> </div> </div> <div class="layui-form-item"><label class="layui-form-label">登录密码：</label> <div class="layui-input-inline"><input type="password" name="password" lay-verify="required"  class="layui-input"></div></div>';
+                } else if (obj.event === 'submenu') {
                     layer.open({
-                        type: 1
-                        , title: '账号密码'
-                        , offset: 'auto'
-                        , id: 'layerDemo'
-                        , content: html
-                        , btn: ['确定', '取消']
-                        , btnAlign: 'c' //按钮居中
-                        , shade: 0 //不显示遮罩
-                        , yes: function (index, layero) {
-                            var password = $("input[name='password']").val();
-                            var account_val = $("input[name='account_val']").val();
-                            if (password == '') {
-                                layer.msg('密码不能为空!');
-                                return false;
-                            }
-                            if (account_val == '') {
-                                layer.msg('账号不能为空!');
-                                return false;
-                            }
-                            var field = {
-                                id: obj.data.id,
-                                password: password,
-                                account: account_val
-                            };
-                            admin.req({
-                                url: '/admin/' + control_name + '/update'
-                                , data: field
-                                , method: 'POST'
-                                , headers: {
-                                    'X-CSRF-TOKEN': csrf_token
-                                }
-                                , done: function (res) {
-                                    if (res.code === 0) {
-                                        layer.msg(res.msg, {
-                                            offset: '15px'
-                                            , icon: 1
-                                            , time: 1000
-                                        }, function () {
-                                            obj.update({
-                                                account: field.account
-                                            }); //数据更新
-                                            layer.close(index); //关闭弹层
-                                        });
-                                    } else {
-                                        layer.msg(res.msg);
-                                    }
-                                }
-                            });
+                        type: 2
+                        , title: '添加子菜单'
+                        , content: '/admin/' + control_name + '/create?superclass_id=' + obj.data.id
+                        , headers: {
+                            'X-CSRF-TOKEN': csrf_token
                         }
-                        , btn2: function (index, layero) {
-                            layer.closeAll();
+                        , maxmin: true
+                        , area: ['500px', '500px']
+                        , btn: ['确定', '取消']
+                        , yes: function (index, layero) {
+                            var iframeWindow = window['layui-layer-iframe' + index]
+                                , submit = layero.find('iframe').contents().find("#layuiadmin-app-form-add");
+                            //监听提交
+                            iframeWindow.layui.form.on('submit(layuiadmin-app-form-add)', function (data) {
+                                var field = data.field;
+                                admin.req({
+                                    url: '/admin/' + control_name + '/update'
+                                    , data: field
+                                    , method: 'POST'
+                                    , headers: {
+                                        'X-CSRF-TOKEN': csrf_token
+                                    }
+                                    , done: function (res) {
+                                        if (res.code === 0) {
+                                            layer.msg(res.msg, {
+                                                offset: '15px'
+                                                , icon: 1
+                                                , time: 1000
+                                            }, function () {
+                                            });
+                                        } else {
+                                            layer.msg(res.msg);
+                                        }
+                                    }
+                                });
+                            });
+                            submit.trigger('click');
                         }
                     });
                 } else if (obj.event === 'restore') {
@@ -470,7 +456,6 @@
                                         } else {
                                             layer.msg(res.msg);
                                         }
-
                                     }
                                 });
                             });

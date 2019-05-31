@@ -217,7 +217,7 @@
                 } else if (obj.event === 'edit') {
                     layer.open({
                         type: 2
-                        , title: '编辑文章'
+                        , title: '编辑'
                         , content: '/admin/' + control_name + '/edit/' + obj.data.id
                         , maxmin: true
                         , area: ['450px', '400px']
@@ -451,7 +451,6 @@
                                         } else {
                                             layer.msg(res.msg);
                                         }
-
                                     }
                                 });
                             });

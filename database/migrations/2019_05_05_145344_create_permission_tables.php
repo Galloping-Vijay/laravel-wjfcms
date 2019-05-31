@@ -23,7 +23,7 @@ class CreatePermissionTables extends Migration
             $table->tinyInteger('sort_order')->default('0')->comment('排序');
             $table->string('url')->default('')->comment('权限地址');
             $table->integer('level')->default('0')->comment('级别');
-            $table->string('icon')->default('')->comment('权限图标');
+            $table->string('icon', 100)->nullable()->comment('权限图标');
             $table->integer('parent_id')->default('0')->comment('父类id');
             $table->tinyInteger('display_menu')->default('0')->comment('菜单是否显示');
             $table->timestamps();

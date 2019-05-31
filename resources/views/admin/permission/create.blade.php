@@ -10,6 +10,7 @@
                        class="layui-input">
             </div>
         </div>
+        <input type="hidden" name="superclass_id" value="{{ $superclass_id }}">
         <input type="hidden" value="0" name="parent_id">
         <input type="hidden" value="0" name="level">
         <div class="layui-form-item">
@@ -40,8 +41,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">ICON图标</label>
             <div class="layui-input-inline">
-                <input type="text" name="icon" placeholder="请输入图标" autocomplete="off" class="layui-input"
-                       lay-verify="required">
+                <input type="text" name="icon" placeholder="请输入图标" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux"><a style="color: red"
                                                           href="https://www.layui.com/doc/element/icon.html"
@@ -77,6 +77,7 @@
             var $ = layui.$
                 , admin = layui.admin
                 , form = layui.form;
+            var superclass_id = $("input[name='superclass_id']").val();
             //初始化菜单
             getMenu('admin');
             //监听指定开关
@@ -93,10 +94,10 @@
             });
             //设置字段
             form.on('select(pid)', function (data) {
-                var str=data.value;
+                var str = data.value;
                 var arr = str.split('-');
-                $("input[name='parent_id']").val(arr[0]);
-                $("input[name='level']").val(arr[1]+1);
+                $("input[name='parent_id']").val(parseInt(arr[0]));
+                $("input[name='level']").val(parseInt(arr[1]) + 1);
             });
 
             /**
@@ -115,7 +116,13 @@
                         if (res.code === 0) {
                             var html = '<option value="0-0">一级菜单</option>';
                             for (var p in res.data) {
-                                html += ' <option value="' + res.data[p].id+'-'+res.data[p].level + '">' + res.data[p].name + '</option>';
+                                if (res.data[p].id == superclass_id) {
+                                    html += ' <option value="' + res.data[p].id + '-' + res.data[p].level + '" selected>' + res.data[p].name + '</option>';
+                                    $("input[name='parent_id']").val(res.data[p].id);
+                                    $("input[name='level']").val(parseInt(res.data[p].level) + 1);
+                                } else {
+                                    html += ' <option value="' + res.data[p].id + '-' + res.data[p].level + '">' + res.data[p].name + '</option>';
+                                }
                             }
                             $('#pid').html(html);
                             form.render('select');
