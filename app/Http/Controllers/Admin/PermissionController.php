@@ -31,8 +31,6 @@ class PermissionController extends Controller
     public function index(Request $request)
     {
         if ($request->isMethod('post')) {
-            $page = $request->input('page', 1);
-            $limit = $request->input('limit', 10);
             $where = [];
             $name = $request->input('name', '');
             $guard_name = $request->input('guard_name', '');
@@ -65,6 +63,34 @@ class PermissionController extends Controller
             'display_menu' => Permissions::$display_menu,
             'delete_list' => Permissions::$delete,
         ]);
+    }
+
+    /**
+     * Instructions:
+     * Author: Vijay  <1937832819@qq.com>
+     * Time: 2019/5/31 10:13
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('admin.' . self::$controlName . '.create', [
+            'guard_name_list' => Permissions::$guard_name_list
+        ]);
+    }
+
+    /**
+     * Instructions:获取下拉菜单
+     * Author: Vijay  <1937832819@qq.com>
+     * Time: 2019/5/31 11:15
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function menu(Request $request)
+    {
+        $guard_name = $request->input('guard_name', 'admin');
+        $menu = Permissions::where('guard_name', $guard_name)->select('id', 'name', 'url', 'level', 'parent_id')->orderBy('level', 'asc')->get()->toArray();
+        $list = Permissions::array2level($menu);
+        return $this->resJson(0, '请求成功', $list);
     }
 
 }

@@ -52,14 +52,14 @@
                 <!-- 按钮组 -->
                 <div style="padding-bottom: 10px;">
                     @can('删除权限')
-                        <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
+                        <button class="layui-btn layuiadmin-btn-list layui-btn-danger" data-type="batchdel">删除</button>
                     @endcan
                     @can('创建权限')
                         <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
                     @endcan
                 </div>
                 <!-- 表格 -->
-                <table id="LAY-app-list" lay-filter="LAY-app-list" ></table>
+                <table id="LAY-app-list" lay-filter="LAY-app-list"></table>
                 <!-- 控制名 -->
                 <input type="hidden" name="control_name" value="{{ $control_name }}">
                 <!-- 模板渲染 -->
@@ -71,11 +71,9 @@
                 </script>
                 <script type="text/html" id="table-list">
                     @{{#  if(d.deleted_at == null){ }}
+                    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="submenu"><i class="layui-icon layui-icon-add-circle-fine"></i> 添加子菜单</a>
                     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
                         <i class="layui-icon layui-icon-edit"></i>编辑
-                    </a>
-                    <a class="layui-btn layui-btn-xs" lay-event="account">
-                        <i class="layui-icon layui-icon-password"></i>账号密码
                     </a>
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
                         <i class="layui-icon layui-icon-delete"></i>删除
@@ -137,12 +135,44 @@
                     //如果是异步请求数据方式，res即为你接口返回的信息。
                 }
             });
+
+            //监听单元格编辑
+            treeGrid.on('edit(LAY-app-list)', function (obj) {
+                var value = obj.value //得到修改后的值
+                    , data = obj.data //得到所在行所有键值
+                    , field_name = obj.field; //得到字段
+                var field = {
+                    id: data.id
+                    , [field_name]: value
+                };
+                admin.req({
+                    url: '/admin/' + control_name + '/update'
+                    , data: field
+                    , method: 'POST'
+                    , headers: {
+                        'X-CSRF-TOKEN': csrf_token
+                    }
+                    , done: function (res) {
+                        if (res.code === 0) {
+                            //登入成功的提示与跳转
+                            layer.msg(res.msg, {
+                                offset: '15px'
+                                , icon: 1
+                                , time: 1000
+                            }, function () {
+                            });
+                        } else {
+                            layer.msg(res.msg);
+                        }
+                    }
+                });
+
+            });
+
             //监听工具条
             treeGrid.on('tool(LAY-app-list)', function (obj) {
                 if (obj.event === 'del') {
                     layer.confirm('确定删除数据吗?', function (index) {
-                        layer.msg('111');
-                        return false;
                         admin.req({
                             url: '/admin/' + control_name + '/destroy'
                             , data: {id: obj.data.id}
@@ -153,7 +183,7 @@
                             , done: function (res) {
                                 if (res.code === 0) {
                                     //登入成功的提示与跳转
-                                    layer.msg('操作成功', {
+                                    layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
                                         , time: 1000
@@ -162,7 +192,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg('操作失败');
+                                    layer.msg(res.msg);
                                 }
                             }
                         });
@@ -333,7 +363,7 @@
             form.on('submit(LAY-app-search)', function (data) {
                 var field = data.field;
                 //执行重载
-                table.reload('LAY-app-list', {
+                treeGrid.reload('LAY-app-list', {
                     where: field
                 });
             });
@@ -369,7 +399,8 @@
             //按钮组
             var $ = layui.$, active = {
                 batchdel: function () {
-                    var checkStatus = table.checkStatus('LAY-app-list')
+                    return layer.msg('暂不支持权限菜单批量删除!');
+                    var checkStatus = treeGrid.checkStatus('LAY-app-list')
                         , checkData = checkStatus.data; //得到选中的数据
                     if (checkData.length === 0) {
                         return layer.msg('请选择数据');
@@ -389,16 +420,16 @@
                             , done: function (res) {
                                 if (res.code === 0) {
                                     //登入成功的提示与跳转
-                                    layer.msg('操作成功', {
+                                    layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
                                         , time: 1000
                                     }, function () {
-                                        table.reload('LAY-app-list');
+                                        treeGrid.reload('LAY-app-list');
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg('操作失败');
+                                    layer.msg(res.msg);
                                 }
                             }
                         });
@@ -410,16 +441,14 @@
                         , title: '添加'
                         , content: '/admin/' + control_name + '/create'
                         , maxmin: true
-                        , area: ['450px', '400px']
+                        , area: ['500px', '400px']
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
-                            //点击确认触发 iframe 内容中的按钮提交
                             var iframeWindow = window['layui-layer-iframe' + index]
                                 , submit = layero.find('iframe').contents().find("#layuiadmin-app-form-add");
                             //监听提交
                             iframeWindow.layui.form.on('submit(layuiadmin-app-form-add)', function (data) {
                                 var field = data.field;
-                                //提交 Ajax 成功后，静态更新表格中的数据
                                 admin.req({
                                     url: '/admin/' + control_name + '/store'
                                     , data: field
@@ -430,16 +459,16 @@
                                     , done: function (res) {
                                         if (res.code === 0) {
                                             //登入成功的提示与跳转
-                                            layer.msg('操作成功', {
+                                            layer.msg(res.msg, {
                                                 offset: '15px'
                                                 , icon: 1
                                                 , time: 1000
                                             }, function () {
-                                                table.reload('LAY-app-list');
+                                                treeGrid.reload('LAY-app-list');
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg('操作失败');
+                                            layer.msg(res.msg);
                                         }
 
                                     }

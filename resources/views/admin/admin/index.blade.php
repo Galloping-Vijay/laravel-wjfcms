@@ -62,7 +62,7 @@
                 <!-- 按钮组 -->
                 <div style="padding-bottom: 10px;">
                     @can('删除管理员')
-                        <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
+                        <button class="layui-btn layuiadmin-btn-list layui-btn-danger" data-type="batchdel">删除</button>
                     @endcan
                     @can('创建管理员')
                             <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
@@ -200,7 +200,7 @@
                             , done: function (res) {
                                 if (res.code === 0) {
                                     //登入成功的提示与跳转
-                                    layer.msg('操作成功', {
+                                    layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
                                         , time: 1000
@@ -209,7 +209,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg('操作失败');
+                                    layer.msg(res.msg);
                                 }
                             }
                         });
@@ -240,7 +240,7 @@
                                     , done: function (res) {
                                         if (res.code === 0) {
                                             //登入成功的提示与跳转
-                                            layer.msg('操作成功', {
+                                            layer.msg(res.msg, {
                                                 offset: '15px'
                                                 , icon: 1
                                                 , time: 1000
@@ -256,7 +256,7 @@
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg('操作失败');
+                                            layer.msg(res.msg);
                                         }
 
                                     }
@@ -333,7 +333,7 @@
                             , done: function (res) {
                                 if (res.code === 0) {
                                     //登入成功的提示与跳转
-                                    layer.msg('操作成功', {
+                                    layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
                                         , time: 1000
@@ -342,7 +342,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg('操作失败');
+                                    layer.msg(res.msg);
                                 }
                             }
                         });
@@ -359,7 +359,7 @@
                             , done: function (res) {
                                 if (res.code === 0) {
                                     //登入成功的提示与跳转
-                                    layer.msg('操作成功', {
+                                    layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
                                         , time: 1000
@@ -368,7 +368,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg('操作失败');
+                                    layer.msg(res.msg);
                                 }
                             }
                         });
@@ -399,7 +399,7 @@
                             , done: function (res) {
                                 if (res.code === 0) {
                                     //登入成功的提示与跳转
-                                    layer.msg('操作成功', {
+                                    layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
                                         , time: 1000
@@ -408,7 +408,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg('操作失败');
+                                    layer.msg(res.msg);
                                 }
                             }
                         });
@@ -440,7 +440,7 @@
                                     , done: function (res) {
                                         if (res.code === 0) {
                                             //登入成功的提示与跳转
-                                            layer.msg('操作成功', {
+                                            layer.msg(res.msg, {
                                                 offset: '15px'
                                                 , icon: 1
                                                 , time: 1000
@@ -449,7 +449,7 @@
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg('操作失败');
+                                            layer.msg(res.msg);
                                         }
 
                                     }

@@ -127,6 +127,8 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         // 创建
         Route::get('create', 'PermissionController@create');
         Route::post('store', 'PermissionController@store');
+        //获取菜单树
+        Route::post('menu', 'PermissionController@menu');
         // 展示
         Route::get('show/{id}', 'PermissionController@show');
         // 编辑
