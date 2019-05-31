@@ -224,23 +224,24 @@
                                     , done: function (res) {
                                         if (res.code === 0) {
                                             //登入成功的提示与跳转
-                                            layer.msg('操作成功', {
+                                            layer.msg(res.msg, {
                                                 offset: '15px'
                                                 , icon: 1
                                                 , time: 1000
                                             }, function () {
                                                 obj.update({
-                                                    account: field.account
-                                                    , username: field.username
-                                                    , tel: field.tel
-                                                    , sex: field.sex
+                                                    sort_order: field.sort_order
+                                                    , name: field.name
+                                                    , guard_name: field.guard_name
+                                                    , url: field.url
+                                                    , icon: field.icon
                                                     , display_menu: field.display_menu
                                                 });
-                                                table.reload('LAY-app-list');
+                                                treeGrid.reload('LAY-app-list');
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg('操作失败');
+                                            layer.msg(res.msg);
                                         }
 
                                     }
@@ -267,7 +268,7 @@
                             iframeWindow.layui.form.on('submit(layuiadmin-app-form-add)', function (data) {
                                 var field = data.field;
                                 admin.req({
-                                    url: '/admin/' + control_name + '/update'
+                                    url: '/admin/' + control_name + '/store'
                                     , data: field
                                     , method: 'POST'
                                     , headers: {
@@ -280,6 +281,8 @@
                                                 , icon: 1
                                                 , time: 1000
                                             }, function () {
+                                                treeGrid.reload('LAY-app-list');
+                                                layer.close(index); //关闭弹层
                                             });
                                         } else {
                                             layer.msg(res.msg);
@@ -302,16 +305,16 @@
                             , done: function (res) {
                                 if (res.code === 0) {
                                     //登入成功的提示与跳转
-                                    layer.msg('操作成功', {
+                                    layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
                                         , time: 1000
                                     }, function () {
-                                        table.reload('LAY-app-list');
+                                        treeGrid.reload('LAY-app-list');
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg('操作失败');
+                                    layer.msg(res.msg);
                                 }
                             }
                         });
@@ -328,7 +331,7 @@
                             , done: function (res) {
                                 if (res.code === 0) {
                                     //登入成功的提示与跳转
-                                    layer.msg('操作成功', {
+                                    layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
                                         , time: 1000
@@ -337,7 +340,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg('操作失败');
+                                    layer.msg(res.msg);
                                 }
                             }
                         });
