@@ -17,8 +17,8 @@
                         <div class="layui-input-inline">
                             <select name="guard_name"  lay-filter="guard_name" id="guard_name">
                                 <option value="">全部</option>
-                                @foreach($guard_name_list as $key=>$val)
-                                    <option value="{{ $key }}">{{ $val }}</option>
+                                @foreach($guard_name_list as $val)
+                                    <option value="{{ $val }}">{{ $val }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -159,7 +159,6 @@
                     }
                     , done: function (res) {
                         if (res.code === 0) {
-                            //登入成功的提示与跳转
                             layer.msg(res.msg, {
                                 offset: '15px'
                                 , icon: 1
@@ -187,7 +186,6 @@
                             }
                             , done: function (res) {
                                 if (res.code === 0) {
-                                    //登入成功的提示与跳转
                                     layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
@@ -227,7 +225,6 @@
                                     }
                                     , done: function (res) {
                                         if (res.code === 0) {
-                                            //登入成功的提示与跳转
                                             layer.msg(res.msg, {
                                                 offset: '15px'
                                                 , icon: 1
@@ -308,7 +305,6 @@
                             }
                             , done: function (res) {
                                 if (res.code === 0) {
-                                    //登入成功的提示与跳转
                                     layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
@@ -334,7 +330,6 @@
                             }
                             , done: function (res) {
                                 if (res.code === 0) {
-                                    //登入成功的提示与跳转
                                     layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
@@ -412,7 +407,6 @@
                             }
                             , done: function (res) {
                                 if (res.code === 0) {
-                                    //登入成功的提示与跳转
                                     layer.msg(res.msg, {
                                         offset: '15px'
                                         , icon: 1
@@ -451,7 +445,6 @@
                                     }
                                     , done: function (res) {
                                         if (res.code === 0) {
-                                            //登入成功的提示与跳转
                                             layer.msg(res.msg, {
                                                 offset: '15px'
                                                 , icon: 1

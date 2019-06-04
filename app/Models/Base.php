@@ -14,7 +14,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Base extends Model
 {
-    //软删除
+    /**
+     * 软删除
+     */
     use SoftDeletes;
 
     /**

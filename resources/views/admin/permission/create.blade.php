@@ -17,8 +17,8 @@
             <label class="layui-form-label">权限组</label>
             <div class="layui-input-inline">
                 <select name="guard_name" lay-verify="required" lay-filter="guard_name" id="guard_name">
-                    @foreach($guard_name_list as $key=>$val)
-                        <option value="{{ $key }}">{{ $val }}</option>
+                    @foreach($guard_name_list as $val)
+                        <option value="{{ $val }}">{{ $val }}</option>
                     @endforeach
                 </select>
             </div>

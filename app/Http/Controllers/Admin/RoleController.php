@@ -2,84 +2,118 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Http\Traits\TraitResource;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    use TraitResource;
+
+    public function __construct()
     {
-        //
+        self::$model = Role::class;
+        self::$controlName = 'role';
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Description:
+     * User: Vijay
+     * Date: 2019/6/4
+     * Time: 21:45
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $page = $request->input('page', 1);
+            $limit = $request->input('limit', 10);
+            $where = [];
+            $name = $request->input('name', '');
+            $description = $request->input('description', '');
+            $guard_name = $request->input('guard_name', '');
+            $status = $request->input('status', '');
+            $delete = $request->input('delete', 0);
+            if ($name != '') {
+                $where[] = ['name', 'like', '%' . $name . '%'];
+            }
+            if ($description != '') {
+                $where[] = ['description', 'like', '%' . $description . '%'];
+            }
+            if ($guard_name != '') {
+                $where[] = ['guard_name', '=', $guard_name];
+            }
+            if ($status != '') {
+                $where[] = ['status', '=', $status];
+            }
+            switch ($delete) {
+                case '1':
+                    $list = self::$model::onlyTrashed()->where($where)->get();
+                    break;
+                case '2':
+                    $list = self::$model::withTrashed()->where($where)->get();
+                    break;
+                default:
+                    $list = self::$model::where($where)->get();
+                    break;
+            }
+            $res = self::getPageData($list, $page, $limit);
+            return self::resJson(0, '获取成功', $res['data'], [
+                    'count' => $res['count']]
+            );
+        }
+        return view('admin.' . self::$controlName . '.index', [
+            'control_name' => self::$controlName,
+            'delete_list' => self::$model::$delete,
+            'guard_name_list' => self::$model::$guard_name_list,
+        ]);
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/6/4
+     * Time: 22:21
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        return view('admin.' . self::$controlName . '.create', [
+            'guard_name_list' => self::$model::$guard_name_list,
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Description:
+     * User: Vijay
+     * Date: 2019/5/27
+     * Time: 22:28
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $model = new self::$model;
+        $model::create($request->input());
+        return $this->resJson(0, '操作成功');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Description:
+     * User: Vijay
+     * Date: 2019/6/4
+     * Time: 22:35
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $info = self::$model::find($id);
+        return view('admin.' . self::$controlName . '.edit', [
+            'info' => $info,
+            'guard_name_list' => self::$model::$guard_name_list,
+        ]);
     }
 }

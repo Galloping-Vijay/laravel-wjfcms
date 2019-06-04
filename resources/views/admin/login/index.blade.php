@@ -89,8 +89,6 @@
                         key: setter.request.tokenName
                         ,value: res.data.access_token
                     });
-
-                    //登入成功的提示与跳转
                     layer.msg('登入成功', {
                         offset: '15px'
                         ,icon: 1

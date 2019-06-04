@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', '管理员列表')
+@section('title', '角色列表')
 @section('content')
     <div class="layui-fluid">
         <div class="layui-card">
@@ -7,35 +7,24 @@
             <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">账号</label>
+                        <label class="layui-form-label">角色名称</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="account" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">昵称</label>
+                        <label class="layui-form-label">角色描述</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="description" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">性别</label>
+                        <label class="layui-form-label">权限组</label>
                         <div class="layui-input-inline">
-                            <select name="sex">
+                            <select name="guard_name"  lay-filter="guard_name" id="guard_name">
                                 <option value="">全部</option>
-                                @foreach($sex_list as $key=>$sex)
-                                    <option value="{{ $key }}">{{ $sex }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">状态</label>
-                        <div class="layui-input-inline">
-                            <select name="status">
-                                <option value="">全部</option>
-                                @foreach($status_list as $sk=>$sv)
-                                    <option value="{{ $sk }}">{{ $sv }}</option>
+                                @foreach($guard_name_list as $val)
+                                    <option value="{{ $val }}">{{ $val }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -61,10 +50,10 @@
             <div class="layui-card-body">
                 <!-- 按钮组 -->
                 <div style="padding-bottom: 10px;">
-                    @can('删除管理员')
+                    @can('删除角色')
                         <button class="layui-btn layuiadmin-btn-list layui-btn-danger" data-type="batchdel">删除</button>
                     @endcan
-                    @can('创建管理员')
+                    @can('编辑角色')
                             <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
                     @endcan
                 </div>
@@ -79,22 +68,10 @@
                            data-id="@{{ d.id }}" lay-text="ON|OFF" @{{ d.status?'checked':'' }}>
                     @{{#  } }}
                 </script>
-                <script type="text/html" id="sexTpl">
-                    @{{#  if(d.sex=='-1'){ }}
-                    <button class="layui-btn layui-btn-xs layui-btn ayui-btn-primary">保密</button>
-                    @{{#  } else if(d.sex=='0'){ }}
-                    <button class="layui-btn layui-btn-xs layui-btn layui-btn-warm">男</button>
-                    @{{#  } else { }}
-                    <button class="layui-btn layui-btn-xs layui-btn-danger">女</button>
-                    @{{#  } }}
-                </script>
                 <script type="text/html" id="table-list">
                     @{{#  if(d.deleted_at == null){ }}
                     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
                         <i class="layui-icon layui-icon-edit"></i>编辑
-                    </a>
-                    <a class="layui-btn layui-btn-xs" lay-event="account">
-                        <i class="layui-icon layui-icon-password"></i>账号密码
                     </a>
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
                         <i class="layui-icon layui-icon-delete"></i>删除
@@ -137,11 +114,9 @@
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
                     , {field: 'id', width: 80, title: 'ID', sort: true}
-                    , {field: 'account', title: '账号'}
-                    , {field: 'username', title: '昵称'}
-                    , {field: 'tel', title: '电话'}
-                    , {field: 'email', title: '邮箱'}
-                    , {field: 'sex', title: '性别', templet: '#sexTpl', align: 'center'}
+                    , {field: 'name', title: '名称'}
+                    , {field: 'description', title: '描述'}
+                    , {field: 'guard_name', title: '角色组'}
                     , {field: 'status', width: 80, title: '状态', templet: '#statusTpl', align: 'center'}
                     , {title: '操作', width: 250, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
@@ -263,62 +238,6 @@
                             submit.trigger('click');
                         }
                     });
-                } else if (obj.event === 'account') {
-                    var html = '<div style="margin-top: 5%" class="layui-form-item"> <label class="layui-form-label">登录账号：</label> <div class="layui-input-inline"> <input type="text" name="account_val" value="' + obj.data.account + '" lay-verify="required" placeholder="请输入账号" class="layui-input"> </div> </div> <div class="layui-form-item"><label class="layui-form-label">登录密码：</label> <div class="layui-input-inline"><input type="password" name="password" lay-verify="required"  class="layui-input"></div></div>';
-                    layer.open({
-                        type: 1
-                        , title: '账号密码'
-                        , offset: 'auto'
-                        , id: 'layerDemo'
-                        , content: html
-                        , btn: ['确定', '取消']
-                        , btnAlign: 'c' //按钮居中
-                        , shade: 0 //不显示遮罩
-                        , yes: function (index, layero) {
-                            var password = $("input[name='password']").val();
-                            var account_val = $("input[name='account_val']").val();
-                            if (password == '') {
-                                layer.msg('密码不能为空!');
-                                return false;
-                            }
-                            if (account_val == '') {
-                                layer.msg('账号不能为空!');
-                                return false;
-                            }
-                            var field = {
-                                id: obj.data.id,
-                                password: password,
-                                account: account_val
-                            };
-                            admin.req({
-                                url: '/admin/' + control_name + '/update'
-                                , data: field
-                                , method: 'POST'
-                                , headers: {
-                                    'X-CSRF-TOKEN': csrf_token
-                                }
-                                , done: function (res) {
-                                    if (res.code === 0) {
-                                        layer.msg(res.msg, {
-                                            offset: '15px'
-                                            , icon: 1
-                                            , time: 1000
-                                        }, function () {
-                                            obj.update({
-                                                account: field.account
-                                            }); //数据更新
-                                            layer.close(index); //关闭弹层
-                                        });
-                                    } else {
-                                        layer.msg(res.msg);
-                                    }
-                                }
-                            });
-                        }
-                        , btn2: function (index, layero) {
-                            layer.closeAll();
-                        }
-                    });
                 } else if (obj.event === 'restore') {
                     layer.confirm('确定恢复数据吗?', function (index) {
                         admin.req({
@@ -418,7 +337,6 @@
                         , area: ['450px', '400px']
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
-                            //点击确认触发 iframe 内容中的按钮提交
                             var iframeWindow = window['layui-layer-iframe' + index]
                                 , submit = layero.find('iframe').contents().find("#layuiadmin-app-form-add");
                             //监听提交

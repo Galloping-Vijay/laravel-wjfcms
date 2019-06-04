@@ -22,8 +22,7 @@ class Permissions extends BasePermission
      * @var array
      */
     public static $guard_name_list = [
-        'admin' => '后台权限组',
-        'home' => '前台权限组'
+        'admin', 'home'
     ];
 
     /**

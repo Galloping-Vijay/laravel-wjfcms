@@ -137,27 +137,27 @@ class PermissionController extends Controller
         //存在子菜单
         $subMenu = self::$model::where('parent_id', $request->id)->first();
         if (!empty($subMenu)) {
-            Db::rollBack();
+            DB::rollBack();
             return $this->resJson(1, '存在子菜单,不能删除');
         }
         //存在角色中
         $resRolePermissions = RoleHasPermissions::where('permission_id', $request->id)->first();
         if (!empty($resRolePermissions)) {
-            Db::rollBack();
+            DB::rollBack();
             return $this->resJson(1, '存在改权限的角色,请先删除角色中的次权限');
         }
         //存在用户权限中
         $resadminPermissions = ModelHasPermissions::where('permission_id', $request->id)->first();
         if (!empty($resadminPermissions)) {
-            Db::rollBack();
+            DB::rollBack();
             return $this->resJson(1, '存在改权限的角色,请先删除角色中的次权限');
         }
         $res = self::$model::destroy($request->id);
         if ($res != true) {
-            Db::rollBack();
+            DB::rollBack();
             return $this->resJson(1, '删除失败');
         }
-        Db::commit();
+        DB::commit();
         return $this->resJson(0, '操作成功', $res);
     }
 
