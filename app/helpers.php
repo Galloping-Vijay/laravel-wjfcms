@@ -2,7 +2,7 @@
 /**
  * Description:
  * Created by PhpStorm.
- * User: VIjay
+ * User: Vijay
  * Date: 2019/4/14
  * Time: 13:07
  */
@@ -11,7 +11,7 @@
  * @param $data
  * @param int $choice
  * Description:
- * User: VIjay
+ * User: Vijay
  * Date: 2019/4/20
  * Time: 14:06
  */

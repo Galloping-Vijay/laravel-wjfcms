@@ -23,7 +23,7 @@ class AdminController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/26
      * Time: 16:33
      */
@@ -78,7 +78,7 @@ class AdminController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/26
      * Time: 21:30
      */
@@ -102,7 +102,7 @@ class AdminController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/26
      * Time: 21:49
      */

@@ -102,11 +102,17 @@
                             @foreach ($menu['child'] as $son)
                                 @if(!empty($son['child']))
                                             <dd data-name="grid">
-                                                <a href="javascript:;">{{ $son['name'] }}</a>
+                                                <a href="javascript:;">
+                                                    <i class="layui-icon {{ $son['icon'] }}"></i>
+                                                    {{ $son['name'] }}
+                                                </a>
                                                 <dl class="layui-nav-child">
                                     @foreach ($son['child'] as $grandson)
                                                     <dd data-name="list">
-                                                        <a lay-href="{{ $grandson['url'] }}">{{ $grandson['name'] }}</a>
+                                                        <a lay-href="{{ $grandson['url'] }}">
+                                                            <i class="layui-icon {{ $grandson['icon'] }}"></i>
+                                                            {{ $grandson['name'] }}
+                                                        </a>
                                                     </dd>
                                     @endforeach
                                                 </dl>
@@ -114,11 +120,17 @@
                                 @else
                                     @if($loop->parent->first)
                                         <dd data-name="{{ $son['name'] }}" class="layui-this">
-                                            <a lay-href="{{ $son['url'] }}">{{ $son['name'] }}</a>
+                                            <a lay-href="{{ $son['url'] }}">
+                                                <i class="layui-icon {{ $son['icon'] }}"></i>
+                                                {{ $son['name'] }}
+                                            </a>
                                         </dd>
                                     @else
                                         <dd data-name="{{ $son['name'] }}">
-                                            <a lay-href="{{ $son['url'] }}">{{ $son['name'] }}</a>
+                                            <a lay-href="{{ $son['url'] }}">
+                                                <i class="layui-icon {{ $son['icon'] }}"></i>
+                                                {{ $son['name'] }}
+                                            </a>
                                         </dd>
                                     @endif
                                 @endif

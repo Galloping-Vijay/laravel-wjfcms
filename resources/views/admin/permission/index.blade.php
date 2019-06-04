@@ -15,8 +15,12 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">权限组</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="guard_name" placeholder="请输入" autocomplete="off"
-                                   class="layui-input">
+                            <select name="guard_name"  lay-filter="guard_name" id="guard_name">
+                                <option value="">全部</option>
+                                @foreach($guard_name_list as $key=>$val)
+                                    <option value="{{ $key }}">{{ $val }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="layui-inline">

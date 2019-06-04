@@ -21,7 +21,7 @@ class IndexController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/24
      * Time: 22:42
      */
@@ -39,7 +39,7 @@ class IndexController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/24
      * Time: 22:40
      */

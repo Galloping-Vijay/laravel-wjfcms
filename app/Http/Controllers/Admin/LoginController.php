@@ -101,7 +101,7 @@ class LoginController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|void
      * @throws \Illuminate\Validation\ValidationException
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/11
      * Time: 21:26
      */

@@ -2,7 +2,7 @@
 /**
  * Description:
  * Created by PhpStorm.
- * User: VIjay
+ * User: Vijay
  * Date: 2019/5/22
  * Time: 22:30
  */
@@ -25,7 +25,7 @@ class Base extends Model
     /**
      * @return Base
      * Description: 获取模型
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/22
      * Time: 22:45
      */
@@ -37,7 +37,7 @@ class Base extends Model
     /**
      * @return null
      * Description:返回错误提示信息
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/22
      * Time: 22:54
      */

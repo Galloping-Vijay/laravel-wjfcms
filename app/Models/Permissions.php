@@ -48,7 +48,7 @@ class Permissions extends BasePermission
      * @param int $parent_id
      * @return array
      * Description:获取菜单树结构
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/24
      * Time: 22:38
      */

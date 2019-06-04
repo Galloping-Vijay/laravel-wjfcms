@@ -2,7 +2,7 @@
 /**
  * Description:资源操作
  * Created by PhpStorm.
- * User: VIjay
+ * User: Vijay
  * Date: 2019/5/26
  * Time: 12:06
  */
@@ -26,7 +26,7 @@ trait TraitResource
 
     /**
      * Description:展示列表
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/27
      * Time: 22:28
      * @param Request $request
@@ -47,7 +47,7 @@ trait TraitResource
 
     /**
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/27
      * Time: 22:28
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -59,7 +59,7 @@ trait TraitResource
 
     /**
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/27
      * Time: 22:28
      * @param Request $request
@@ -74,7 +74,7 @@ trait TraitResource
 
     /**
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/27
      * Time: 22:28
      * @param $id
@@ -88,7 +88,7 @@ trait TraitResource
 
     /**
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/27
      * Time: 22:29
      * @param $id
@@ -106,7 +106,7 @@ trait TraitResource
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/26
      * Time: 21:20
      */
@@ -122,7 +122,7 @@ trait TraitResource
 
     /**
      * Description:删除
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/27
      * Time: 22:11
      * @param Request $request
@@ -136,7 +136,7 @@ trait TraitResource
 
     /**
      * Description:恢复数据
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/27
      * Time: 22:18
      * @param Request $request
@@ -154,7 +154,7 @@ trait TraitResource
 
     /**
      * Description:彻底删除
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/27
      * Time: 22:18
      * @param Request $request
@@ -176,7 +176,7 @@ trait TraitResource
      * @param int $limit 没有数量
      * @return array
      * Description:获取分页数据
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/26
      * Time: 15:45
      */
@@ -206,7 +206,7 @@ trait TraitResource
      * @param array $header 头信息
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:返回json数据
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/26
      * Time: 16:41
      */

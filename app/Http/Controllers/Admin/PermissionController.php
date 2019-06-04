@@ -25,7 +25,7 @@ class PermissionController extends Controller
 
     /**
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/30
      * Time: 21:30
      * @param Request $request
@@ -63,8 +63,9 @@ class PermissionController extends Controller
         }
         return view('admin.' . self::$controlName . '.index', [
             'control_name' => self::$controlName,
-            'display_menu' => Permissions::$display_menu,
-            'delete_list' => Permissions::$delete,
+            'display_menu' => self::$model::$display_menu,
+            'delete_list' => self::$model::$delete,
+            'guard_name_list' => self::$model::$guard_name_list,
         ]);
     }
 
@@ -78,14 +79,14 @@ class PermissionController extends Controller
     {
         $superclass_id = request()->input('superclass_id', 0);
         return view('admin.' . self::$controlName . '.create', [
-            'guard_name_list' => Permissions::$guard_name_list,
+            'guard_name_list' => self::$model::$guard_name_list,
             'superclass_id' => $superclass_id
         ]);
     }
 
     /**
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/27
      * Time: 22:29
      * @param $id
@@ -96,7 +97,7 @@ class PermissionController extends Controller
         $info = self::$model::find($id);
         return view('admin.' . self::$controlName . '.edit', [
             'info' => $info,
-            'guard_name_list' => Permissions::$guard_name_list,
+            'guard_name_list' => self::$model::$guard_name_list,
         ]);
     }
 
@@ -104,7 +105,7 @@ class PermissionController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/26
      * Time: 21:20
      */
@@ -124,7 +125,7 @@ class PermissionController extends Controller
 
     /**
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/31
      * Time: 22:44
      * @param Request $request
@@ -170,8 +171,8 @@ class PermissionController extends Controller
     public function menu(Request $request)
     {
         $guard_name = $request->input('guard_name', 'admin');
-        $menu = Permissions::where('guard_name', $guard_name)->select('id', 'name', 'url', 'level', 'parent_id')->orderBy('level', 'asc')->get()->toArray();
-        $list = Permissions::array2level($menu);
+        $menu = self::$model::where('guard_name', $guard_name)->select('id', 'name', 'url', 'level', 'parent_id')->orderBy('level', 'asc')->get()->toArray();
+        $list = self::$model::array2level($menu);
         return $this->resJson(0, '请求成功', $list);
     }
 

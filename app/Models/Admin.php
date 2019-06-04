@@ -62,7 +62,7 @@ class Admin extends Authenticatable
     /**
      * @return null
      * Description:
-     * User: VIjay
+     * User: Vijay
      * Date: 2019/5/26
      * Time: 20:38
      */
