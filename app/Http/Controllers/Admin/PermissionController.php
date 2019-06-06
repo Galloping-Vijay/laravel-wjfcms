@@ -176,4 +176,25 @@ class PermissionController extends Controller
         return $this->resJson(0, '请求成功', $list);
     }
 
+    /**
+     * Description:获取dtree权限树结构
+     * User: Vijay
+     * Date: 2019/6/7
+     * Time: 0:22
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function permissionTree(Request $request)
+    {
+        $guard_name = $request->input('guard_name', 'admin');
+        $permissions = self::$model::where('guard_name', $guard_name)->select('id', 'name as title', 'level', 'parent_id')->orderBy('level', 'asc')->get()->toArray();
+        $list = self::$model::getAuthTree($permissions, 0, true);
+        return $this->resJson(0, '操作成功', $list,[
+            'status'=>[
+                'code'=>200,
+                'message'=>'操作成功'
+            ]
+        ]);
+    }
+
 }

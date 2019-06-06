@@ -67,31 +67,51 @@ class Permissions extends BasePermission
     }
 
     /**
-     * Instructions:
-     * Author: Vijay  <1937832819@qq.com>
-     * Time: 2019/4/22 14:44
+     * Description:权限菜单是否选中树形结构
+     * User: Vijay
+     * Date: 2019/6/6
+     * Time: 23:55
      * @param array $data
+     * @param bool $dtree true时构造dtree树结构(配合dtree插件.地址:http://www.wisdomelon.com/DTreeHelper/)
      * @param int $parent_id
      * @param int $role_id
      * @return array
      */
-    public static function getAuthTree(array $data = [], int $parent_id = 0, int $role_id = 0): array
+    public static function getAuthTree(array $data = [], int $parent_id = 0, $dtree = false, int $role_id = 0): array
     {
         static $roleList = [];
         if (empty($roleList)) {
-            $roleList = RoleHasPermissions::where('role_id', $role_id)->get(['id', 'permission_id']);
+            $role = Role::where('id', $role_id)->first();
+            if (!empty($role)) {
+                $roleList = $role->getPermissionFieldList('id');
+            }
         }
         $resArr = [];
-        foreach ($data as $key => &$val) {
-            if ($val['parent_id'] == $parent_id) {
-                $val['value'] = $val['id'];
-                if (in_array($val['id'], $roleList)) {
-                    $val['checked'] = true;
-                } else {
-                    $val['checked'] = false;
+        if ($dtree === false) {
+            foreach ($data as $key => $val) {
+                if ($val['parent_id'] == $parent_id) {
+                    $val['value'] = $val['id'];
+                    if (in_array($val['id'], $roleList)) {
+                        $val['checked'] = true;
+                    } else {
+                        $val['checked'] = false;
+                    }
+                    $val['list'] = self::getAuthTree($data, $val['id']);
+                    if (empty($val['list'])) unset($val['list']);
+                    $resArr[] = $val;
                 }
-                $val['list'] = self::getAuthTree($data, $val['id']);
-                if (empty($val['list'])) unset($val['list']);
+            }
+        } else {
+            foreach ($data as $key => $val) {
+                $val['value'] = $val['id'];
+                $val['parentId'] = $val['parent_id'];
+                $val['children'] = [];
+                $val['checkArr']['type'] = 0;
+                if (in_array($val['id'], $roleList)) {
+                    $val['checkArr']['checked'] = '1';
+                } else {
+                    $val['checkArr']['checked'] = '0';
+                }
                 $resArr[] = $val;
             }
         }

@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 @section('title', '角色添加')
+@section('header')
+    <link rel="stylesheet" href="{{ asset('static/layuiadmin/style/dtree/dtree.css') }}" media="all">
+    <link rel="stylesheet" href="{{ asset('static/layuiadmin/style/dtree/font/dtreefont.css') }}" media="all">
+@endsection
 @section('content')
     <div class="layui-form" lay-filter="layuiadmin-app-list" id="layuiadmin-app-form-list"
          style="padding: 20px 30px 0 0;">
@@ -28,6 +32,12 @@
             </div>
         </div>
         <div class="layui-form-item">
+        <label class="layui-form-label">权限</label>
+        <div class="layui-input-inline" id="permissionTree" style="height: 400px;overflow: auto;"  class="dtree" data-id="0">
+
+        </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-inline">
                 <input type="hidden" name="status" value="1">
@@ -53,9 +63,11 @@
             base: "/static/layuiadmin/"
         }).extend({
             index: 'lib/index'
-        }).use(['index', 'table'], function () {
+        }).use(['index', 'table', 'dtree'], function () {
             var $ = layui.$
+                , dtree = layui.dtree
                 , form = layui.form;
+            var csrf_token = $('meta[name="csrf-token"]').attr('content');
             //监听指定开关
             form.on('switch(status)', function () {
                 if (this.checked) {
@@ -63,6 +75,26 @@
                 } else {
                     $("input[name='status']").val('0');
                 }
+            });
+            //异步加载权限菜单
+            dtree.render({
+                elem: "#permissionTree",
+                url: "/admin/permission/permissionTree",
+                headers: {
+                    'X-CSRF-TOKEN': csrf_token
+                },
+                initLevel: 0,
+                dataFormat: "list",  //配置data的风格为list
+                checkbar: true,//开启复选框
+                menubar: true,
+                menubarFun: {
+                    remove: function (checkbarNodes) { // 必须将该方法实现了，节点才会真正的从后台删除哦
+                        return true;
+                    }
+                }
+            });
+            dtree.on("node('menubarTree1')", function (data) {
+                layer.msg(JSON.stringify(data.param));
             });
         });
     </script>
