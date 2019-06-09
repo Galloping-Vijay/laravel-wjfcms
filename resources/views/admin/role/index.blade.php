@@ -15,13 +15,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">角色描述</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="description" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="description" placeholder="请输入" autocomplete="off"
+                                   class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">权限组</label>
                         <div class="layui-input-inline">
-                            <select name="guard_name"  lay-filter="guard_name" id="guard_name">
+                            <select name="guard_name" lay-filter="guard_name" id="guard_name">
                                 <option value="">全部</option>
                                 @foreach($guard_name_list as $val)
                                     <option value="{{ $val }}">{{ $val }}</option>
@@ -54,7 +55,7 @@
                         <button class="layui-btn layuiadmin-btn-list layui-btn-danger" data-type="batchdel">删除</button>
                     @endcan
                     @can('编辑角色')
-                            <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
+                        <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
                     @endcan
                 </div>
                 <!-- 表格 -->
@@ -197,45 +198,8 @@
                         , area: ['450px', '400px']
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
-                            var iframeWindow = window['layui-layer-iframe' + index]
-                                , submit = layero.find('iframe').contents().find("#layuiadmin-app-form-edit");
-
-                            //监听提交
-                            iframeWindow.layui.form.on('submit(layuiadmin-app-form-edit)', function (data) {
-                                var field = data.field; //获取提交的字段
-                                //提交 Ajax 成功后，静态更新表格中的数据
-                                admin.req({
-                                    url: '/admin/' + control_name + '/update'
-                                    , data: field
-                                    , method: 'POST'
-                                    , headers: {
-                                        'X-CSRF-TOKEN': csrf_token
-                                    }
-                                    , done: function (res) {
-                                        if (res.code === 0) {
-                                            layer.msg(res.msg, {
-                                                offset: '15px'
-                                                , icon: 1
-                                                , time: 1000
-                                            }, function () {
-                                                obj.update({
-                                                    account: field.account
-                                                    , username: field.username
-                                                    , tel: field.tel
-                                                    , sex: field.sex
-                                                    , status: field.status
-                                                });
-                                                table.reload('LAY-app-list');
-                                                layer.close(index); //关闭弹层
-                                            });
-                                        } else {
-                                            layer.msg(res.msg);
-                                        }
-
-                                    }
-                                });
-                            });
-                            submit.trigger('click');
+                            var submit = layero.find('iframe').contents().find("#layuiadmin-app-form-edit");
+                            submit.click();
                         }
                     });
                 } else if (obj.event === 'restore') {
@@ -337,36 +301,9 @@
                         , area: ['450px', '400px']
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
-                            var iframeWindow = window['layui-layer-iframe' + index]
-                                , submit = layero.find('iframe').contents().find("#layuiadmin-app-form-add");
-                            //监听提交
-                            iframeWindow.layui.form.on('submit(layuiadmin-app-form-add)', function (data) {
-                                var field = data.field;
-                                //提交 Ajax 成功后，静态更新表格中的数据
-                                admin.req({
-                                    url: '/admin/' + control_name + '/store'
-                                    , data: field
-                                    , method: 'POST'
-                                    , headers: {
-                                        'X-CSRF-TOKEN': csrf_token
-                                    }
-                                    , done: function (res) {
-                                        if (res.code === 0) {
-                                            layer.msg(res.msg, {
-                                                offset: '15px'
-                                                , icon: 1
-                                                , time: 1000
-                                            }, function () {
-                                                table.reload('LAY-app-list');
-                                                layer.close(index); //关闭弹层
-                                            });
-                                        } else {
-                                            layer.msg(res.msg);
-                                        }
-                                    }
-                                });
-                            });
-                            submit.trigger('click');
+                            //点击确认触发 iframe 内容中的按钮提交
+                            var submit = layero.find('iframe').contents().find("#layuiadmin-app-form-add");
+                            submit.click();
                         }
                     });
                 }

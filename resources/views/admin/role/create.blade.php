@@ -32,11 +32,13 @@
             </div>
         </div>
         <div class="layui-form-item">
-        <label class="layui-form-label">权限</label>
-        <div class="layui-input-inline" id="permissionTree" style="height: 400px;overflow: auto;"  class="dtree" data-id="0">
+            <label class="layui-form-label">权限</label>
+            <ul class="layui-input-inline dtree" id="permissionTree" style="height: 300px;overflow: auto;" class="dtree"
+                data-id="0">
 
+            </ul>
         </div>
-        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-inline">
@@ -51,6 +53,8 @@
             <input type="button" lay-submit lay-filter="layuiadmin-app-form-edit" id="layuiadmin-app-form-edit"
                    value="确认编辑">
         </div>
+        <!-- 控制名 -->
+        <input type="hidden" name="control_name" value="{{ $control_name }}">
     </div>
 @endsection
 
@@ -63,11 +67,13 @@
             base: "/static/layuiadmin/"
         }).extend({
             index: 'lib/index'
-        }).use(['index', 'table', 'dtree'], function () {
+        }).use(['index', 'table', 'dtree', 'admin'], function () {
             var $ = layui.$
                 , dtree = layui.dtree
+                , admin = layui.admin
                 , form = layui.form;
             var csrf_token = $('meta[name="csrf-token"]').attr('content');
+            var control_name = $('input[name="control_name"]').val();
             //监听指定开关
             form.on('switch(status)', function () {
                 if (this.checked) {
@@ -83,18 +89,64 @@
                 headers: {
                     'X-CSRF-TOKEN': csrf_token
                 },
+                request: {
+                    guard_name: 'admin',
+                },
                 initLevel: 0,
+                checkbarType: "all", // 默认就是all，其他的值为： no-all  p-casc   self  only
                 dataFormat: "list",  //配置data的风格为list
                 checkbar: true,//开启复选框
                 menubar: true,
                 menubarFun: {
                     remove: function (checkbarNodes) { // 必须将该方法实现了，节点才会真正的从后台删除哦
+                        console.log(checkbarNodes);
                         return true;
                     }
                 }
             });
-            dtree.on("node('menubarTree1')", function (data) {
-                layer.msg(JSON.stringify(data.param));
+            // 点击节点触发回调，其中obj内包含丰富的数据，打开浏览器F12查看！
+            dtree.on("node('permissionTree')", function (obj) {
+                 layer.msg(JSON.stringify(obj.param));
+                // console.log(obj.param); // 点击当前节点传递的参数
+                // console.log(obj.dom); // 当前节点的jquery对象
+                // console.log(obj.childParams); // 当前节点的所有子节点参数
+                // console.log(obj.parentParam); // 当前节点的父节点参数
+            });
+
+            //监听提交
+            form.on('submit(layuiadmin-app-form-add)', function (data) {
+                var field = data.field; //获取提交的字段
+                field.permission_name = [];
+                var params = dtree.getCheckbarNodesParam("permissionTree");//获取复选框选中值
+                if (params.length > 0) {
+                    for (var n in params) {
+                        field.permission_name.push(params[n].context)
+                    }
+                }
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                //提交 Ajax 成功后，关闭当前弹层并重载表格
+                admin.req({
+                    url: '/admin/' + control_name + '/store'
+                    , data: field
+                    , method: 'POST'
+                    , headers: {
+                        'X-CSRF-TOKEN': csrf_token
+                    }
+                    , done: function (res) {
+                        if (res.code === 0) {
+                            layer.msg(res.msg, {
+                                offset: '15px'
+                                , icon: 1
+                                , time: 1000
+                            }, function () {
+                                parent.layui.table.reload('LAY-app-list'); //重载表格
+                                parent.layer.close(index); //再执行关闭
+                            });
+                        } else {
+                            layer.msg(res.msg);
+                        }
+                    }
+                });
             });
         });
     </script>

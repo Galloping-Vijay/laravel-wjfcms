@@ -50,13 +50,13 @@ class RoleController extends Controller
             }
             switch ($delete) {
                 case '1':
-                    $list = self::$model::onlyTrashed()->where($where)->get();
+                    $list = Role::onlyTrashed()->where($where)->get();
                     break;
                 case '2':
-                    $list = self::$model::withTrashed()->where($where)->get();
+                    $list = Role::withTrashed()->where($where)->get();
                     break;
                 default:
-                    $list = self::$model::where($where)->get();
+                    $list = Role::where($where)->get();
                     break;
             }
             $res = self::getPageData($list, $page, $limit);
@@ -66,8 +66,8 @@ class RoleController extends Controller
         }
         return view('admin.' . self::$controlName . '.index', [
             'control_name' => self::$controlName,
-            'delete_list' => self::$model::$delete,
-            'guard_name_list' => self::$model::$guard_name_list,
+            'delete_list' => Role::$delete,
+            'guard_name_list' => Role::$guard_name_list,
         ]);
     }
 
@@ -81,23 +81,9 @@ class RoleController extends Controller
     public function create()
     {
         return view('admin.' . self::$controlName . '.create', [
-            'guard_name_list' => self::$model::$guard_name_list,
+            'guard_name_list' => Role::$guard_name_list,
+            'control_name' => self::$controlName,
         ]);
-    }
-
-    /**
-     * Description:
-     * User: Vijay
-     * Date: 2019/5/27
-     * Time: 22:28
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $model = new self::$model;
-        $model::create($request->input());
-        return $this->resJson(0, '操作成功');
     }
 
     /**
@@ -113,7 +99,8 @@ class RoleController extends Controller
         $info = self::$model::find($id);
         return view('admin.' . self::$controlName . '.edit', [
             'info' => $info,
-            'guard_name_list' => self::$model::$guard_name_list,
+            'guard_name_list' => Role::$guard_name_list,
+            'control_name' => self::$controlName,
         ]);
     }
 }

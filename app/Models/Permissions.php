@@ -83,7 +83,7 @@ class Permissions extends BasePermission
         if (empty($roleList)) {
             $role = Role::where('id', $role_id)->first();
             if (!empty($role)) {
-                $roleList = $role->getPermissionFieldList('id');
+                $roleList = $role->getPermissionFieldList('id')->toArray();
             }
         }
         $resArr = [];

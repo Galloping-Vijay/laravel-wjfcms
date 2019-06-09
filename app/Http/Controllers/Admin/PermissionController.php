@@ -63,9 +63,9 @@ class PermissionController extends Controller
         }
         return view('admin.' . self::$controlName . '.index', [
             'control_name' => self::$controlName,
-            'display_menu' => self::$model::$display_menu,
-            'delete_list' => self::$model::$delete,
-            'guard_name_list' => self::$model::$guard_name_list,
+            'display_menu' => Permissions::$display_menu,
+            'delete_list' => Permissions::$delete,
+            'guard_name_list' => Permissions::$guard_name_list,
         ]);
     }
 
@@ -79,8 +79,8 @@ class PermissionController extends Controller
     {
         $superclass_id = request()->input('superclass_id', 0);
         return view('admin.' . self::$controlName . '.create', [
-            'guard_name_list' => self::$model::$guard_name_list,
-            'superclass_id' => $superclass_id
+            'guard_name_list' => Permissions::$guard_name_list,
+            'superclass_id' => $superclass_id,
         ]);
     }
 
@@ -97,7 +97,7 @@ class PermissionController extends Controller
         $info = self::$model::find($id);
         return view('admin.' . self::$controlName . '.edit', [
             'info' => $info,
-            'guard_name_list' => self::$model::$guard_name_list,
+            'guard_name_list' => Permissions::$guard_name_list,
         ]);
     }
 
@@ -187,12 +187,13 @@ class PermissionController extends Controller
     public function permissionTree(Request $request)
     {
         $guard_name = $request->input('guard_name', 'admin');
+        $role_id = $request->input('role_id', 0);
         $permissions = self::$model::where('guard_name', $guard_name)->select('id', 'name as title', 'level', 'parent_id')->orderBy('level', 'asc')->get()->toArray();
-        $list = self::$model::getAuthTree($permissions, 0, true);
-        return $this->resJson(0, '操作成功', $list,[
-            'status'=>[
-                'code'=>200,
-                'message'=>'操作成功'
+        $list = Permissions::getAuthTree($permissions, 0, true, $role_id);
+        return $this->resJson(0, '操作成功', $list, [
+            'status' => [
+                'code' => 200,
+                'message' => '操作成功'
             ]
         ]);
     }
