@@ -23,6 +23,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "@websanova/vue-auth": "^2.21.14-beta"
+        "@websanova/vue-auth": "^2.21.14-beta",
+        "querystringify": "^2.1.1"
     }
 }
