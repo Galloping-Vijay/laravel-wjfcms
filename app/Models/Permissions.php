@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Traits\TraitsModel;
 use Spatie\Permission\Models\Permission as BasePermission;
 
 class Permissions extends BasePermission
 {
-    use SoftDeletes;
+    use TraitsModel;
 
     /**
      * Author: Vijay  <1937832819@qq.com>
@@ -31,15 +31,6 @@ class Permissions extends BasePermission
     public static $display_menu = [
         0 => '不显示',
         1 => '显示'
-    ];
-
-    /**
-     * @var array
-     */
-    public static $delete = [
-        0 => '正常',
-        1 => '软删除',
-        2 => '全部'
     ];
 
     /**

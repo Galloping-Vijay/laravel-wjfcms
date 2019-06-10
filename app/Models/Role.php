@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Traits\TraitsModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Spatie\Permission\Models\Role as BaseRole;
 
 class Role extends BaseRole
 {
-    use SoftDeletes;
+    use TraitsModel;
 
     /**
      * Author: Vijay  <1937832819@qq.com>
@@ -25,15 +25,6 @@ class Role extends BaseRole
      */
     public static $guard_name_list = [
         'admin', 'home'
-    ];
-
-    /**
-     * @var array
-     */
-    public static $delete = [
-        0 => '正常',
-        1 => '软删除',
-        2 => '全部'
     ];
 
     /**

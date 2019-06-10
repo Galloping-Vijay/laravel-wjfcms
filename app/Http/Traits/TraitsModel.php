@@ -3,16 +3,15 @@
  * Description:
  * Created by PhpStorm.
  * User: Vijay
- * Date: 2019/5/22
- * Time: 22:30
+ * Date: 2019/6/10
+ * Time: 21:39
  */
 
-namespace App\Models;
+namespace App\Http\Traits;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Base extends Model
+trait TraitsModel
 {
     /**
      * 软删除
@@ -20,16 +19,25 @@ class Base extends Model
     use SoftDeletes;
 
     /**
+     * @var array
+     */
+    public static $delete = [
+        0 => '正常',
+        1 => '软删除',
+        2 => '全部'
+    ];
+
+    /**
      * @var null
      */
     protected $error = null;
 
     /**
-     * @return Base
-     * Description: 获取模型
+     * Description:
      * User: Vijay
-     * Date: 2019/5/22
-     * Time: 22:45
+     * Date: 2019/6/10
+     * Time: 21:41
+     * @return TraitsModel
      */
     public static function initialization()
     {
@@ -37,11 +45,11 @@ class Base extends Model
     }
 
     /**
-     * @return null
      * Description:返回错误提示信息
      * User: Vijay
-     * Date: 2019/5/22
-     * Time: 22:54
+     * Date: 2019/6/10
+     * Time: 21:42
+     * @return null
      */
     public function getError()
     {
