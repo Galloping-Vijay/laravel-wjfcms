@@ -5,7 +5,8 @@
     <title>登入 - laravel-wjfcms</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/layui/css/layui.css') }}" media="all">
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/style/admin.css') }}" media="all">
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/style/login.css') }}" media="all">
@@ -22,12 +23,16 @@
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             @csrf
             <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
-                <input type="text" name="account" id="LAY-user-login-username" lay-verify="required" placeholder="账号" class="layui-input">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-username"
+                       for="LAY-user-login-username"></label>
+                <input type="text" name="account" id="LAY-user-login-username" lay-verify="required" placeholder="账号"
+                       class="layui-input">
             </div>
             <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
-                <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" placeholder="密码" class="layui-input">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password"
+                       for="LAY-user-login-password"></label>
+                <input type="password" name="password" id="LAY-user-login-password" lay-verify="required"
+                       placeholder="密码" class="layui-input">
             </div>
             {{--<div class="layui-form-item">
                 <div class="layui-row">
@@ -42,10 +47,10 @@
                     </div>
                 </div>
             </div>--}}
-           {{-- <div class="layui-form-item" style="margin-bottom: 20px;">
-                <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
-                <a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
-            </div>--}}
+            {{-- <div class="layui-form-item" style="margin-bottom: 20px;">
+                 <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+                 <a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
+             </div>--}}
             <div class="layui-form-item">
                 <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
             </div>
@@ -65,35 +70,40 @@
         base: "/static/layuiadmin/" //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'user'], function(){
+    }).use(['index', 'user'], function () {
         var $ = layui.$
-            ,setter = layui.setter
-            ,admin = layui.admin
-            ,form = layui.form
-            ,router = layui.router()
-            ,search = router.search;
+            , setter = layui.setter
+            , admin = layui.admin
+            , form = layui.form
+            , router = layui.router()
+            , search = router.search;
 
+        //过期跳转
+        if (top != self) {
+            top.location.href = '/admin/login';
+        }
+        
         form.render();
 
         //提交
-        form.on('submit(LAY-user-login-submit)', function(obj){
+        form.on('submit(LAY-user-login-submit)', function (obj) {
 
             //请求登入接口
             admin.req({
                 url: "{{ route('admin.login') }}"
                 , method: 'POST'
-                ,data: obj.field
-                ,done: function(res){
+                , data: obj.field
+                , done: function (res) {
                     //请求成功后，写入 access_token
                     layui.data(setter.tableName, {
                         key: setter.request.tokenName
-                        ,value: res.data.access_token
+                        , value: res.data.access_token
                     });
                     layer.msg('登入成功', {
                         offset: '15px'
-                        ,icon: 1
-                        ,time: 1000
-                    }, function(){
+                        , icon: 1
+                        , time: 1000
+                    }, function () {
                         location.href = '/admin/index/index'; //后台主页
                     });
                 }
