@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SysytemConfigSeeder extends Seeder
+class SystemConfigsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -151,6 +151,6 @@ class SysytemConfigSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
             ]
         ];
-        DB::table('system_config')->insert($data);
+        DB::table('system_configs')->insert($data);
     }
 }

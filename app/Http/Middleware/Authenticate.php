@@ -40,7 +40,6 @@ class Authenticate extends Middleware
                 return $this->auth->shouldUse($guard);
             }
         }
-
         // 这里我们以 guards 传入的第一个参数为准选择跳转到的登录页面
         $guard = $guards[0];
         if ($guard == 'admin') {

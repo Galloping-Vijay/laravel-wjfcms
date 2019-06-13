@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSystemConfigTable extends Migration
+class CreateSystemConfigsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateSystemConfigTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('system_config')) {
-            Schema::create('system_config', function (Blueprint $table) {
+        if (!Schema::hasTable('system_configs')) {
+            Schema::create('system_configs', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('title', 100)->default('')->comment('配置标题');
                 $table->string('key', 100)->default('')->comment('字段名');
@@ -33,6 +33,6 @@ class CreateSystemConfigTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system_config');
+        Schema::dropIfExists('system_configs');
     }
 }

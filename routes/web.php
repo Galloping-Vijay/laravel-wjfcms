@@ -166,6 +166,12 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::post('forceDelete', 'RoleController@forceDelete');
     });
 
+    // 系统设置
+    Route::prefix('systemConfig')->group(function () {
+        //基础设置
+        Route::any('basal', 'SystemConfigController@basal');
+    });
+
     // 文章管理
     Route::prefix('article')->group(function () {
         // 文章列表
@@ -309,24 +315,6 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::get('restore/{id}', 'ChatController@restore');
         // 彻底删除随言碎语
         Route::get('forceDelete/{id}', 'ChatController@forceDelete');
-    });
-
-    // 系统设置
-    Route::prefix('config')->group(function () {
-        // 编辑配置项页面
-        Route::get('edit', 'ConfigController@edit');
-        // 编辑邮箱配置页面
-        Route::get('email', 'ConfigController@email');
-        // 编辑 oauth 配置页面
-        Route::get('oauth', 'ConfigController@oauth');
-        // 编辑 qq 群配置页面
-        Route::get('qqQun', 'ConfigController@qqQun');
-        // 编辑备份配置页面
-        Route::get('backup', 'ConfigController@backup');
-        // 编辑配置
-        Route::post('update', 'ConfigController@update');
-        // 清空各种缓存
-        Route::get('clear', 'ConfigController@clear');
     });
 
     // 开源项目管理
