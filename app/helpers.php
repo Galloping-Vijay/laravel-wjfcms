@@ -8,7 +8,7 @@
  */
 
 /**
- * Instructions:终止打印数据
+ * Instructions:打印数据
  * Author: Vijay  <1937832819@qq.com>
  * Time: 2019/6/14 9:59
  * @param $data
