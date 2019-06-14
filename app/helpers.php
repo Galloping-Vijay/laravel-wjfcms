@@ -8,12 +8,11 @@
  */
 
 /**
+ * Instructions:终止打印数据
+ * Author: Vijay  <1937832819@qq.com>
+ * Time: 2019/6/14 9:59
  * @param $data
  * @param int $choice
- * Description:
- * User: Vijay
- * Date: 2019/4/20
- * Time: 14:06
  */
 function pr($data, $choice = 0)
 {
