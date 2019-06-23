@@ -103,7 +103,7 @@ class SystemConfigsSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
             ], [
                 'title' => '统计代码',
-                'key' => '统计代码',
+                'key' => 'site_tongji',
                 'value' => '',
                 'type' => 'textarea',
                 'status' => 1,
