@@ -68,8 +68,12 @@ trait TraitResource
     public function store(Request $request)
     {
         $model = new self::$model;
-        $model::create($request->input());
-        return $this->resJson(0, '操作成功');
+        try {
+            $model::create($request->input());
+            return $this->resJson(0, '操作成功');
+        } catch (\Exception $e) {
+            return $this->resJson(1, '操作失败' . $e->getMessage());
+        }
     }
 
     /**
@@ -116,8 +120,12 @@ trait TraitResource
         if (empty($info)) {
             return $this->resJson(1, '没有该条记录');
         }
-        $res = $info->update($request->input());
-        return $this->resJson(0, '操作成功', $res);
+        try {
+            $res = $info->update($request->input());
+            return $this->resJson(0, '操作成功', $res);
+        } catch (\Exception $e) {
+            return $this->resJson(1, '操作失败' . $e->getMessage());
+        }
     }
 
     /**
@@ -130,8 +138,12 @@ trait TraitResource
      */
     public function destroy(Request $request)
     {
-        $res = self::$model::destroy($request->id);
-        return $this->resJson(0, '操作成功', $res);
+        try {
+            $res = self::$model::destroy($request->id);
+            return $this->resJson(0, '操作成功', $res);
+        } catch (\Exception $e) {
+            return $this->resJson(1, '操作失败' . $e->getMessage());
+        }
     }
 
     /**
@@ -148,8 +160,12 @@ trait TraitResource
         if (empty($info)) {
             return $this->resJson(1, '没有该条记录');
         }
-        $res = $info->restore();
-        return $this->resJson(0, '操作成功', $res);
+        try {
+            $res = $info->restore();
+            return $this->resJson(0, '操作成功', $res);
+        } catch (\Exception $e) {
+            return $this->resJson(1, '操作失败' . $e->getMessage());
+        }
     }
 
     /**
@@ -166,8 +182,12 @@ trait TraitResource
         if (empty($info)) {
             return $this->resJson(1, '没有该条记录');
         }
-        $res = $info->forceDelete();
-        return $this->resJson(0, '操作成功', $res);
+        try {
+            $res = $info->forceDelete();
+            return $this->resJson(0, '操作成功', $res);
+        } catch (\Exception $e) {
+            return $this->resJson(1, '操作失败' . $e->getMessage());
+        }
     }
 
     /**

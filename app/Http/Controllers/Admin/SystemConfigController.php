@@ -34,29 +34,34 @@ class SystemConfigController extends Controller
                     return self::resJson(1, '上传失败');
                 }
             }
-            //全部提交
-            DB::beginTransaction();
-            foreach ($request->input() as $key => $val) {
-                if (empty($val)) {
-                    continue;
+            try {
+                //全部提交
+                DB::beginTransaction();
+                foreach ($request->input() as $key => $val) {
+                    if (empty($val)) {
+                        continue;
+                    }
+                    if (!in_array($key, SystemConfig::$keysList)) {
+                        continue;
+                    }
+                    $info = SystemConfig::where('key', $key)->first();
+                    if (empty($info)) {
+                        continue;
+                    }
+                    if ($key == 'site_tongji') {
+                        $info->value = htmlspecialchars($val);
+                    } else {
+                        $info->value = $val;
+                    }
+                    $info->save();
+                    $info = null;
                 }
-                if (!in_array($key, SystemConfig::$keysList)) {
-                    continue;
-                }
-                $info = SystemConfig::where('key', $key)->first();
-                if (empty($info)) {
-                    continue;
-                }
-                if ($key == 'site_tongji') {
-                    $info->value = htmlspecialchars($val);
-                } else {
-                    $info->value = $val;
-                }
-                $info->save();
-                $info = null;
+                DB::commit();
+                return self::resJson(0, '操作成功');
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return self::resJson(1, '操作失败' . $e->getMessage());
             }
-            DB::commit();
-            return self::resJson(0, '操作成功');
         }
         $list = SystemConfig::where([['status', '=', '1'],
             ['config_type', '=', '0']])->select('key', 'value')->get();

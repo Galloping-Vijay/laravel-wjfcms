@@ -175,22 +175,24 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
     // 文章管理
     Route::prefix('article')->group(function () {
         // 列表
-        Route::get('index', 'ArticleController@index');
-        // 发布
+        Route::any('index', 'ArticleController@index');
+        // 创建
         Route::get('create', 'ArticleController@create');
         Route::post('store', 'ArticleController@store');
+        // 展示
+        Route::get('show/{id}', 'ArticleController@show');
         // 编辑
         Route::get('edit/{id}', 'ArticleController@edit');
-        //更新
-        Route::post('update/{id}', 'ArticleController@update');
-        // 上传图片
-        Route::post('uploadImage', 'ArticleController@uploadImage');
+        // 更新
+        Route::post('update', 'ArticleController@update');
         // 删除
         Route::post('destroy', 'ArticleController@destroy');
         // 恢复删除
         Route::post('restore', 'ArticleController@restore');
         // 彻底删除
         Route::post('forceDelete', 'ArticleController@forceDelete');
+        // 上传图片
+        Route::post('uploadImage', 'ArticleController@uploadImage');
         // 批量替换功能视图
         Route::get('replaceView', 'ArticleController@replaceView');
         // 批量替换功能
@@ -199,56 +201,121 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
 
     // 分类管理
     Route::prefix('category')->group(function () {
-        // 分类列表
-        Route::get('index', 'CategoryController@index');
-        // 添加分类
+        // 列表
+        Route::any('index', 'CategoryController@index');
+        // 创建
         Route::get('create', 'CategoryController@create');
         Route::post('store', 'CategoryController@store');
-        // 编辑分类
+        // 展示
+        Route::get('show/{id}', 'CategoryController@show');
+        // 编辑
         Route::get('edit/{id}', 'CategoryController@edit');
-        Route::post('update/{id}', 'CategoryController@update');
-        // 排序
-        Route::post('sort', 'CategoryController@sort');
-        // 删除分类
-        Route::get('destroy/{id}', 'CategoryController@destroy');
-        // 恢复删除的分类
-        Route::get('restore/{id}', 'CategoryController@restore');
-        // 彻底删除分类
-        Route::get('forceDelete/{id}', 'CategoryController@forceDelete');
-    });
-
-    // 标签管理
-    Route::prefix('tag')->group(function () {
-        // 标签列表
-        Route::get('index', 'TagController@index');
-        // 添加标签
-        Route::get('create', 'TagController@create');
-        Route::post('store', 'TagController@store');
-        // 编辑标签
-        Route::get('edit/{id}', 'TagController@edit');
-        Route::post('update/{id}', 'TagController@update');
-        // 删除标签
-        Route::get('destroy/{id}', 'TagController@destroy');
-        // 恢复删除的标签
-        Route::get('restore/{id}', 'TagController@restore');
-        // 彻底删除标签
-        Route::get('forceDelete/{id}', 'TagController@forceDelete');
+        // 更新
+        Route::post('update', 'CategoryController@update');
+        // 删除
+        Route::post('destroy', 'CategoryController@destroy');
+        // 恢复删除
+        Route::post('restore', 'CategoryController@restore');
+        // 彻底删除
+        Route::post('forceDelete', 'CategoryController@forceDelete');
     });
 
     // 评论管理
     Route::prefix('comment')->group(function () {
         // 评论列表
-        Route::get('index', 'CommentController@index');
-        // 删除评论
-        Route::get('destroy/{id}', 'CommentController@destroy');
-        // 恢复删除的评论
-        Route::get('restore/{id}', 'CommentController@restore');
-        // 彻底删除评论
-        Route::get('forceDelete/{id}', 'CommentController@forceDelete');
-        // 批量替换功能视图
-        Route::get('replaceView', 'CommentController@replaceView');
+        Route::any('index', 'CommentController@index');
+        // 删除
+        Route::post('destroy', 'CommentController@destroy');
+        // 恢复删除
+        Route::post('restore', 'CommentController@restore');
+        // 彻底删除
+        Route::post('forceDelete', 'CommentController@forceDelete');
         // 批量替换功能
-        Route::post('replace', 'CommentController@replace');
+        Route::any('replace', 'CommentController@replace');
+    });
+
+    // 有些话管理
+    Route::prefix('chat')->group(function () {
+        // 列表
+        Route::any('index', 'ChatController@index');
+        // 创建
+        Route::get('create', 'ChatController@create');
+        Route::post('store', 'ChatController@store');
+        // 展示
+        Route::get('show/{id}', 'ChatController@show');
+        // 编辑
+        Route::get('edit/{id}', 'ChatController@edit');
+        // 更新
+        Route::post('update', 'ChatController@update');
+        // 删除
+        Route::post('destroy', 'ChatController@destroy');
+        // 恢复删除
+        Route::post('restore', 'ChatController@restore');
+        // 彻底删除
+        Route::post('forceDelete', 'ChatController@forceDelete');
+    });
+
+    // 标签管理
+    Route::prefix('tag')->group(function () {
+        // 列表
+        Route::any('index', 'TagController@index');
+        // 创建
+        Route::get('create', 'TagController@create');
+        Route::post('store', 'TagController@store');
+        // 展示
+        Route::get('show/{id}', 'TagController@show');
+        // 编辑
+        Route::get('edit/{id}', 'TagController@edit');
+        // 更新
+        Route::post('update', 'TagController@update');
+        // 删除
+        Route::post('destroy', 'TagController@destroy');
+        // 恢复删除
+        Route::post('restore', 'TagController@restore');
+        // 彻底删除
+        Route::post('forceDelete', 'TagController@forceDelete');
+    });
+
+    //前台导航菜单
+    Route::prefix('nav')->group(function () {
+        // 列表
+        Route::any('index', 'NavController@index');
+        // 创建
+        Route::get('create', 'NavController@create');
+        Route::post('store', 'NavController@store');
+        // 展示
+        Route::get('show/{id}', 'NavController@show');
+        // 编辑
+        Route::get('edit/{id}', 'NavController@edit');
+        // 更新
+        Route::post('update', 'NavController@update');
+        // 删除
+        Route::post('destroy', 'NavController@destroy');
+        // 恢复删除
+        Route::post('restore', 'NavController@restore');
+        // 彻底删除
+        Route::post('forceDelete', 'NavController@forceDelete');
+    });
+
+    // 友情链接管理
+    Route::prefix('friendLinks')->group(function () {
+        // 列表
+        Route::any('index', 'FriendLinksController@index');
+        // 创建
+        Route::get('create', 'FriendLinksController@create');
+        Route::post('store', 'FriendLinksController@store');
+        // 展示
+        Route::get('show/{id}', 'FriendLinksController@show');
+        // 编辑
+        Route::get('edit/{id}', 'FriendLinksController@edit');
+        // 更新
+        Route::post('update', 'FriendLinksController@update');
+        // 删除
+        Route::post('destroy', 'FriendLinksController@destroy');
+        // 恢复删除
+        Route::post('restore', 'FriendLinksController@restore');
+        // 彻底删除
+        Route::post('forceDelete', 'FriendLinksController@forceDelete');
     });
 
     // 第三方用户管理
@@ -258,26 +325,6 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         // 编辑管理员
         Route::get('edit/{id}', 'OauthUserController@edit');
         Route::post('update/{id}', 'OauthUserController@update');
-    });
-
-    // 友情链接管理
-    Route::prefix('friendshipLink')->group(function () {
-        // 友情链接列表
-        Route::get('index', 'FriendshipLinkController@index');
-        // 添加友情链接
-        Route::get('create', 'FriendshipLinkController@create');
-        Route::post('store', 'FriendshipLinkController@store');
-        // 编辑友情链接
-        Route::get('edit/{id}', 'FriendshipLinkController@edit');
-        Route::post('update/{id}', 'FriendshipLinkController@update');
-        // 排序
-        Route::post('sort', 'FriendshipLinkController@sort');
-        // 删除友情链接
-        Route::get('destroy/{id}', 'FriendshipLinkController@destroy');
-        // 恢复删除的友情链接
-        Route::get('restore/{id}', 'FriendshipLinkController@restore');
-        // 彻底删除友情链接
-        Route::get('forceDelete/{id}', 'FriendshipLinkController@forceDelete');
     });
 
     // 推荐博客管理
@@ -300,24 +347,6 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::get('forceDelete/{id}', 'SiteController@forceDelete');
     });
 
-    // 随言碎语管理
-    Route::prefix('chat')->group(function () {
-        // 随言碎语列表
-        Route::get('index', 'ChatController@index');
-        // 添加随言碎语
-        Route::get('create', 'ChatController@create');
-        Route::post('store', 'ChatController@store');
-        // 编辑随言碎语
-        Route::get('edit/{id}', 'ChatController@edit');
-        Route::post('update/{id}', 'ChatController@update');
-        // 删除随言碎语
-        Route::get('destroy/{id}', 'ChatController@destroy');
-        // 恢复删除的随言碎语
-        Route::get('restore/{id}', 'ChatController@restore');
-        // 彻底删除随言碎语
-        Route::get('forceDelete/{id}', 'ChatController@forceDelete');
-    });
-
     // 开源项目管理
     Route::prefix('gitProject')->group(function () {
         // 开源项目列表
@@ -336,26 +365,6 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::get('restore/{id}', 'GitProjectController@restore');
         // 彻底删除开源项目
         Route::get('forceDelete/{id}', 'GitProjectController@forceDelete');
-    });
-
-    // 菜单管理
-    Route::prefix('nav')->group(function () {
-        // 菜单列表
-        Route::get('index', 'NavController@index');
-        // 添加菜单
-        Route::get('create', 'NavController@create');
-        Route::post('store', 'NavController@store');
-        // 编辑菜单
-        Route::get('edit/{id}', 'NavController@edit');
-        Route::post('update/{id}', 'NavController@update');
-        // 排序
-        Route::post('sort', 'NavController@sort');
-        // 删除菜单
-        Route::get('destroy/{id}', 'NavController@destroy');
-        // 恢复删除的菜单
-        Route::get('restore/{id}', 'NavController@restore');
-        // 彻底删除菜单
-        Route::get('forceDelete/{id}', 'NavController@forceDelete');
     });
 });
 

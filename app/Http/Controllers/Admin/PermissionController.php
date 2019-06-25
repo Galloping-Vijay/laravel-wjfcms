@@ -119,8 +119,12 @@ class PermissionController extends Controller
         if ($info->level != $request->level) {
             return $this->resJson(1, '暂时不支持修改级别');
         }
-        $res = $info->update($request->input());
-        return $this->resJson(0, '操作成功', $res);
+        try {
+            $res = $info->update($request->input());
+            return $this->resJson(0, '操作成功', $res);
+        } catch (\Exception $e) {
+            return $this->resJson(1, '操作失败' . $e->getMessage());
+        }
     }
 
     /**
@@ -133,32 +137,38 @@ class PermissionController extends Controller
      */
     public function destroy(Request $request)
     {
-        DB::beginTransaction();
-        //存在子菜单
-        $subMenu = self::$model::where('parent_id', $request->id)->first();
-        if (!empty($subMenu)) {
+        try {
+            DB::beginTransaction();
+            //存在子菜单
+            $subMenu = self::$model::where('parent_id', $request->id)->first();
+            if (!empty($subMenu)) {
+                DB::rollBack();
+                return $this->resJson(1, '存在子菜单,不能删除');
+            }
+            //存在角色中
+            $resRolePermissions = RoleHasPermissions::where('permission_id', $request->id)->first();
+            if (!empty($resRolePermissions)) {
+                DB::rollBack();
+                return $this->resJson(1, '存在改权限的角色,请先删除角色中的次权限');
+            }
+            //存在用户权限中
+            $resadminPermissions = ModelHasPermissions::where('permission_id', $request->id)->first();
+            if (!empty($resadminPermissions)) {
+                DB::rollBack();
+                return $this->resJson(1, '存在改权限的角色,请先删除角色中的次权限');
+            }
+            $res = self::$model::destroy($request->id);
+            if ($res != true) {
+                DB::rollBack();
+                return $this->resJson(1, '删除失败');
+            }
+            DB::commit();
+            return $this->resJson(0, '操作成功', $res);
+        } catch (\Exception $e) {
             DB::rollBack();
-            return $this->resJson(1, '存在子菜单,不能删除');
+            return $this->resJson(1, '操作失败' . $e->getMessage());
         }
-        //存在角色中
-        $resRolePermissions = RoleHasPermissions::where('permission_id', $request->id)->first();
-        if (!empty($resRolePermissions)) {
-            DB::rollBack();
-            return $this->resJson(1, '存在改权限的角色,请先删除角色中的次权限');
-        }
-        //存在用户权限中
-        $resadminPermissions = ModelHasPermissions::where('permission_id', $request->id)->first();
-        if (!empty($resadminPermissions)) {
-            DB::rollBack();
-            return $this->resJson(1, '存在改权限的角色,请先删除角色中的次权限');
-        }
-        $res = self::$model::destroy($request->id);
-        if ($res != true) {
-            DB::rollBack();
-            return $this->resJson(1, '删除失败');
-        }
-        DB::commit();
-        return $this->resJson(0, '操作成功', $res);
+
     }
 
     /**
