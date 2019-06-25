@@ -15,7 +15,7 @@ class CreateAdminsTable extends Migration
     {
         if (!Schema::hasTable('admins')) {
             Schema::create('admins', function (Blueprint $table) {
-                $table->bigIncrements('id');
+                $table->bigIncrements('id')->comment('后台管理员表');
                 $table->string('account',100)->default('')->unique()->comment('账号');
                 $table->string('username',255)->default('')->comment('昵称');
                 $table->string('password')->default('')->comment('密码');
