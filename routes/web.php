@@ -174,22 +174,23 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
 
     // 文章管理
     Route::prefix('article')->group(function () {
-        // 文章列表
+        // 列表
         Route::get('index', 'ArticleController@index');
-        // 发布文章
+        // 发布
         Route::get('create', 'ArticleController@create');
         Route::post('store', 'ArticleController@store');
-        // 编辑文章
+        // 编辑
         Route::get('edit/{id}', 'ArticleController@edit');
+        //更新
         Route::post('update/{id}', 'ArticleController@update');
         // 上传图片
         Route::post('uploadImage', 'ArticleController@uploadImage');
-        // 删除文章
-        Route::get('destroy/{id}', 'ArticleController@destroy');
-        // 恢复删除的文章
-        Route::get('restore/{id}', 'ArticleController@restore');
-        // 彻底删除文章
-        Route::get('forceDelete/{id}', 'ArticleController@forceDelete');
+        // 删除
+        Route::post('destroy', 'ArticleController@destroy');
+        // 恢复删除
+        Route::post('restore', 'ArticleController@restore');
+        // 彻底删除
+        Route::post('forceDelete', 'ArticleController@forceDelete');
         // 批量替换功能视图
         Route::get('replaceView', 'ArticleController@replaceView');
         // 批量替换功能

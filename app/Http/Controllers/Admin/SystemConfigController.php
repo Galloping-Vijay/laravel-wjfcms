@@ -64,7 +64,6 @@ class SystemConfigController extends Controller
         foreach ($list as $key => $val) {
             $config[$val['key']] = $val['value'];
         }
-
         return view('admin.systemConfig.basal', [
             'config' => $config,
         ]);
