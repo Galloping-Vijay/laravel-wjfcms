@@ -123,7 +123,7 @@ class PermissionController extends Controller
             $res = $info->update($request->input());
             return $this->resJson(0, '操作成功', $res);
         } catch (\Exception $e) {
-            return $this->resJson(1, '操作失败' . $e->getMessage());
+            return $this->resJson(1, $e->getMessage());
         }
     }
 
@@ -166,7 +166,7 @@ class PermissionController extends Controller
             return $this->resJson(0, '操作成功', $res);
         } catch (\Exception $e) {
             DB::rollBack();
-            return $this->resJson(1, '操作失败' . $e->getMessage());
+            return $this->resJson(1, $e->getMessage());
         }
 
     }

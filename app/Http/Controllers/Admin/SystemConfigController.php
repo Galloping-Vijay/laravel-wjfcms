@@ -60,7 +60,7 @@ class SystemConfigController extends Controller
                 return self::resJson(0, '操作成功');
             } catch (\Exception $e) {
                 DB::rollBack();
-                return self::resJson(1, '操作失败' . $e->getMessage());
+                return self::resJson(1, $e->getMessage());
             }
         }
         $list = SystemConfig::where([['status', '=', '1'],
