@@ -212,6 +212,8 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::get('edit/{id}', 'CategoryController@edit');
         // 更新
         Route::post('update', 'CategoryController@update');
+        //下拉
+        Route::any('tree', 'CategoryController@tree');
         // 删除
         Route::post('destroy', 'CategoryController@destroy');
         // 恢复删除
