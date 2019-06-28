@@ -17,6 +17,35 @@ layui.define(['table', 'form'], function (exports) {
             where: field
         });
     });
+
+    //监听指定开关
+    form.on('switch(table-button-status)', function (data) {
+        var field = {
+            status: this.checked ? 1 : 0,
+            id: $(this).data('id')
+        };
+        admin.req({
+            url: '/admin/' + control_name + '/update'
+            , data: field
+            , method: 'POST'
+            , headers: {
+                'X-CSRF-TOKEN': csrf_token
+            }
+            , done: function (res) {
+                if (res.code === 0) {
+                    layer.msg(res.msg, {
+                        offset: '15px'
+                        , icon: 1
+                        , time: 1000
+                    }, function () {
+                    });
+                } else {
+                    layer.msg(res.msg);
+                }
+            }
+        });
+    });
+
     //监听工具条
     table.on('tool(LAY-app-list)', function (obj) {
         if (obj.event === 'del') {
