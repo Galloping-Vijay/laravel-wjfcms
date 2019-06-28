@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', '角色列表')
+@section('control_name', $control_name)
 @section('content')
     <div class="layui-fluid">
         <div class="layui-card">
@@ -60,8 +60,6 @@
                 </div>
                 <!-- 表格 -->
                 <table id="LAY-app-list" lay-filter="LAY-app-list"></table>
-                <!-- 控制名 -->
-                <input type="hidden" name="control_name" value="{{ $control_name }}">
                 <!-- 模板渲染 -->
                 <script type="text/html" id="statusTpl">
                     @{{#  if(d.deleted_at == null){ }}
@@ -100,7 +98,7 @@
                 , $ = layui.$
                 , admin = layui.admin
                 , form = layui.form;
-            var control_name = $('input[name="control_name"]').val();
+            var control_name = $('meta[name="control_name"]').attr('content');
             var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
             //表格数据
@@ -114,10 +112,10 @@
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 80, title: 'ID', sort: true}
-                    , {field: 'name', title: '名称'}
-                    , {field: 'description', title: '描述'}
-                    , {field: 'guard_name', title: '角色组'}
+                    , {field: 'id', width: 80, title: 'ID', sort: true, align: 'center'}
+                    , {field: 'name', title: '名称', align: 'center'}
+                    , {field: 'description', title: '描述', align: 'center'}
+                    , {field: 'guard_name', title: '角色组', align: 'center'}
                     , {field: 'status', width: 80, title: '状态', templet: '#statusTpl', align: 'center'}
                     , {title: '操作', width: 250, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]

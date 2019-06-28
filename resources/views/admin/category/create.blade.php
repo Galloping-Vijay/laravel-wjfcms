@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', '文章分类添加')
+@section('control_name', $control_name)
 @section('content')
     <div class="layui-form" lay-filter="layuiadmin-app-list" id="layuiadmin-app-form-list"
          style="padding: 20px 30px 0 0;">

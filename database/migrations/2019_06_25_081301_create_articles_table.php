@@ -16,7 +16,7 @@ class CreateArticlesTable extends Migration
         if (!Schema::hasTable('articles')) {
             Schema::create('articles', function (Blueprint $table) {
                 $table->bigIncrements('id')->comment('文章表');
-                $table->boolean('category_id')->default(0)->comment('分类id');
+                $table->integer('category_id')->default(0)->comment('分类id');
                 $table->string('title')->default('')->comment('标题');
                 $table->string('author')->default('')->comment('作者');
                 $table->mediumText('markdown')->comment('markdown文章内容');
