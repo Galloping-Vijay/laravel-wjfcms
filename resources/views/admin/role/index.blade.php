@@ -114,10 +114,10 @@
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 80, title: 'ID', sort: true}
-                    , {field: 'name', title: '名称'}
-                    , {field: 'description', title: '描述'}
-                    , {field: 'guard_name', title: '角色组'}
+                    , {field: 'id', width: 80, title: 'ID', sort: true, align: 'center'}
+                    , {field: 'name', title: '名称', align: 'center'}
+                    , {field: 'description', title: '描述', align: 'center'}
+                    , {field: 'guard_name', title: '角色组', align: 'center'}
                     , {field: 'status', width: 80, title: '状态', templet: '#statusTpl', align: 'center'}
                     , {title: '操作', width: 250, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]

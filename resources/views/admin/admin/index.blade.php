@@ -136,11 +136,11 @@
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 80, title: 'ID', sort: true}
-                    , {field: 'account', title: '账号'}
-                    , {field: 'username', title: '昵称'}
-                    , {field: 'tel', title: '电话'}
-                    , {field: 'email', title: '邮箱'}
+                    , {field: 'id', align: 'center',  width: 80, title: 'ID', sort: true}
+                    , {field: 'account', align: 'center',  title: '账号'}
+                    , {field: 'username', align: 'center',  title: '昵称'}
+                    , {field: 'tel',  align: 'center', title: '电话'}
+                    , {field: 'email', align: 'center',  title: '邮箱'}
                     , {field: 'sex', title: '性别', templet: '#sexTpl', align: 'center'}
                     , {field: 'status', width: 80, title: '状态', templet: '#statusTpl', align: 'center'}
                     , {title: '操作', width: 250, align: 'center', fixed: 'right', toolbar: '#table-list'}

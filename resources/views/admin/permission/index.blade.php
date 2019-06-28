@@ -126,12 +126,12 @@
                 , where: {_token: csrf_token}
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 80, title: 'ID', sort: true}
-                    , {field: 'sort_order', width: 80, title: '排序', edit: 'text', sort: true}
+                    , {field: 'id', width: 80, title: 'ID', align: 'center',  sort: true}
+                    , {field: 'sort_order', width: 80, title: '排序', edit: 'text',  align: 'center', sort: true}
                     , {field: 'name', title: '名称'}
-                    , {field: 'guard_name', title: '权限组'}
-                    , {field: 'url', title: '权限地址'}
-                    , {field: 'icon', title: '图标'}
+                    , {field: 'guard_name', title: '权限组', align: 'center'}
+                    , {field: 'url', title: '权限地址', align: 'center'}
+                    , {field: 'icon', title: '图标', align: 'center'}
                     , {field: 'display_menu', width: 80, title: '显示菜单', templet: '#statusTpl', align: 'center'}
                     , {title: '操作', width: 250, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
