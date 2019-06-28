@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', '角色编辑')
+@section('control_name', $control_name)
 @section('header')
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/style/dtree/dtree.css') }}" media="all">
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/style/dtree/font/dtreefont.css') }}" media="all">

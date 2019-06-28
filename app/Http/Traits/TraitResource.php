@@ -42,7 +42,10 @@ trait TraitResource
             $data = self::getPageData($list, $page, $limit);
             return response($data);
         }
-        return view('admin.' . self::$controlName . '.index');
+        return view('admin.' . self::$controlName . '.index',
+            [
+                'control_name' => self::$controlName,
+            ]);
     }
 
     /**
@@ -54,7 +57,10 @@ trait TraitResource
      */
     public function create()
     {
-        return view('admin.' . self::$controlName . '.create');
+        return view('admin.' . self::$controlName . '.create',
+            [
+                'control_name' => self::$controlName,
+            ]);
     }
 
     /**
@@ -102,7 +108,8 @@ trait TraitResource
     {
         $info = self::$model::find($id);
         return view('admin.' . self::$controlName . '.edit', [
-            'info' => $info
+            'info' => $info,
+            'control_name' => self::$controlName,
         ]);
     }
 

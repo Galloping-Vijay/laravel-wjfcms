@@ -81,6 +81,7 @@ class PermissionController extends Controller
         return view('admin.' . self::$controlName . '.create', [
             'guard_name_list' => Permissions::$guard_name_list,
             'superclass_id' => $superclass_id,
+            'control_name' => self::$controlName,
         ]);
     }
 
@@ -98,6 +99,7 @@ class PermissionController extends Controller
         return view('admin.' . self::$controlName . '.edit', [
             'info' => $info,
             'guard_name_list' => Permissions::$guard_name_list,
+            'control_name' => self::$controlName,
         ]);
     }
 

@@ -9,6 +9,8 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- controller name -->
+    <meta name="control_name" content="@yield('control_name','index')">
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/layui/css/layui.css') }}" media="all">
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/style/admin.css') }}" media="all">
     <script src="{{ asset('static/layuiadmin/layui/layui.js') }}"></script>

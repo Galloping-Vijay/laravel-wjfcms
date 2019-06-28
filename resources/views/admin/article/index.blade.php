@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', '文章列表')
+@section('control_name', $control_name)
 @section('content')
     <div class="layui-fluid">
         <div class="layui-card">
@@ -56,8 +56,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 控制名 -->
-            <input type="hidden" name="control_name" value="{{ $control_name }}">
             <div class="layui-card-body">
                 <div style="padding-bottom: 10px;">
                     @can('创建文章')
@@ -97,7 +95,7 @@
 
 @section('script')
     <script>
-        var control_name = document.querySelector('input[name="control_name"]').getAttribute('value');
+        var control_name = document.querySelector('meta[name="control_name"]').getAttribute('content');
         var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         layui.config({
             base: "/static/layuiadmin/"

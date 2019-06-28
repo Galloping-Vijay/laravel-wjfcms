@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-@section('title', '网站设置')
 @section('header')
     <style>
         #up_logo {

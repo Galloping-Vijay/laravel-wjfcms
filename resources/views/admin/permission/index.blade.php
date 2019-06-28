@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', '菜单列表')
+@section('control_name', $control_name)
 @section('content')
     <div class="layui-fluid">
         <div class="layui-card">
@@ -51,7 +51,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="layui-card-body" style="min-height: 600px">
                 <!-- 按钮组 -->
                 <div style="padding-bottom: 10px;">
@@ -64,8 +63,6 @@
                 </div>
                 <!-- 表格 -->
                 <table id="LAY-app-list" lay-filter="LAY-app-list"></table>
-                <!-- 控制名 -->
-                <input type="hidden" name="control_name" value="{{ $control_name }}">
                 <!-- 模板渲染 -->
                 <script type="text/html" id="statusTpl">
                     @{{#  if(d.deleted_at == null){ }}
@@ -107,7 +104,7 @@
                 , admin = layui.admin
                 , treeGrid = layui.treeGrid
                 , form = layui.form;
-            var control_name = $('input[name="control_name"]').val();
+            var control_name = $('meta[name="control_name"]').attr('content');
             var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
             //表格数据树

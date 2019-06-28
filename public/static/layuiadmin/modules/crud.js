@@ -6,9 +6,15 @@
 layui.define(['table', 'form'], function (exports) {
     var $ = layui.$
         , table = layui.table
-        ,layer = layui.layer
-        ,admin = layui.admin
+        , layer = layui.layer
+        , admin = layui.admin
         , form = layui.form;
+    if (typeof(control_name) == "undefined") {
+        control_name = $('meta[name="control_name"]').attr('content');
+    }
+    if (typeof(csrf_token) == "undefined") {
+        csrf_token = $('meta[name="csrf-token"]').attr('content');
+    }
     //监听搜索
     form.on('submit(LAY-app-search)', function (data) {
         var field = data.field;
