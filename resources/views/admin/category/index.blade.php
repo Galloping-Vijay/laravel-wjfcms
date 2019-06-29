@@ -45,8 +45,10 @@
                 <!-- 模板渲染 -->
                 <script type="text/html" id="table-list">
                     @{{#  if(d.deleted_at == null){ }}
+                    <a class="layui-btn layui-btn-xs" lay-event="article"><i
+                                class="layui-icon layui-icon-list"></i>分类文章</a>
                     <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="submenu"><i
-                                class="layui-icon layui-icon-add-circle-fine"></i> 添加子分类</a>
+                                class="layui-icon layui-icon-add-circle-fine"></i>添加子分类</a>
                     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
                         <i class="layui-icon layui-icon-edit"></i>编辑
                     </a>
@@ -100,7 +102,7 @@
                     , {field: 'sort', width: 80, title: '排序', edit: 'text', sort: true}
                     , {field: 'name', title: '名称'}
                     , {field: 'keywords', title: '关键字'}
-                    , {title: '操作', width: 250, align: 'center', fixed: 'right', toolbar: '#table-list'}
+                    , {title: '操作', width: 350, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
                 , page: false
                 , done: function (res, curr, count) {
@@ -311,6 +313,9 @@
                             }
                         });
                     });
+                } else if (obj.event === 'article') {
+                    var href = '/admin/article/index?category_id=' + obj.data.id;
+                    parent.layui.index.openTabsPage(href, '文章列表');
                 }
             });
 
