@@ -59,16 +59,21 @@ class CategoryController extends Controller
     }
 
     /**
-     * Instructions:
-     * Author: Vijay  <1937832819@qq.com>
-     * Time: 2019/5/31 10:13
+     * Description:
+     * User: Vijay
+     * Date: 2019/6/29
+     * Time: 11:51
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
         $superclass_id = request()->input('superclass_id', 0);
+        $tree = self::$model::select('id', 'name', 'pid')->orderBy('id', 'asc')->get()->toArray();
+        $list = self::$model::array2level($tree);
         return view('admin.' . self::$controlName . '.create', [
             'superclass_id' => $superclass_id,
+            'control_name' => self::$controlName,
+            'list' => $list
         ]);
     }
 
@@ -83,8 +88,12 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $info = self::$model::find($id);
+        $tree = self::$model::select('id', 'name', 'pid')->orderBy('id', 'asc')->get()->toArray();
+        $list = self::$model::array2level($tree);
         return view('admin.' . self::$controlName . '.edit', [
             'info' => $info,
+            'control_name' => self::$controlName,
+            'list' => $list
         ]);
     }
 
@@ -101,10 +110,6 @@ class CategoryController extends Controller
         $info = self::$model::find($request->id);
         if (empty($info)) {
             return $this->resJson(1, '没有该条记录');
-        }
-        //当更新时,级别改变,下级要相应的调整,待完善
-        if ($info->level != $request->level) {
-            return $this->resJson(1, '暂时不支持修改级别');
         }
         try {
             $res = $info->update($request->input());
@@ -127,7 +132,7 @@ class CategoryController extends Controller
         try {
             DB::beginTransaction();
             //存在子菜单
-            $subMenu = self::$model::where('parent_id', $request->id)->first();
+            $subMenu = self::$model::where('pid', $request->id)->first();
             if (!empty($subMenu)) {
                 DB::rollBack();
                 return $this->resJson(1, '存在子菜单,不能删除');
@@ -145,39 +150,5 @@ class CategoryController extends Controller
         }
 
     }
-
-    /**
-     * Instructions:获取下拉菜单
-     * Author: Vijay  <1937832819@qq.com>
-     * Time: 2019/5/31 11:15
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
-    public function tree()
-    {
-        $tree = self::$model::select('id', 'name', 'pid')->orderBy('id', 'asc')->get()->toArray();
-        $list = self::$model::array2level($tree);
-        return $this->resJson(0, '请求成功', $list);
-    }
-
-    /**
-     * Description:获取dtree权限树结构
-     * User: Vijay
-     * Date: 2019/6/7
-     * Time: 0:22
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
-    public function permissionTree(Request $request)
-    {
-        $guard_name = $request->input('guard_name', 'admin');
-        $role_id = $request->input('role_id', 0);
-        $self::$model = self::$model::where('guard_name', $guard_name)->select('id', 'name as title', 'level', 'parent_id')->orderBy('level', 'asc')->get()->toArray();
-        $list = self::$model::getAuthTree($self::$model, 0, true, $role_id);
-        return $this->resJson(0, '操作成功', $list, [
-            'status' => [
-                'code' => 200,
-                'message' => '操作成功'
-            ]
-        ]);
-    }
+    
 }

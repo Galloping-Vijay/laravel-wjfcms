@@ -10,12 +10,18 @@
                        class="layui-input">
             </div>
         </div>
-        <input type="hidden" name="superclass_id" value="{{ $superclass_id }}">
         <div class="layui-form-item">
             <label class="layui-form-label">上级：</label>
             <div class="layui-input-inline" id="">
-                <select name="" lay-verify="required" lay-search="" lay-filter="pid" id="pid">
-
+                <select name="pid" lay-verify="required" lay-search="" lay-filter="pid" id="pid">
+                    <option value="0">一级菜单</option>
+                    @foreach ($list as $key=>$val)
+                        @if ($val['id'] == $superclass_id)
+                            <option value="{{ $val['id'] }}" selected>{!! $val['name'] !!}</option>
+                        @else
+                            <option value="{{ $val['id'] }}">{!! $val['name'] !!}</option>
+                        @endif
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -61,39 +67,6 @@
             var $ = layui.$
                 , admin = layui.admin
                 , form = layui.form;
-            var superclass_id = $("input[name='superclass_id']").val();
-            //初始化菜单
-            getMenu();
-            /**
-             * 获取分类树
-             */
-            function getMenu() {
-                admin.req({
-                    url: '/admin/category/tree'
-                    , data: {}
-                    , headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                    , method: 'POST'
-                    , done: function (res) {
-                        if (res.code === 0) {
-                            var html = '<option value="0-0">一级菜单</option>';
-                            for (var p in res.data) {
-                                if (res.data[p].id == superclass_id) {
-                                    html += ' <option value="' + res.data[p].id + '" selected>' + res.data[p].name + '</option>';
-                                    $("input[name='pid']").val(res.data[p].id);
-                                } else {
-                                    html += ' <option value="' + res.data[p].id + '">' + res.data[p].name + '</option>';
-                                }
-                            }
-                            $('#pid').html(html);
-                            form.render('select');
-                        } else {
-                            layer.msg(res.msg);
-                        }
-                    }
-                });
-            }
         });
     </script>
 @endsection

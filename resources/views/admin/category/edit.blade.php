@@ -4,59 +4,46 @@
     <div class="layui-form" lay-filter="layuiadmin-app-list" id="layuiadmin-app-form-list"
          style="padding: 20px 30px 0 0;">
         <div class="layui-form-item">
-            <label class="layui-form-label">权限名称</label>
+            <label class="layui-form-label">名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="name" value="{{ $info->name }}" lay-verify="required" placeholder="请输入权限名称" autocomplete="off"
+                <input type="text" name="name" value="{{ $info->name }}" lay-verify="required" placeholder="请输入名称" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
-        <input type="hidden" value="{{ $info->parent_id }}" name="parent_id">
-        <input type="hidden" value="{{ $info->level }}" name="level">
         <input type="hidden" value="{{ $info->id }}" name="id">
         <div class="layui-form-item">
-            <label class="layui-form-label">权限组</label>
-            <div class="layui-input-inline">
-                <select name="guard_name" lay-verify="required" lay-filter="guard_name" id="guard_name">
-                    @foreach($guard_name_list as $val)
-                        @if($val == $info->guard_name)
-                            <option selected value="{{ $val }}">{{ $val }}</option>
+            <label class="layui-form-label">上级：</label>
+            <div class="layui-input-inline" id="">
+                <select name="pid" lay-verify="required" lay-search="" lay-filter="pid" id="pid">
+                    <option value="0">一级菜单</option>
+                    @foreach ($list as $key=>$val)
+                        @if ($val['id'] == $info->pid)
+                            <option value="{{ $val['id'] }}" selected>{!! $val['name'] !!}</option>
                         @else
-                            <option value="{{ $val }}">{{ $val }}</option>
+                            <option value="{{ $val['id'] }}">{!! $val['name'] !!}</option>
                         @endif
                     @endforeach
                 </select>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">上级菜单：</label>
-            <div class="layui-input-inline" id="">
-                <select name="" lay-verify="required" lay-search="" lay-filter="pid" id="pid">
-
-                </select>
+            <label class="layui-form-label">关键字</label>
+            <div class="layui-input-inline">
+                <input type="text" name="keywords" value="{{ $info->keywords }}" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">权限地址</label>
+            <label class="layui-form-label">描述</label>
             <div class="layui-input-inline">
-                <input type="text" name="url" value="{{ $info->url }}" lay-verify="required" placeholder="如:/admin/index/index"
-                       autocomplete="off" class="layui-input">
+                <textarea name="description" class="layui-textarea">{{ $info->description }}</textarea>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">ICON图标</label>
+            <label class="layui-form-label">排序</label>
             <div class="layui-input-inline">
-                <input type="text" name="icon" value="{{ $info->icon }}" placeholder="请输入图标" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux"><a style="color: red"
-                                                          href="https://www.layui.com/doc/element/icon.html"
-                                                          target="_blank">去挑选</a></div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">是否显示为菜单</label>
-            <div class="layui-input-inline">
-                <input type="hidden" name="display_menu" value="{{ $info->display_menu }}">
-                <input type="checkbox" {{ $info->display_menu==1?'checked':'' }} lay-verify="required" lay-filter="status" lay-skin="switch"
-                       lay-text="显示|隐藏">
+                <input type="number" name="sort" value="{{ $info->sort }}" value="0" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-hide">
@@ -81,61 +68,6 @@
             var $ = layui.$
                 , admin = layui.admin
                 , form = layui.form;
-            var parent_id = $("input[name='parent_id']").val();
-            //初始化菜单
-            getMenu('admin');
-            //监听指定开关
-            form.on('switch(status)', function () {
-                if (this.checked) {
-                    $("input[name='display_menu']").val('1');
-                } else {
-                    $("input[name='display_menu']").val('0');
-                }
-            });
-            //监听select改变
-            form.on('select(guard_name)', function (data) {
-                getMenu(data.value)
-            });
-            //设置字段
-            form.on('select(pid)', function (data) {
-                var str = data.value;
-                var arr = str.split('-');
-                $("input[name='parent_id']").val(parseInt(arr[0]));
-                $("input[name='level']").val(parseInt(arr[1]) + 1);
-            });
-
-            /**
-             * 获取菜单
-             * @param guard_name
-             */
-            function getMenu(guard_name = 'admin') {
-                admin.req({
-                    url: '/admin/permission/menu'
-                    , data: {guard_name: guard_name}
-                    , headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                    , method: 'POST'
-                    , done: function (res) {
-                        if (res.code === 0) {
-                            var html = '<option value="0-0">一级菜单</option>';
-                            for (var p in res.data) {
-                                if (res.data[p].id == parent_id) {
-                                    html += ' <option value="' + res.data[p].id + '-' + res.data[p].level + '" selected>' + res.data[p].name + '</option>';
-                                    $("input[name='parent_id']").val(res.data[p].id);
-                                    $("input[name='level']").val(parseInt(res.data[p].level) + 1);
-                                } else {
-                                    html += ' <option value="' + res.data[p].id + '-' + res.data[p].level + '">' + res.data[p].name + '</option>';
-                                }
-                            }
-                            $('#pid').html(html);
-                            form.render('select');
-                        } else {
-                            layer.msg(res.msg);
-                        }
-                    }
-                });
-            }
         });
     </script>
 @endsection
