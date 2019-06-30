@@ -77,6 +77,12 @@
                            data-id="@{{ d.id }}" lay-text="已审核|待审核" @{{ d.status?'checked':'' }}>
                     @{{#  } }}
                 </script>
+                <script type="text/html" id="topTpl">
+                    @{{#  if(d.deleted_at == null){ }}
+                    <input type="checkbox" name="is_top" lay-skin="switch" lay-filter="table-button-top"
+                           data-id="@{{ d.id }}" lay-text="是|否" @{{ d.is_top?'checked':'' }}>
+                    @{{#  } }}
+                </script>
                 <script type="text/html" id="table-list">
                     @{{#  if(d.deleted_at == null){ }}
                     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
@@ -126,12 +132,14 @@
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
                     , {field: 'id', width: 100, title: '文章ID', sort: true}
-                    , {field: 'cate_name', title: '文章分类', minWidth: 100}
                     , {field: 'title', title: '文章标题'}
+                    , {field: 'cate_name', title: '文章分类', minWidth: 100}
+                    , {field: 'keywords', title: '文章标签', minWidth: 100}
                     , {field: 'author', title: '作者'}
                     , {field: 'created_at', title: '提交时间', sort: true}
+                    , {field: 'is_top', title: '是否置顶', templet: '#topTpl', minWidth: 80, align: 'center'}
                     , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 80, align: 'center'}
-                    , {title: '操作', minWidth: 150, align: 'center', fixed: 'right', toolbar: '#table-list'}
+                    , {title: '操作', minWidth: 200, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
                 , page: true
                 , limit: 10
@@ -153,6 +161,34 @@
             form.on('switch(table-button-status)', function (data) {
                 var field = {
                     status: this.checked ? 1 : 0,
+                    id: $(this).data('id')
+                };
+                admin.req({
+                    url: '/admin/' + control_name + '/update'
+                    , data: field
+                    , method: 'POST'
+                    , headers: {
+                        'X-CSRF-TOKEN': csrf_token
+                    }
+                    , done: function (res) {
+                        if (res.code === 0) {
+                            layer.msg(res.msg, {
+                                offset: '15px'
+                                , icon: 1
+                                , time: 1000
+                            }, function () {
+                            });
+                        } else {
+                            layer.msg(res.msg);
+                        }
+                    }
+                });
+            });
+
+            //监听指定开关
+            form.on('switch(table-button-top)', function (data) {
+                var field = {
+                    is_top: this.checked ? 1 : 0,
                     id: $(this).data('id')
                 };
                 admin.req({
@@ -210,7 +246,7 @@
                         , title: '编辑'
                         , content: '/admin/' + control_name + '/edit/' + obj.data.id
                         , maxmin: true
-                        , area: ['450px', '400px']
+                        , area: ['800px', '500px']
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
                             var iframeWindow = window['layui-layer-iframe' + index]

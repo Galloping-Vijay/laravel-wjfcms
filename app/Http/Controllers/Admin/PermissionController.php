@@ -118,8 +118,10 @@ class PermissionController extends Controller
             return $this->resJson(1, '没有该条记录');
         }
         //当更新时,级别改变,下级要相应的调整,待完善
-        if ($info->level != $request->level) {
-            return $this->resJson(1, '暂时不支持修改级别');
+        if (isset($request->level)) {
+            if ($info->level != $request->level) {
+                return $this->resJson(1, '暂时不支持修改级别');
+            }
         }
         try {
             $res = $info->update($request->input());

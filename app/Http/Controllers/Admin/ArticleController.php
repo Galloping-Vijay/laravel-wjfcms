@@ -122,20 +122,81 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $model = new self::$model;
+        $data = $request->input();
+        if (isset($data['tags']) && !empty($data['tags'])) {
+            $keywordsArr = [];
+            foreach ($data['tags'] as $key => $val) {
+                $keywordsArr[] = $key;
+            }
+            $data['keywords'] = implode(',', $keywordsArr);
+        }
+        if (isset($data['content'])) {
+            $data['content'] = htmlspecialchars($data['content']);
+        }
+        $data['cover'] = $data['cover'] ?? '';
         try {
-            $data = $request->input();
-            if (isset($data['tags']) && !empty($data['tags'])) {
-                $keywordsArr = [];
-                foreach ($data['tags'] as $key => $val) {
-                    $keywordsArr[] = $key;
-                }
-                $data['keywords'] = implode(',', $keywordsArr);
-            }
-            if (isset($data['html'])) {
-                $data['html'] = $data['markdown'] = htmlspecialchars($data['html']);
-            }
             $model::create($data);
             return $this->resJson(0, '操作成功');
+        } catch (\Exception $e) {
+            return $this->resJson(1, $e->getMessage());
+        }
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/6/30
+     * Time: 16:40
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $info = self::$model::find($id);
+        if (!empty($info->keywords)) {
+            $info->tags = explode(',', $info->keywords);
+        }
+        $tree = Category::select('id', 'name', 'pid')->orderBy('id', 'asc')->get()->toArray();
+        $info->content = htmlspecialchars_decode($info->content);
+        $category_list = Category::array2level($tree);
+        $tags_list = Tag::all();
+        return view('admin.' . self::$controlName . '.edit', [
+            'info' => $info,
+            'control_name' => self::$controlName,
+            'category_list' => $category_list,
+            'tags_list' => $tags_list
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * Description:
+     * User: Vijay
+     * Date: 2019/5/26
+     * Time: 21:20
+     */
+    public function update(Request $request)
+    {
+        $info = self::$model::find($request->id);
+        if (empty($info)) {
+            return $this->resJson(1, '没有该条记录');
+        }
+        $data = $request->input();
+        if (isset($data['tags']) && !empty($data['tags'])) {
+            $keywordsArr = [];
+            foreach ($data['tags'] as $key => $val) {
+                $keywordsArr[] = $key;
+            }
+            $data['keywords'] = implode(',', $keywordsArr);
+        }
+        if (isset($data['content']) && !empty($data['content'])) {
+            $data['content'] = htmlspecialchars($data['content']);
+        }
+        $data['cover'] = $data['cover'] ?? '';
+        try {
+            $res = $info->update($data);
+            return $this->resJson(0, '操作成功', $res);
         } catch (\Exception $e) {
             return $this->resJson(1, $e->getMessage());
         }

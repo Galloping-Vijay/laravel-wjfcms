@@ -61,7 +61,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">内容</label>
             <div class="layui-input-block">
-                <textarea id="html" name="html" style="display: none;"></textarea>
+                <textarea id="content" name="content" style="display: none;"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
@@ -156,7 +156,7 @@
                 }
             });
             //注意：layedit.set 一定要放在 build 前面，否则配置全局接口将无效。
-            var layedit_index = layedit.build('html'); //建立编辑器
+            var layedit_index = layedit.build('content'); //建立编辑器
 
             //监听指定开关
             form.on('switch(status)', function () {
@@ -176,25 +176,8 @@
             });
 
             $('#layuiadmin-app-form-add').click(function () {
-                $("textarea[name='html']").val(layedit.getContent(layedit_index));
+                $("textarea[name='content']").val(layedit.getContent(layedit_index));
             });
         });
-
-        /**
-         * 获取url上的参数
-         * @param variable
-         * @returns {*}
-         */
-        function getQueryVariable(variable) {
-            var query = window.location.search.substring(1);
-            var vars = query.split("&");
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                if (pair[0] == variable) {
-                    return pair[1];
-                }
-            }
-            return ('');
-        }
     </script>
 @endsection
