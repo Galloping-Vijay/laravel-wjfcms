@@ -224,6 +224,8 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
     Route::prefix('comment')->group(function () {
         // 评论列表
         Route::any('index', 'CommentController@index');
+        // 更新
+        Route::post('update', 'CommentController@update');
         // 删除
         Route::post('destroy', 'CommentController@destroy');
         // 恢复删除
