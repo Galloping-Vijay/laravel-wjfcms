@@ -39,16 +39,16 @@ class ArticleController extends Controller
             $status = $request->input('status', '');
             $delete = $request->input('delete', 0);
             if ($title != '') {
-                $where[] = ['title', 'like', '%' . $title . '%'];
+                $where[] = ['articles.title', 'like', '%' . $title . '%'];
             }
             if ($author != '') {
-                $where[] = ['author', 'like', '%' . $author . '%'];
+                $where[] = ['articles.author', 'like', '%' . $author . '%'];
             }
             if ($category_id != '') {
-                $where[] = ['category_id', '=', $category_id];
+                $where[] = ['articles.category_id', '=', $category_id];
             }
             if ($status != '') {
-                $where[] = ['status', '=', $status];
+                $where[] = ['articles.status', '=', $status];
             }
             switch ($delete) {
                 case '1':

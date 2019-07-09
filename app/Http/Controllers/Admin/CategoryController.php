@@ -148,7 +148,6 @@ class CategoryController extends Controller
             DB::rollBack();
             return $this->resJson(1, $e->getMessage());
         }
-
     }
 
 }

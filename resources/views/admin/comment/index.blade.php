@@ -6,30 +6,15 @@
             <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">作者</label>
+                        <label class="layui-form-label">评论者</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="username" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">标题</label>
+                        <label class="layui-form-label">文章标题</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">文章分类</label>
-                        <div class="layui-input-inline">
-                            <select name="category_id">
-                                <option value="">全部分类</option>
-                                @foreach($category_list as $ck=>$cv)
-                                    @if($category_id == $cv['id'])
-                                        <option value="{{ $cv['id'] }}" selected>{!! $cv['name'] !!}</option>
-                                    @else
-                                        <option value="{{ $cv['id'] }}">{!! $cv['name'] !!}</option>
-                                    @endif
-                                @endforeach
-                            </select>
+                            <input type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -62,11 +47,11 @@
             </div>
             <div class="layui-card-body">
                 <div style="padding-bottom: 10px;">
-                    @can('删除文章')
-                        <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
+                    @can('批量替换')
+                        <button class="layui-btn layuiadmin-btn-list" data-type="replace">批量替换</button>
                     @endcan
-                    @can('创建文章')
-                        <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
+                    @can('删除评论')
+                        <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除评论</button>
                     @endcan
                 </div>
                 <table id="LAY-app-list" lay-filter="LAY-app-list"></table>
@@ -77,17 +62,8 @@
                            data-id="@{{ d.id }}" lay-text="已审核|待审核" @{{ d.status?'checked':'' }}>
                     @{{#  } }}
                 </script>
-                <script type="text/html" id="topTpl">
-                    @{{#  if(d.deleted_at == null){ }}
-                    <input type="checkbox" name="is_top" lay-skin="switch" lay-filter="table-button-top"
-                           data-id="@{{ d.id }}" lay-text="是|否" @{{ d.is_top?'checked':'' }}>
-                    @{{#  } }}
-                </script>
                 <script type="text/html" id="table-list">
                     @{{#  if(d.deleted_at == null){ }}
-                    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
-                        <i class="layui-icon layui-icon-edit"></i>编辑
-                    </a>
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
                         <i class="layui-icon layui-icon-delete"></i>删除
                     </a>
@@ -117,27 +93,22 @@
                 , layer = layui.layer
                 , admin = layui.admin
                 , form = layui.form;
-            var category_id = getQueryVariable('category_id');
             //表格数据
             table.render({
                 elem: '#LAY-app-list'
                 , url: '/admin/' + control_name + '/index'
                 , method: 'post'
-                , where: {
-                    category_id: category_id
-                }
+                , where: {}
                 , headers: {
                     'X-CSRF-TOKEN': csrf_token
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 100, title: '文章ID', sort: true, align: 'center'}
-                    , {field: 'title', title: '文章标题', align: 'center'}
-                    , {field: 'cate_name', title: '文章分类', minWidth: 100, align: 'center'}
-                    , {field: 'keywords', title: '文章标签', minWidth: 100, align: 'center'}
-                    , {field: 'author', title: '作者', align: 'center'}
-                    , {field: 'created_at', title: '提交时间', sort: true, align: 'center'}
-                    , {field: 'is_top', title: '是否置顶', templet: '#topTpl', minWidth: 80, align: 'center'}
+                    , {field: 'id', width: 100, title: 'ID', sort: true,align: 'center'}
+                    , {field: 'title', title: '文章标题',align: 'center'}
+                    , {field: 'username', title: '评论者',align: 'center'}
+                    , {field: 'content', title: '内容',align: 'center'}
+                    , {field: 'created_at', title: '提交时间', sort: true,align: 'center'}
                     , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 80, align: 'center'}
                     , {title: '操作', minWidth: 200, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
@@ -240,47 +211,6 @@
                             }
                         });
                     });
-                } else if (obj.event === 'edit') {
-                    layer.open({
-                        type: 2
-                        , title: '编辑'
-                        , content: '/admin/' + control_name + '/edit/' + obj.data.id
-                        , maxmin: true
-                        , area: ['800px', '500px']
-                        , btn: ['确定', '取消']
-                        , yes: function (index, layero) {
-                            var iframeWindow = window['layui-layer-iframe' + index]
-                                , submit = layero.find('iframe').contents().find("#layuiadmin-app-form-edit");
-                            //监听提交
-                            iframeWindow.layui.form.on('submit(layuiadmin-app-form-edit)', function (data) {
-                                var field = data.field; //获取提交的字段
-                                //提交 Ajax 成功后，静态更新表格中的数据
-                                admin.req({
-                                    url: '/admin/' + control_name + '/update'
-                                    , data: field
-                                    , method: 'POST'
-                                    , headers: {
-                                        'X-CSRF-TOKEN': csrf_token
-                                    }
-                                    , done: function (res) {
-                                        if (res.code === 0) {
-                                            layer.msg(res.msg, {
-                                                offset: '15px'
-                                                , icon: 1
-                                                , time: 1000
-                                            }, function () {
-                                                table.reload('LAY-app-list');
-                                                layer.close(index); //关闭弹层
-                                            });
-                                        } else {
-                                            layer.msg(res.msg);
-                                        }
-                                    }
-                                });
-                            });
-                            submit.trigger('click');
-                        }
-                    });
                 } else if (obj.event === 'restore') {
                     layer.confirm('确定恢复数据吗?', function (index) {
                         admin.req({
@@ -371,46 +301,57 @@
                         });
                     });
                 },
-                add: function () {
+                replace: function () {
+                    var html = '<div style="margin-top: 5%" class="layui-form-item"> <label class="layui-form-label">查找：</label> <div class="layui-input-inline"> <input type="text" name="search" value="" lay-verify="required" placeholder="请输入要查找的内容" class="layui-input"> </div> </div> <div class="layui-form-item"><label class="layui-form-label">替换：</label> <div class="layui-input-inline"><input type="text" name="replace"  placeholder="请输入替换后的内容" lay-verify="required"  class="layui-input"></div></div>';
                     layer.open({
-                        type: 2
-                        , title: '添加'
-                        , content: '/admin/' + control_name + '/create?category_id=' + category_id
-                        , maxmin: true
-                        , area: ['800px', '500px']
+                        type: 1
+                        , title: '替换'
+                        , offset: 'auto'
+                        , id: 'layerDemo'
+                        , content: html
                         , btn: ['确定', '取消']
+                        , btnAlign: 'c' //按钮居中
+                        , shade: 0 //不显示遮罩
                         , yes: function (index, layero) {
-                            //点击确认触发 iframe 内容中的按钮提交
-                            var iframeWindow = window['layui-layer-iframe' + index]
-                                , submit = layero.find('iframe').contents().find("#layuiadmin-app-form-add");
-                            //监听提交
-                            iframeWindow.layui.form.on('submit(layuiadmin-app-form-add)', function (data) {
-                                var field = data.field;
-                                //提交 Ajax 成功后，静态更新表格中的数据
-                                admin.req({
-                                    url: '/admin/' + control_name + '/store'
-                                    , data: field
-                                    , method: 'POST'
-                                    , headers: {
-                                        'X-CSRF-TOKEN': csrf_token
+                            var search = $("input[name='search']").val();
+                            var replace = $("input[name='replace']").val();
+                            if (search == '') {
+                                layer.msg('查找文本不能为空!');
+                                return false;
+                            }
+                            if (replace == '') {
+                                layer.msg('替换文本不能为空!');
+                                return false;
+                            }
+                            var field = {
+                                search: search,
+                                replace: replace
+                            };
+                            admin.req({
+                                url: '/admin/' + control_name + '/replace'
+                                , data: field
+                                , method: 'POST'
+                                , headers: {
+                                    'X-CSRF-TOKEN': csrf_token
+                                }
+                                , done: function (res) {
+                                    if (res.code === 0) {
+                                        layer.msg(res.msg, {
+                                            offset: '15px'
+                                            , icon: 1
+                                            , time: 1000
+                                        }, function () {
+                                            layer.close(index); //关闭弹层
+                                            table.reload('LAY-app-list');
+                                        });
+                                    } else {
+                                        layer.msg(res.msg);
                                     }
-                                    , done: function (res) {
-                                        if (res.code === 0) {
-                                            layer.msg(res.msg, {
-                                                offset: '15px'
-                                                , icon: 1
-                                                , time: 1000
-                                            }, function () {
-                                                table.reload('LAY-app-list');
-                                                layer.close(index); //关闭弹层
-                                            });
-                                        } else {
-                                            layer.msg(res.msg);
-                                        }
-                                    }
-                                });
+                                }
                             });
-                            submit.trigger('click');
+                        }
+                        , btn2: function (index, layero) {
+                            layer.closeAll();
                         }
                     });
                 }

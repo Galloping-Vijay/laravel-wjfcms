@@ -6,37 +6,15 @@
         <div class="layui-form-item">
             <label class="layui-form-label">名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="name" value="{{ $info->name }}" lay-verify="required" placeholder="请输入名称" autocomplete="off"
+                <input type="text" name="name" value="{{ $info->name }}" lay-verify="required" placeholder="请输入" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <input type="hidden" value="{{ $info->id }}" name="id">
         <div class="layui-form-item">
-            <label class="layui-form-label">上级</label>
-            <div class="layui-input-inline" id="">
-                <select name="pid" lay-verify="required" lay-search="" lay-filter="pid" id="pid">
-                    <option value="0">一级菜单</option>
-                    @foreach ($list as $key=>$val)
-                        @if ($val['id'] == $info->pid)
-                            <option value="{{ $val['id'] }}" selected>{!! $val['name'] !!}</option>
-                        @else
-                            <option value="{{ $val['id'] }}">{!! $val['name'] !!}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">关键字</label>
+            <label class="layui-form-label">链接地址</label>
             <div class="layui-input-inline">
-                <input type="text" name="keywords" value="{{ $info->keywords }}" placeholder="请输入" autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">描述</label>
-            <div class="layui-input-inline">
-                <textarea name="description" class="layui-textarea">{{ $info->description }}</textarea>
+                <input type="text" name="url" lay-verify="url" placeholder="请输入" autocomplete="off" value="{{ $info->url }}" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
