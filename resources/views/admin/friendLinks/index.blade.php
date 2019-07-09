@@ -3,44 +3,13 @@
 @section('content')
     <div class="layui-fluid">
         <div class="layui-card">
+            <!-- 搜索 -->
             <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">作者</label>
+                        <label class="layui-form-label">链接名</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">标题</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">文章分类</label>
-                        <div class="layui-input-inline">
-                            <select name="category_id">
-                                <option value="">全部分类</option>
-                                @foreach($category_list as $ck=>$cv)
-                                    @if($category_id == $cv['id'])
-                                        <option value="{{ $cv['id'] }}" selected>{!! $cv['name'] !!}</option>
-                                    @else
-                                        <option value="{{ $cv['id'] }}">{!! $cv['name'] !!}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">状态</label>
-                        <div class="layui-input-inline">
-                            <select name="status">
-                                <option value="">全部</option>
-                                @foreach($status_list as $sk=>$sv)
-                                    <option value="{{ $sk }}">{{ $sv }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -60,29 +29,20 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-card-body">
+
+            <div class="layui-card-body" style="min-height: 600px">
+                <!-- 按钮组 -->
                 <div style="padding-bottom: 10px;">
-                    @can('删除文章')
-                        <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
+                    @can('删除友情链接')
+                        <button class="layui-btn layuiadmin-btn-list layui-btn-danger" data-type="batchdel">删除</button>
                     @endcan
-                    @can('创建文章')
+                    @can('添加友情链接')
                         <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
                     @endcan
                 </div>
+                <!-- 表格 -->
                 <table id="LAY-app-list" lay-filter="LAY-app-list"></table>
                 <!-- 模板渲染 -->
-                <script type="text/html" id="statusTpl">
-                    @{{#  if(d.deleted_at == null){ }}
-                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="table-button-status"
-                           data-id="@{{ d.id }}" lay-text="已审核|待审核" @{{ d.status?'checked':'' }}>
-                    @{{#  } }}
-                </script>
-                <script type="text/html" id="topTpl">
-                    @{{#  if(d.deleted_at == null){ }}
-                    <input type="checkbox" name="is_top" lay-skin="switch" lay-filter="table-button-top"
-                           data-id="@{{ d.id }}" lay-text="是|否" @{{ d.is_top?'checked':'' }}>
-                    @{{#  } }}
-                </script>
                 <script type="text/html" id="table-list">
                     @{{#  if(d.deleted_at == null){ }}
                     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
@@ -117,28 +77,22 @@
                 , layer = layui.layer
                 , admin = layui.admin
                 , form = layui.form;
-            var category_id = getQueryVariable('category_id');
             //表格数据
             table.render({
                 elem: '#LAY-app-list'
                 , url: '/admin/' + control_name + '/index'
                 , method: 'post'
-                , where: {
-                    category_id: category_id
-                }
+                , where: {}
                 , headers: {
                     'X-CSRF-TOKEN': csrf_token
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 100, title: '文章ID', sort: true, align: 'center'}
-                    , {field: 'title', title: '文章标题', align: 'center'}
-                    , {field: 'cate_name', title: '文章分类', minWidth: 100, align: 'center'}
-                    , {field: 'keywords', title: '文章标签', minWidth: 100, align: 'center'}
-                    , {field: 'author', title: '作者', align: 'center'}
-                    , {field: 'created_at', title: '提交时间', sort: true, align: 'center'}
-                    , {field: 'is_top', title: '是否置顶', templet: '#topTpl', minWidth: 80, align: 'center'}
-                    , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 80, align: 'center'}
+                    , {field: 'id', width: 100, title: 'ID', align: 'center', sort: true}
+                    , {field: 'sort', width: 80, align: 'center', title: '排序', edit: 'text', sort: true}
+                    , {field: 'name', title: '链接名', align: 'center',}
+                    , {field: 'url', title: '链接地址', align: 'center',}
+                    , {field: 'created_at', title: '提交时间', sort: true}
                     , {title: '操作', minWidth: 200, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
                 , page: true
@@ -157,11 +111,14 @@
                 });
             });
 
-            //监听指定开关
-            form.on('switch(table-button-status)', function (data) {
+            //监听单元格编辑
+            table.on('edit(LAY-app-list)', function (obj) {
+                var value = obj.value //得到修改后的值
+                    , data = obj.data //得到所在行所有键值
+                    , field_name = obj.field; //得到字段
                 var field = {
-                    status: this.checked ? 1 : 0,
-                    id: $(this).data('id')
+                    id: data.id
+                    , [field_name]: value
                 };
                 admin.req({
                     url: '/admin/' + control_name + '/update'
@@ -185,33 +142,6 @@
                 });
             });
 
-            //监听指定开关
-            form.on('switch(table-button-top)', function (data) {
-                var field = {
-                    is_top: this.checked ? 1 : 0,
-                    id: $(this).data('id')
-                };
-                admin.req({
-                    url: '/admin/' + control_name + '/update'
-                    , data: field
-                    , method: 'POST'
-                    , headers: {
-                        'X-CSRF-TOKEN': csrf_token
-                    }
-                    , done: function (res) {
-                        if (res.code === 0) {
-                            layer.msg(res.msg, {
-                                offset: '15px'
-                                , icon: 1
-                                , time: 1000
-                            }, function () {
-                            });
-                        } else {
-                            layer.msg(res.msg);
-                        }
-                    }
-                });
-            });
 
             //监听工具条
             table.on('tool(LAY-app-list)', function (obj) {
@@ -246,7 +176,7 @@
                         , title: '编辑'
                         , content: '/admin/' + control_name + '/edit/' + obj.data.id
                         , maxmin: true
-                        , area: ['800px', '500px']
+                        , area: ['400px', '400px']
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
                             var iframeWindow = window['layui-layer-iframe' + index]
@@ -375,9 +305,9 @@
                     layer.open({
                         type: 2
                         , title: '添加'
-                        , content: '/admin/' + control_name + '/create?category_id=' + category_id
+                        , content: '/admin/' + control_name + '/create'
                         , maxmin: true
-                        , area: ['800px', '500px']
+                        , area: ['400px', '400px']
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
                             //点击确认触发 iframe 内容中的按钮提交
@@ -421,22 +351,5 @@
             });
 
         });
-
-        /**
-         * 获取url上的参数
-         * @param variable
-         * @returns {*}
-         */
-        function getQueryVariable(variable) {
-            var query = window.location.search.substring(1);
-            var vars = query.split("&");
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                if (pair[0] == variable) {
-                    return pair[1];
-                }
-            }
-            return ('');
-        }
     </script>
 @endsection

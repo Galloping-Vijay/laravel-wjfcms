@@ -93,7 +93,7 @@
                 , layer = layui.layer
                 , admin = layui.admin
                 , form = layui.form;
-            //文章管理
+            //表格数据
             table.render({
                 elem: '#LAY-app-list'
                 , url: '/admin/' + control_name + '/index'
@@ -104,11 +104,11 @@
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 100, title: 'ID', sort: true}
-                    , {field: 'title', title: '文章标题'}
-                    , {field: 'username', title: '评论者'}
-                    , {field: 'content', title: '内容'}
-                    , {field: 'created_at', title: '提交时间', sort: true}
+                    , {field: 'id', width: 100, title: 'ID', sort: true,align: 'center'}
+                    , {field: 'title', title: '文章标题',align: 'center'}
+                    , {field: 'username', title: '评论者',align: 'center'}
+                    , {field: 'content', title: '内容',align: 'center'}
+                    , {field: 'created_at', title: '提交时间', sort: true,align: 'center'}
                     , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 80, align: 'center'}
                     , {title: '操作', minWidth: 200, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]

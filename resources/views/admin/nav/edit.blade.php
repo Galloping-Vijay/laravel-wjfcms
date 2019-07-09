@@ -6,7 +6,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="name" value="{{ $info->name }}" lay-verify="required" placeholder="请输入名称" autocomplete="off"
+                <input type="text" name="name" value="{{ $info->name }}" lay-verify="required" placeholder="请输入" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -27,16 +27,9 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">关键字</label>
+            <label class="layui-form-label">链接地址</label>
             <div class="layui-input-inline">
-                <input type="text" name="keywords" value="{{ $info->keywords }}" placeholder="请输入" autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">描述</label>
-            <div class="layui-input-inline">
-                <textarea name="description" class="layui-textarea">{{ $info->description }}</textarea>
+                <input type="text" name="url" lay-verify="required" placeholder="请输入" autocomplete="off" value="{{ $info->url }}" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">

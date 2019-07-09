@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">上级菜单：</label>
+            <label class="layui-form-label">上级菜单</label>
             <div class="layui-input-inline" id="">
                 <select name="" lay-verify="required" lay-search="" lay-filter="pid" id="pid">
 
