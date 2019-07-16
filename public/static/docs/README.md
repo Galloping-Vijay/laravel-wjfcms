@@ -1,4 +1,4 @@
-![default](./public/static/docs/images/logo.png)
+![default](./images/logo.png)
 
 # 前言
 
