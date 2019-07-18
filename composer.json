@@ -1,12 +1,22 @@
 {
-    "name": "laravel/laravel",
+    "name": "galloping-vijay/laravel-wjfcms",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "laravel-wjfcms是基于laravel5.8及layui开发的后台管理系统。",
     "keywords": [
-        "framework",
+        "laravel-wjfcms",
+		"cms",
+		"php",
         "laravel"
     ],
     "license": "MIT",
+	 "authors": [
+        {
+            "name": "galloping-vijay",
+            "email": "1937832819@qq.com",
+            "homepage": "https://github.com/Galloping-Vijay/",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "doctrine/dbal": "^2.9",
