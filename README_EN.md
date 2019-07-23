@@ -15,33 +15,33 @@ Laravel-wjfcms has the following characteristics：
 
 ### ①  Easy to use：
 
-Laravel-wjfcms is easy to use and can be used in just a few steps；
+Laravel-wjfcms is easy to use and can be used in just a few steps;
 
 ### ②  Laravel's best entry demo：
 
-Laravel is currently the most popular PHP framework. Its design philosophy and perfect ecology are what every phper wants to learn and master.For many students who have just contacted laravel, the laravel documentation is hard to read, which has led many people to be discouraged.Most of the slag work uses the thinkphp framework, so when writing laravel-wjfcms, there will be a lot of thinkphp thinking, if you are also a thinkphp developer, and want to contact laravel, I believe that learning together, soonCan get laravel；
+Laravel is currently the most popular PHP framework. Its design philosophy and perfect ecology are what every phper wants to learn and master.For many students who have just contacted laravel, the laravel documentation is hard to read, which has led many people to be discouraged.Most of the slag work uses the thinkphp framework, so when writing laravel-wjfcms, there will be a lot of thinkphp thinking, if you are also a thinkphp developer, and want to contact laravel, I believe that learning together, soonCan get laravel;
 
 ### ③  Second opening convenience：
 
-Whether it is open or direct, you can easily develop modules as long as you have a certain php foundation.；
+Whether it is open or direct, you can easily develop modules as long as you have a certain php foundation.;
 
 ### ④ Beautiful and elegant：
 
-The laravel-wjfcms background page is based on the single-page version of layui-admin. The view is beautiful and the documentation is rich. You don't have to worry about the page layout and JS anymore.。
+The laravel-wjfcms background page is based on the single-page version of layui-admin. The view is beautiful and the documentation is rich. You don't have to worry about the page layout and JS anymore.
 
 # Functional module：
 
-### Authority management；
+### Authority management;
 
-### Article management；
+### Article management;
 
-### Comment management；
+### Comment management;
 
-### API interface；
+### API interface;
 
-### System Configuration；
+### System Configuration;
 
-### Website management；
+### Website management;
 
 # Code address：
 
