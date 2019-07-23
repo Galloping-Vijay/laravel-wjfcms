@@ -5,6 +5,8 @@
 <a href="https://badge.fury.io/ph/galloping-vijay%2Flaravel-wjfcms"><img src="https://badge.fury.io/ph/galloping-vijay%2Flaravel-wjfcms.svg" alt="PHP version" height="18"></a>
 ![Packagist](https://img.shields.io/packagist/l/galloping-vijay/laravel-wjfcms.svg)
 
+<a href="https://github.com/Galloping-Vijay/laravel-wjfcms/blob/master/README_EN.md">English readme</a>
+
 # 前言
 
 **laravel-wjfcms是基于laravel5.8及layui开发的后台管理系统。**
@@ -45,7 +47,7 @@ laravel-wjfcms后台页面是基于layui-admin的单页版开发的，视图美�
 
 如果喜欢，欢迎 star 与 fork，谢谢支持！
 
-手册地址:https://www.kancloud.cn/wjf19940211/laravel-wjfcms/1132636
+手册地址：https://www.kancloud.cn/wjf19940211/laravel-wjfcms/1132636
 
 Github：https://github.com/Galloping-Vijay/laravel-wjfcms
 

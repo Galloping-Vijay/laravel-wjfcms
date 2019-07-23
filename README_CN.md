@@ -1,9 +1,12 @@
 ![default](./public/static/docs/images/logo.png)
 
 ![github](https://img.shields.io/badge/build-passing-green.svg)
-<a href=""><img src="https://img.shields.io/badge/微信公众号-心若野马-green.svg" alt="心若野马 version" height="18"></a>
+<a href="https://github.com/Galloping-Vijay/laravel-wjfcms/blob/master/public/static/docs/images/公众号.jpg"><img src="https://img.shields.io/badge/微信公众号-心若野马-green.svg" alt="心若野马 version" height="18"></a>
 <a href="https://badge.fury.io/ph/galloping-vijay%2Flaravel-wjfcms"><img src="https://badge.fury.io/ph/galloping-vijay%2Flaravel-wjfcms.svg" alt="PHP version" height="18"></a>
 ![Packagist](https://img.shields.io/packagist/l/galloping-vijay/laravel-wjfcms.svg)
+
+
+<a href="https://github.com/Galloping-Vijay/laravel-wjfcms/blob/master/README_EN.md">English readme</a>
 
 # 前言
 
@@ -33,9 +36,18 @@ laravel-wjfcms后台页面是基于layui-admin的单页版开发的，视图美�
 
 ### 文章管理；
 
+### 评论管理；
+
+### API接口；
+
+### 系统配置；
+
+### 网站管理；
+
 # 代码地址：
 
 如果喜欢，欢迎 star 与 fork，谢谢支持！
 
-Github：https://github.com/Galloping-Vijay/laravel-wjfcms
+手册地址：https://www.kancloud.cn/wjf19940211/laravel-wjfcms/1132636
 
+Github：https://github.com/Galloping-Vijay/laravel-wjfcms
