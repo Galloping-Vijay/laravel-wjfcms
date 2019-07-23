@@ -1,7 +1,7 @@
 {
     "name": "galloping-vijay/laravel-wjfcms",
     "type": "project",
-    "description": "laravel-wjfcms是基于laravel5.8及layui开发的后台管理系统。",
+    "description": "Laravel-wjfcms is a back-end management system based on laravel5.8 and layui.",
     "keywords": [
         "laravel-wjfcms",
 		"cms",
