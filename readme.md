@@ -1,7 +1,7 @@
 ![default](./public/static/docs/images/logo.png)
 
 ![github](https://img.shields.io/badge/build-passing-green.svg)
-<a href=""><img src="https://img.shields.io/badge/微信公众号-心若野马-green.svg" alt="心若野马 version" height="18"></a>
+<a href="https://github.com/Galloping-Vijay/laravel-wjfcms/blob/master/public/static/docs/images/公众号.jpg"><img src="https://img.shields.io/badge/微信公众号-心若野马-green.svg" alt="心若野马 version" height="18"></a>
 <a href="https://badge.fury.io/ph/galloping-vijay%2Flaravel-wjfcms"><img src="https://badge.fury.io/ph/galloping-vijay%2Flaravel-wjfcms.svg" alt="PHP version" height="18"></a>
 ![Packagist](https://img.shields.io/packagist/l/galloping-vijay/laravel-wjfcms.svg)
 
