@@ -33,9 +33,19 @@ laravel-wjfcms后台页面是基于layui-admin的单页版开发的，视图美�
 
 ### 文章管理；
 
+### 评论管理；
+
+### API接口；
+
+### 系统配置；
+
+### 网站管理；
+
 # 代码地址：
 
 如果喜欢，欢迎 star 与 fork，谢谢支持！
+
+手册地址:https://www.kancloud.cn/wjf19940211/laravel-wjfcms/1132636
 
 Github：https://github.com/Galloping-Vijay/laravel-wjfcms
 
