@@ -120,6 +120,27 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::post('forceDelete', 'AdminController@forceDelete');
     });
 
+    //用户管理
+    Route::prefix('user')->group(function () {
+        // 列表
+        Route::any('index', 'UserController@index');
+        // 创建
+        Route::get('create', 'UserController@create');
+        Route::post('store', 'UserController@store');
+        // 展示
+        Route::get('show/{id}', 'UserController@show');
+        // 编辑
+        Route::get('edit/{id}', 'UserController@edit');
+        // 更新
+        Route::post('update', 'UserController@update');
+        // 删除
+        Route::post('destroy', 'UserController@destroy');
+        // 恢复删除
+        Route::post('restore', 'UserController@restore');
+        // 彻底删除
+        Route::post('forceDelete', 'UserController@forceDelete');
+    });
+
     //权限管理
     Route::prefix('permission')->group(function () {
         // 列表
@@ -320,53 +341,5 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::post('forceDelete', 'FriendLinksController@forceDelete');
     });
 
-    // 第三方用户管理
-    Route::prefix('oauthUser')->group(function () {
-        // 用户列表
-        Route::get('index', 'OauthUserController@index');
-        // 编辑管理员
-        Route::get('edit/{id}', 'OauthUserController@edit');
-        Route::post('update/{id}', 'OauthUserController@update');
-    });
-
-    // 推荐博客管理
-    Route::prefix('site')->group(function () {
-        // 推荐博客列表
-        Route::get('index', 'SiteController@index');
-        // 添加推荐博客
-        Route::get('create', 'SiteController@create');
-        Route::post('store', 'SiteController@store');
-        // 编辑推荐博客
-        Route::get('edit/{id}', 'SiteController@edit');
-        Route::post('update/{id}', 'SiteController@update');
-        // 排序
-        Route::post('sort', 'SiteController@sort');
-        // 删除推荐博客
-        Route::get('destroy/{id}', 'SiteController@destroy');
-        // 恢复删除的推荐博客
-        Route::get('restore/{id}', 'SiteController@restore');
-        // 彻底删除推荐博客
-        Route::get('forceDelete/{id}', 'SiteController@forceDelete');
-    });
-
-    // 开源项目管理
-    Route::prefix('gitProject')->group(function () {
-        // 开源项目列表
-        Route::get('index', 'GitProjectController@index');
-        // 添加开源项目
-        Route::get('create', 'GitProjectController@create');
-        Route::post('store', 'GitProjectController@store');
-        // 编辑开源项目
-        Route::get('edit/{id}', 'GitProjectController@edit');
-        Route::post('update/{id}', 'GitProjectController@update');
-        // 排序
-        Route::post('sort', 'GitProjectController@sort');
-        // 删除开源项目
-        Route::get('destroy/{id}', 'GitProjectController@destroy');
-        // 恢复删除的开源项目
-        Route::get('restore/{id}', 'GitProjectController@restore');
-        // 彻底删除开源项目
-        Route::get('forceDelete/{id}', 'GitProjectController@forceDelete');
-    });
 });
 

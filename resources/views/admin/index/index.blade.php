@@ -93,7 +93,7 @@
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
                     @foreach ($menus as $menu)
                         @if(!empty($menu['child']))
-                            <li data-name="{{ $menu['name'] }}" class="layui-nav-item layui-nav-itemed">
+                            <li data-name="{{ $menu['name'] }}" class="layui-nav-item">
                                 <a href="javascript:;" lay-tips="{{ $menu['name'] }}" lay-direction="2">
                                     <i class="layui-icon {{ $menu['icon'] }}"></i>
                                     <cite>{{ $menu['name'] }}</cite>
