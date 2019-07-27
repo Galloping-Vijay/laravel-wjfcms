@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin;
+use App\Models\Article;
+use App\Models\Chat;
+use App\Models\Comment;
 use App\Models\Permissions;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
@@ -45,6 +50,21 @@ class IndexController extends Controller
      */
     public function main()
     {
-        return view('admin.index.main');
+        $articleList = Article::leftJoin('categories', 'categories.id', '=', 'articles.category_id')
+            ->select('articles.id','articles.title','articles.click', 'categories.name as cate_name')
+            ->get();
+        $chatList = Chat:: select('id','content','created_at')
+            ->get();
+        $commentNum = Comment::count();
+        $adminNum = Admin::count();
+        $userNum = User::count();
+        return view('admin.index.main', [
+            'articleList' => $articleList,
+            'chatList' => $chatList,
+            'articleNum' => count($articleList),
+            'commentNum' => $commentNum,
+            'adminNum' => $adminNum,
+            'userNum' => $userNum,
+        ]);
     }
 }
