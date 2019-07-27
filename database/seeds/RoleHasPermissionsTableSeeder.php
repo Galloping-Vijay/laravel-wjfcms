@@ -13,7 +13,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
     public function run()
     {
         $data = [];
-        for ($i = 1; $i <= 27; $i++) {
+        for ($i = 1; $i <= 82; $i++) {
             $data[] = [
                 'role_id' => '1',
                 'permission_id' => $i,
