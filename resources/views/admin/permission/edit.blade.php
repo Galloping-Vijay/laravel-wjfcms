@@ -131,7 +131,7 @@
                             $('#pid').html(html);
                             form.render('select');
                         } else {
-                            layer.msg(res.msg);
+                            layer.msg(res.msg, {icon: 2});;
                         }
                     }
                 });

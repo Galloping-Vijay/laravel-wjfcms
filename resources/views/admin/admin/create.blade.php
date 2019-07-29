@@ -11,6 +11,17 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">角色</label>
+            <div class="layui-input-inline">
+                <select name="role_names"  id="role_names">
+                    <option value="">请选择</option>
+                    @foreach($role_list as $val)
+                        <option value="{{ $val->name }}">{{ $val->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">电话</label>
             <div class="layui-input-inline">
                 <input type="number" name="tel" placeholder="请输入手机号码" autocomplete="off" class="layui-input">

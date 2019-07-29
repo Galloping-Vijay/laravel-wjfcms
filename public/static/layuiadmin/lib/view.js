@@ -93,7 +93,7 @@ layui.define(['laytpl', 'layer'], function(exports){
       ,dataType: 'json'
       ,success: function(res){
         var statusCode = response.statusCode;
-        
+
         //只有 response 的 code 一切正常才执行 done
         if(res[response.statusName] == statusCode.ok) {
           typeof options.done === 'function' && options.done(res); 
@@ -103,7 +103,12 @@ layui.define(['laytpl', 'layer'], function(exports){
         else if(res[response.statusName] == statusCode.logout){
           view.exit();
         }
-        
+
+        // wrong 的时候也执行done
+        else if(res[response.statusName] == statusCode.wrong) {
+            typeof options.done === 'function' && options.done(res);
+        }
+
         //其它异常
         else {
           var error = [

@@ -37,7 +37,11 @@ layui.define(['table', 'form'], function (exports) {
             , headers: {
                 'X-CSRF-TOKEN': csrf_token
             }
+            , beforeSend: function (XMLHttpRequest) {
+                layer.load();
+            }
             , done: function (res) {
+                layer.closeAll('loading');
                 if (res.code === 0) {
                     layer.msg(res.msg, {
                         offset: '15px'
@@ -63,7 +67,11 @@ layui.define(['table', 'form'], function (exports) {
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -101,7 +109,11 @@ layui.define(['table', 'form'], function (exports) {
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -129,7 +141,11 @@ layui.define(['table', 'form'], function (exports) {
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -154,7 +170,11 @@ layui.define(['table', 'form'], function (exports) {
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -193,7 +213,11 @@ layui.define(['table', 'form'], function (exports) {
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -233,7 +257,11 @@ layui.define(['table', 'form'], function (exports) {
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'

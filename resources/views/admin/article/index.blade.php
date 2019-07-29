@@ -170,7 +170,11 @@
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -179,7 +183,7 @@
                             }, function () {
                             });
                         } else {
-                            layer.msg(res.msg);
+                            layer.msg(res.msg, {icon: 2});
                         }
                     }
                 });
@@ -198,7 +202,11 @@
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -207,7 +215,7 @@
                             }, function () {
                             });
                         } else {
-                            layer.msg(res.msg);
+                            layer.msg(res.msg, {icon: 2});
                         }
                     }
                 });
@@ -224,7 +232,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -235,7 +247,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -262,7 +274,11 @@
                                     , headers: {
                                         'X-CSRF-TOKEN': csrf_token
                                     }
+                                    , beforeSend: function (XMLHttpRequest) {
+                                        layer.load();
+                                    }
                                     , done: function (res) {
+                                        layer.closeAll('loading');
                                         if (res.code === 0) {
                                             layer.msg(res.msg, {
                                                 offset: '15px'
@@ -273,7 +289,7 @@
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg(res.msg);
+                                            layer.msg(res.msg, {icon: 2});
                                         }
                                     }
                                 });
@@ -290,7 +306,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -301,7 +321,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -315,7 +335,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -326,7 +350,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -340,7 +364,7 @@
                     var checkStatus = table.checkStatus('LAY-app-list')
                         , checkData = checkStatus.data; //得到选中的数据
                     if (checkData.length === 0) {
-                        return layer.msg('请选择数据');
+                        return layer.msg('请选择数据', {icon: 2});
                     }
                     var ids = [];
                     for (i in checkData) {
@@ -354,7 +378,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -365,7 +393,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -394,7 +422,11 @@
                                     , headers: {
                                         'X-CSRF-TOKEN': csrf_token
                                     }
+                                    , beforeSend: function (XMLHttpRequest) {
+                                        layer.load();
+                                    }
                                     , done: function (res) {
+                                        layer.closeAll('loading');
                                         if (res.code === 0) {
                                             layer.msg(res.msg, {
                                                 offset: '15px'
@@ -405,7 +437,7 @@
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg(res.msg);
+                                            layer.msg(res.msg, {icon: 2});
                                         }
                                     }
                                 });

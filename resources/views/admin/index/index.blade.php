@@ -5,7 +5,8 @@
     <meta name="renderer" content="webkit">
     <title>wjfcms-laravel - @yield('title','后台管理系统')</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="_token" content="{!! csrf_token() !!}"/>
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/layui/css/layui.css') }}" media="all">
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/style/admin.css') }}" media="all">
@@ -34,13 +35,15 @@
                     </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords=">
+                    <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search"
+                           layadmin-event="serach" lay-action="template/search.html?keywords=">
                 </li>
             </ul>
             <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
 
                 <li class="layui-nav-item" lay-unselect>
-                    <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
+                    <a href="javascript:;" onclick="layer.tips('待开发', this, {tips: 3});" layadmin-event="message"
+                       lay-text="消息中心" title="消息中心">
                         <i class="layui-icon layui-icon-notice"></i>
 
                         <!-- 如果有新消息，则显示小圆点 -->
@@ -48,17 +51,17 @@
                     </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" layadmin-event="theme">
+                    <a href="javascript:;" layadmin-event="theme" title="主题">
                         <i class="layui-icon layui-icon-theme"></i>
                     </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" layadmin-event="note">
+                    <a href="javascript:;" layadmin-event="note" title="便签">
                         <i class="layui-icon layui-icon-note"></i>
                     </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" layadmin-event="fullscreen">
+                    <a href="javascript:;" layadmin-event="fullscreen" title="全屏">
                         <i class="layui-icon layui-icon-screen-full"></i>
                     </a>
                 </li>
@@ -67,15 +70,16 @@
                         <cite>{{ $admin->username }}</cite>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                        <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+                        <dd><a lay-href="/admin/admin/info">基本资料</a></dd>
+                        <dd><a lay-href="/admin/admin/password">修改密码</a></dd>
                         <hr>
                         <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
                     </dl>
                 </li>
 
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
+                    <a href="javascript:;" layadmin-event="about"><i
+                                class="layui-icon layui-icon-more-vertical"></i></a>
                 </li>
                 <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
                     <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
@@ -90,7 +94,8 @@
                     <span>laravel-wjfcms</span>
                 </div>
 
-                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
+                    lay-filter="layadmin-system-side-menu">
                     @foreach ($menus as $menu)
                         @if(!empty($menu['child']))
                             <li data-name="{{ $menu['name'] }}" class="layui-nav-item">
@@ -99,47 +104,48 @@
                                     <cite>{{ $menu['name'] }}</cite>
                                 </a>
                                 <dl class="layui-nav-child">
-                            @foreach ($menu['child'] as $son)
-                                @if(!empty($son['child']))
+                                    @foreach ($menu['child'] as $son)
+                                        @if(!empty($son['child']))
                                             <dd data-name="grid">
                                                 <a href="javascript:;">
                                                     <i class="layui-icon {{ $son['icon'] }}"></i>
                                                     {{ $son['name'] }}
                                                 </a>
                                                 <dl class="layui-nav-child">
-                                    @foreach ($son['child'] as $grandson)
-                                                    <dd data-name="list">
-                                                        <a lay-href="{{ $grandson['url'] }}">
-                                                            <i class="layui-icon {{ $grandson['icon'] }}"></i>
-                                                            {{ $grandson['name'] }}
-                                                        </a>
-                                                    </dd>
-                                    @endforeach
+                                                    @foreach ($son['child'] as $grandson)
+                                                        <dd data-name="list">
+                                                            <a lay-href="{{ $grandson['url'] }}">
+                                                                <i class="layui-icon {{ $grandson['icon'] }}"></i>
+                                                                {{ $grandson['name'] }}
+                                                            </a>
+                                                        </dd>
+                                                    @endforeach
                                                 </dl>
                                             </dd>
-                                @else
-                                    @if($loop->parent->first)
-                                        <dd data-name="{{ $son['name'] }}" class="layui-this">
-                                            <a lay-href="{{ $son['url'] }}">
-                                                <i class="layui-icon {{ $son['icon'] }}"></i>
-                                                {{ $son['name'] }}
-                                            </a>
-                                        </dd>
-                                    @else
-                                        <dd data-name="{{ $son['name'] }}">
-                                            <a lay-href="{{ $son['url'] }}">
-                                                <i class="layui-icon {{ $son['icon'] }}"></i>
-                                                {{ $son['name'] }}
-                                            </a>
-                                        </dd>
-                                    @endif
-                                @endif
-                            @endforeach
+                                        @else
+                                            @if($loop->parent->first)
+                                                <dd data-name="{{ $son['name'] }}" class="layui-this">
+                                                    <a lay-href="{{ $son['url'] }}">
+                                                        <i class="layui-icon {{ $son['icon'] }}"></i>
+                                                        {{ $son['name'] }}
+                                                    </a>
+                                                </dd>
+                                            @else
+                                                <dd data-name="{{ $son['name'] }}">
+                                                    <a lay-href="{{ $son['url'] }}">
+                                                        <i class="layui-icon {{ $son['icon'] }}"></i>
+                                                        {{ $son['name'] }}
+                                                    </a>
+                                                </dd>
+                                            @endif
+                                        @endif
+                                    @endforeach
                                 </dl>
                             </li>
                         @else
                             <li data-name="{{ $menu['name'] }}" class="layui-nav-item">
-                                <a href="javascript:;" lay-href="{{ $menu['url'] }}" lay-tips="{{ $menu['name'] }}" lay-direction="2">
+                                <a href="javascript:;" lay-href="{{ $menu['url'] }}" lay-tips="{{ $menu['name'] }}"
+                                   lay-direction="2">
                                     <i class="layui-icon layui-icon-auz"></i>
                                     <cite>{{ $menu['name'] }}</cite>
                                 </a>
@@ -168,7 +174,8 @@
             </div>
             <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
                 <ul class="layui-tab-title" id="LAY_app_tabsheader">
-                    <li lay-id="/admin/index/main" lay-attr="/admin/index/main" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+                    <li lay-id="/admin/index/main" lay-attr="/admin/index/main" class="layui-this"><i
+                                class="layui-icon layui-icon-home"></i></li>
                 </ul>
             </div>
         </div>

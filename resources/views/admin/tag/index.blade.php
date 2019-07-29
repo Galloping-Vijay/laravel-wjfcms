@@ -116,7 +116,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -127,7 +131,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});;
                                 }
                             }
                         });
@@ -146,7 +150,7 @@
                         , yes: function (index, layero) {
                             var name = $("input[name='name_val']").val();
                             if (name == '') {
-                                layer.msg('标签名不能为空!');
+                                layer.msg('标签名不能为空', {icon: 2});
                                 return false;
                             }
                             admin.req({
@@ -156,7 +160,11 @@
                                 , headers: {
                                     'X-CSRF-TOKEN': csrf_token
                                 }
+                                , beforeSend: function (XMLHttpRequest) {
+                                    layer.load();
+                                }
                                 , done: function (res) {
+                                    layer.closeAll('loading');
                                     if (res.code === 0) {
                                         layer.msg(res.msg, {
                                             offset: '15px'
@@ -167,7 +175,7 @@
                                             table.reload('LAY-app-list');
                                         });
                                     } else {
-                                        layer.msg(res.msg);
+                                        layer.msg(res.msg, {icon: 2});;
                                     }
                                 }
                             });
@@ -185,7 +193,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -196,7 +208,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});;
                                 }
                             }
                         });
@@ -210,7 +222,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -221,7 +237,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});;
                                 }
                             }
                         });
@@ -235,7 +251,7 @@
                     var checkStatus = table.checkStatus('LAY-app-list')
                         , checkData = checkStatus.data; //得到选中的数据
                     if (checkData.length === 0) {
-                        return layer.msg('请选择数据');
+                        return layer.msg('请选择数据', {icon: 2});
                     }
                     var ids = [];
                     for (i in checkData) {
@@ -249,7 +265,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -260,7 +280,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});;
                                 }
                             }
                         });
@@ -280,7 +300,7 @@
                         , yes: function (index, layero) {
                             var name = $("input[name='name_val']").val();
                             if (name == '') {
-                                layer.msg('标签名不能为空!');
+                                layer.msg('标签名不能为空', {icon: 2});
                                 return false;
                             }
                             admin.req({
@@ -290,7 +310,11 @@
                                 , headers: {
                                     'X-CSRF-TOKEN': csrf_token
                                 }
+                                , beforeSend: function (XMLHttpRequest) {
+                                    layer.load();
+                                }
                                 , done: function (res) {
+                                    layer.closeAll('loading');
                                     if (res.code === 0) {
                                         layer.msg(res.msg, {
                                             offset: '15px'
@@ -301,7 +325,7 @@
                                             table.reload('LAY-app-list');
                                         });
                                     } else {
-                                        layer.msg(res.msg);
+                                        layer.msg(res.msg, {icon: 2});;
                                     }
                                 }
                             });

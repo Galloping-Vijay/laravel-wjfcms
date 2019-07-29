@@ -15,7 +15,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">权限组</label>
                         <div class="layui-input-inline">
-                            <select name="guard_name"  lay-filter="guard_name" id="guard_name">
+                            <select name="guard_name" lay-filter="guard_name" id="guard_name">
                                 <option value="">全部</option>
                                 @foreach($guard_name_list as $val)
                                     <option value="{{ $val }}">{{ $val }}</option>
@@ -123,8 +123,8 @@
                 , where: {_token: csrf_token}
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 80, title: 'ID', align: 'center',  sort: true}
-                    , {field: 'sort_order', width: 80, title: '排序', edit: 'text',  align: 'center', sort: true}
+                    , {field: 'id', width: 80, title: 'ID', align: 'center', sort: true}
+                    , {field: 'sort_order', width: 80, title: '排序', edit: 'text', align: 'center', sort: true}
                     , {field: 'name', title: '名称'}
                     , {field: 'guard_name', title: '权限组', align: 'center'}
                     , {field: 'url', title: '权限地址', align: 'center'}
@@ -154,16 +154,21 @@
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
                                 , icon: 1
                                 , time: 1000
                             }, function () {
+                                layer.close(index); //关闭弹层
                             });
                         } else {
-                            layer.msg(res.msg);
+                            layer.msg(res.msg, {icon: 2});;
                         }
                     }
                 });
@@ -181,7 +186,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -189,10 +198,10 @@
                                         , time: 1000
                                     }, function () {
                                         obj.del();
-                                        layer.close(index);
+                                        layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});;
                                 }
                             }
                         });
@@ -220,7 +229,11 @@
                                     , headers: {
                                         'X-CSRF-TOKEN': csrf_token
                                     }
+                                    , beforeSend: function (XMLHttpRequest) {
+                                        layer.load();
+                                    }
                                     , done: function (res) {
+                                        layer.closeAll('loading');
                                         if (res.code === 0) {
                                             layer.msg(res.msg, {
                                                 offset: '15px'
@@ -239,9 +252,8 @@
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg(res.msg);
+                                            layer.msg(res.msg, {icon: 2});;
                                         }
-
                                     }
                                 });
                             });
@@ -272,7 +284,11 @@
                                     , headers: {
                                         'X-CSRF-TOKEN': csrf_token
                                     }
+                                    , beforeSend: function (XMLHttpRequest) {
+                                        layer.load();
+                                    }
                                     , done: function (res) {
+                                        layer.closeAll('loading');
                                         if (res.code === 0) {
                                             layer.msg(res.msg, {
                                                 offset: '15px'
@@ -283,7 +299,7 @@
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg(res.msg);
+                                            layer.msg(res.msg, {icon: 2});;
                                         }
                                     }
                                 });
@@ -300,7 +316,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -311,7 +331,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});;
                                 }
                             }
                         });
@@ -325,7 +345,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -336,7 +360,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});;
                                 }
                             }
                         });
@@ -366,7 +390,11 @@
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -375,7 +403,7 @@
                             }, function () {
                             });
                         } else {
-                            layer.msg(res.msg);
+                            layer.msg(res.msg, {icon: 2});;
                         }
                     }
                 });
@@ -384,11 +412,11 @@
             //按钮组
             var $ = layui.$, active = {
                 batchdel: function () {
-                    return layer.msg('暂不支持权限菜单批量删除!');
+                    return layer.msg('暂不支持权限菜单批量删除', {icon: 2});
                     var checkStatus = treeGrid.checkStatus('LAY-app-list')
                         , checkData = checkStatus.data; //得到选中的数据
                     if (checkData.length === 0) {
-                        return layer.msg('请选择数据');
+                        return layer.msg('请选择数据', {icon: 2});
                     }
                     var ids = [];
                     for (i in checkData) {
@@ -402,7 +430,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -413,7 +445,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});;
                                 }
                             }
                         });
@@ -440,7 +472,11 @@
                                     , headers: {
                                         'X-CSRF-TOKEN': csrf_token
                                     }
+                                    , beforeSend: function (XMLHttpRequest) {
+                                        layer.load();
+                                    }
                                     , done: function (res) {
+                                        layer.closeAll('loading');
                                         if (res.code === 0) {
                                             layer.msg(res.msg, {
                                                 offset: '15px'
@@ -451,7 +487,7 @@
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg(res.msg);
+                                            layer.msg(res.msg, {icon: 2});;
                                         }
                                     }
                                 });

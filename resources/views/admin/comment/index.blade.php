@@ -104,11 +104,11 @@
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 100, title: 'ID', sort: true,align: 'center'}
-                    , {field: 'title', title: '文章标题',align: 'center'}
-                    , {field: 'username', title: '评论者',align: 'center'}
-                    , {field: 'content', title: '内容',align: 'center'}
-                    , {field: 'created_at', title: '提交时间', sort: true,align: 'center'}
+                    , {field: 'id', width: 100, title: 'ID', sort: true, align: 'center'}
+                    , {field: 'title', title: '文章标题', align: 'center'}
+                    , {field: 'username', title: '评论者', align: 'center'}
+                    , {field: 'content', title: '内容', align: 'center'}
+                    , {field: 'created_at', title: '提交时间', sort: true, align: 'center'}
                     , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 80, align: 'center'}
                     , {title: '操作', minWidth: 200, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
@@ -141,7 +141,11 @@
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -150,7 +154,7 @@
                             }, function () {
                             });
                         } else {
-                            layer.msg(res.msg);
+                            layer.msg(res.msg, {icon: 2});
                         }
                     }
                 });
@@ -169,7 +173,11 @@
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -178,7 +186,7 @@
                             }, function () {
                             });
                         } else {
-                            layer.msg(res.msg);
+                            layer.msg(res.msg, {icon: 2});
                         }
                     }
                 });
@@ -195,7 +203,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -206,7 +218,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -220,7 +232,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -231,7 +247,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -245,7 +261,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -256,7 +276,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -270,7 +290,7 @@
                     var checkStatus = table.checkStatus('LAY-app-list')
                         , checkData = checkStatus.data; //得到选中的数据
                     if (checkData.length === 0) {
-                        return layer.msg('请选择数据');
+                        return layer.msg('请选择数据', {icon: 2});
                     }
                     var ids = [];
                     for (i in checkData) {
@@ -284,7 +304,11 @@
                             , headers: {
                                 'X-CSRF-TOKEN': csrf_token
                             }
+                            , beforeSend: function (XMLHttpRequest) {
+                                layer.load();
+                            }
                             , done: function (res) {
+                                layer.closeAll('loading');
                                 if (res.code === 0) {
                                     layer.msg(res.msg, {
                                         offset: '15px'
@@ -295,7 +319,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg);
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -316,11 +340,11 @@
                             var search = $("input[name='search']").val();
                             var replace = $("input[name='replace']").val();
                             if (search == '') {
-                                layer.msg('查找文本不能为空!');
+                                layer.msg('查找文本不能为空', {icon: 2});
                                 return false;
                             }
                             if (replace == '') {
-                                layer.msg('替换文本不能为空!');
+                                layer.msg('替换文本不能为空', {icon: 2});
                                 return false;
                             }
                             var field = {
@@ -334,7 +358,11 @@
                                 , headers: {
                                     'X-CSRF-TOKEN': csrf_token
                                 }
+                                , beforeSend: function (XMLHttpRequest) {
+                                    layer.load();
+                                }
                                 , done: function (res) {
+                                    layer.closeAll('loading');
                                     if (res.code === 0) {
                                         layer.msg(res.msg, {
                                             offset: '15px'
@@ -345,7 +373,7 @@
                                             table.reload('LAY-app-list');
                                         });
                                     } else {
-                                        layer.msg(res.msg);
+                                        layer.msg(res.msg, {icon: 2});
                                     }
                                 }
                             });

@@ -14,25 +14,25 @@
                                     <div carousel-item>
                                         <ul class="layui-row layui-col-space10">
                                             <li class="layui-col-xs6">
-                                                <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
+                                                <a lay-href="/admin/article/index" class="layadmin-backlog-body">
                                                     <h3>文章总数</h3>
                                                     <p><cite>{{ $articleNum }}</cite></p>
                                                 </a>
                                             </li>
                                             <li class="layui-col-xs6">
-                                                <a lay-href="app/forum/list.html" class="layadmin-backlog-body">
+                                                <a lay-href="/admin/comment/index" class="layadmin-backlog-body">
                                                     <h3>总评论数</h3>
                                                     <p><cite>{{ $commentNum }}</cite></p>
                                                 </a>
                                             </li>
                                             <li class="layui-col-xs6">
-                                                <a lay-href="template/goodslist.html" class="layadmin-backlog-body">
+                                                <a lay-href="/admin/user/index" class="layadmin-backlog-body">
                                                     <h3>总会员</h3>
                                                     <p><cite>{{ $userNum }}</cite></p>
                                                 </a>
                                             </li>
                                             <li class="layui-col-xs6">
-                                                <a href="javascript:;" onclick="layer.tips('不跳转', this, {tips: 3});"
+                                                <a href="/admin/admin/index"
                                                    class="layadmin-backlog-body">
                                                     <h3>管理员</h3>
                                                     <p><cite>{{ $adminNum }}</cite></p>

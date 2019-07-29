@@ -108,6 +108,8 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::post('store', 'AdminController@store');
         // 展示
         Route::get('show/{id}', 'AdminController@show');
+        Route::get('info', 'AdminController@info');
+        Route::any('password', 'AdminController@password');
         // 编辑
         Route::get('edit/{id}', 'AdminController@edit');
         // 更新

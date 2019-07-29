@@ -132,7 +132,11 @@
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -143,7 +147,7 @@
                                 parent.layer.close(index); //再执行关闭
                             });
                         } else {
-                            layer.msg(res.msg);
+                            layer.msg(res.msg, {icon: 2});;
                         }
                     }
                 });

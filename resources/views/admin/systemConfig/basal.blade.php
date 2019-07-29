@@ -236,7 +236,7 @@
                 , done: function (res) {
                     //如果上传失败
                     if (res.code > 0) {
-                        return layer.msg('上传失败');
+                        return layer.msg('上传失败', {icon: 2});
                     }
                     //上传成功
                     $('input[name="site_logo"]').val(res.data);
@@ -262,7 +262,11 @@
                     , headers: {
                         'X-CSRF-TOKEN': csrf_token
                     }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
                     , done: function (res) {
+                        layer.closeAll('loading');
                         if (res.code === 0) {
                             layer.msg(res.msg, {
                                 offset: '15px'
@@ -272,7 +276,7 @@
 
                             });
                         } else {
-                            layer.msg(res.msg);
+                            layer.msg(res.msg, {icon: 2});;
                         }
                     }
                 });
