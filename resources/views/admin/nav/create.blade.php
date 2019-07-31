@@ -33,6 +33,16 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">打开方式</label>
+            <div class="layui-input-inline" id="">
+                <select name="target" lay-verify="required" lay-search="" lay-filter="target" id="target">
+                    @foreach ($target_list as $v)
+                        <option value="{{ $v }}">{!! $v !!}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">排序</label>
             <div class="layui-input-inline">
                 <input type="number" name="sort" value="0" placeholder="请输入" autocomplete="off"

@@ -23,7 +23,9 @@ Auth::routes();
 // Home 模块
 Route::namespace('Home')->group(function () {
     // 首页
-    Route::get('/', 'IndexController@index');
+    Route::any('/', 'IndexController@index');
+    //历史上的今天
+    Route::any('history','IndexController@history');
     // 分类
     Route::get('category/{id}', 'IndexController@category');
     // 标签

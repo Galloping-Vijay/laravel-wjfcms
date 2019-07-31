@@ -67,6 +67,7 @@ class NavController extends Controller
         $tree = self::$model::select('id', 'name', 'pid')->orderBy('id', 'asc')->get()->toArray();
         $list = self::$model::array2level($tree);
         return view('admin.' . self::$controlName . '.create', [
+            'target_list' => self::$model::$targetList,
             'superclass_id' => $superclass_id,
             'control_name' => self::$controlName,
             'list' => $list
@@ -88,6 +89,7 @@ class NavController extends Controller
         $list = self::$model::array2level($tree);
         return view('admin.' . self::$controlName . '.edit', [
             'info' => $info,
+            'target_list' => self::$model::$targetList,
             'control_name' => self::$controlName,
             'list' => $list
         ]);

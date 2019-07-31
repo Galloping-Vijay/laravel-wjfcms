@@ -14,7 +14,15 @@ class Nav extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'pid', 'sort', 'url', 'created_at'
+        'name', 'pid', 'sort', 'url', 'target', 'icon', 'created_at'
+    ];
+
+    /**
+     * 打开方式
+     * @var array
+     */
+    public static $targetList = [
+        '_self', '_blank', '_parent', '_top', 'framename'
     ];
 
     /**
@@ -41,5 +49,26 @@ class Nav extends Model
             }
         }
         return $list;
+    }
+
+    /**
+     * Description:获取菜单树结构
+     * User: Vijay
+     * Date: 2019/7/31
+     * Time: 11:43
+     * @param array $data
+     * @param int $pid
+     * @return array
+     */
+    public static function getMenuTree(array $data = [], int $pid = 0): array
+    {
+        $resArr = [];
+        foreach ($data as $key => &$val) {
+            if ($val['pid'] == $pid) {
+                $val['child'] = self::getMenuTree($data, $val['id']);
+                $resArr[] = $val;
+            }
+        }
+        return $resArr;
     }
 }

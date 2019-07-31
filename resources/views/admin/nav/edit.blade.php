@@ -6,7 +6,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="name" value="{{ $info->name }}" lay-verify="required" placeholder="请输入" autocomplete="off"
+                <input type="text" name="name" value="{{ $info->name }}" lay-verify="required" placeholder="请输入"
+                       autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -29,13 +30,29 @@
         <div class="layui-form-item">
             <label class="layui-form-label">链接地址</label>
             <div class="layui-input-inline">
-                <input type="text" name="url" lay-verify="required" placeholder="请输入" autocomplete="off" value="{{ $info->url }}" class="layui-input">
+                <input type="text" name="url" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       value="{{ $info->url }}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">打开方式</label>
+            <div class="layui-input-inline" id="">
+                <select name="target" lay-verify="required" lay-search="" lay-filter="target" id="target">
+                    @foreach ($target_list as $v)
+                        @if ($v == $info->target)
+                            <option value="{{ $v }}" selected>{!! $v !!}</option>
+                        @else
+                            <option value="{{ $v }}">{!! $v !!}</option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">排序</label>
             <div class="layui-input-inline">
-                <input type="number" name="sort" value="{{ $info->sort }}" value="0" placeholder="请输入" autocomplete="off"
+                <input type="number" name="sort" value="{{ $info->sort }}" value="0" placeholder="请输入"
+                       autocomplete="off"
                        class="layui-input">
             </div>
         </div>

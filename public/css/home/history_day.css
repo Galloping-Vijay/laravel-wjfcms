@@ -1,0 +1,81 @@
+.events {
+    position: relative;
+}
+.events li{
+    position: relative;
+    border-bottom: none !important;
+    border-left: 1px solid #e1e3e6;
+    width: 95%;
+    float: right;
+    overflow: inherit !important;
+}
+.events li .year {
+    position: absolute;
+    left: -135px;
+    top: 0;
+    width: 120px;
+    height: 25px;
+    line-height: 25px;
+    color: #333;
+    font-size: 20px;
+    text-align: right;
+}
+.events li .icon {
+    position: absolute;
+    left: -18px;
+    top: -5px;
+    border: 5px solid #fff;
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+    text-align: center;
+    background: #e5e5e5;
+}
+.events li .icon em {
+    line-height: 25px;
+    font-size: 16px;
+    color: #c2c2c2;
+}
+.cmn-icon {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    outline: 0;
+}
+.wiki-home-eventsOnHistory-icons {
+    font-family: baikeFont_wiki-home-eventsOnHistory-icons;
+    font-weight: 400;
+    font-style: normal;
+}
+.events li .event {
+    padding-top: 12px;
+}
+.events li .event .event_tit-wrapper {
+    font-size: 16px;
+    border-top: 1px solid #e1e3e6;
+}
+.events li .event .event_tit-wrapper .event_tit {
+    position: relative;
+    top: -13px;
+    margin-left: 35px;
+    padding-left: 5px;
+    background: #fff;
+}
+.events a {
+    color: #338de6;
+    text-decoration: none;
+}
+.events li .event .event_cnt {
+    margin: -6px 0 0 15px;
+    font-size: 14px;
+    color: #999;
+}
+.events :last-child {
+    padding-bottom: 0;
+    border-color: transparent;
+}
