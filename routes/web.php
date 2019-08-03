@@ -24,8 +24,6 @@ Auth::routes();
 Route::namespace('Home')->group(function () {
     // 首页
     Route::any('/', 'IndexController@index');
-    //历史上的今天
-    Route::any('history','IndexController@history');
     // 分类
     Route::get('category/{id}', 'IndexController@category');
     // 标签
@@ -49,6 +47,14 @@ Route::namespace('Home')->group(function () {
         Route::get('/', 'SiteController@index');
         Route::post('store', 'SiteController@store')->middleware('auth.oauth', 'clean.xss');
     });
+    //历史上的今天
+    Route::any('history','IndexController@history');
+    //热度榜
+    Route::any('clickArticle','IndexController@clickArticle');
+    //友情链接
+    Route::any('friendLinks','IndexController@friendLinks');
+    //标签云
+    Route::any('ajaxTags','IndexController@ajaxTags');
 });
 
 // auth
