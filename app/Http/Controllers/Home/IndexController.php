@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Traits\TraitFront;
 use App\Models\Article;
-use App\Models\Category;
 use App\Models\FriendLink;
-use App\Models\Nav;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,9 +21,18 @@ class IndexController extends Controller
      */
     public function __construct()
     {
+        //登录验证
         //$this->middleware('auth');
     }
 
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/8/4
+     * Time: 16:30
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $keytitle = $request->input('keytitle', '');
@@ -65,8 +72,19 @@ class IndexController extends Controller
         if (empty($info)) {
             return redirect('/');
         }
+        $infoTags = [];
+        if (!empty($info->keywords)) {
+            $infoTags = Tag::whereIn('name', explode(',', $info->keywords))
+                ->select('id', 'name')
+                ->get()->toArray();
+        }
+        $pre = Article::select('id', 'title')->find($id - 1);
+        $next = Article::select('id', 'title')->find($id + 1);
         return view('home.index.article', [
             'info' => $info,
+            'info_tags' => $infoTags,
+            'pre' => $pre,
+            'next' => $next
         ]);
     }
 
