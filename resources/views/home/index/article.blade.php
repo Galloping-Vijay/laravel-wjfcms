@@ -70,13 +70,13 @@
             </div>
         </div>
         <div class="sidebar">
-            @component('./layouts/hot')
+            @component('./layouts/home/hot')
             @endcomponent
-            @component('./layouts/tag')
+            @component('./layouts/home/tag')
             @endcomponent
-            @component('./layouts/publicwx')
+            @component('./layouts/home/publicwx')
             @endcomponent
-            @component('./layouts/applets')
+            @component('./layouts/home/applets')
             @endcomponent
         </div>
     </article>

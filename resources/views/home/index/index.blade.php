@@ -58,19 +58,19 @@
             </div>
         </div>
         <div class="sidebar">
-            @component('./layouts/about')
+            @component('./layouts/home/about')
             @endcomponent
-            @component('./layouts/search')
+            @component('./layouts/home/search')
             @endcomponent
-            @component('./layouts/tag')
+            @component('./layouts/home/tag')
             @endcomponent
-            @component('./layouts/hot')
+            @component('./layouts/home/hot')
             @endcomponent
-            @component('./layouts/links')
+            @component('./layouts/home/links')
             @endcomponent
-            @component('./layouts/cloud')
+            @component('./layouts/home/cloud')
             @endcomponent
-            @component('./layouts/history')
+            @component('./layouts/home/history')
             @endcomponent
         </div>
     </article>

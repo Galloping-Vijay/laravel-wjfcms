@@ -25,9 +25,9 @@ Route::namespace('Home')->group(function () {
     // 首页
     Route::any('/', 'IndexController@index');
     // 分类
-    Route::get('category/{id}', 'IndexController@category');
+    Route::get('category/{category}', 'IndexController@category');
     // 标签
-    Route::get('tag/{id}', 'IndexController@tag');
+    Route::get('tag/{tag}', 'IndexController@tag');
     // 随言碎语
     Route::get('chat', 'IndexController@chat');
     // 开源项目

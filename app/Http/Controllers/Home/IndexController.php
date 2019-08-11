@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Traits\TraitFront;
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\Chat;
 use App\Models\FriendLink;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -72,6 +74,10 @@ class IndexController extends Controller
         if (empty($info)) {
             return redirect('/');
         }
+
+        $info->click += 1;
+        $info->save();
+
         $infoTags = [];
         if (!empty($info->keywords)) {
             $infoTags = Tag::whereIn('name', explode(',', $info->keywords))
@@ -85,6 +91,78 @@ class IndexController extends Controller
             'info_tags' => $infoTags,
             'pre' => $pre,
             'next' => $next
+        ]);
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/8/11
+     * Time: 15:41
+     * @param Category $category
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function category(Category $category)
+    {
+        $where = [
+            ['status', '=', '1'],
+            ['category_id', '=', $category->id]
+        ];
+        $articles = Article::where($where)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(15);
+        return view('home.index.category', [
+            'info' => $category,
+            'articles' => $articles,
+        ]);
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/8/11
+     * Time: 17:53
+     * @param Tag $tag
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function tag(Tag $tag)
+    {
+        $where = [
+            ['status', '=', '1'],
+            ['keywords', 'like', '%' . $tag->name . '%']
+        ];
+        $articles = Article::where($where)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(9);
+        $count = count($articles);
+        $data = [];
+        $j = 0;
+        for ($i = 0; $i < $count; $i++) {
+            if ($i % 3 == 0) {
+                $j++;
+            }
+            $data[$j][] = $articles[$i]->toArray();
+        }
+        return view('home.index.tag', [
+            'info' => $tag,
+            'articles' => $articles,
+            'data' => $data
+        ]);
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/8/11
+     * Time: 17:53
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function chat()
+    {
+        $chats = Chat::orderBy('id', 'desc')
+            ->paginate(30);
+        return view('home.index.chat', [
+            'chats' => $chats
         ]);
     }
 
