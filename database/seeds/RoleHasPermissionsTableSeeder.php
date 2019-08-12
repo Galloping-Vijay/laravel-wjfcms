@@ -12,13 +12,13 @@ class RoleHasPermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = [];
-        for ($i = 1; $i <= 100; $i++) {
-            $data[] = [
-                'role_id' => '1',
-                'permission_id' => $i,
-            ];
-        }
-        DB::table('role_has_permissions')->insert($data);
+//        $data = [];
+//        for ($i = 1; $i <= 100; $i++) {
+//            $data[] = [
+//                'role_id' => '1',
+//                'permission_id' => $i,
+//            ];
+//        }
+//        DB::table('role_has_permissions')->insert($data);
     }
 }
