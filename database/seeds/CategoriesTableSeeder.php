@@ -25,17 +25,6 @@ class CategoriesTableSeeder extends Seeder
                 'deleted_at'  => null,
             ],
             [
-                'name'        => 'php',
-                'slug'        => 'php',
-                'keywords'    => 'php',
-                'description' => '关于PHP的文章',
-                'sort'        => 1,
-                'pid'         => 0,
-                'created_at'  => date('Y-m-d H:i:s'),
-                'updated_at'  =>  date('Y-m-d H:i:s'),
-                'deleted_at'  => null,
-            ],
-            [
                 'name'        => 'linux',
                 'slug'        => 'linux',
                 'keywords'    => 'linux',
