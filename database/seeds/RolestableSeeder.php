@@ -36,5 +36,22 @@ class RolestableSeeder extends Seeder
             ]
         ];
         DB::table('roles')->insert($data);
+
+        $rolesData = [
+            [
+                'role_id' => '1',
+                'model_type' => 'App\Models\Admin',
+                'model_id' => '1',
+            ],
+        ];
+        DB::table('model_has_roles')->insert($rolesData);
+        $rolePerData = [];
+        for ($i = 1; $i <= 100; $i++) {
+            $rolePerData[] = [
+                'role_id' => '1',
+                'permission_id' => $i,
+            ];
+        }
+        DB::table('role_has_permissions')->insert($rolePerData);
     }
 }
