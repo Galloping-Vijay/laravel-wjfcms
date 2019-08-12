@@ -14,6 +14,7 @@ class AdminsTableSeeder extends Seeder
     public function run()
     {
         $data = [
+            'id' => 1,
             'username' => 'Vijay',
             'account' => '13000000000',
             'password' => Hash::make(123456),
