@@ -10,7 +10,9 @@ use App\Models\FriendLink;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 use Vijay\Curl\Curl;
+use App\Models\Nav;
 
 class IndexController extends Controller
 {
@@ -25,6 +27,13 @@ class IndexController extends Controller
     {
         //登录验证
         //$this->middleware('auth');
+        //共享视图
+        $navList = Nav::getMenuTree(Nav::orderBy('sort', 'asc')->get()->toArray());
+        $categories = Category::getMenuTree(Category::orderBy('sort', 'asc')->select('id', 'name', 'pid')->get()->toArray());
+        View::share([
+            'nav_list' => $navList,
+            'category_list' => $categories,
+        ]);
     }
 
     /**
