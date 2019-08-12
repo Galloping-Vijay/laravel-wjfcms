@@ -12,7 +12,7 @@ class ModelHasPermissions extends Seeder
      */
     public function run()
     {
-        $data = [];
+       /* $data = [];
         for ($i = 1; $i < 28; $i++) {
             $data[] = [
                 'permission_id' => $i,
@@ -20,6 +20,6 @@ class ModelHasPermissions extends Seeder
                 'model_id' => 1,
             ];
         }
-        \Illuminate\Support\Facades\DB::table('model_has_permissions')->insert($data);
+        \Illuminate\Support\Facades\DB::table('model_has_permissions')->insert($data);*/
     }
 }
