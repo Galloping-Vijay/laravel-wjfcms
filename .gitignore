@@ -3,6 +3,7 @@
 /public/storage
 /public/uploads
 /storage/*.key
+nginx.htaccess
 /vendor
 .idea/
 /public/webhooks.php

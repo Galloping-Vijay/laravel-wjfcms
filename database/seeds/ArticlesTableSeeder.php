@@ -27,6 +27,7 @@ class ArticlesTableSeeder extends Seeder
                 'keywords' => 'laravel',
                 'cover' => '',
                 'is_top' => 1,
+                'status' => 1,
                 'click' => 666,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
