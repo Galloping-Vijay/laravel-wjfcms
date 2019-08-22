@@ -83,7 +83,7 @@ class IndexController extends Controller
         if (empty($info)) {
             return redirect('/');
         }
-
+        //dd(htmlspecialchars_decode($info->content));
         $info->click += 1;
         $info->save();
 

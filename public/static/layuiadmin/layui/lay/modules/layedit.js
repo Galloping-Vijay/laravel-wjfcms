@@ -800,7 +800,7 @@ layui.define(["layer", "form"], function (t) {
                             i.default
                         }, function (i) {
                             y.call(t, "pre", {
-                                text: i.code,
+                                text: '<code class="'+i.lang+'">'+i.code+'</code>',
                                 "lay-lang": i.lang
                             }, e),
                                 setTimeout(function () {

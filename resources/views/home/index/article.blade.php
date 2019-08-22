@@ -1,11 +1,11 @@
 @extends('layouts.home')
+@section('header')
+<<script src="{{ asset('static/highlight/highlight.pack.js') }}"></script>
+<link href="{{ asset('static/highlight/styles/vs2015.css') }}" rel="stylesheet">
+<script>hljs.initHighlightingOnLoad();</script>
+@endsection
 @section('content')
     <div style="width: 100%;height: 76px;"></div>
-    <script src="{{ asset('js/home/shCore.js') }}"></script>
-    <link href="{{ asset('css/home/shCoreDefault.css') }}" rel="stylesheet">
-    <script type="text/javascript">
-        SyntaxHighlighter.all();
-    </script>
     <article>
         <div class="infos">
             <div class="newsview">
