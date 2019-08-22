@@ -81,6 +81,7 @@
                     @endforeach
                 </ul>
             </div>
+            @if(!empty($chats->items()))
             <div class="pagelist">
                 <div>
                     @if(!$chats->onFirstPage())
@@ -92,6 +93,7 @@
                     @endif
                 </div>
             </div>
+            @endif
         </div>
         <div class="sidebar">
             @component('./layouts/home/hot')

@@ -19,7 +19,7 @@
                         li += '<a href="/tag/'+res[i].id+'">'+res[i].name+'</a>';
                     }
                 } else {
-                    li += '<li>网络异常，获取数据失败</li>';
+                    li += '<li>没有数据哦!</li>';
                 }
                 $('#ajaxTags').find('li').remove();
                 $('#ajaxTags').append(li);

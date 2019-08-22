@@ -45,17 +45,19 @@
                     </li>
                 @endforeach
             </ul>
-            <div class="pagelist">
-                <div>
-                    @if(!$articles->onFirstPage())
-                        <a class="prev" href="{{ $articles->previousPageUrl() }}">上一页</a>
-                    @endif
-                    <span class="current">第{{ $articles->currentPage() }}页</span>
-                    @if($articles->lastPage() !== $articles->currentPage())
-                        <a class="next" href="{{ $articles->nextPageUrl() }}">下一页</a>
-                    @endif
+            @if(!empty($articles->items()))
+                <div class="pagelist">
+                    <div>
+                        @if(!$articles->onFirstPage())
+                            <a class="prev" href="{{ $articles->previousPageUrl() }}">上一页</a>
+                        @endif
+                        <span class="current">第{{ $articles->currentPage() }}页</span>
+                        @if($articles->lastPage() !== $articles->currentPage())
+                            <a class="next" href="{{ $articles->nextPageUrl() }}">下一页</a>
+                        @endif
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
         <div class="sidebar">
             @component('./layouts/home/about')

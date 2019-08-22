@@ -30,7 +30,7 @@
                             '            </li>';
                     }
                 } else {
-                    li += '<li>网络异常，获取数据失败</li>';
+                    li += '<li>没有数据哦!</li>';
                 }
                 $('#friendLinks').find('li').remove();
                 $('#friendLinks').append(li);

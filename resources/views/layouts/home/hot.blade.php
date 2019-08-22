@@ -20,7 +20,7 @@
                         li += '<li><b><a href="/article/'+res[i].id+'" title="'+res[i].title+'">'+res[i].title+'</a></b><p><i><img src="'+res[i].cover+'" alt="'+res[i].title+'" title="'+res[i].title+'"></i>'+res[i].description+'</p></li>';
                     }
                 } else {
-                    li += '<li>网络异常，获取数据失败</li>';
+                    li += '<li>没有数据哦!</li>';
                 }
                 $('#clickArticle').find('li').remove();
                 $('#clickArticle').append(li);

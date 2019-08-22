@@ -33,6 +33,7 @@
                     </li>
                 @endforeach
             </ul>
+            @if(!empty($articles->items()))
             <div class="pagelist">
                 <div>
                     @if(!$articles->onFirstPage())
@@ -44,6 +45,7 @@
                     @endif
                 </div>
             </div>
+            @endif
         </div>
         <div class="sidebar">
             @component('./layouts/home/hot')
