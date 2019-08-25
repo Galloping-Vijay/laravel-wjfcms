@@ -80,10 +80,9 @@ class IndexController extends Controller
     public function article($id)
     {
         $info = Article::find($id);
-        if (empty($info)) {
+        if (empty($info) || $info->status == 0) {
             return redirect('/');
         }
-        //dd(htmlspecialchars_decode($info->content));
         $info->click += 1;
         $info->save();
 
