@@ -15,7 +15,7 @@ class FriendLinksTableSeeder extends Seeder
         $data = [
             [
                 'name' => 'Vijay Blog',
-                'url' => 'https://yuemeet.com',
+                'url' => 'https://choudalao.com',
                 'sort' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),

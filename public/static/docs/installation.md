@@ -1,3 +1,7 @@
+## 特别提醒
+
+**linux下注意权限问题**
+
 ## 获取代码
 
 github地址：[laravel-wjfcms](https://github.com/Galloping-Vijay/laravel-wjfcms) （欢迎 star 与 fork）
@@ -8,7 +12,13 @@ github地址：[laravel-wjfcms](https://github.com/Galloping-Vijay/laravel-wjfcm
 git clone https://github.com/Galloping-Vijay/laravel-wjfcms
 ~~~
 
+win下
+
 ![screenshot_1562922175293](./images/screenshot_1562922175293.png)
+
+ubuntu下(注意权限)
+
+![screenshot_1565618633020](./images/screenshot_1565618633020.png)
 
 ## 进入项目目录
 
@@ -32,7 +42,7 @@ cp .env.example .env
 
 APP_NAME 项目名称，如：blog；  
 
-APP_URL 项目访问域名,如：www.yuemeet.com；  
+APP_URL 项目访问域名,如：www.choudalao.com；  
 
 DB_DATABASE 数据库名；  
 
@@ -60,17 +70,23 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 composer install 
 ~~~
 
+![composer_install](./images/composer_install.png)
+
 ## 设置laravel应用密钥
 
 ~~~shell
 php artisan key:generate
 ~~~
 
+![](./images/generate.png)
+
 ## 创建数据表
 
 ~~~shell
 php artisan migrate
 ~~~
+
+![migrate](./images/migrate.png)
 
 ## 生成初始数据
 

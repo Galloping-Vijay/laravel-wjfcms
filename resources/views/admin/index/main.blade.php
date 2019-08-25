@@ -147,7 +147,7 @@
                     </div>
                     <div class="layui-card-body layui-text layadmin-text">
                         <p>laravel-wjfcms是基于laravel5.8及layui开发的后台管理系统。</p>
-                        <p>—— Vijay（<a href="" target="_blank">yuemeet.com</a>）</p>
+                        <p>—— Vijay（<a href="http://www.choudalao.com" target="_blank">www.choudalao.com</a>）</p>
                     </div>
                 </div>
             </div>
@@ -196,7 +196,7 @@
                         , {
                             field: 'title', title: '文章标题', minWidth: 300
                             , templet: function (d) {
-                                return '<div><a href="" target="_blank" class="layui-table-link">' + d.title + '</div>';
+                                return '<div><a href="/article/'+d.id+'" target="_blank" class="layui-table-link">' + d.title + '</div>';
                             }
                         }
                         , {field: 'cate_name', title: '分类', minWidth: 120}
@@ -217,7 +217,7 @@
                             title: '内容',
                             minWidth: 300,
                             templet: function (d) {
-                                return '<div><a href="" target="_blank" class="layui-table-link">' + d.content + '</div>';
+                                return '<div><a href="javascript:void(0);" target="_blank" class="layui-table-link">' + d.content + '</div>';
                             }
                         }
                         , {field: 'created_at', title: '创建时间', sort: true}

@@ -1,7 +1,7 @@
 /**
  @Name：通用增删改查
  @Author：Vijay
- @Site：http://www.yuemeet.com
+ @Site：http://www.choudalao.com
  */
 layui.define(['table', 'form'], function (exports) {
     var $ = layui.$

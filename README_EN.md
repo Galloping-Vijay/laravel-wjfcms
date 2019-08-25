@@ -13,35 +13,36 @@
 
 Laravel-wjfcms has the following characteristics：
 
-### ①  Easy to use：
+###   Easy to use：
 
 Laravel-wjfcms is easy to use and can be used in just a few steps;
 
-### ②  Laravel's best entry demo：
+###   Laravel's best entry demo：
 
 Laravel is currently the most popular PHP framework. Its design philosophy and perfect ecology are what every phper wants to learn and master.For many students who have just contacted laravel, the laravel documentation is hard to read, which has led many people to be discouraged.Most of the slag work uses the thinkphp framework, so when writing laravel-wjfcms, there will be a lot of thinkphp thinking, if you are also a thinkphp developer, and want to contact laravel, I believe that learning together, soonCan get laravel;
 
-### ③  Second opening convenience：
+###   Second opening convenience：
 
 Whether it is open or direct, you can easily develop modules as long as you have a certain php foundation.;
 
-### ④ Beautiful and elegant：
+###  Beautiful and elegant：
 
 The laravel-wjfcms background page is based on the single-page version of layui-admin. The view is beautiful and the documentation is rich. You don't have to worry about the page layout and JS anymore.
 
-# Functional module：
+### MVC layered mode
+
+Using the MVC application is divided into three core components: model (M), view (V), controller (C).
+
+### User Management
+
+Laravel-wjfcms has built-in flexible user management and can be directly interoperable with third-party sites.
 
 ### Authority management;
+RBAC rights management is implemented based on the [Laravel Permission] (https://github.com/spatie/laravel-permission) extension package maintained by Spatie.
 
 ### Article management;
 
-### Comment management;
-
-### API interface;
-
-### System Configuration;
-
-### Website management;
+BBuilt-in article system, including articles, categories, tags, comments, and more.
 
 # Code address：
 

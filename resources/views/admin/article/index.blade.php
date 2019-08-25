@@ -297,6 +297,7 @@
                             submit.trigger('click');
                         }
                     });
+                    $('.layui-layer-max').trigger("click");
                 } else if (obj.event === 'restore') {
                     layer.confirm('确定恢复数据吗?', function (index) {
                         admin.req({
@@ -445,6 +446,7 @@
                             submit.trigger('click');
                         }
                     });
+                    $('.layui-layer-max').trigger("click");
                 }
             };
             $('.layui-btn.layuiadmin-btn-list').on('click', function () {

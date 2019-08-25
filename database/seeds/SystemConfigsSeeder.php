@@ -24,7 +24,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '网站地址',
                 'key' => 'site_url',
-                'value' => 'www.yuemeet.com',
+                'value' => 'www.choudalao.com',
                 'type' => 'text',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
