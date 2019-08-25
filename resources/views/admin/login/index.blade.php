@@ -99,13 +99,23 @@
                         key: setter.request.tokenName
                         , value: res.data.access_token
                     });
-                    layer.msg('登入成功', {
-                        offset: '15px'
-                        , icon: 1
-                        , time: 1000
-                    }, function () {
-                        location.href = '/admin/index/index'; //后台主页
-                    });
+                    if(res.code === 0){
+                        layer.msg(res.msg, {
+                            offset: '15px'
+                            , icon: 1
+                            , time: 1000
+                        }, function () {
+                            location.href = '/admin/index/index'; //后台主页
+                        });
+                    }else{
+                        layer.msg(res.msg, {
+                            offset: '15px'
+                            , icon: 2
+                            , time: 1000
+                        }, function () {
+
+                        });
+                    }
                 }
             });
 
