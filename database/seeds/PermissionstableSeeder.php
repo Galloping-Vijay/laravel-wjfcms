@@ -504,7 +504,7 @@ class PermissionstableSeeder extends Seeder
                     'level' => 1,
                     'icon' => 'layui-icon-list',
                     'parent_id' => 36,
-                    'display_menu' => 0,
+                    'display_menu' => 1,
                     'created_at' => '2019-06-25 14:50:47',
                 ),
             38 =>
