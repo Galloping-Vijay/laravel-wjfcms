@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Traits\TraitResource;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -198,6 +200,33 @@ class ArticleController extends Controller
             $res = $info->update($data);
             return $this->resJson(0, '操作成功', $res);
         } catch (\Exception $e) {
+            return $this->resJson(1, $e->getMessage());
+        }
+    }
+
+    /**
+     * Description:
+     * User: Vijay <1937832819@qq.com>
+     * Date: 2019/08/26
+     * Time: 11:59
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            //如果存在评论
+            $relation = Comment::where('article_id', $request->id)->first();
+            if (!empty($relation)) {
+                DB::rollBack();
+                return $this->resJson(1, '该文章存在评论,不能删除');
+            }
+            $res = self::$model::destroy($request->id);
+            DB::commit();
+            return $this->resJson(0, '操作成功', $res);
+        } catch (\Exception $e) {
+            DB::rollBack();
             return $this->resJson(1, $e->getMessage());
         }
     }

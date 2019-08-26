@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Traits\TraitResource;
+use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -136,6 +137,12 @@ class CategoryController extends Controller
             if (!empty($subMenu)) {
                 DB::rollBack();
                 return $this->resJson(1, '存在子菜单,不能删除');
+            }
+            //如果存在文章
+            $subArt = Article::where('category_id',$request->id)->first();
+            if (!empty($subArt)) {
+                DB::rollBack();
+                return $this->resJson(1, '该分类存在文章,不能删除');
             }
             $res = self::$model::destroy($request->id);
             if ($res != true) {
