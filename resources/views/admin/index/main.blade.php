@@ -217,7 +217,7 @@
                             title: '内容',
                             minWidth: 300,
                             templet: function (d) {
-                                return '<div><a href="javascript:void(0);" target="_blank" class="layui-table-link">' + d.content + '</div>';
+                                return '<div><a href="javascript:void(0);" class="layui-table-link">' + d.content + '</div>';
                             }
                         }
                         , {field: 'created_at', title: '创建时间', sort: true}
