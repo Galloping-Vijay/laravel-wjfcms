@@ -32,35 +32,6 @@ class ArticlesTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
                 'deleted_at' => null,
-            ],
-            [
-                'category_id' => 1,
-                'title' => 'jQuery获取值的方法',
-                'author' => 'Vijay',
-                'slug' => 'php',
-                'content' => 'jQuery通过input标签的name获取值;
-            &lt;/div&gt;&lt;p&gt;&lt;/p&gt;',
-                'description' => '&lt;p&gt;&lt;pre lay-lang=&quot;JavaScript&quot;&gt;&lt;code class=&quot;JavaScript&quot;&gt;//js动态加载HTML元素时出现的无效的点击事件
-$(&quot;body&quot;).delegate(&quot;.layui-icon-delete&quot;,&quot;click&quot;, function(){
-    $(this).parent().remove();
-});
-//原生方法
-document.querySelector(\'input[name=&quot;control_name&quot;]\').getAttribute(\'value\');
-document.querySelector(\'meta[name=&quot;csrf-token&quot;]\').getAttribute(\'content\');
-$(&quot;input[name=\'mobile\']&quot;).val()
-$(&quot;input[name=\'_checkbox\']:checked&quot;);
-$(&quot;input[name=\'sfz\']&quot;).attr(&quot;checked&quot;,&quot;checked&quot;);
-$(&quot;:radio[name=\'level\']:checked&quot;).val();
-$(&quot;select[name=\'province\']&quot;).val();
-$(\'textarea[name=&quot;content&quot;]\').val();&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;',
-                'keywords' => 'php',
-                'cover' => '',
-                'is_top' => 1,
-                'status' => 1,
-                'click' => 666,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-                'deleted_at' => null,
             ]
         ];
         DB::table('articles')->insert($data);
