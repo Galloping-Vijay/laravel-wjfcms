@@ -22,6 +22,7 @@ class CreateAdminsTable extends Migration
                 $table->string('tel',50)->default('')->comment('手机');
                 $table->string('email',50)->default('')->comment('邮箱');
                 $table->tinyInteger('sex')->default('-1')->comment('性别-1:保密,0:男,1:女');
+				$table->tinyInteger('status')->default('1')->comment('状态0:禁用,1:启用');
                 $table->timestamps();
                 $table->softDeletes();
             });
