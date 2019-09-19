@@ -18,7 +18,7 @@
 @endsection
 @section('content')
     <article>
-        <div class="blank"></div>
+        <div style="width: 100%;height: 76px;"></div>
         <div class="blogsbox">
             <div id="content">
                 <div class="login-header">
