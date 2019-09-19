@@ -5,8 +5,8 @@ body {
     margin: 0;
     padding: 0;
     background-size: cover;
-    animation: body_app 100s infinite backwards;
-    -webkit-backface-visibility: hidden;
+    /*animation: body_app 100s infinite backwards;*/
+    /*-webkit-backface-visibility: hidden;*/
 }
 
 @keyframes body_app {
