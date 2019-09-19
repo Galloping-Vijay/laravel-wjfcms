@@ -73,7 +73,7 @@
     </style>
 </head>
 
-<body style="">
+<body style="" id="body_app">
 <header>
     <div class="tophead">
         <div class="logo">
