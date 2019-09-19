@@ -14,6 +14,8 @@
     <script src="{{ asset('js/home/hm.js') }}"></script>
     <link href="{{ asset('css/home/index.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home/m.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/home/easyForm.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/home/auth.css') }}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{ asset('js/home/modernizr.js') }}"></script>
     <![endif]-->
