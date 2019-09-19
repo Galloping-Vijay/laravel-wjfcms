@@ -1,5 +1,6 @@
 @extends('layouts.home')
 @section('header')
+    <link href="{{ asset('/css/home/easyForm.css') }}" rel="stylesheet">
     <style>
         .error-msg{
             color: red;
@@ -14,6 +15,7 @@
         .vali-code{
             display: none;
         }
+        .blogsbox{text-align:center;}
     </style>
 @endsection
 @section('content')
