@@ -40,7 +40,6 @@ body {
 #content {
     background-color: rgba(255, 255, 255, 0.95);
     max-width: 420px;
-    height: 330px;
     border-radius: 6px;
     padding: 10px;
     margin-top: 15%;
@@ -126,10 +125,9 @@ body {
     background-color: #00A7EB;
     color: #ffffff;
     font-size: 16px;
-    width: 91%;
-    height: 40px;
-    margin-left: 18px;
-    border: 1px solid #ff7d0a;
+    width: 86%;
+    height: 50px;
+    border: 1px solid #D4D4D4;
     border-radius: 20px;
 }
 
@@ -144,6 +142,7 @@ body {
 .logon-box {
     margin-top: 20px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .logon-box a {
