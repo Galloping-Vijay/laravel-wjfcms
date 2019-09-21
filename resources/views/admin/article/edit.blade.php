@@ -167,7 +167,7 @@
                         _token: csrf_token
                     }
                     , done: function (data) {
-                        console.log(data);
+                        //console.log(data);
                     }
                 }
                 , uploadVideo: {

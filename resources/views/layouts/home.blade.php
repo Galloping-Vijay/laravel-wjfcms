@@ -44,7 +44,7 @@
         })();
         function addLink() {
             var selection = window.getSelection();
-            pagelink = "<br /><br />作者：Vijay<br />链接： " + document.location.href + "<br />来源：Vijay个人博客<br />著作权归Vijay所有，任何形式的转载都请联系Vijay获得授权并注明出处。";
+            pagelink = "<br /><br />作者：Vijay<br />链接： " + document.location.href + "<br />来源：Vijay个人博客<br />著作权归Vijay所有，任何形式的转载都请联系Vijay(1937832819@qq.com)获得授权并注明出处。";
             copytext = selection + pagelink;
             newdiv = document.createElement('div');
             newdiv.style.position = 'absolute';
