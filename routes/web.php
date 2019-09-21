@@ -40,6 +40,8 @@ Route::namespace('Home')->group(function () {
     Route::get('checkLogin', 'IndexController@checkLogin');
     // 搜索文章
     Route::post('search', 'IndexController@search');
+    //申请友情链接
+    Route::post('applyLink', 'IndexController@applyLink');
     // feed
     Route::get('feed', 'IndexController@feed');
     // 推荐博客

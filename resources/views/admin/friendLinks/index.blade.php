@@ -43,6 +43,13 @@
                 <!-- 表格 -->
                 <table id="LAY-app-list" lay-filter="LAY-app-list"></table>
                 <!-- 模板渲染 -->
+                <script type="text/html" id="statusTpl">
+                    @{{#  if(d.deleted_at == null){ }}
+                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="table-button-status"
+                           data-id="@{{ d.id }}" lay-text="已审核|待审核" @{{ d.status?'checked':'' }}>
+                    @{{#  } }}
+                </script>
+                <!-- 模板渲染 -->
                 <script type="text/html" id="table-list">
                     @{{#  if(d.deleted_at == null){ }}
                     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
@@ -92,6 +99,8 @@
                     , {field: 'sort', width: 80, align: 'center', title: '排序', edit: 'text', sort: true}
                     , {field: 'name', title: '链接名', align: 'center',}
                     , {field: 'url', title: '链接地址', align: 'center',}
+                    , {field: 'email', title: '联系邮箱', align: 'center',}
+                    , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 80, align: 'center'}
                     , {field: 'created_at', title: '提交时间', sort: true}
                     , {title: '操作', minWidth: 200, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
@@ -141,6 +150,38 @@
                             });
                         } else {
                             layer.msg(res.msg, {icon: 2});;
+                        }
+                    }
+                });
+            });
+
+            //监听指定开关
+            form.on('switch(table-button-status)', function (data) {
+                var field = {
+                    status: this.checked ? 1 : 0,
+                    id: $(this).data('id')
+                };
+                admin.req({
+                    url: '/admin/' + control_name + '/update'
+                    , data: field
+                    , method: 'POST'
+                    , headers: {
+                        'X-CSRF-TOKEN': csrf_token
+                    }
+                    , beforeSend: function (XMLHttpRequest) {
+                        layer.load();
+                    }
+                    , done: function (res) {
+                        layer.closeAll('loading');
+                        if (res.code === 0) {
+                            layer.msg(res.msg, {
+                                offset: '15px'
+                                , icon: 1
+                                , time: 1000
+                            }, function () {
+                            });
+                        } else {
+                            layer.msg(res.msg, {icon: 2});
                         }
                     }
                 });

@@ -93,7 +93,7 @@
                 <input type="hidden" name="status" value="{{ $info->status }}">
                 <input type="checkbox" {{ $info->status==1?'checked':'' }} lay-verify="required" lay-filter="status"
                        lay-skin="switch"
-                       lay-text="正常|禁用">
+                       lay-text="已审核|待审核">
             </div>
         </div>
         <div class="layui-form-item layui-hide">

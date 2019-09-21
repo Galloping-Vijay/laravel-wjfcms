@@ -39,30 +39,35 @@
         $('.add_links').click(function () {
             layer.open({
                 title: '友链提交',
-                content: '网站名称:<input type="text" name="title" class="layui-layer-input" placeholder="请输入网站名称" value=""></p ><p>网站链接<input type="text" name="link" class="layui-layer-input" placeholder="请输入以http或https开头的url" value=""></p >联系邮箱:<input type="text" name="email" class="layui-layer-input" placeholder="联系邮箱" value=""></p >',
+                content: '网站名称:<input type="text" name="name" class="layui-layer-input" placeholder="请输入网站名称" value=""></p ><p>网站链接<input type="text" name="url" class="layui-layer-input" placeholder="请输入以http或https开头的url" value=""></p >联系邮箱:<input type="text" name="email" class="layui-layer-input" placeholder="联系邮箱" value=""></p >',
                 yes: function () {
-                    if ($("input[name='title']").val() != "" && $("input[name='link']").val() != "" && $("input[name='email']").val() != "") {
+                    if ($("input[name='name']").val() != "" && $("input[name='url']").val() != "" && $("input[name='email']").val() != "") {
                         $.ajax({
                             type: "POST",
-                            url: "/index/linkshandle.html",
+                            url: "/applyLink",
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
                             data: {
-                                title: $("input[name='title']").val(),
-                                link: $("input[name='link']").val(),
+                                name: $("input[name='name']").val(),
+                                url: $("input[name='url']").val(),
                                 email: $("input[name='email']").val()
                             },
                             dataType: "json",
                             success: function (data) {
-                                if (data.status == 0) {
+                                if (data.code == 0) {
                                     layer.msg(data.msg, {icon: 1});
                                     window.location.reload();
                                 } else {
-                                    layer.msg(data.msg, {icon: 0});
+                                    layer.msg(data.msg, {icon: 2});
                                     return false;
                                 }
                             }
                         });
                     } else {
-                        layer.msg('网站名称或网站链接以及联系邮箱不能为空', {icon: 0});
+                        layer.msg('网站名称或网站链接以及联系邮箱不能为空', {icon: 0},function () {
+                            return false;
+                        });
                     }
                 }
             });

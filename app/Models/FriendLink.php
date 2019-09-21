@@ -14,6 +14,6 @@ class FriendLink extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'url', 'sort', 'created_at'
+        'name', 'url', 'sort', 'created_at', 'status', 'email'
     ];
 }

@@ -191,6 +191,25 @@ class IndexController extends Controller
     }
 
     /**
+     * Description:提交友情链接
+     * User: Vijay
+     * Date: 2019/9/21
+     * Time: 14:08
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function applyLink(Request $request)
+    {
+        $model = new FriendLink();
+        try {
+            $model::create($request->input());
+            return $this->resJson(0, '操作成功');
+        } catch (\Exception $e) {
+            return $this->resJson(1, $e->getMessage());
+        }
+    }
+
+    /**
      * Description:
      * User: Vijay
      * Date: 2019/8/3
@@ -219,7 +238,7 @@ class IndexController extends Controller
      */
     public function friendLinks(Request $request)
     {
-        $links = FriendLink::select('name', 'url')->get();
+        $links = FriendLink::where('status', 1)->select('name', 'url')->get();
         return $this->resJson('0', '获取成功', $links);
     }
 

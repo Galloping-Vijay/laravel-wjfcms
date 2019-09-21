@@ -24,6 +24,14 @@
                        class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="hidden" name="status" value="1">
+                <input type="checkbox" checked lay-filter="status" lay-skin="switch"
+                       lay-text="已审核|待审核">
+            </div>
+        </div>
         <div class="layui-form-item layui-hide">
             <input type="button" lay-submit lay-filter="layuiadmin-app-form-add" id="layuiadmin-app-form-add"
                    value="确认添加">
@@ -46,6 +54,14 @@
             var $ = layui.$
                 , admin = layui.admin
                 , form = layui.form;
+            //监听指定开关
+            form.on('switch(status)', function () {
+                if (this.checked) {
+                    $("input[name='status']").val('1');
+                } else {
+                    $("input[name='status']").val('0');
+                }
+            });
         });
     </script>
 @endsection
