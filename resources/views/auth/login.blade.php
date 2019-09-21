@@ -1,73 +1,52 @@
-@extends('layouts.app')
-
+@extends('layouts.home')
+@section('header')
+    <link href="{{ asset('/css/home/easyForm.css') }}" rel="stylesheet">
+    <style>
+        .error-msg{
+            color: red;
+        }
+        .blogsbox{
+            width: 100%;
+        }
+        #img-vali-code{
+            margin-left: 18px;
+            height: 25px;
+        }
+        .vali-code{
+            display: none;
+        }
+        .blogsbox{text-align:center;}
+    </style>
+@endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <article>
+        <div style="width: 100%;height: 76px;"></div>
+        <div class="blogsbox">
+            <div id="content">
+                <div class="login-header">
+                    欢迎登录
+                </div>
+                <div class="login-input-box">
+                    <input type="email" id="email" placeholder="请输入邮箱账号">
+                </div>
+                <div class="login-input-box">
+                    <input type="password" id="password" placeholder="请输入密码">
+                </div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                <div class="login-input-box  vali-code">
+                    <input type="text" id="code" placeholder="请输入验证码">
+                </div>
+                <div class="remember-box">
+                    <p class="error-msg"></p>
+                </div>
+                <div class="login-button-box">
+                    <button type="button" class="btn-login">开始登录</button>
+                </div>
+                <div class="logon-box">
+                    <a href="/password/reset">忘记密码?</a>
+                    <a href="/register">注册</a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </article>
 @endsection

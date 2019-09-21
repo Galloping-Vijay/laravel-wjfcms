@@ -18,6 +18,7 @@ Route::get('test', function () {
     pr(2);
 });
 
+//用户登录注册
 Auth::routes();
 
 // Home 模块
@@ -75,6 +76,7 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::post('login', 'AdminController@login');
     });
+
 });
 
 // 后台登录页面
