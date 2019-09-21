@@ -58,7 +58,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Timezone
+    | Application Timezone UTC
     |--------------------------------------------------------------------------
     |
     | Here you may specify the default timezone for your application, which
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('TIMEZONE','Asia/Shanghai'),
 
     /*
     |--------------------------------------------------------------------------
