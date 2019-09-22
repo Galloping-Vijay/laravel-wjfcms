@@ -1,4 +1,4 @@
-![default](./public/static/docs/images/logo.png)
+![default](./public/images/config/logo.png)
 
 ![github](https://img.shields.io/badge/build-passing-green.svg)
 <a href="https://github.com/Galloping-Vijay/laravel-wjfcms/blob/master/public/static/docs/images/公众号.jpg"><img src="https://img.shields.io/badge/微信公众号-心若野马-green.svg" alt="心若野马 version" height="18"></a>
