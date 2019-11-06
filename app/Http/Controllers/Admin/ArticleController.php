@@ -300,41 +300,4 @@ class ArticleController extends Controller
         }
         return self::resJson(1, '没有要上传的文件');
     }
-
-    /**
-     * Description:
-     * User: Vijay
-     * Date: 2019/11/6
-     * Time: 23:57
-     * @param $base64_image_content
-     * @param $path
-     * @return bool|string
-     */
-    public function base64_image_content($base64_image_content, $path)
-    {
-        //匹配出图片的格式
-        if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)) {
-            $type = $result[2];
-            $new_file = $path . "/" . date('Ymd', time()) . "/";
-            $basePutUrl = C('UPLOAD_IMG_BASE64_URL') . $new_file;
-
-            if (!file_exists($basePutUrl)) {
-                //检查是否有该文件夹，如果没有就创建，并给予最高权限
-                mkdir($basePutUrl, 0700);
-            }
-            $ping_url = genRandomString(8) . time() . ".{$type}";
-            $ftp_image_upload_url = $new_file . $ping_url;
-            $local_file_url = $basePutUrl . $ping_url;
-
-            if (file_put_contents($local_file_url, base64_decode(str_replace($result[1], '', $base64_image_content)))) {
-                //TODO 个人业务的FTP 账号图片上传
-                ftp_upload(C('REMOTE_ROOT') . $ftp_image_upload_url, $local_file_url);
-                return $ftp_image_upload_url;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
 }
