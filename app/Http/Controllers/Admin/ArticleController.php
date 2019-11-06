@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Traits\TraitResource;
+use App\Http\Traits\TraitUpload;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Comment;
@@ -11,10 +12,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use function foo\func;
+use phpDocumentor\Reflection\Types\Self_;
 
 class ArticleController extends Controller
 {
     use TraitResource;
+    use TraitUpload;
 
     public function __construct()
     {
@@ -278,10 +281,35 @@ class ArticleController extends Controller
             } else {
                 return self::resJson(1, '上传失败');
             }
+        } elseif ($request->hasFile('editormd-image-file')) {
+            $result = self::imageUpload('editormd-image-file');
+            if ($result['status_code'] === 200) {
+                $data = [
+                    'success' => 1,
+                    'message' => $result['message'],
+                    'url'     => $result['data'][0]['path'],
+                ];
+            } else {
+                $data = [
+                    'success' => 0,
+                    'message' => $result['message'],
+                    'url'     => '',
+                ];
+            }
+            return response()->json($data);
         }
         return self::resJson(1, '没有要上传的文件');
     }
 
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/11/6
+     * Time: 23:57
+     * @param $base64_image_content
+     * @param $path
+     * @return bool|string
+     */
     public function base64_image_content($base64_image_content, $path)
     {
         //匹配出图片的格式

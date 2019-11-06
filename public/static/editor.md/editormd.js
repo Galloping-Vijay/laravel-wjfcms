@@ -365,7 +365,7 @@
             
             var _this            = this;
             var classPrefix      = this.classPrefix  = editormd.classPrefix; 
-            var settings         = this.settings     = $.extend(true, {}, editormd.defaults, options);
+            var settings         = this.settings     = $.extend(true, editormd.defaults, options);
             
             id                   = (typeof id === "object") ? settings.id : id;
             
@@ -2012,7 +2012,7 @@
                 smartLists  : true,
                 smartypants : true
             };
-            
+            console.log(editormd.markedRenderer(markdownToC, rendererOptions));
             marked.setOptions(markedOptions);
                     
             var newMarkdownDoc = editormd.$marked(cmValue, markedOptions);
@@ -3365,7 +3365,7 @@
 
     // Emoji graphics files url path
     editormd.emoji     = {
-        path  : "https://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/",
+        path  : "/images/emojis/",
         ext   : ".png"
     };
 
@@ -3968,7 +3968,6 @@
         } else {
             saveTo.remove();
         }
-        
         div.addClass("markdown-body " + this.classPrefix + "html-preview").append(markdownParsed);
         
         var tocContainer = (settings.tocContainer !== "") ? $(settings.tocContainer) : div;

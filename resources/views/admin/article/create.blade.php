@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 @section('control_name', $control_name)
 @section('header')
-    <link rel="stylesheet" href="{{ asset('static/editor.md/css/editormd.min.css') }}" media="all">
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('static/editor.md/css/editormd.min.css') }}" media="all">
 @endsection
 @section('content')
     <div class="layui-form" lay-filter="layuiadmin-app-list" id="layuiadmin-app-form-list"
@@ -32,7 +32,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">作者</label>
             <div class="layui-input-block">
-                <input type="text" name="author" placeholder="admin" value="admin" autocomplete="off"
+                <input type="text" name="author" placeholder="admin" value="Vijay" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -65,8 +65,12 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">内容</label>
-            <div class="layui-input-block" id="editor">
-                <textarea  name="content" style="display:none;"></textarea>
+            <div class="layui-input-block">
+                <div id="editor">
+                    <textarea class="editormd-markdown-textarea" name="contentn-doc"></textarea>
+                    <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
+                    <textarea class="editormd-html-textarea" name="content-code"></textarea>
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
@@ -117,7 +121,7 @@
             var uploadImageUrl = '/admin/article/uploadImage';
             editor = editormd("editor", {
                 autoFocus : false,
-                width     : "94%",
+                width     : "100%",
                 height    : 640,
                 path : "/static/editor.md/lib/",  // Autoload modules mode, codemirror,
                 saveHTMLToTextarea : true,//这个配置，方便post提交表单，表单字段会自动加上一个字段content-html-code,形式为html格式
@@ -126,6 +130,10 @@
                 imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : uploadImageUrl,//注意你后端的上传图片服务地址
             });
+
+            //editor.getMarkdown();       // 获取 Markdown 源码
+            //editor.getHTML();           // 获取 Textarea 保存的 HTML 源码
+            //editor.getPreviewedHTML();  // 获取预览窗口里的 HTML，在开启 watch 且没有开启 saveHTMLToTextarea 时使用
 
             /**
              * 复制粘贴图片功能

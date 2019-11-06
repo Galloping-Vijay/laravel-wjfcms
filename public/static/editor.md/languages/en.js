@@ -77,8 +77,7 @@
                 },
                 preformattedText : {
                     title             : "Preformatted text / Codes", 
-                    emptyAlert        : "Error: Please fill in the Preformatted text or content of the codes.",
-                    placeholder       : "coding now...."
+                    emptyAlert        : "Error: Please fill in the Preformatted text or content of the codes."
                 },
                 codeBlock : {
                     title             : "Code block",         
@@ -86,8 +85,7 @@
                     selectDefaultText : "select a code language...",
                     otherLanguage     : "Other languages",
                     unselectedLanguageAlert : "Error: Please select the code language.",
-                    codeEmptyAlert    : "Error: Please fill in the code content.",
-                    placeholder       : "coding now...."
+                    codeEmptyAlert    : "Error: Please fill in the code content."
                 },
                 htmlEntities : {
                     title : "HTML Entities"
