@@ -10,6 +10,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use function foo\func;
 
 class ArticleController extends Controller
 {
@@ -241,8 +242,34 @@ class ArticleController extends Controller
      */
     public function uploadImage(Request $request)
     {
-        if ($request->hasFile('file')) {
-            $date = date('Ymd');
+        $date = date('Ymd');
+        if ($request->input('base64_img')) {
+            //正则匹配
+            if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $request->input('base64_img'), $result)) {
+                //获取图片
+                $base64_img = base64_decode(str_replace($result[1], '', $request->input('base64_img')));
+                //设置名称
+                $src = date("YmdHis") . getRandomStr(6) . '.png';
+                //设置路径
+                $path = 'uploads/' . $date;
+                //拼接完整文件路径
+                $pathSrc = $path . '/' . $src;
+                //路径检测和创建
+                if (!is_dir($path)) {
+                    mkdir($path, 0777, true);
+                }
+                //存储图片
+                file_put_contents($pathSrc, $base64_img);//保存图片，返回的是字节数
+                //设置返回值
+                $data['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $path . '/' . $src;
+                $data['title'] = '文章图片';
+                if (file_exists($pathSrc)) {
+                    return self::resJson(0, '上传成功', $data);
+                }
+                return self::resJson(1, '上传失败');
+            }
+            return self::resJson(1, '不是base64格式');
+        } elseif ($request->hasFile('file')) {
             $path = $request->file('file')->store('', 'uploads');
             if ($path) {
                 $data['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/uploads/' . $date . '/' . $path;
@@ -253,5 +280,33 @@ class ArticleController extends Controller
             }
         }
         return self::resJson(1, '没有要上传的文件');
+    }
+
+    public function base64_image_content($base64_image_content, $path)
+    {
+        //匹配出图片的格式
+        if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)) {
+            $type = $result[2];
+            $new_file = $path . "/" . date('Ymd', time()) . "/";
+            $basePutUrl = C('UPLOAD_IMG_BASE64_URL') . $new_file;
+
+            if (!file_exists($basePutUrl)) {
+                //检查是否有该文件夹，如果没有就创建，并给予最高权限
+                mkdir($basePutUrl, 0700);
+            }
+            $ping_url = genRandomString(8) . time() . ".{$type}";
+            $ftp_image_upload_url = $new_file . $ping_url;
+            $local_file_url = $basePutUrl . $ping_url;
+
+            if (file_put_contents($local_file_url, base64_decode(str_replace($result[1], '', $base64_image_content)))) {
+                //TODO 个人业务的FTP 账号图片上传
+                ftp_upload(C('REMOTE_ROOT') . $ftp_image_upload_url, $local_file_url);
+                return $ftp_image_upload_url;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }
