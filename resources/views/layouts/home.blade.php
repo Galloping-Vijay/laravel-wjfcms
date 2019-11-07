@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    {{--百度平台--}}
+    <meta name="baidu-site-verification" content="9jxVRatXIs" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="baidu-site-verification" content="">
