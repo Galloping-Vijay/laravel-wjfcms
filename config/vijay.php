@@ -7,7 +7,7 @@
  */
 
 return [
-    'version' => 'v1.1.1',
+    'version' => 'v1.2.1',
     'branch' => env('DEPLOY_BRANCH', 'master'),
     'web_name' => '臭大佬',
     'head' => [
