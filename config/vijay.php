@@ -16,9 +16,9 @@ return [
         'description' => ''
     ],
     'water' => [
-        'text' => '',
-        'size' => '臭大佬',
-        'color' => '',
+        'text' => 'ChouDaLao',
+        'size' => '15',
+        'color' => '#019683',
     ],
     'author' => 'Vijay',
     'baidu_site_url' => '',

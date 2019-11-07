@@ -23,6 +23,16 @@
     <link rel="stylesheet" href="{{ asset('css/home/layer.css') }}" id="layui_layer_skinlayercss" style="">
     @yield('header')
     <script>
+        /*百度统计*/
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?42bfb0edc8942ae12e19e306f81c22a6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script>
         window.onload = function () {
             var oH2 = document.getElementsByTagName("h2")[0];
             var oUl = document.getElementsByTagName("ul")[0];
@@ -33,15 +43,7 @@
             }
         }
     </script>
-
     <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
         function addLink() {
             var selection = window.getSelection();
             pagelink = "<br /><br />作者：Vijay<br />链接： " + document.location.href + "<br />来源：Vijay个人博客<br />著作权归Vijay所有，任何形式的转载都请联系Vijay(1937832819@qq.com)获得授权并注明出处。";
