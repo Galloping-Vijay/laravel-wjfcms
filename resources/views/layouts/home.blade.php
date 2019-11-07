@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     {{--百度平台--}}
     <meta name="baidu-site-verification" content="9jxVRatXIs" />
-    <meta name="baidu_union_verify" content="c045b824dd8db85a5beb3c8a697cc2fc">
+    <meta name="baidu_union_verify" content="285b65cf325abe072bde0437c133e008">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="baidu-site-verification" content="">
