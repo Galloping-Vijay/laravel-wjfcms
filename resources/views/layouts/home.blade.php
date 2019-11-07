@@ -9,9 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="baidu-site-verification" content="">
     <meta name="google-site-verification" content="">
-    <title>@yield('title','Vijay个人博客')</title>
-    <meta name="keywords" content="@yield('keywords','Vijay个人博客')">
-    <meta name="description" content="@yield('description','Vijay个人博客')">
+    <title>@yield('title','臭大佬')</title>
+    <meta name="keywords" content="@yield('keywords','臭大佬')">
+    <meta name="description" content="@yield('description','臭大佬')">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/home/base.css') }}" rel="stylesheet">
     <script src="{{ asset('js/home/hm.js') }}"></script>
@@ -48,7 +48,7 @@
     <script>
         function addLink() {
             var selection = window.getSelection();
-            pagelink = "<br /><br />作者：Vijay<br />链接： " + document.location.href + "<br />来源：Vijay个人博客<br />著作权归Vijay所有，任何形式的转载都请联系Vijay(1937832819@qq.com)获得授权并注明出处。";
+            pagelink = "<br /><br />作者：Vijay<br />链接： " + document.location.href + "<br />来源：臭大佬<br />著作权归Vijay所有，任何形式的转载都请联系Vijay(1937832819@qq.com)获得授权并注明出处。";
             copytext = selection + pagelink;
             newdiv = document.createElement('div');
             newdiv.style.position = 'absolute';
@@ -80,12 +80,12 @@
 <header>
     <div class="tophead">
         <div class="logo">
-            <a href="/" title="Vijay个人博客">
+            <a href="/" title="臭大佬">
                 <img src="/images/config/avatar.jpg"
-                     style="width: 40px;height: 40px; border-radius: 20px;margin-right: 10px;" alt="Vijay个人博客"
-                     title="Vijay个人博客">
+                     style="width: 40px;height: 40px; border-radius: 20px;margin-right: 10px;" alt="臭大佬"
+                     title="臭大佬">
             </a>
-            <a href="/" title="Vijay个人博客">Vijay个人博客</a>
+            <a href="/" title="臭大佬">臭大佬</a>
         </div>
         <div id="mnav">
             <h2><span class="navicon"></span></h2>
@@ -124,8 +124,8 @@
 
 @section('footer')
 <footer>
-    <p>Copyright © 2019 <a href="/" title="Vijay个人博客">Vijay个人博客</a>
-        All rights reserved&nbsp;<a href="/" title="Vijay个人博客" rel="nofollow">闽ICP备17016331号</a>
+    <p>Copyright © 2019 <a href="/" title="臭大佬">臭大佬</a>
+        All rights reserved&nbsp;<a href="/" title="臭大佬" rel="nofollow">闽ICP备17016331号</a>
     </p>
     <p>所有文章未经授权禁止转载、摘编、复制或建立镜像，如有违反，追究法律责任。举报邮箱：<a
                 href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=1937832819@qq.com" rel="nofollow" target="_blank">1937832819@qq.com</a>
@@ -190,7 +190,7 @@
                     <i class="side-icon-user"></i>
                     <section>
                         <div class="login_herder">
-                            <img src="/images/config/avatar.jpg" class="huiyuan-img" alt="Vijay个人博客" title="Vijay个人博客">
+                            <img src="/images/config/avatar.jpg" class="huiyuan-img" alt="臭大佬" title="臭大佬">
                             <span>登录</span>
                         </div>
                         <div class="userinfo">
@@ -219,7 +219,7 @@
                             <div class="kf">
                                 <ul class="kfdh">
                                     <p class="kftext">微信</p>
-                                    <p class="kfnum"><img src="/images/config/wx.jpg" alt="Vijay个人博客" title="Vijay个人博客"></p>
+                                    <p class="kfnum"><img src="/images/config/wx.jpg" alt="臭大佬" title="臭大佬"></p>
                                 </ul>
                             </div>
                         </div>
@@ -230,8 +230,8 @@
                     <section class="dashang-section">
                         <p>如果你觉得本站很棒，可以通过扫码支付打赏哦！</p>
                         <ul>
-                            <li><img src="/images/config/weixin_pay.jpg" alt="Vijay个人博客" title="Vijay个人博客">微信收款码</li>
-                            <li><img src="/images/config/ali_pay.jpg" alt="Vijay个人博客" title="Vijay个人博客">支付宝收款码</li>
+                            <li><img src="/images/config/weixin_pay.jpg" alt="臭大佬" title="臭大佬">微信收款码</li>
+                            <li><img src="/images/config/ali_pay.jpg" alt="臭大佬" title="臭大佬">支付宝收款码</li>
                         </ul>
                     </section>
                 </li>

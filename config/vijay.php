@@ -9,11 +9,11 @@
 return [
     'version' => 'v1.1.1',
     'branch' => env('DEPLOY_BRANCH', 'master'),
-    'web_name' => '',
+    'web_name' => '臭大佬',
     'head' => [
-        'title' => '',
-        'keywords' => '',
-        'description' => ''
+        'title' => '臭大佬',
+        'keywords' => '臭大佬',
+        'description' => '臭大佬'
     ],
     'water' => [
         'text' => 'ChouDaLao',

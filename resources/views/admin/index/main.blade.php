@@ -96,8 +96,9 @@
                                 <td>当前版本</td>
                                 <td>
                                     <script type="text/html" template>
+                                        {{ config('vijay.version') }}
                                         <a href="https://www.kancloud.cn/wjf19940211/laravel-wjfcms/1132643"
-                                           target="_blank" style="padding-left: 15px;">更新日志</a>
+                                           target="_blank" style="padding-left: 15px;">(更新日志)</a>
                                     </script>
                                 </td>
                             </tr>
