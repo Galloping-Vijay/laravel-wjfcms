@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/layui/css/layui.css') }}" media="all">
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/style/admin.css') }}" media="all">
     <script src="{{ asset('static/layuiadmin/layui/layui.js') }}"></script>
-    <script src="{{ asset('static/ace/ace.js') }}"></script>
     @yield('header')
     <style>
         .footer {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Traits\TraitResource;
+use App\Http\Traits\TraitUpload;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Comment;
@@ -10,10 +11,13 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use function foo\func;
+use phpDocumentor\Reflection\Types\Self_;
 
 class ArticleController extends Controller
 {
     use TraitResource;
+    use TraitUpload;
 
     public function __construct()
     {
@@ -132,10 +136,11 @@ class ArticleController extends Controller
             }
             $data['keywords'] = implode(',', $keywordsArr);
         }
-        if (isset($data['content'])) {
-            $data['content'] = htmlspecialchars($data['content']);
+        if (isset($data['editor-html-code'])) {
+            $data['content'] = htmlspecialchars($data['editor-html-code']);
         }
-        $data['cover'] = $data['cover'] ?? '';
+        $data['markdown'] = $data['editor-html-doc'];
+        $data['cover'] = $data['cover'] ?? $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/default-img.jpg';
         try {
             $model::create($data);
             return $this->resJson(0, '操作成功');
@@ -192,10 +197,11 @@ class ArticleController extends Controller
             }
             $data['keywords'] = implode(',', $keywordsArr);
         }
-        if (isset($data['content']) && !empty($data['content'])) {
-            $data['content'] = htmlspecialchars($data['content']);
+        if (isset($data['editor-html-code']) && !empty($data['editor-html-code'])) {
+            $data['content'] = htmlspecialchars($data['editor-html-code']);
         }
-        $data['cover'] = $data['cover'] ?? '';
+        $data['markdown'] = $data['editor-html-doc'];
+        $data['cover'] = $data['cover'] ?? $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/default-img.jpg';
         try {
             $res = $info->update($data);
             return $this->resJson(0, '操作成功', $res);
@@ -241,8 +247,36 @@ class ArticleController extends Controller
      */
     public function uploadImage(Request $request)
     {
-        if ($request->hasFile('file')) {
-            $date = date('Ymd');
+        $date = date('Ymd');
+        //复制到编辑器的图片,直接base64的图片
+        if ($request->input('base64_img')) {
+            //正则匹配
+            if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $request->input('base64_img'), $result)) {
+                //获取图片
+                $base64_img = base64_decode(str_replace($result[1], '', $request->input('base64_img')));
+                //设置名称
+                $src = date("YmdHis") . getRandomStr(6) . '.png';
+                //设置路径
+                $path = 'uploads/' . $date;
+                //拼接完整文件路径
+                $pathSrc = $path . '/' . $src;
+                //路径检测和创建
+                if (!is_dir($path)) {
+                    mkdir($path, 0777, true);
+                }
+                //存储图片
+                file_put_contents($pathSrc, $base64_img);//保存图片，返回的是字节数
+                //设置返回值
+                $data['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $path . '/' . $src;
+                $data['title'] = '文章图片';
+                if (file_exists($pathSrc)) {
+                    return self::resJson(0, '上传成功', $data);
+                }
+                return self::resJson(1, '上传失败');
+            }
+            return self::resJson(1, '不是base64格式');
+        } elseif ($request->hasFile('file')) {
+            //文件请求方式
             $path = $request->file('file')->store('', 'uploads');
             if ($path) {
                 $data['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/uploads/' . $date . '/' . $path;
@@ -251,6 +285,23 @@ class ArticleController extends Controller
             } else {
                 return self::resJson(1, '上传失败');
             }
+        } elseif ($request->hasFile('editormd-image-file')) {
+            //markdown添加图片
+            $result = self::imageUpload('editormd-image-file');
+            if ($result['status_code'] === 200) {
+                $data = [
+                    'success' => 1,
+                    'message' => $result['message'],
+                    'url' => $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $result['data'][0]['path'],
+                ];
+            } else {
+                $data = [
+                    'success' => 0,
+                    'message' => $result['message'],
+                    'url' => '',
+                ];
+            }
+            return response()->json($data);
         }
         return self::resJson(1, '没有要上传的文件');
     }
