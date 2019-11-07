@@ -133,8 +133,8 @@
 
     <script type="text/javascript">
         $(function() {
-            var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             var uploadImageUrl = '/admin/article/uploadImage';
+            var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             editor = editormd("editor", {
                 autoFocus : false,
                 width     : "100%",
@@ -217,33 +217,68 @@
             }
             document.addEventListener('paste', function (event) {
                 paste(event);
-            })
-        });
-    </script>
-    <script>
-        layui.config({
-            base: "/static/layuiadmin/"
-        }).extend({
-            index: 'lib/index'
-        }).use(['index', 'table'], function () {
-            var $ = layui.$
-                , form = layui.form;
-            //监听指定开关
-            form.on('switch(status)', function () {
-                if (this.checked) {
-                    $("input[name='status']").val('1');
-                } else {
-                    $("input[name='status']").val('0');
-                }
             });
-            //监听指定开关
-            form.on('switch(is_top)', function () {
-                if (this.checked) {
-                    $("input[name='is_top']").val('1');
-                } else {
-                    $("input[name='is_top']").val('0');
-                }
+
+            layui.config({
+                base: "/static/layuiadmin/"
+            }).extend({
+                index: 'lib/index'
+            }).use(['index', 'table', 'upload'], function () {
+                var $ = layui.$
+                    , upload = layui.upload
+                    , form = layui.form;
+                //监听指定开关
+                form.on('switch(status)', function () {
+                    if (this.checked) {
+                        $("input[name='status']").val('1');
+                    } else {
+                        $("input[name='status']").val('0');
+                    }
+                });
+                //监听指定开关
+                form.on('switch(is_top)', function () {
+                    if (this.checked) {
+                        $("input[name='is_top']").val('1');
+                    } else {
+                        $("input[name='is_top']").val('0');
+                    }
+                });
+                //图片上传
+                var uploadInst = upload.render({
+                    elem: '#up_cover'
+                    , url: uploadImageUrl
+                    , headers: {
+                        'X-CSRF-TOKEN': csrf_token
+                    }
+                    , accept: 'images'
+                    , field: "file"
+                    , type: 'images'
+                    , exts: 'jpg|png|gif' //设置一些后缀，用于演示前端验证和后端的验证
+                    , before: function (obj) {
+                        //预读本地文件示例，不支持ie8
+                        obj.preview(function (index, file, result) {
+                            $('#up_cover').attr('src', result); //图片链接（base64）
+                        });
+                    }
+                    , done: function (res) {
+                        //如果上传失败
+                        if (res.code > 0) {
+                            return layer.msg('上传失败', {icon: 2});
+                        }
+                        //上传成功
+                        $('input[name="cover"]').val(res.data.src);
+                    }
+                    , error: function () {
+                        //演示失败状态，并实现重传
+                        var up_logo_text = $('#up_cover_text');
+                        up_logo_text.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                        up_logo_text.find('.demo-reload').on('click', function () {
+                            uploadInst.upload();
+                        });
+                    }
+                });
             });
         });
+
     </script>
 @endsection
