@@ -5,6 +5,7 @@
     {{--百度平台--}}
     <meta name="baidu-site-verification" content="9jxVRatXIs" />
     <meta name="baidu_union_verify" content="285b65cf325abe072bde0437c133e008">
+    <meta name="360-site-verification" content="6f7a678e74c316eb393d9fd80d103ca2" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="baidu-site-verification" content="">
