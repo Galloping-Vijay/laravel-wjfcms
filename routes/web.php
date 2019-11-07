@@ -51,13 +51,19 @@ Route::namespace('Home')->group(function () {
         Route::post('store', 'SiteController@store')->middleware('auth.oauth', 'clean.xss');
     });
     //历史上的今天
-    Route::any('history','IndexController@history');
+    Route::any('history', 'IndexController@history');
     //热度榜
-    Route::any('clickArticle','IndexController@clickArticle');
+    Route::any('clickArticle', 'IndexController@clickArticle');
     //友情链接
-    Route::any('friendLinks','IndexController@friendLinks');
+    Route::any('friendLinks', 'IndexController@friendLinks');
     //标签云
-    Route::any('ajaxTags','IndexController@ajaxTags');
+    Route::any('ajaxTags', 'IndexController@ajaxTags');
+
+    // 工具类
+    Route::prefix('tools')->group(function () {
+        // 百度自动提交
+        Route::get('linkSubmit', 'ToolsController@linkSubmit');
+    });
 });
 
 // auth
