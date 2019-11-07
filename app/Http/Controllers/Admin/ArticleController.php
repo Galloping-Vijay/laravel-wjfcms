@@ -200,8 +200,12 @@ class ArticleController extends Controller
         if (isset($data['editor-html-code']) && !empty($data['editor-html-code'])) {
             $data['content'] = htmlspecialchars($data['editor-html-code']);
         }
-        $data['markdown'] = $data['editor-html-doc'];
-        $data['cover'] = $data['cover'] ?? $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/default-img.jpg';
+        if (isset($data['editor-html-doc']) && !empty($data['editor-html-doc'])) {
+            $data['markdown'] = $data['editor-html-doc'];
+        }
+        if (isset($data['cover']) && !empty($data['cover'])) {
+            $data['cover'] = $data['cover'] ?? $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/default-img.jpg';
+        }
         try {
             $res = $info->update($data);
             return $this->resJson(0, '操作成功', $res);
