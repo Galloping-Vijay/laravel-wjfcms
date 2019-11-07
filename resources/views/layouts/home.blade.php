@@ -21,9 +21,7 @@
     <script type="text/javascript" src="{{ asset('js/home/jquery-2.1.1.min.js') }}"></script>
     <script src="{{ asset('js/home/layer.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/home/layer.css') }}" id="layui_layer_skinlayercss" style="">
-    @yield('header')
     <script>
-        /*百度统计*/
         var _hmt = _hmt || [];
         (function() {
             var hm = document.createElement("script");
@@ -32,6 +30,7 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
+    @yield('header')
     <script>
         window.onload = function () {
             var oH2 = document.getElementsByTagName("h2")[0];
