@@ -418,7 +418,6 @@
                                 if (!field.cover) {
                                     field.cover = window.location.protocol + "//" + window.location.host + '/images/config/default-img.jpg';
                                 }
-                                console.log(field);return false;
                                 //提交 Ajax 成功后，静态更新表格中的数据
                                 admin.req({
                                     url: '/admin/' + control_name + '/store'

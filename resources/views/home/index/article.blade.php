@@ -1,8 +1,49 @@
 @extends('layouts.home')
 @section('header')
-<<script src="{{ asset('static/highlight/highlight.pack.js') }}"></script>
-<link href="{{ asset('static/highlight/styles/vs2015.css') }}" rel="stylesheet">
+{{--高亮  --}}
+<script src="{{ asset('static/highlight/highlight.pack.js') }}"></script>
+<link href="{{ asset('static/highlight/styles/sunburst.css') }}" rel="stylesheet">
 <script>hljs.initHighlightingOnLoad();</script>
+{{--复制--}}
+<script src="{{ asset('static/clipboard/dist/clipboard.min.js') }}" type="text/javascript" ></script>
+<style>
+    pre{
+        position: relative;
+        padding: 0;
+        display: inherit;
+    }
+    pre:hover .btn-copy{
+        opacity: 1;
+    }
+    .btn-copy {
+        display: inline-block;
+        cursor: pointer;
+        background-color: #eee;
+        background-image: linear-gradient(#fcfcfc,#eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-appearance: none;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 20px;
+        color: #333;
+        -webkit-transition: opacity .3s ease-in-out;
+        -o-transition: opacity .3s ease-in-out;
+        transition: opacity .3s ease-in-out;
+        padding: 2px 6px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        opacity: 0;
+    }
+    .btn-copy span {
+        margin-left: 5px;
+    }
+</style>
 @endsection
 @section('content')
     <div style="width: 100%;height: 76px;"></div>
@@ -80,4 +121,38 @@
             @endcomponent
         </div>
     </article>
+@endsection
+
+@section('script')
+    @parent
+    <script src="{{ asset('static/layuiadmin/layui/layui.js') }}"></script>
+    <script>
+        $(function() {
+            var layer = null;
+            //一般直接写在一个js文件中
+            layui.use(['layer'], function(){
+                layer = layui.layer;
+            });
+            /* code */
+            var initCopyCode = function(){
+                var copyHtml = '';
+                copyHtml += '<button class="btn-copy" data-clipboard-action="copy" data-clipboard-target=".copyCode">';
+                copyHtml += '  <i class="fa fa-globe"></i><span>copy</span>';
+                copyHtml += '</button>';
+                $("pre code").before(copyHtml);
+                var clipboard  = new ClipboardJS('.btn-copy', {
+                    target: function(trigger) {
+                        return trigger.nextElementSibling;
+                    }
+                });
+                clipboard.on('success', function(e) {
+                    layer.msg('复制成功');
+                });
+                clipboard.on('error', function(e) {
+                    console.log(e);
+                });
+            };
+            initCopyCode();
+        })
+    </script>
 @endsection

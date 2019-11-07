@@ -136,10 +136,11 @@ class ArticleController extends Controller
             }
             $data['keywords'] = implode(',', $keywordsArr);
         }
-        if (isset($data['content'])) {
-            $data['content'] = htmlspecialchars($data['content']);
+        if (isset($data['editor-html-code'])) {
+            $data['content'] = htmlspecialchars($data['editor-html-code']);
         }
-        $data['cover'] = $data['cover'] ?? '';
+        $data['markdown'] = $data['editor-html-doc'];
+        $data['cover'] = $data['cover'] ?? $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/default-img.jpg';
         try {
             $model::create($data);
             return $this->resJson(0, '操作成功');
@@ -196,10 +197,11 @@ class ArticleController extends Controller
             }
             $data['keywords'] = implode(',', $keywordsArr);
         }
-        if (isset($data['content']) && !empty($data['content'])) {
-            $data['content'] = htmlspecialchars($data['content']);
+        if (isset($data['editor-html-code']) && !empty($data['editor-html-code'])) {
+            $data['content'] = htmlspecialchars($data['editor-html-code']);
         }
-        $data['cover'] = $data['cover'] ?? '';
+        $data['markdown'] = $data['editor-html-doc'];
+        $data['cover'] = $data['cover'] ?? $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/default-img.jpg';
         try {
             $res = $info->update($data);
             return $this->resJson(0, '操作成功', $res);
@@ -246,6 +248,7 @@ class ArticleController extends Controller
     public function uploadImage(Request $request)
     {
         $date = date('Ymd');
+        //复制到编辑器的图片,直接base64的图片
         if ($request->input('base64_img')) {
             //正则匹配
             if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $request->input('base64_img'), $result)) {
@@ -273,6 +276,7 @@ class ArticleController extends Controller
             }
             return self::resJson(1, '不是base64格式');
         } elseif ($request->hasFile('file')) {
+            //文件请求方式
             $path = $request->file('file')->store('', 'uploads');
             if ($path) {
                 $data['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/uploads/' . $date . '/' . $path;
@@ -282,18 +286,19 @@ class ArticleController extends Controller
                 return self::resJson(1, '上传失败');
             }
         } elseif ($request->hasFile('editormd-image-file')) {
+            //markdown添加图片
             $result = self::imageUpload('editormd-image-file');
             if ($result['status_code'] === 200) {
                 $data = [
                     'success' => 1,
                     'message' => $result['message'],
-                    'url'     => $result['data'][0]['path'],
+                    'url' => $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $result['data'][0]['path'],
                 ];
             } else {
                 $data = [
                     'success' => 0,
                     'message' => $result['message'],
-                    'url'     => '',
+                    'url' => '',
                 ];
             }
             return response()->json($data);

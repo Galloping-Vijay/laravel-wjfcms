@@ -67,9 +67,9 @@
             <label class="layui-form-label">内容</label>
             <div class="layui-input-block">
                 <div id="editor">
-                    <textarea class="editormd-markdown-textarea" name="contentn-doc"></textarea>
+                    <textarea class="editormd-markdown-textarea" name="editor-html-doc"></textarea>
                     <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
-                    <textarea class="editormd-html-textarea" name="content-code"></textarea>
+                   {{-- <textarea class="editormd-html-textarea" name="content-code"></textarea>--}}
                 </div>
             </div>
         </div>
@@ -124,16 +124,27 @@
                 width     : "100%",
                 height    : 640,
                 path : "/static/editor.md/lib/",  // Autoload modules mode, codemirror,
-                saveHTMLToTextarea : true,//这个配置，方便post提交表单，表单字段会自动加上一个字段content-html-code,形式为html格式
+                saveHTMLToTextarea : true, //这个配置，方便post提交表单，表单字段会自动加上一个字段content-html-code,形式为html格式
+                tex: true,//科学公式TeX语言支持，默认关闭
+                flowChart: true,//流程图支持，默认关闭
+                sequenceDiagram: true,//时序/序列图支持，默认关闭
                 /**上传图片相关配置如下*/
                 imageUpload    : true,
                 imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : uploadImageUrl,//注意你后端的上传图片服务地址
             });
 
-            //editor.getMarkdown();       // 获取 Markdown 源码
-            //editor.getHTML();           // 获取 Textarea 保存的 HTML 源码
-            //editor.getPreviewedHTML();  // 获取预览窗口里的 HTML，在开启 watch 且没有开启 saveHTMLToTextarea 时使用
+            //testEditor.gotoLine(90);//跳转至第90行
+            //testEditor.show();//显示编辑器
+            //testEditor.hide;//隐藏编辑器
+            //testEditor.getMarkdown();//获取markdown代码
+            //testEditor.getHTML();//获取markdown解析后的html代码
+            //testEditor.watch();//开启实时预览
+            //testEditor.unwatch();//关闭实时预览
+            //testEditor.previewing();//预览
+            //testEditor.fullscreen();//全屏
+            //testEditor.showToolbar();//显示工具栏
+            //testEditor.hideToolbar();//隐藏工具栏
 
             /**
              * 复制粘贴图片功能
@@ -198,7 +209,7 @@
             base: "/static/layuiadmin/"
         }).extend({
             index: 'lib/index'
-        }).use(['index', 'table',], function () {
+        }).use(['index', 'table'], function () {
             var $ = layui.$
                 , form = layui.form;
             //监听指定开关
