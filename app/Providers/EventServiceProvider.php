@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Article;
+use App\Observers\ArticleObserver;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -28,7 +30,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
+        //观察者监听模型事件
+        //Article::observe(ArticleObserver::class);
     }
 }

@@ -274,6 +274,7 @@ class ArticleController extends Controller
                 $data['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $path . '/' . $src;
                 $data['title'] = '文章图片';
                 if (file_exists($pathSrc)) {
+                    waterMarkImage($data['src']);
                     return self::resJson(0, '上传成功', $data);
                 }
                 return self::resJson(1, '上传失败');
@@ -285,6 +286,7 @@ class ArticleController extends Controller
             if ($path) {
                 $data['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/uploads/' . $date . '/' . $path;
                 $data['title'] = '文章图片';
+                waterMarkImage($data['src'], true);
                 return self::resJson(0, '上传成功', $data);
             } else {
                 return self::resJson(1, '上传失败');
@@ -293,10 +295,12 @@ class ArticleController extends Controller
             //markdown添加图片
             $result = self::imageUpload('editormd-image-file');
             if ($result['status_code'] === 200) {
+                $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $result['data'][0]['path'];
+                waterMarkImage($url);
                 $data = [
                     'success' => 1,
                     'message' => $result['message'],
-                    'url' => $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $result['data'][0]['path'],
+                    'url' => $url,
                 ];
             } else {
                 $data = [

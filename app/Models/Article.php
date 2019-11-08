@@ -36,4 +36,17 @@ class Article extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    /**
+     * Description:获取markdown字段
+     * User: Vijay <1937832819@qq.com>
+     * Date: 2019/11/08
+     * Time: 13:07
+     * @param $value
+     * @return mixed
+     */
+    public function getMarkdownAttribute($value)
+    {
+        return $value ? $value : $this->content;
+    }
 }

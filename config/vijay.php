@@ -16,7 +16,7 @@ return [
         'description' => '臭大佬'
     ],
     'water' => [
-        'text' => 'ChouDaLao',
+        'text' => '臭大佬',
         'size' => '15',
         'color' => '#019683',
     ],

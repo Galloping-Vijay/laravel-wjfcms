@@ -7,6 +7,8 @@
  * Time: 13:07
  */
 
+use Intervention\Image\Facades\Image;
+
 /**
  * Instructions:打印数据
  * Author: Vijay  <1937832819@qq.com>
@@ -65,4 +67,62 @@ function getRandomStr($len = 4, $special = false)
         $str .= $chars[mt_rand(0, $charsLen)];
     }
     return $str;
+}
+
+/**
+ * Description:图片添加水印
+ * User: Vijay <1937832819@qq.com>
+ * Date: 2019/11/08
+ * Time: 10:27
+ * @param string $img 图片
+ * @param boolean $isCover 是否为封面图
+ * @param string $text 文字
+ * @param string $color 颜色
+ * @param string $size 尺寸
+ * @return bool|\Intervention\Image\Image
+ */
+function waterMarkImage($img, $isCover = false, $text = '', $color = '', $size = '')
+{
+    if (!$img) {
+        return false;
+    }
+    //不修改默认logo
+    if (strpos($img, 'default-img') !== false) {
+        return false;
+    }
+    if (strpos($img, $_SERVER['REQUEST_SCHEME']) !== false) {
+        $domain = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
+        $img = public_path(str_ireplace($domain, '', $img));
+    }
+    if (!file_exists($img)) {
+        return false;
+    }
+    if (!$text) {
+        $text = config('vijay.water.text');
+    }
+    if (!$color) {
+        $color = config('vijay.water.color');
+    }
+    if (!$size) {
+        $size = config('vijay.water.size');
+    }
+    $extension = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+    if ($extension !== 'gif') {
+        $image = Image::make($img);
+        if ($isCover) {
+            $image->resize(200, 200);
+        }
+        $image->text($text, $image->width() - 10, $image->height() - 10, function ($font) use ($color, $size) {
+            $font->file(public_path('fonts/msyh.ttf'));
+            $font->size($size);
+            $font->color($color);
+            $font->align('right');
+            $font->valign('bottom');
+        });
+        $res = $image->save($img);
+        if ($res->encoded) {
+            return true;
+        }
+    }
+    return false;
 }

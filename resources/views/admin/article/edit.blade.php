@@ -74,7 +74,7 @@
             <label class="layui-form-label">内容</label>
             <div class="layui-input-block">
                 <div id="editor">
-                    <textarea class="editormd-markdown-textarea" name="editor-html-doc">{{ !empty($info->markdown)?$info->markdown:$info->content }}</textarea>
+                    <textarea class="editormd-markdown-textarea" name="editor-html-doc">{{ $info->markdown }}</textarea>
                     <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
                     {{-- <textarea class="editormd-html-textarea" name="content-code"></textarea>--}}
                 </div>
