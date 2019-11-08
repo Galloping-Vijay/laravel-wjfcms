@@ -21,6 +21,16 @@ class NavsTableSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
                 'deleted_at' => null,
             ],
+            [
+                'name' => '文档',
+                'sort' => 1,
+                'url' => 'https://www.kancloud.cn/wjf19940211/laravel-wjfcms/1132641',
+                'pid' => 0,
+                'target' => '_blank',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'deleted_at' => null,
+            ],
         ];
         DB::table('navs')->insert($data);
     }
