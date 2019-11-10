@@ -62,6 +62,7 @@ class IndexController extends Controller
         }
         $articles = Article::where($where)
             ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(15);
         return view('home.index.index', [
             'top_article' => $topArticle,

@@ -62,6 +62,7 @@ class ArticleController extends Controller
                         ->where($where)
                         ->leftJoin('categories', 'categories.id', '=', 'articles.category_id')
                         ->select('articles.*', 'categories.name as cate_name')
+                        ->orderBy('created_at', 'desc')
                         ->get();
                     break;
                 case '2':
@@ -69,12 +70,14 @@ class ArticleController extends Controller
                         ->where($where)
                         ->leftJoin('categories', 'categories.id', '=', 'articles.category_id')
                         ->select('articles.*', 'categories.name as cate_name')
+                        ->orderBy('created_at', 'desc')
                         ->get();
                     break;
                 default:
                     $list = Article::where($where)
                         ->leftJoin('categories', 'categories.id', '=', 'articles.category_id')
                         ->select('articles.*', 'categories.name as cate_name')
+                        ->orderBy('created_at', 'desc')
                         ->get();
                     break;
             }
