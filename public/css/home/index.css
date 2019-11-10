@@ -15,7 +15,7 @@ article { width: 1200px; margin: auto }
 /* rightbox */
 .blogs { float: left; width: 70%; overflow: hidden; }
 .blogs li { margin-bottom: 10px; overflow: hidden; padding: 20px; background: #fff }
-h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0; }
+h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; }
 .blogpic { overflow: hidden; width: 30%; display: block; float: left; margin-right: 20px; border-radius: 5px; ; }
 .autor { width: 100%; overflow: hidden; clear: both; margin: 20px 0 0 0; display: inline-block; color: #838383; font-size: 12px }
 .autor span { margin-right: 10px; padding-left: 20px }
