@@ -156,7 +156,7 @@
                     </div>
                     <div class="layui-card-body layui-text layadmin-text">
                         <p>{{ config('vijay.motto') }}</p>
-                        <p>—— {{ config('vijay.author') }}（<a href="{{ config('vijay.base_url') }}" target="_blank">{{ config('vijay.base_name') }}</a>）</p>
+                        <p>—— {{ config('vijay.author') }}（<a href="{{ config('vijay.base_url') }}" target="_blank">{{ config('vijay.object_name') }}</a>）</p>
                     </div>
                 </div>
             </div>
