@@ -38,9 +38,10 @@
 @section('footer')
     <div class="layui-footer footer footer-index">
         <div class="layui-main">
-            <p>© 2017~2020 <a href="http://www.yuemeet.com" target="_blank">厦门悦遇科技有限公司</a> 版权所有</p>
+            <p>© {{ config('vijay.copyright') }} <a href="{{ config('vijay.website') }}"
+                                                    target="_blank">{{ config('vijay.company') }} </a> 版权所有</p>
             <p>
-                GitHub <a href="https://github.com/Galloping-Vijay/laravel-wjfcms" target="_blank">laravel-wjfcms</a>
+                GitHub <a href="{{ config('vijay.github') }}" target="_blank">{{ config('vijay.object_name') }}</a>
             </p>
         </div>
     </div>

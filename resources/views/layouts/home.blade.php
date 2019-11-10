@@ -10,9 +10,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="baidu-site-verification" content="">
     <meta name="google-site-verification" content="">
-    <title>@yield('title','臭大佬')</title>
-    <meta name="keywords" content="@yield('keywords','臭大佬')">
-    <meta name="description" content="@yield('description','臭大佬')">
+    <title>@yield('title',\App\Models\SystemConfig::getConfigCache('seo_title'))</title>
+    <meta name="keywords" content="@yield('keywords',\App\Models\SystemConfig::getConfigCache('site_seo_keywords'))">
+    <meta name="description" content="@yield('description',\App\Models\SystemConfig::getConfigCache('site_seo_description'))">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/home/base.css') }}" rel="stylesheet">
     <script src="{{ asset('js/home/hm.js') }}"></script>
@@ -125,11 +125,11 @@
 
 @section('footer')
 <footer>
-    <p>Copyright © 2019 <a href="/" title="臭大佬">臭大佬</a>
-        All rights reserved&nbsp;<a href="/" title="臭大佬" rel="nofollow">闽ICP备17016331号</a>
+    <p>Copyright © 2019 <a href="/" title="{{ \App\Models\SystemConfig::getConfigCache('site_name') }}">{{ \App\Models\SystemConfig::getConfigCache('site_name') }}</a>
+        All rights reserved&nbsp;<a href="#" title="臭大佬" rel="nofollow">{{ \App\Models\SystemConfig::getConfigCache('site_icp') }}</a>
     </p>
     <p>所有文章未经授权禁止转载、摘编、复制或建立镜像，如有违反，追究法律责任。举报邮箱：<a
-                href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=1937832819@qq.com" rel="nofollow" target="_blank">1937832819@qq.com</a>
+                href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email={{ \App\Models\SystemConfig::getConfigCache('site_email') }}" rel="nofollow" target="_blank">{{ \App\Models\SystemConfig::getConfigCache('site_email') }}</a>
     </p>
     <a href="#">
         <div class="top_tag"></div>
@@ -165,14 +165,14 @@
             });
             // 2. 分享接口
             wx.updateAppMessageShareData({
-                title: 'Vijay Blog', // 分享标题
+                title: '臭大佬', // 分享标题
                 desc: '每一次经历，每一段时光都值得被记录，它们将会是你未来的财富。', // 分享描述
                 link: 'https://www.choudalao.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: 'https://www.choudalao.com/images/config/avatar.jpg', // 分享图标
             }, function (res) {
             });
             wx.updateTimelineShareData({
-                title: 'Vijay Blog', // 分享标题
+                title: '臭大佬', // 分享标题
                 link: 'https://www.choudalao.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: 'https://www.choudalao.com/images/config/avatar.jpg', // 分享图标
             }, function (res) {

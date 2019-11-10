@@ -79,7 +79,15 @@
                                 <td>框架作者</td>
                                 <td>
                                     <script type="text/html" template>
-                                        <a href="" target="_blank">Vijay</a> (1937832819@qq.com)
+                                        <a href="" target="_blank">{{ config('vijay.author') }}</a> ({{ config('vijay.email') }})
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>交流群</td>
+                                <td>
+                                    <script type="text/html" template>
+                                        <a href="#" target="_blank">{{ config('vijay.qq_qun') }}</a>
                                     </script>
                                 </td>
                             </tr>
@@ -87,7 +95,7 @@
                                 <td>开发文档</td>
                                 <td>
                                     <script type="text/html" template>
-                                        <a href="https://www.kancloud.cn/wjf19940211/laravel-wjfcms" target="_blank"
+                                        <a href="{{ config('vijay.document') }}" target="_blank"
                                            style="padding-left: 15px;">文档地址</a>
                                     </script>
                                 </td>
@@ -97,7 +105,7 @@
                                 <td>
                                     <script type="text/html" template>
                                         {{ config('vijay.version') }}
-                                        <a href="https://www.kancloud.cn/wjf19940211/laravel-wjfcms/1132643"
+                                        <a href="{{ config('vijay.update_log') }}"
                                            target="_blank" style="padding-left: 15px;">(更新日志)</a>
                                     </script>
                                 </td>
@@ -116,9 +124,9 @@
                                 <td>获取渠道</td>
                                 <td style="padding-bottom: 0;">
                                     <div class="layui-btn-container">
-                                        <a href="https://www.kancloud.cn/wjf19940211/laravel-wjfcms/1159545"
+                                        <a href="{{ config('vijay.authorize') }}"
                                            target="_blank" class="layui-btn layui-btn-danger">获取授权</a>
-                                        <a href="https://github.com/Galloping-Vijay/laravel-wjfcms" target="_blank"
+                                        <a href="{{ config('vijay.github') }}" target="_blank"
                                            class="layui-btn">GitHub</a>
                                     </div>
                                 </td>
@@ -133,9 +141,9 @@
                         <div class="layui-carousel layadmin-carousel layadmin-news" data-autoplay="true"
                              data-anim="fade" lay-filter="news">
                             <div carousel-item>
-                                <div><a href="" target="_blank" class="layui-bg-red">商城</a></div>
-                                <div><a href="" target="_blank" class="layui-bg-green">博客</a></div>
-                                <div><a href="" target="_blank" class="layui-bg-blue">外包官网</a></div>
+                                <div><a href="{{ config('vijay.shop') }}" target="_blank" class="layui-bg-red">商城</a></div>
+                                <div><a href="{{ config('vijay.base_url') }}" target="_blank" class="layui-bg-green">博客</a></div>
+                                <div><a href="{{ config('vijay.development') }}" target="_blank" class="layui-bg-blue">外包官网</a></div>
                             </div>
                         </div>
                     </div>
@@ -147,8 +155,8 @@
                         <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢" lay-offset="5"></i>
                     </div>
                     <div class="layui-card-body layui-text layadmin-text">
-                        <p>laravel-wjfcms是基于laravel5.8及layui开发的后台管理系统。</p>
-                        <p>—— Vijay（<a href="http://www.choudalao.com" target="_blank">www.choudalao.com</a>）</p>
+                        <p>{{ config('vijay.motto') }}</p>
+                        <p>—— {{ config('vijay.author') }}（<a href="{{ config('vijay.base_url') }}" target="_blank">{{ config('vijay.base_name') }}</a>）</p>
                     </div>
                 </div>
             </div>

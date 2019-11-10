@@ -1,4 +1,5 @@
 @extends('layouts.home')
+@section('title', '首页 | '.\App\Models\SystemConfig::getConfigCache('seo_title'))
 @section('content')
     <div style="width: 100%;height: 76px;"></div>
     <article>

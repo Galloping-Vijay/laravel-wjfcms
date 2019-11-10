@@ -55,6 +55,7 @@ class SystemConfigController extends Controller
                     }
                     $info->save();
                     $info = null;
+                    SystemConfig::getConfigCache($key, false);
                 }
                 DB::commit();
                 return self::resJson(0, '操作成功');

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class SystemConfig extends Model
 {
@@ -28,7 +29,25 @@ class SystemConfig extends Model
      * 所有的键
      * @var array
      */
-    public static $keysList = ['site_name', 'site_url', 'site_logo', 'site_icp', 'site_tongji', 'site_copyright', 'site_co_name', 'address', 'map_lat', 'map_lng', 'site_phone', 'site_email', 'site_qq', 'site_wechat', 'seo_title', 'site_seo_keywords', 'site_seo_description'];
+    public static $keysList = [
+        'site_name',
+        'site_url',
+        'site_logo',
+        'site_icp',
+        'site_tongji',
+        'site_copyright',
+        'site_co_name',
+        'address',
+        'map_lat',
+        'map_lng',
+        'site_phone',
+        'site_email',
+        'site_qq',
+        'site_wechat',
+        'seo_title',
+        'site_seo_keywords',
+        'site_seo_description'
+    ];
 
     /**
      * Description:获取配置名称
@@ -40,5 +59,31 @@ class SystemConfig extends Model
     public function getConfigTypeNameAttribute()
     {
         return self::$ConfigTypeList[$this->config_type];
+    }
+
+    /**
+     * Description:获取缓存
+     * User: Vijay
+     * Date: 2019/11/10
+     * Time: 14:24
+     * @param null $key
+     * @param bool $isCache
+     * @return mixed|string
+     */
+    public static function getConfigCache($key = null, $isCache = true)
+    {
+        if (!in_array($key, self::$keysList)) {
+            return '';
+        }
+        $val = Cache::get($key);
+        if ($isCache === false || !$val) {
+            $info = self::where('key', $key)->select('value')->first();
+            if (empty($info)) {
+                return '';
+            }
+            $val = $info->value;
+            Cache::put($key, $info->value);
+        }
+        return $val;
     }
 }
