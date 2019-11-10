@@ -80,7 +80,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '公司/工作室名称',
                 'key' => 'site_co_name',
-                'value' => '厦门市超级码力网络科技有限公司',
+                'value' => '厦门市悦遇科技有限公司',
                 'type' => 'textarea',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -96,7 +96,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '版权信息',
                 'key' => 'site_copyright',
-                'value' => '悦觅科技',
+                'value' => '悦遇科技',
                 'type' => 'textarea',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -128,7 +128,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => 'SEO标题',
                 'key' => 'seo_title',
-                'value' => '悦觅',
+                'value' => '臭大佬',
                 'type' => 'text',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -136,7 +136,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => 'SEO关键字',
                 'key' => 'site_seo_keywords',
-                'value' => '悦觅社区',
+                'value' => '臭大佬',
                 'type' => 'textarea',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -144,7 +144,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => 'SEO描述',
                 'key' => 'site_seo_description',
-                'value' => '悦觅社区',
+                'value' => '臭大佬',
                 'type' => 'textarea',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),

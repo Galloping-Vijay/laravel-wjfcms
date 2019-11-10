@@ -12,9 +12,9 @@ class PermissionstableSeeder extends Seeder
      */
     public function run()
     {
-        $data = array(
-            0 =>
-                array(
+        $data = [
+            1 =>
+                [
                     'id' => 1,
                     'name' => '后台管理',
                     'guard_name' => 'admin',
@@ -25,9 +25,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 0,
                     'display_menu' => 1,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            1 =>
-                array(
+                ],
+            2 =>
+                [
                     'id' => 2,
                     'name' => '系统管理',
                     'guard_name' => 'admin',
@@ -38,9 +38,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 0,
                     'display_menu' => 1,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            2 =>
-                array(
+                ],
+            3 =>
+                [
                     'id' => 3,
                     'name' => '控制台',
                     'guard_name' => 'admin',
@@ -51,9 +51,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 1,
                     'display_menu' => 1,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            3 =>
-                array(
+                ],
+            4 =>
+                [
                     'id' => 4,
                     'name' => '角色管理',
                     'guard_name' => 'admin',
@@ -64,9 +64,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 2,
                     'display_menu' => 1,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            4 =>
-                array(
+                ],
+            5 =>
+                [
                     'id' => 5,
                     'name' => '权限管理',
                     'guard_name' => 'admin',
@@ -77,9 +77,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 2,
                     'display_menu' => 1,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            5 =>
-                array(
+                ],
+            6 =>
+                [
                     'id' => 6,
                     'name' => '用户管理',
                     'guard_name' => 'admin',
@@ -90,9 +90,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 2,
                     'display_menu' => 1,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            6 =>
-                array(
+                ],
+            7 =>
+                [
                     'id' => 7,
                     'name' => '角色列表',
                     'guard_name' => 'admin',
@@ -103,9 +103,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 4,
                     'display_menu' => 1,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            7 =>
-                array(
+                ],
+            8 =>
+                [
                     'id' => 8,
                     'name' => '查看角色',
                     'guard_name' => 'admin',
@@ -116,9 +116,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 4,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            8 =>
-                array(
+                ],
+            9 =>
+                [
                     'id' => 9,
                     'name' => '创建角色',
                     'guard_name' => 'admin',
@@ -129,9 +129,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 4,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            9 =>
-                array(
+                ],
+            10 =>
+                [
                     'id' => 10,
                     'name' => '保存角色',
                     'guard_name' => 'admin',
@@ -142,9 +142,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 4,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            10 =>
-                array(
+                ],
+            11 =>
+                [
                     'id' => 11,
                     'name' => '编辑角色',
                     'guard_name' => 'admin',
@@ -155,9 +155,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 4,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            11 =>
-                array(
+                ],
+            12 =>
+                [
                     'id' => 12,
                     'name' => '修改角色',
                     'guard_name' => 'admin',
@@ -168,9 +168,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 4,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            12 =>
-                array(
+                ],
+            13 =>
+                [
                     'id' => 13,
                     'name' => '删除角色',
                     'guard_name' => 'admin',
@@ -181,9 +181,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 4,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            13 =>
-                array(
+                ],
+            14 =>
+                [
                     'id' => 14,
                     'name' => '权限列表',
                     'guard_name' => 'admin',
@@ -194,9 +194,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 5,
                     'display_menu' => 1,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            14 =>
-                array(
+                ],
+            15 =>
+                [
                     'id' => 15,
                     'name' => '查看权限',
                     'guard_name' => 'admin',
@@ -207,9 +207,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 5,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            15 =>
-                array(
+                ],
+            16 =>
+                [
                     'id' => 16,
                     'name' => '创建权限',
                     'guard_name' => 'admin',
@@ -220,9 +220,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 5,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            16 =>
-                array(
+                ],
+            17 =>
+                [
                     'id' => 17,
                     'name' => '保存权限',
                     'guard_name' => 'admin',
@@ -233,9 +233,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 5,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            17 =>
-                array(
+                ],
+            18 =>
+                [
                     'id' => 18,
                     'name' => '编辑权限',
                     'guard_name' => 'admin',
@@ -246,9 +246,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 5,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            18 =>
-                array(
+                ],
+            19 =>
+                [
                     'id' => 19,
                     'name' => '修改权限',
                     'guard_name' => 'admin',
@@ -259,9 +259,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 5,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            19 =>
-                array(
+                ],
+            20 =>
+                [
                     'id' => 20,
                     'name' => '删除权限',
                     'guard_name' => 'admin',
@@ -272,9 +272,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 5,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            20 =>
-                array(
+                ],
+            21 =>
+                [
                     'id' => 21,
                     'name' => '管理员列表',
                     'guard_name' => 'admin',
@@ -285,9 +285,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 6,
                     'display_menu' => 1,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            21 =>
-                array(
+                ],
+            22 =>
+                [
                     'id' => 22,
                     'name' => '查看管理员',
                     'guard_name' => 'admin',
@@ -298,9 +298,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 21,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            22 =>
-                array(
+                ],
+            23 =>
+                [
                     'id' => 23,
                     'name' => '创建管理员',
                     'guard_name' => 'admin',
@@ -311,9 +311,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 21,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            23 =>
-                array(
+                ],
+            24 =>
+                [
                     'id' => 24,
                     'name' => '保存管理员',
                     'guard_name' => 'admin',
@@ -324,9 +324,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 21,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            24 =>
-                array(
+                ],
+            25 =>
+                [
                     'id' => 25,
                     'name' => '编辑管理员',
                     'guard_name' => 'admin',
@@ -337,9 +337,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 21,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            25 =>
-                array(
+                ],
+            26 =>
+                [
                     'id' => 26,
                     'name' => '修改管理员',
                     'guard_name' => 'admin',
@@ -350,9 +350,9 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 21,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            26 =>
-                array(
+                ],
+            27 =>
+                [
                     'id' => 27,
                     'name' => '删除管理员',
                     'guard_name' => 'admin',
@@ -363,10 +363,10 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 21,
                     'display_menu' => 0,
                     'created_at' => '2019-05-22 13:56:01',
-                ),
-            27 =>
-                array(
-                    'id' => 35,
+                ],
+            28 =>
+                [
+                    'id' => 28,
                     'name' => '网站设置',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
@@ -376,10 +376,10 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 2,
                     'display_menu' => 1,
                     'created_at' => '2019-06-23 04:58:48',
-                ),
-            28 =>
-                array(
-                    'id' => 36,
+                ],
+            29 =>
+                [
+                    'id' => 29,
                     'name' => '内容管理',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
@@ -389,608 +389,608 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 0,
                     'display_menu' => 1,
                     'created_at' => '2019-06-25 14:35:19',
-                ),
-            29 =>
-                array(
-                    'id' => 37,
+                ],
+            30 =>
+                [
+                    'id' => 30,
                     'name' => '文章列表',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/article/index',
                     'level' => 1,
                     'icon' => 'layui-icon-file-b',
-                    'parent_id' => 36,
+                    'parent_id' => 29,
                     'display_menu' => 1,
                     'created_at' => '2019-06-25 14:36:44',
-                ),
-            30 =>
-                array(
-                    'id' => 38,
+                ],
+            31 =>
+                [
+                    'id' => 31,
                     'name' => '创建文章',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/article/create',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 37,
+                    'parent_id' => 30,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:40:33',
-                ),
-            31 =>
-                array(
-                    'id' => 39,
+                ],
+            32 =>
+                [
+                    'id' => 32,
                     'name' => '显示文章',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/article/show',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 37,
+                    'parent_id' => 30,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:41:10',
-                ),
-            32 =>
-                array(
-                    'id' => 40,
+                ],
+            33 =>
+                [
+                    'id' => 33,
                     'name' => '保存文章',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/article/store',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 37,
+                    'parent_id' => 30,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:41:41',
-                ),
-            33 =>
-                array(
-                    'id' => 41,
+                ],
+            34 =>
+                [
+                    'id' => 34,
                     'name' => '编辑文章',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/article/edit',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 37,
+                    'parent_id' => 30,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:42:02',
-                ),
-            34 =>
-                array(
-                    'id' => 42,
+                ],
+            35 =>
+                [
+                    'id' => 35,
                     'name' => '修改文章',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/article/update',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 37,
+                    'parent_id' => 30,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:42:41',
-                ),
-            35 =>
-                array(
-                    'id' => 43,
+                ],
+            36 =>
+                [
+                    'id' => 36,
                     'name' => '删除文章',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/article/destroy',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 37,
+                    'parent_id' => 30,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:43:31',
-                ),
-            36 =>
-                array(
-                    'id' => 44,
+                ],
+            37 =>
+                [
+                    'id' => 37,
                     'name' => '上传图片',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/article/uploadImage',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 37,
+                    'parent_id' => 30,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:44:34',
-                ),
-            37 =>
-                array(
-                    'id' => 45,
+                ],
+            38 =>
+                [
+                    'id' => 38,
                     'name' => '文章分类',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/category/index',
                     'level' => 1,
                     'icon' => 'layui-icon-list',
-                    'parent_id' => 36,
+                    'parent_id' => 29,
                     'display_menu' => 1,
                     'created_at' => '2019-06-25 14:50:47',
-                ),
-            38 =>
-                array(
-                    'id' => 46,
+                ],
+            39 =>
+                [
+                    'id' => 39,
                     'name' => '创建分类',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/category/create',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 45,
+                    'parent_id' => 38,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:51:45',
-                ),
-            39 =>
-                array(
-                    'id' => 47,
+                ],
+            40 =>
+                [
+                    'id' => 40,
                     'name' => '保存分类',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/category/store',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 45,
+                    'parent_id' => 38,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:52:10',
-                ),
-            40 =>
-                array(
-                    'id' => 48,
+                ],
+            41 =>
+                [
+                    'id' => 41,
                     'name' => '查看分类',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/category/show',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 45,
+                    'parent_id' => 38,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:52:42',
-                ),
-            41 =>
-                array(
-                    'id' => 49,
+                ],
+            42 =>
+                [
+                    'id' => 42,
                     'name' => '编辑分类',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/category/edit',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 45,
+                    'parent_id' => 38,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:53:04',
-                ),
-            42 =>
-                array(
-                    'id' => 50,
+                ],
+            43 =>
+                [
+                    'id' => 43,
                     'name' => '修改分类',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/category/update',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 45,
+                    'parent_id' => 38,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:53:24',
-                ),
-            43 =>
-                array(
-                    'id' => 51,
+                ],
+            44 =>
+                [
+                    'id' => 44,
                     'name' => '删除分类',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/category/destroy',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 45,
+                    'parent_id' => 38,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:53:55',
-                ),
-            44 =>
-                array(
-                    'id' => 52,
+                ],
+            45 =>
+                [
+                    'id' => 45,
                     'name' => '评论列表',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/comment/index',
                     'level' => 1,
                     'icon' => 'layui-icon-chat',
-                    'parent_id' => 36,
+                    'parent_id' => 29,
                     'display_menu' => 1,
                     'created_at' => '2019-06-25 14:55:02',
-                ),
-            45 =>
-                array(
-                    'id' => 53,
+                ],
+            46 =>
+                [
+                    'id' => 46,
                     'name' => '删除评论',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/comment/destroy',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 52,
+                    'parent_id' => 45,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:55:39',
-                ),
-            46 =>
-                array(
-                    'id' => 54,
+                ],
+            47 =>
+                [
+                    'id' => 47,
                     'name' => '批量替换',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/comment/replace',
                     'level' => 2,
                     'icon' => 'layui-icon-survey',
-                    'parent_id' => 52,
+                    'parent_id' => 45,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 14:57:40',
-                ),
-            47 =>
-                array(
-                    'id' => 55,
+                ],
+            48 =>
+                [
+                    'id' => 48,
                     'name' => '有些话',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/chat/index',
                     'level' => 1,
                     'icon' => 'layui-icon-face-surprised',
-                    'parent_id' => 36,
+                    'parent_id' => 29,
                     'display_menu' => 1,
                     'created_at' => '2019-06-25 15:04:23',
-                ),
-            48 =>
-                array(
-                    'id' => 56,
+                ],
+            49 =>
+                [
+                    'id' => 49,
                     'name' => '查看有些话',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/chat/show',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 55,
+                    'parent_id' => 48,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:05:08',
-                ),
-            49 =>
-                array(
-                    'id' => 57,
+                ],
+            50 =>
+                [
+                    'id' => 50,
                     'name' => '添加有些话',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/chat/create',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 55,
+                    'parent_id' => 48,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:05:52',
-                ),
-            50 =>
-                array(
-                    'id' => 58,
+                ],
+            51 =>
+                [
+                    'id' => 51,
                     'name' => '保存有些话',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/chat/store',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 55,
+                    'parent_id' => 48,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:06:25',
-                ),
-            51 =>
-                array(
-                    'id' => 59,
+                ],
+            52 =>
+                [
+                    'id' => 52,
                     'name' => '编辑有些话',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/chat/edit',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 55,
+                    'parent_id' => 48,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:07:10',
-                ),
-            52 =>
-                array(
-                    'id' => 60,
+                ],
+            53 =>
+                [
+                    'id' => 53,
                     'name' => '修改有些话',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/chat/update',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 55,
+                    'parent_id' => 48,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:07:35',
-                ),
-            53 =>
-                array(
-                    'id' => 61,
+                ],
+            54 =>
+                [
+                    'id' => 54,
                     'name' => '删除有些话',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/chat/destroy',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 55,
+                    'parent_id' => 48,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:08:01',
-                ),
-            54 =>
-                array(
-                    'id' => 62,
+                ],
+            55 =>
+                [
+                    'id' => 55,
                     'name' => '标签管理',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/tag/index',
                     'level' => 1,
                     'icon' => 'layui-icon-note',
-                    'parent_id' => 36,
+                    'parent_id' => 29,
                     'display_menu' => 1,
                     'created_at' => '2019-06-25 15:08:48',
-                ),
-            55 =>
-                array(
-                    'id' => 63,
+                ],
+            56 =>
+                [
+                    'id' => 56,
                     'name' => '查看标签',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/tag/show',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 62,
+                    'parent_id' => 55,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:10:37',
-                ),
-            56 =>
-                array(
-                    'id' => 64,
+                ],
+            57 =>
+                [
+                    'id' => 57,
                     'name' => '创建标签',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/tag/create',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 62,
+                    'parent_id' => 55,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:23:49',
-                ),
-            57 =>
-                array(
-                    'id' => 65,
+                ],
+            58 =>
+                [
+                    'id' => 58,
                     'name' => '保存标签',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/tag/store',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 62,
+                    'parent_id' => 55,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:29:27',
-                ),
-            58 =>
-                array(
-                    'id' => 66,
+                ],
+            59 =>
+                [
+                    'id' => 59,
                     'name' => '编辑标签',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/tag/edit',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 62,
+                    'parent_id' => 55,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:29:51',
-                ),
-            59 =>
-                array(
-                    'id' => 67,
+                ],
+            60 =>
+                [
+                    'id' => 60,
                     'name' => '修改便签',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/tag/upda',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 62,
+                    'parent_id' => 55,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:30:29',
-                ),
-            60 =>
-                array(
-                    'id' => 68,
+                ],
+            61 =>
+                [
+                    'id' => 61,
                     'name' => '删除标签',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/tag/destroy',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 62,
+                    'parent_id' => 55,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:31:12',
-                ),
-            61 =>
-                array(
-                    'id' => 69,
+                ],
+            62 =>
+                [
+                    'id' => 62,
                     'name' => '前台菜单',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/nav/index',
                     'level' => 1,
                     'icon' => 'layui-icon-spread-left',
-                    'parent_id' => 36,
+                    'parent_id' => 29,
                     'display_menu' => 1,
                     'created_at' => '2019-06-25 15:36:35',
-                ),
-            62 =>
-                array(
-                    'id' => 70,
+                ],
+            63 =>
+                [
+                    'id' => 63,
                     'name' => '展示前台菜单',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/nav/show',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 69,
+                    'parent_id' => 62,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:37:09',
-                ),
-            63 =>
-                array(
-                    'id' => 71,
+                ],
+            64 =>
+                [
+                    'id' => 64,
                     'name' => '创建前台菜单',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/nav/create',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 69,
+                    'parent_id' => 62,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:37:35',
-                ),
-            64 =>
-                array(
-                    'id' => 72,
+                ],
+            65 =>
+                [
+                    'id' => 65,
                     'name' => '保存前台菜单',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/nav/store',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 69,
+                    'parent_id' => 62,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:38:05',
-                ),
-            65 =>
-                array(
-                    'id' => 73,
+                ],
+            66 =>
+                [
+                    'id' => 66,
                     'name' => '编辑前台菜单',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/nav/edit',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 69,
+                    'parent_id' => 62,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:38:26',
-                ),
-            66 =>
-                array(
-                    'id' => 74,
+                ],
+            67 =>
+                [
+                    'id' => 67,
                     'name' => '修改前台菜单',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/nav/update',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 69,
+                    'parent_id' => 62,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:38:49',
-                ),
-            67 =>
-                array(
-                    'id' => 75,
+                ],
+            68 =>
+                [
+                    'id' => 68,
                     'name' => '删除前台菜单',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/nav/destroy',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 69,
+                    'parent_id' => 62,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:39:14',
-                ),
-            68 =>
-                array(
-                    'id' => 76,
+                ],
+            69 =>
+                [
+                    'id' => 69,
                     'name' => '友情链接',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/friendLinks/index',
                     'level' => 1,
                     'icon' => 'layui-icon-link',
-                    'parent_id' => 36,
+                    'parent_id' => 29,
                     'display_menu' => 1,
                     'created_at' => '2019-06-25 15:41:50',
-                ),
-            69 =>
-                array(
-                    'id' => 77,
+                ],
+            70 =>
+                [
+                    'id' => 70,
                     'name' => '查看友情链接',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/friendLinks/show',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 76,
+                    'parent_id' => 69,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:42:16',
-                ),
-            70 =>
-                array(
-                    'id' => 78,
+                ],
+            71 =>
+                [
+                    'id' => 71,
                     'name' => '添加友情链接',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/friendLinks/create',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 76,
+                    'parent_id' => 69,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:42:40',
-                ),
-            71 =>
-                array(
-                    'id' => 79,
+                ],
+            72 =>
+                [
+                    'id' => 72,
                     'name' => '保存友情链接',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/friendLinks/store',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 76,
+                    'parent_id' => 69,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:43:03',
-                ),
-            72 =>
-                array(
-                    'id' => 80,
+                ],
+            73 =>
+                [
+                    'id' => 73,
                     'name' => '编辑友情链接',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/friendLinks/edit',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 76,
+                    'parent_id' => 69,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:43:29',
-                ),
-            73 =>
-                array(
-                    'id' => 81,
+                ],
+            74 =>
+                [
+                    'id' => 74,
                     'name' => '修改友情链接',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/friendLinks/update',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 76,
+                    'parent_id' => 69,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:44:26',
-                ),
-            74 =>
-                array(
-                    'id' => 82,
+                ],
+            75 =>
+                [
+                    'id' => 75,
                     'name' => '删除友情链接',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/friendLinks/destroy',
                     'level' => 2,
                     'icon' => NULL,
-                    'parent_id' => 76,
+                    'parent_id' => 69,
                     'display_menu' => 0,
                     'created_at' => '2019-06-25 15:44:50',
-                ),
-            75 =>
-                array(
-                    'id' => 83,
+                ],
+            76 =>
+                [
+                    'id' => 76,
                     'name' => '用户列表',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
@@ -1000,86 +1000,86 @@ class PermissionstableSeeder extends Seeder
                     'parent_id' => 6,
                     'display_menu' => 1,
                     'created_at' => '2019-07-27 07:21:48',
-                ),
-            76 =>
-                array(
-                    'id' => 84,
+                ],
+            77 =>
+                [
+                    'id' => 77,
                     'name' => '查看用户',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/user/show',
                     'level' => 3,
                     'icon' => NULL,
-                    'parent_id' => 83,
+                    'parent_id' => 76,
                     'display_menu' => 0,
                     'created_at' => '2019-07-27 07:22:58',
-                ),
-            77 =>
-                array(
-                    'id' => 85,
+                ],
+            78 =>
+                [
+                    'id' => 78,
                     'name' => '创建用户',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/user/create',
                     'level' => 3,
                     'icon' => NULL,
-                    'parent_id' => 83,
+                    'parent_id' => 76,
                     'display_menu' => 0,
                     'created_at' => '2019-07-27 07:24:14',
-                ),
-            78 =>
-                array(
-                    'id' => 86,
+                ],
+            79 =>
+                [
+                    'id' => 79,
                     'name' => '保存用户',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/user/store',
                     'level' => 3,
                     'icon' => NULL,
-                    'parent_id' => 83,
+                    'parent_id' => 76,
                     'display_menu' => 0,
                     'created_at' => '2019-07-27 07:25:07',
-                ),
-            79 =>
-                array(
-                    'id' => 87,
+                ],
+            80 =>
+                [
+                    'id' => 80,
                     'name' => '编辑用户',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/user/edit',
                     'level' => 3,
                     'icon' => NULL,
-                    'parent_id' => 83,
+                    'parent_id' => 76,
                     'display_menu' => 0,
                     'created_at' => '2019-07-27 07:26:00',
-                ),
-            80 =>
-                array(
-                    'id' => 88,
+                ],
+            81 =>
+                [
+                    'id' => 81,
                     'name' => '更新用户',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/user/update',
                     'level' => 3,
                     'icon' => NULL,
-                    'parent_id' => 83,
+                    'parent_id' => 76,
                     'display_menu' => 0,
                     'created_at' => '2019-07-27 07:27:31',
-                ),
-            81 =>
-                array(
-                    'id' => 89,
+                ],
+            82 =>
+                [
+                    'id' => 82,
                     'name' => '删除用户',
                     'guard_name' => 'admin',
                     'sort_order' => 0,
                     'url' => '/admin/user/destroy',
                     'level' => 3,
                     'icon' => NULL,
-                    'parent_id' => 83,
+                    'parent_id' => 76,
                     'display_menu' => 0,
                     'created_at' => '2019-07-27 07:28:07',
-                ),
-        );
+                ],
+        ];
 
         DB::table('permissions')->insert($data);
     }

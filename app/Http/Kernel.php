@@ -43,7 +43,6 @@ class Kernel extends HttpKernel
         ],
         //后台中间件
         'admin' => [
-            //'admin.auth',
             'auth:admin',
         ]
     ];

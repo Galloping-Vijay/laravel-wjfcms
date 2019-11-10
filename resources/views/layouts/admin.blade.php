@@ -38,7 +38,7 @@
 @section('footer')
     <div class="layui-footer footer footer-index">
         <div class="layui-main">
-            <p>© 2017~2020 <a href="http://www.yuemeet.com" target="_blank">厦门超级码力网络有限公司</a> 版权所有</p>
+            <p>© 2017~2020 <a href="http://www.yuemeet.com" target="_blank">厦门悦遇科技有限公司</a> 版权所有</p>
             <p>
                 GitHub <a href="https://github.com/Galloping-Vijay/laravel-wjfcms" target="_blank">laravel-wjfcms</a>
             </p>

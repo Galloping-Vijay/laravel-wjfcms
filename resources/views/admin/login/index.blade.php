@@ -54,12 +54,6 @@
             <div class="layui-form-item">
                 <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
             </div>
-            {{--<div class="layui-trans layui-form-item layadmin-user-login-other">--}}
-                {{--<label>社交账号登入</label>--}}
-                {{--<a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>--}}
-                {{--<a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>--}}
-                {{--<a href="javascript:;"><i class="layui-icon layui-icon-login-weibo"></i></a>--}}
-            {{--</div>--}}
         </div>
     </div>
 </div>
@@ -120,14 +114,6 @@
             });
 
         });
-
-
-        //实际使用时记得删除该代码
-        // layer.msg('为了方便演示，用户名密码可随意输入', {
-        //     offset: '15px'
-        //     ,icon: 1
-        // });
-
     });
 </script>
 </body>

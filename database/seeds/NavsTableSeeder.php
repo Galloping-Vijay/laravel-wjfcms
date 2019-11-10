@@ -15,8 +15,10 @@ class NavsTableSeeder extends Seeder
         $data = [
             [
                 'name' => '有些话',
+                'sort' => 0,
                 'url' => '/chat',
                 'pid' => 0,
+                'target' => '_self',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
                 'deleted_at' => null,
