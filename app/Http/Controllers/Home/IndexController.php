@@ -96,6 +96,7 @@ class IndexController extends Controller
         $pre = Article::select('id', 'title')->find($id - 1);
         $next = Article::select('id', 'title')->find($id + 1);
         return view('home.index.article', [
+            'is_article' => true,
             'info' => $info,
             'info_tags' => $infoTags,
             'pre' => $pre,
