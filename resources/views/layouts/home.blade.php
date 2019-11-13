@@ -121,7 +121,7 @@
         </div>
         <nav class="topnav" id="topnav">
             <ul>
-                <li><a href="/" title="首页" @if(request()->path() === '/') id="topnav_current" @endif >首页</a></li>
+                <li><a href="/" title="首页" class="pc_home" @if(request()->path() === '/') id="topnav_current" @endif >首页</a></li>
                 @foreach($category_list as $ck=>$cv)
                     <li>
                         <a href="/category/{{ $cv['id'] }}" @if((request()->path() === 'category/' . $cv['id']) || (isset($is_article) && $info->category_id === $cv['id'])) id="topnav_current" @endif title="{{ $cv['name'] }}">{{ $cv['name'] }}</a>
@@ -153,7 +153,6 @@
 @show
 
 @section('script')
-    <script src="{{ asset('js/home/nav.js') }}"></script>
     <script src="{{ asset('js/home/jweixin-1.4.0.js') }}"></script>
     <script>
         wx.config({
