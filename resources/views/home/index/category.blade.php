@@ -1,6 +1,6 @@
 @extends('layouts.home')
 @section('title', $info->name.' | '.\App\Models\SystemConfig::getConfigCache('seo_title'))
-@section('keywords', $info->name))
+@section('keywords', $info->name)
 @section('description', $info->description)
 @section('content')
     <div style="width: 100%;height: 76px;"></div>
