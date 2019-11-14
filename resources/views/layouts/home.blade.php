@@ -15,7 +15,6 @@
     <meta name="description" content="@yield('description',\App\Models\SystemConfig::getConfigCache('site_seo_description'))">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/home/base.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/home/hm.js') }}"></script>
     <link href="{{ asset('css/home/index.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home/m.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/home/auth.css') }}" rel="stylesheet">
@@ -25,58 +24,10 @@
     <script type="text/javascript" src="{{ asset('js/home/jquery-2.1.1.min.js') }}"></script>
     <script src="{{ asset('js/home/layer.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/home/layer.css') }}" id="layui_layer_skinlayercss" style="">
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?42bfb0edc8942ae12e19e306f81c22a6";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-    <script>
-        //自动推送功能
-        (function(){
-            var bp = document.createElement('script');
-            var curProtocol = window.location.protocol.split(':')[0];
-            if (curProtocol === 'https') {
-                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-            }
-            else {
-                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-            }
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(bp, s);
-        })();
-    </script>
     @yield('header')
     <script>
-        window.onload = function () {
-            var oH2 = document.getElementsByTagName("h2")[0];
-            var oUl = document.getElementsByTagName("ul")[0];
-            oH2.onclick = function () {
-                var style = oUl.style;
-                style.display = style.display == "block" ? "none" : "block";
-                oH2.className = style.display == "block" ? "open" : ""
-            }
-        }
-    </script>
-    <script>
-        function addLink() {
-            var selection = window.getSelection();
-            pagelink = "<br /><br />作者：Vijay<br />链接： " + document.location.href + "<br />来源：臭大佬<br />著作权归Vijay所有，任何形式的转载都请联系Vijay(1937832819@qq.com)获得授权并注明出处。";
-            copytext = selection + pagelink;
-            newdiv = document.createElement('div');
-            newdiv.style.position = 'absolute';
-            newdiv.style.left = '-99999px';
-            document.body.appendChild(newdiv);
-            newdiv.innerHTML = copytext;
-            selection.selectAllChildren(newdiv);
-            window.setTimeout(function () {
-                document.body.removeChild(newdiv);
-            }, 100);
-        }
-        document.oncopy = addLink;
+        //统计代码
+        {!! htmlspecialchars_decode(\App\Models\SystemConfig::getConfigCache('site_tongji')) !!}
     </script>
     <style>
         header {
@@ -153,6 +104,49 @@
 @show
 
 @section('script')
+    <script>
+        {{-- 自动推送功能--}}
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+
+        window.onload = function () {
+            var oH2 = document.getElementsByTagName("h2")[0];
+            var oUl = document.getElementsByTagName("ul")[0];
+            oH2.onclick = function () {
+                var style = oUl.style;
+                style.display = style.display == "block" ? "none" : "block";
+                oH2.className = style.display == "block" ? "open" : ""
+            }
+        }
+    </script>
+
+    <script>
+        // function addLink() {
+        //     var selection = window.getSelection();
+        //     pagelink = "<br /><br />作者：Vijay<br />链接： " + document.location.href + "<br />来源：臭大佬<br />著作权归Vijay所有，任何形式的转载都请联系Vijay(1937832819@qq.com)获得授权并注明出处。";
+        //     copytext = selection + pagelink;
+        //     newdiv = document.createElement('div');
+        //     newdiv.style.position = 'absolute';
+        //     newdiv.style.left = '-99999px';
+        //     document.body.appendChild(newdiv);
+        //     newdiv.innerHTML = copytext;
+        //     selection.selectAllChildren(newdiv);
+        //     window.setTimeout(function () {
+        //         document.body.removeChild(newdiv);
+        //     }, 100);
+        // }
+        // document.oncopy = addLink;
+    </script>
     <script src="{{ asset('js/home/jweixin-1.4.0.js') }}"></script>
     <script>
         wx.config({
@@ -254,20 +248,22 @@
         </div>
     </div>
     <script>
-        //toolbar
-        $("#guanbi").click(function () {
-            $(".toolbar").addClass("guanbi");
-            $(".toolbar-open").addClass("openviewd");
-            $("#toolbar-menu li").removeClass("current");
-        });
-        $(".toolbar-open").click(function () {
-            $(".toolbar-open").removeClass("openviewd");
-            $(".toolbar").removeClass("guanbi");
-        });
-        //toolbar-menu
-        $('#toolbar-menu li').click(function () {
-            $(this).addClass('current').siblings().removeClass('current');
-        });
+        (function(){
+            //toolbar
+            $("#guanbi").click(function () {
+                $(".toolbar").addClass("guanbi");
+                $(".toolbar-open").addClass("openviewd");
+                $("#toolbar-menu li").removeClass("current");
+            });
+            $(".toolbar-open").click(function () {
+                $(".toolbar-open").removeClass("openviewd");
+                $(".toolbar").removeClass("guanbi");
+            });
+            //toolbar-menu
+            $('#toolbar-menu li').click(function () {
+                $(this).addClass('current').siblings().removeClass('current');
+            });
+        })();
     </script>
 @show
 </body>
