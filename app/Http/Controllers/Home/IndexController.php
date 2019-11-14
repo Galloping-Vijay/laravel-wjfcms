@@ -61,8 +61,8 @@ class IndexController extends Controller
             $where[] = ['title', 'like', '%' . $keytitle . '%'];
         }
         $articles = Article::where($where)
-            ->orderBy('updated_at', 'desc')
             ->orderBy('created_at', 'desc')
+            ->orderBy('click', 'desc')
             ->paginate(15);
         return view('home.index.index', [
             'top_article' => $topArticle,
@@ -119,7 +119,7 @@ class IndexController extends Controller
             ['category_id', '=', $category->id]
         ];
         $articles = Article::where($where)
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(15);
         return view('home.index.category', [
             'info' => $category,
@@ -142,7 +142,7 @@ class IndexController extends Controller
             ['keywords', 'like', '%' . $tag->name . '%']
         ];
         $articles = Article::where($where)
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(9);
         $count = count($articles);
         $data = [];
