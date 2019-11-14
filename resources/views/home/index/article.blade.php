@@ -72,8 +72,8 @@
                     {!! htmlspecialchars_decode($info->content) !!}
                 </div>
             </div>
-            <div class="share"></div>
-            <p>
+           {{-- <div class="share"></div>--}}
+            {{--<p>--}}
             {{--<span class="diggits praise">--}}
             {{--<a href="javascript:;"> 很赞哦！ </a>--}}
             {{--(<b>0</b>)--}}
@@ -130,7 +130,7 @@
 
 @section('script')
     @parent
-    <script src="{{ asset('static/layuiadmin/layui/layui.js') }}"></script>
+
     <script>
         $(function() {
             var layer = null;

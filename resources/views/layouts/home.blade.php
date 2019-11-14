@@ -22,8 +22,7 @@
     <script src="{{ asset('js/home/modernizr.js') }}"></script>
     <![endif]-->
     <script type="text/javascript" src="{{ asset('js/home/jquery-2.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/home/layer.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('css/home/layer.css') }}" id="layui_layer_skinlayercss" style="">
+    <script src="{{ asset('static/layuiadmin/layui/layui.js') }}"></script>
     @yield('header')
     <script>
         //统计代码
