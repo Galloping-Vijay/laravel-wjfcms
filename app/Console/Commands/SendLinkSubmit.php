@@ -77,24 +77,26 @@ class SendLinkSubmit extends Command
         if (isset($res['success'])) {
             $msg = '推送成功';
             $this->info($msg . $res['success'] . '条');
+            //方式一
+            Mail::to($toUser)->send(new Alarm($msg));
         } else {
             $msg = $res['message'] ?? '请求过于频繁';
             $this->info('推送失败');
             $this->info('原因：' . $msg);
             $subject = env('MAIL_FROM_NAME');
-            /*//方式一
-            Mail::to($toUser)->send(new Alarm($msg));
-            //方式二
-            Mail::send('emails.alarm.text', [
-                'name' => env('MAIL_FROM_NAME'),
-                'title' => env('MAIL_FROM_NAME'),
-                'content' => $msg,
-            ], function ($message) use ($toUser, $subject) {
-                $message->to($toUser)->subject($subject);
-                //发送附件
-                //$attachment = storage_path('xls/files/test.xls');
-                //$message->attach($attachment, ['as' => '中文文档.xls']);
-            });*/
+//            //方式一
+//            Mail::to($toUser)->send(new Alarm($msg));
+//            //方式二
+//            Mail::send('emails.alarm.text', [
+//                'name' => env('MAIL_FROM_NAME'),
+//                'title' => env('MAIL_FROM_NAME'),
+//                'content' => $msg,
+//            ], function ($message) use ($toUser, $subject) {
+//                $message->to($toUser)->subject($subject);
+//                //发送附件
+//                //$attachment = storage_path('xls/files/test.xls');
+//                //$message->attach($attachment, ['as' => '中文文档.xls']);
+//            });
             //方式三 发送纯文本
             Mail::raw($msg, function ($message) use ($toUser, $subject) {
                 $message->to($toUser)->subject($subject);
