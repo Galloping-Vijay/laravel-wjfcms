@@ -77,7 +77,7 @@ class SendLinkSubmit extends Command
         if (isset($res['success'])) {
             $msg = '推送成功';
             $this->info($msg . $res['success'] . '条');
-            //方式一
+            //成功也发送
             Mail::to($toUser)->send(new Alarm($msg));
         } else {
             $msg = $res['message'] ?? '请求过于频繁';
