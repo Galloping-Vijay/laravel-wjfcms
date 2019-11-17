@@ -29,9 +29,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command(SendLinkSubmit::class,['--force'])->everyTenMinutes()->runInBackground();
+        $schedule->command('emails:send')->everyMinute();
         //log
-        $schedule->command(LogInfo::class,['--force'])->everyTenMinutes()->runInBackground();
+        $schedule->command('lesson:log')->everyMinute();
     }
 
     /**
