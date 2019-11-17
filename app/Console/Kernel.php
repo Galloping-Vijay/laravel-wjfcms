@@ -10,17 +10,19 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
+     * 应用中自定义的 Artisan 命令
      * The Artisan commands provided by your application.
      *
      * @var array
      */
     protected $commands = [
         //
-        LogInfo::class,
+        //LogInfo::class,
         SendLinkSubmit::class,
     ];
 
     /**
+     * 定义计划任务
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
@@ -30,9 +32,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('send:linkSubmit')->everyMinute();
         //log
-        $schedule->command('lesson:log')->everyMinute();
+        //$schedule->command('lesson:log')->everyMinute();
+        $schedule->command('send:linkSubmit')->everyMinute();
     }
 
     /**
