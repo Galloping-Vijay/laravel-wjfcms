@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         LogInfo::class,
+        SendLinkSubmit::class,
     ];
 
     /**
