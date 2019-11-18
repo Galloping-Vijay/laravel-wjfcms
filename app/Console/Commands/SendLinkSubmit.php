@@ -78,9 +78,12 @@ class SendLinkSubmit extends Command
             $msg = '推送成功';
             $this->info($msg . $res['success'] . '条');
             //成功也发送
-           // Mail::to($toUser)->send(new Alarm($msg));
+            // Mail::to($toUser)->send(new Alarm($msg));
         } else {
             $msg = $res['message'] ?? '请求过于频繁';
+            if ($msg == 'over quota') {
+                return false;
+            }
             $this->info('推送失败');
             $this->info('原因：' . $msg);
             $subject = env('MAIL_FROM_NAME');
