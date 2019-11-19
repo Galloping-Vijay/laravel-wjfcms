@@ -77,7 +77,7 @@
                 <ul id="list2">
                     @foreach($chats as $chat)
                     <li>
-                        <span>{{ $chat->created_at }}</span><i><a href="javascript:void(0);" >{{ $chat->content }}</a></i>
+                        <span>{{ $chat->created_at }}</span><i><a class="chat_tiem" href="javascript:void(0);" >{{ $chat->content }}</a></i>
                     </li>
                     @endforeach
                 </ul>
@@ -109,4 +109,20 @@
             @endcomponent
         </div>
     </article>
+@endsection
+@section('script')
+    @parent
+    <script>
+        $(function() {
+            layui.use(['layer'], function(){
+                var layer = layui.layer;
+                $(document).on('click','.chat_tiem',function (d){
+                    layer.msg($(this).text(), {
+                        time: 60000,
+                        btn: ['朕已阅']
+                    });
+                })
+            });
+        });
+    </script>
 @endsection
