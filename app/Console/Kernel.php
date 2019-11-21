@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         //log
         //$schedule->command('lesson:log')->everyMinute();
-        $schedule->command('send:linkSubmit')->everyMinute();
+        //$schedule->command('send:linkSubmit')->everyMinute();
     }
 
     /**
