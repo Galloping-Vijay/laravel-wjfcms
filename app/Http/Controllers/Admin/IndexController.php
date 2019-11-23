@@ -51,9 +51,10 @@ class IndexController extends Controller
     public function main()
     {
         $articleList = Article::leftJoin('categories', 'categories.id', '=', 'articles.category_id')
-            ->select('articles.id','articles.title','articles.click', 'categories.name as cate_name')
+            ->select('articles.id', 'articles.title', 'articles.click', 'categories.name as cate_name')
+            ->orderBy('articles.click', 'desc')
             ->get();
-        $chatList = Chat:: select('id','content','created_at')
+        $chatList = Chat:: select('id', 'content', 'created_at')
             ->get();
         $commentNum = Comment::count();
         $adminNum = Admin::count();
