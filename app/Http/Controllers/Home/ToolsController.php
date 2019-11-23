@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Vijay\Curl\Curl;
 
 class ToolsController extends Controller
@@ -46,6 +47,11 @@ class ToolsController extends Controller
         );
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
-        return $result;
+        $res = json_decode($result, true);
+        $remainArr = [
+            'link_remain' => Cache::get('link_remain')
+        ];
+        $res = array_merge($res, $remainArr);
+        return response()->json($res);
     }
 }

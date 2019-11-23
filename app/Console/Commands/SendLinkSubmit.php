@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\Alarm;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class SendLinkSubmit extends Command
@@ -77,6 +77,7 @@ class SendLinkSubmit extends Command
         if (isset($res['success'])) {
             $msg = '推送成功';
             $this->info($msg . $res['success'] . '条');
+            Cache::put('link_remain', $res['remain']);
             //成功也发送
             // Mail::to($toUser)->send(new Alarm($msg));
         } else {

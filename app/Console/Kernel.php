@@ -6,6 +6,7 @@ use App\Console\Commands\LogInfo;
 use App\Console\Commands\SendLinkSubmit;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Cache;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,7 +26,7 @@ class Kernel extends ConsoleKernel
      * 定义计划任务
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
@@ -34,7 +35,11 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         //log
         //$schedule->command('lesson:log')->everyMinute();
-        //$schedule->command('send:linkSubmit')->everyMinute();
+        $schedule->command('send:linkSubmit')->everyMinute()->when(function () {
+            if (Cache::get('link_remain') > 20) {
+                return true;
+            }
+        });
     }
 
     /**
@@ -44,7 +49,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
