@@ -36,7 +36,8 @@ class Kernel extends ConsoleKernel
         //log
         //$schedule->command('lesson:log')->everyMinute();
         $schedule->command('send:linkSubmit')->everyMinute()->when(function () {
-            if (Cache::get('link_remain') > 20) {
+            $link_remain = Cache::get('link_remain');
+            if (is_null($link_remain) || $link_remain > 20) {
                 return true;
             }
         });
