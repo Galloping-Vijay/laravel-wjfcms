@@ -21,6 +21,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        '/admin/article/uploadImage'
+        '/admin/article/uploadImage',
+        'wechat',
     ];
 }

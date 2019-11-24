@@ -64,6 +64,10 @@ Route::namespace('Home')->group(function () {
         // 百度自动提交
         Route::get('linkSubmit', 'ToolsController@linkSubmit');
     });
+    //微信
+    Route::prefix('wechat')->group(function () {
+        Route::any('/', 'WeChatController@serve');
+    });
 });
 
 // auth
