@@ -71,9 +71,11 @@ class WeChatController extends Controller
                     }
                     break;
                 case 'text':
+                    Log::info($message->Content);
                     $res = Tuling::handle()->param($message->Content)->answer();
                     switch ($res['resultType']) {
                         case 'text':
+                            Log::info('返回内容:' . $res['content']);
                             return $res['content'];
                             break;
                         case 'image':
