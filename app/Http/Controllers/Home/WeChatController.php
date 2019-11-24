@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use EasyWeChat\Factory;
 use App\Http\Traits\TraitUpload;
 use App\Libs\Tuling;
 use EasyWeChat\Kernel\Messages\Image;
@@ -15,22 +16,37 @@ class WeChatController extends Controller
     use TraitUpload;
 
     /**
+     * @var array|null
+     */
+    private $config = null;
+
+    /**
+     * WeChatController constructor.
+     * @param null $config
+     */
+    public function __construct($config = null)
+    {
+        $this->config = array_merge($this->config, $config);
+    }
+
+    /**
      * Description:处理微信的请求消息
      * User: Vijay
      * Date: 2019/11/24
-     * Time: 19:27
-     * @return mixed
+     * Time: 20:29
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \EasyWeChat\Kernel\Exceptions\BadRequestException
+     * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
+     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
+     * @throws \ReflectionException
      */
     public function serve()
     {
         Log::info('request arrived.'); # 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
-        $app = app('wechat.official_account');
 
-        $app->server->push(function($message){
-            return $message['MsgType'];
-        });
-
-        return $app->server->serve();
+        $this->config = array_merge($this->config, app('wechat.official_account.default'));
+        $app = Factory::officialAccount($this->config);
+        //$app = app('wechat.official_account');
         $app->server->push(function ($message) use (&$app) {
             //return "欢迎关注 心若野马";
             switch ($message['MsgType']) {
@@ -117,7 +133,6 @@ class WeChatController extends Controller
 
             // ...
         });
-
         return $app->server->serve();
     }
 }
