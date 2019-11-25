@@ -38,13 +38,11 @@ class WeChatController extends Controller
         //$app = Factory::officialAccount($this->config);
         $app = app('wechat.official_account');
         $app->server->push(function ($message) use ($app) {
-            return json_encode($message, JSON_UNESCAPED_UNICODE);
             Log::info(json_encode($message, JSON_UNESCAPED_UNICODE));
-            //return "欢迎关注 心若野马";
             switch ($message['MsgType']) {
                 case 'event':
                     # 事件消息...
-                    switch ($message->Event) {
+                    switch ($message['Event']) {
                         case 'subscribe':
                             # code...
                             $res = Tuling::handle()->param('你好啊')->answer();
@@ -57,7 +55,7 @@ class WeChatController extends Controller
                         case 'CLICK':
                             # code...
                             //点击自定义click菜单
-                            switch ($message->EventKey) {
+                            switch ($message['EventKey']) {
                                 case 'key1'://如果为key1菜单,执行
                                     break;
                                 default :
@@ -71,8 +69,8 @@ class WeChatController extends Controller
                     }
                     break;
                 case 'text':
-                    Log::info($message->Content);
-                    $res = Tuling::handle()->param($message->Content)->answer();
+                    Log::info($message['Content']);
+                    $res = Tuling::handle()->param($message['Content'])->answer();
                     switch ($res['resultType']) {
                         case 'text':
                             Log::info('返回内容:' . $res['content']);
