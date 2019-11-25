@@ -38,7 +38,7 @@ class WeChatController extends Controller
         //$app = Factory::officialAccount($this->config);
         $app = app('wechat.official_account');
         $app->server->push(function ($message) use ($app) {
-            Log::info(json_encode($message, JSON_UNESCAPED_UNICODE));
+            //Log::info(json_encode($message, JSON_UNESCAPED_UNICODE));
             switch ($message['MsgType']) {
                 case 'event':
                     # 事件消息...
@@ -69,11 +69,11 @@ class WeChatController extends Controller
                     }
                     break;
                 case 'text':
-                    Log::info($message['Content']);
+                    //Log::info($message['Content']);
                     $res = Tuling::handle()->param($message['Content'])->answer();
                     switch ($res['resultType']) {
                         case 'text':
-                            Log::info('返回内容:' . $res['content']);
+                            //Log::info('返回内容:' . $res['content']);
                             return $res['content'];
                             break;
                         case 'image':
