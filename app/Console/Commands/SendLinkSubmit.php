@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class SendLinkSubmit extends Command
@@ -78,6 +79,12 @@ class SendLinkSubmit extends Command
             $msg = '推送成功';
             $this->info($msg . $res['success'] . '条');
             Cache::put('link_remain', $res['remain']);
+            $this->info('link_remain:' . Cache::get('link_remain'));
+            Log::info(json_encode([
+                'type' => 'linkSubmit',
+                'msg' => $res['success'],
+                'link_remain' => $res['remain']
+            ]));
             //成功也发送
             // Mail::to($toUser)->send(new Alarm($msg));
         } else {
@@ -88,6 +95,10 @@ class SendLinkSubmit extends Command
             $this->info('推送失败');
             $this->info('原因：' . $msg);
             $subject = env('MAIL_FROM_NAME');
+            Log::info(json_encode([
+                'type' => 'linkSubmit',
+                'msg' => $msg,
+            ]));
 //            //方式一
 //            Mail::to($toUser)->send(new Alarm($msg));
 //            //方式二
