@@ -34,12 +34,12 @@ class WeChatController extends Controller
      */
     public function serve()
     {
-        $this->config = config('wechat.official_account.default');
-        $app = Factory::officialAccount($this->config);
-        Log::info(json_encode($this->config,JSON_UNESCAPED_UNICODE));
-        //$app = app('wechat.official_account');
+        //$this->config = config('wechat.official_account.default');
+        //$app = Factory::officialAccount($this->config);
+        $app = app('wechat.official_account');
         $app->server->push(function ($message) use ($app) {
-            Log::info(json_encode($message,JSON_UNESCAPED_UNICODE));
+            return "欢迎关注 心若野马！";
+            Log::info(json_encode($message, JSON_UNESCAPED_UNICODE));
             //return "欢迎关注 心若野马";
             switch ($message['MsgType']) {
                 case 'event':
