@@ -82,7 +82,7 @@ class SendLinkSubmit extends Command
             $this->info('link_remain:' . Cache::get('link_remain'));
             Log::info(json_encode([
                 'type' => 'linkSubmit',
-                'msg' => $res['success'],
+                'remain' => $res['remain'],
                 'link_remain' => $res['remain']
             ]));
             //成功也发送
