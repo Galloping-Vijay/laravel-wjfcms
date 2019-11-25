@@ -24,6 +24,51 @@ class SendLinkSubmit extends Command
     protected $description = '向百度主动提交链接';
 
     /**
+     * @var string
+     * Description:
+     * User: Vijay <1937832819@qq.com>
+     * Date: 2019/11/25
+     * Time: 17:33
+     */
+    private $api = 'http://data.zz.baidu.com/urls?site=https://www.choudalao.com&token=nsdmyfRcySMSxYl1';
+
+    /**
+     * @var array
+     * Description:
+     * User: Vijay <1937832819@qq.com>
+     * Date: 2019/11/25
+     * Time: 17:34
+     */
+    private static $urls = [
+        'https://www.choudalao.com/',
+        'https://www.choudalao.com/chat',
+        'https://www.choudalao.com/category/1',
+        'https://www.choudalao.com/category/3',
+        'https://www.choudalao.com/category/4',
+        'https://www.choudalao.com/category/5',
+        'https://www.choudalao.com/category/6',
+        'https://www.choudalao.com/category/7',
+        'https://www.choudalao.com/category/8',
+        'https://www.choudalao.com/tag/1',
+        'https://www.choudalao.com/tag/2',
+        'https://www.choudalao.com/tag/3',
+        'https://www.choudalao.com/tag/4',
+        'https://www.choudalao.com/tag/5',
+        'https://www.choudalao.com/tag/6',
+        'https://www.choudalao.com/tag/7',
+        'https://www.choudalao.com/tag/8',
+    ];
+
+    /**
+     * @var string
+     * Description:
+     * User: Vijay <1937832819@qq.com>
+     * Date: 2019/11/25
+     * Time: 17:35
+     */
+    private $toUser = '184521508@qq.com';
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -41,50 +86,29 @@ class SendLinkSubmit extends Command
      */
     public function handle()
     {
-        //
-        $urls = array(
-            'https://www.choudalao.com/',
-            'https://www.choudalao.com/chat',
-            'https://www.choudalao.com/category/1',
-            'https://www.choudalao.com/category/3',
-            'https://www.choudalao.com/category/4',
-            'https://www.choudalao.com/category/5',
-            'https://www.choudalao.com/category/6',
-            'https://www.choudalao.com/category/7',
-            'https://www.choudalao.com/category/8',
-            'https://www.choudalao.com/tag/1',
-            'https://www.choudalao.com/tag/2',
-            'https://www.choudalao.com/tag/3',
-            'https://www.choudalao.com/tag/4',
-            'https://www.choudalao.com/tag/5',
-            'https://www.choudalao.com/tag/6',
-            'https://www.choudalao.com/tag/7',
-            'https://www.choudalao.com/tag/8',
-        );
-        $api = 'http://data.zz.baidu.com/urls?site=https://www.choudalao.com&token=nsdmyfRcySMSxYl1';
         $ch = curl_init();
         $options = array(
-            CURLOPT_URL => $api,
+            CURLOPT_URL => $this->api,
             CURLOPT_POST => true,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POSTFIELDS => implode("\n", $urls),
+            CURLOPT_POSTFIELDS => implode("\n", self::$urls),
             CURLOPT_HTTPHEADER => array('Content-Type: text/plain'),
         );
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
         $res = json_decode($result, true);
         $this->info($result);
-        $toUser = '184521508@qq.com';
+        $toUser = $this->toUser;
         if (isset($res['success'])) {
-            $msg = '推送成功';
-            $this->info($msg . $res['success'] . '条');
             Cache::put('link_remain', $res['remain']);
-            $this->info('link_remain:' . Cache::get('link_remain'));
-            Log::info(json_encode([
+            $resStr = json_encode([
                 'type' => 'linkSubmit',
+                'status' => '成功',
                 'remain' => $res['remain'],
-                'link_remain' => $res['remain']
-            ]));
+                'link_remain' => Cache::get('link_remain')
+            ]);
+            $this->info($resStr);
+            Log::info($resStr);
             //成功也发送
             // Mail::to($toUser)->send(new Alarm($msg));
         } else {
@@ -92,13 +116,14 @@ class SendLinkSubmit extends Command
             if ($msg == 'over quota') {
                 return false;
             }
-            $this->info('推送失败');
-            $this->info('原因：' . $msg);
-            $subject = env('MAIL_FROM_NAME');
-            Log::info(json_encode([
+            $resStr = json_encode([
                 'type' => 'linkSubmit',
-                'msg' => $msg,
-            ]));
+                'status' => '失败',
+                'msg' => $res['message'],
+            ]);
+            $this->info($resStr);
+            Log::info($resStr);
+            $subject = env('MAIL_FROM_NAME');
 //            //方式一
 //            Mail::to($toUser)->send(new Alarm($msg));
 //            //方式二
