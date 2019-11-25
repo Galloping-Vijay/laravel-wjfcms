@@ -45,7 +45,7 @@ class Tuling
     public function __construct()
     {
         $this->api_key = env('TULING_API_KEY');
-        $this->api_url = env('TULING_API_URL');
+        $this->app_url = env('TULING_API_URL');
     }
 
 

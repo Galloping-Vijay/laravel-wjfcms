@@ -63,6 +63,7 @@ Route::namespace('Home')->group(function () {
     Route::prefix('tools')->group(function () {
         // 百度自动提交
         Route::get('linkSubmit', 'ToolsController@linkSubmit');
+        Route::get('tuling', 'ToolsController@tuling');
     });
     //微信
     Route::prefix('wechat')->group(function () {

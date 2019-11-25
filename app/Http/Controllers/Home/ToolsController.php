@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Libs\Tuling;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -52,6 +53,13 @@ class ToolsController extends Controller
             'link_remain' => Cache::get('link_remain')
         ];
         $res = array_merge($res, $remainArr);
+        return response()->json($res);
+    }
+
+    public function tuling()
+    {
+        $res = Tuling::handle()->param('德玛西亚')->answer();
+        dd($res);
         return response()->json($res);
     }
 }
