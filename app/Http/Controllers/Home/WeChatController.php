@@ -24,18 +24,12 @@ class WeChatController extends Controller
     /**
      * Description:处理微信的请求消息
      * User: Vijay
-     * Date: 2019/11/24
-     * Time: 20:29
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \EasyWeChat\Kernel\Exceptions\BadRequestException
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
-     * @throws \ReflectionException
+     * Date: 2019/11/25
+     * Time: 21:05
+     * @return mixed
      */
     public function serve()
     {
-        //$this->config = config('wechat.official_account.default');
-        //$app = Factory::officialAccount($this->config);
         $app = app('wechat.official_account');
         $app->server->push(function ($message) use ($app) {
             //Log::info(json_encode($message, JSON_UNESCAPED_UNICODE));
