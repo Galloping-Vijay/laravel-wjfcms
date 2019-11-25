@@ -38,7 +38,7 @@ class WeChatController extends Controller
         //$app = Factory::officialAccount($this->config);
         $app = app('wechat.official_account');
         $app->server->push(function ($message) use ($app) {
-            return "欢迎关注 心若野马！";
+            return json_encode($message, JSON_UNESCAPED_UNICODE);
             Log::info(json_encode($message, JSON_UNESCAPED_UNICODE));
             //return "欢迎关注 心若野马";
             switch ($message['MsgType']) {
