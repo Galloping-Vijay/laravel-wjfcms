@@ -58,7 +58,7 @@
         <div id="mnav">
             <h2><span class="navicon"></span></h2>
             <ul>
-                <li><a href="/" title="首页">首页</a></li>
+                <li><a href="/" title="臭大佬">首页</a></li>
                 @foreach($category_list as $ck=>$cv)
                     <li>
                         <a href="/category/{{ $cv['id'] }}" title="{{ $cv['name'] }}">{{ $cv['name'] }}</a>
@@ -73,7 +73,7 @@
         </div>
         <nav class="topnav" id="topnav">
             <ul>
-                <li><a href="/" title="首页" class="pc_home" @if(request()->path() === '/') id="topnav_current" @endif >首页</a></li>
+                <li><a href="/" title="臭大佬" class="pc_home" @if(request()->path() === '/') id="topnav_current" @endif >首页</a></li>
                 @foreach($category_list as $ck=>$cv)
                     <li>
                         <a href="/category/{{ $cv['id'] }}" @if((request()->path() === 'category/' . $cv['id']) || (isset($is_article) && $info->category_id === $cv['id'])) id="topnav_current" @endif title="{{ $cv['name'] }}">{{ $cv['name'] }}</a>
