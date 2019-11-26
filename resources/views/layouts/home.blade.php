@@ -45,14 +45,16 @@
 <body style="" id="body_app">
 <header>
     <div class="tophead">
+        <h1>
         <div class="logo">
             <a href="/" title="臭大佬">
                 <img src="/images/config/avatar.jpg"
                      style="width: 40px;height: 40px; border-radius: 20px;margin-right: 10px;" alt="臭大佬"
                      title="臭大佬">
             </a>
-            <a href="/" title="臭大佬">臭大佬</a>
+           <a href="/" title="臭大佬">臭大佬</a>
         </div>
+        </h1>
         <div id="mnav">
             <h2><span class="navicon"></span></h2>
             <ul>
