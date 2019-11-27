@@ -42,7 +42,7 @@
             <label class="layui-form-label">标签</label>
             <div class="layui-input-block">
                 @foreach($tags_list as $tk=>$tv)
-                    @if(in_array($tv->name,$info->tags))
+                    @if($info->tags && in_array($tv->name,$info->tags))
                         <input type="checkbox" checked name="tags[{{ $tv->name }}]" title="{{ $tv->name }}">
                     @else
                         <input type="checkbox" name="tags[{{ $tv->name }}]" title="{{ $tv->name }}">
@@ -132,22 +132,22 @@
     <script src="{{asset('static/editor.md/lib/jquery.flowchart.min.js')}}"></script>
 
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             var uploadImageUrl = '/admin/article/uploadImage';
             var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             editor = editormd("editor", {
-                autoFocus : false,
-                width     : "100%",
-                height    : 640,
-                path : "/static/editor.md/lib/",  // Autoload modules mode, codemirror,
-                saveHTMLToTextarea : true, //这个配置，方便post提交表单，表单字段会自动加上一个字段content-html-code,形式为html格式
+                autoFocus: false,
+                width: "100%",
+                height: 640,
+                path: "/static/editor.md/lib/",  // Autoload modules mode, codemirror,
+                saveHTMLToTextarea: true, //这个配置，方便post提交表单，表单字段会自动加上一个字段content-html-code,形式为html格式
                 tex: true,//科学公式TeX语言支持，默认关闭
                 flowChart: true,//流程图支持，默认关闭
                 sequenceDiagram: true,//时序/序列图支持，默认关闭
                 /**上传图片相关配置如下*/
-                imageUpload    : true,
-                imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : uploadImageUrl,//注意你后端的上传图片服务地址
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL: uploadImageUrl,//注意你后端的上传图片服务地址
             });
 
             //testEditor.gotoLine(90);//跳转至第90行
@@ -203,7 +203,7 @@
                                     contentType: 'application/x-www-form-urlencoded;charest=UTF-8',
                                     success: function (res) {
                                         if (res.code === 0) {
-                                            var imgShow= '![]('+res.data.src+')';
+                                            var imgShow = '![](' + res.data.src + ')';
                                             editor.insertValue(imgShow);
                                         } else {
                                             layer.msg(res.msg, {icon: 2});
@@ -215,6 +215,7 @@
                     }
                 }
             }
+
             document.addEventListener('paste', function (event) {
                 paste(event);
             });
