@@ -1,5 +1,5 @@
 <div class="cloud">
-    <h2 class="hometitle">标签云</h2>
+    <h2 class="hometitle">臭大佬标签云</h2>
     <ul id="ajaxTags">
     </ul>
 </div>

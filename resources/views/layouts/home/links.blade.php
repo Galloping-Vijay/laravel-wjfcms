@@ -1,6 +1,6 @@
 <div class="links">
-    <h2 class="hometitle">友情链接
-        <a href="javascript:;" title="申请友链" class="add_links">申请友链</a>
+    <h2 class="hometitle">臭大佬友情链接
+        <a href="javascript:;" title="申请友链" class="add_links">申请臭大佬友链</a>
     </h2>
     <p style="padding: 10px;word-wrap: break-word;word-break: normal;word-break:break-all;">
         本站信息如下：<br>
