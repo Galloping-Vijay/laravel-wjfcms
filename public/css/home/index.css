@@ -23,6 +23,7 @@ h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0;overflow: hidden;
 .autor span a:hover { text-decoration: underline }
 .lm { background: url(/images/home/tag.png) no-repeat left center }
 .dtime { background: url(/images/home/time.png) no-repeat left center }
+.author { background: url(/images/home/臭大佬.png) no-repeat left center }
 .viewnum { background: url(/images/home/look.png) no-repeat left center }
 .pingl { background: url(/images/home/massage.png) no-repeat left center }
 .blogpic img { width: 100%}

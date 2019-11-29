@@ -32,7 +32,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">作者</label>
             <div class="layui-input-block">
-                <input type="text" name="author" placeholder="admin" value="Vijay" autocomplete="off"
+                <input type="text" name="author" placeholder="admin" value="臭大佬" autocomplete="off"
                        class="layui-input">
             </div>
         </div>

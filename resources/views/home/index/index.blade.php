@@ -35,6 +35,7 @@
                             <p>{{ $article->description }}</p>
                         </div>
                         <div class="autor">
+                            <span class="author">{{ $article->author }}</span>
                         <span class="lm">
                             <a href="javascript:void(0);" title="{{ $article->keywords }}"
                                class="classname">{{ $article->keywords }}</a>
