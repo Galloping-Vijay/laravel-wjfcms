@@ -74,6 +74,10 @@ Route::namespace('Home')->group(function () {
 // auth
 Route::namespace('Auth')->prefix('auth')->group(function () {
     // 第三方登录
+    Route::get('/{social}', 'AuthenticationController@getSocialRedirect')
+        ->middleware('guest');
+    Route::get('/{social}/callback', 'Web\AuthenticationController@getSocialCallback')
+        ->middleware('guest');
     Route::prefix('oauth')->group(function () {
         // 重定向
         Route::get('redirectToProvider/{service}', 'OAuthController@redirectToProvider');
@@ -82,7 +86,6 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
         // 退出登录
         Route::get('logout', 'OAuthController@logout');
     });
-
     // 后台登录
     Route::prefix('admin')->group(function () {
         Route::post('login', 'AdminController@login');
