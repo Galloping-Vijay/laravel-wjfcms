@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
      * 定义计划任务
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
@@ -39,6 +39,9 @@ class Kernel extends ConsoleKernel
             $link_remain = Cache::get('link_remain');
             if (is_null($link_remain) || $link_remain > 20) {
                 return true;
+            } else if (date('G') == '0' && $link_remain <= 20) {
+                //如果是一天的开始,并且$link_remain<=20,则设置成null,就可以重新推送了
+                Cache::put('link_remain', null);
             }
         });
     }
