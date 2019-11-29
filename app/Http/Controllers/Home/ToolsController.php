@@ -50,7 +50,7 @@ class ToolsController extends Controller
         $result = curl_exec($ch);
         $res = json_decode($result, true);
         $remainArr = [
-            'link_remain' => Cache::get('link_remain')
+            'link_remain' => Cache::put('link_remain', $res['remain'])
         ];
         $res = array_merge($res, $remainArr);
         return response()->json($res);
