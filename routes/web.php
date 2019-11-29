@@ -76,16 +76,11 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
     // 第三方登录
     Route::get('/{social}', 'AuthenticationController@getSocialRedirect')
         ->middleware('guest');
-    Route::get('/{social}/callback', 'Web\AuthenticationController@getSocialCallback')
+    Route::get('/{social}/callback', 'AuthenticationController@getSocialCallback')
         ->middleware('guest');
-    Route::prefix('oauth')->group(function () {
-        // 重定向
-        Route::get('redirectToProvider/{service}', 'OAuthController@redirectToProvider');
-        // 获取用户资料并登录
-        Route::get('handleProviderCallback/{service}', 'OAuthController@handleProviderCallback');
-        // 退出登录
-        Route::get('logout', 'OAuthController@logout');
-    });
+    // 退出登录
+    Route::get('logout', 'AuthenticationController@logout');
+
     // 后台登录
     Route::prefix('admin')->group(function () {
         Route::post('login', 'AdminController@login');

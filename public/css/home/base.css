@@ -155,3 +155,17 @@ h1.t_nav a { width: 100px; display: block; text-align: center; color: #fff; floa
 .routine_img{
     width: 100%;
 }
+.auth-group{
+    text-align: center;
+}
+.auth-title {
+    margin: 10px 0;
+    color: darkgrey
+}
+
+.auth-apps a img {
+    display: inline-block;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+}

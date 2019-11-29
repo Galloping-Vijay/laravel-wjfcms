@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticationController extends Controller
 {
+    use AuthenticatesUsers;
+
     /**
      * Description:未授权跳转页
      * User: Vijay <1937832819@qq.com>
@@ -23,12 +26,12 @@ class AuthenticationController extends Controller
         try {
             return Socialite::with($account)->redirect();
         } catch (\InvalidArgumentException $e) {
-            return redirect('/login');
+            return redirect('/register');
         }
     }
 
     /**
-     * Description:
+     * Description:OAuth 回调中获取用户信息
      * User: Vijay <1937832819@qq.com>
      * Date: 2019/11/29
      * Time: 18:36
@@ -37,7 +40,6 @@ class AuthenticationController extends Controller
      */
     public function getSocialCallback($account)
     {
-        // 从第三方 OAuth 回调中获取用户信息
         $socialUser = Socialite::with($account)->user();
         // 在本地 users 表中查询该用户来判断是否已存在
         $user = User::where('provider_id', '=', $socialUser->id)
@@ -49,7 +51,7 @@ class AuthenticationController extends Controller
             $newUser->name = $socialUser->getName();
             $newUser->email = $socialUser->getEmail() == '' ? '' : $socialUser->getEmail();
             $newUser->avatar = $socialUser->getAvatar();
-            $newUser->password = '';
+            $newUser->password = Hash::make('123456');
             $newUser->provider = $account;
             $newUser->provider_id = $socialUser->getId();
             $newUser->save();

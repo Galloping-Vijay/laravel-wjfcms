@@ -1,4 +1,5 @@
 @extends('layouts.home')
+@section('title', '登录 | '.\App\Models\SystemConfig::getConfigCache('seo_title'))
 @section('header')
     <link href="{{ asset('/css/home/easyForm.css') }}" rel="stylesheet">
     <style>

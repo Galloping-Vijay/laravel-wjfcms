@@ -210,6 +210,21 @@
                                 <input type="submit" value="登陆" class="inputsub-dl">
                                 <a href="/register" class="inputsub-zc">注册</a>
                             </form>
+                            <div class="auth-group">
+                                <div class="auth-title">—— 社交账号登入 ——</div>
+                                <div class="auth-apps">
+                                    <a href="/auth/github" data-type="github">
+                                        <img src="/images/home/app_logo/github.png">
+                                    </a>
+                                    <a href="/auth/qq" data-type="qq">
+                                        <img src="/images/home/app_logo/qq.png">
+                                    </a>
+                                    <a href="/auth/weibo" data-type="weibo">
+                                        <img src="/images/home/app_logo/weibo.png">
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </section>
                 </li>
