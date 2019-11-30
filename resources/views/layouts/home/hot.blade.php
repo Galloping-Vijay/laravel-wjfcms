@@ -1,5 +1,5 @@
 <div class="paihang" style="margin-top:20px;">
-    <h2 class="hometitle">臭大佬热度榜</h2>
+    <h2 class="hometitle">热度榜</h2>
     <ul  id="clickArticle">
     </ul>
 </div>

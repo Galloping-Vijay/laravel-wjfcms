@@ -1,13 +1,13 @@
 <div class="links">
-    <h2 class="hometitle">臭大佬友情链接
+    <h2 class="hometitle">友情链接
         <a href="javascript:;" title="申请友链" class="add_links">申请臭大佬友链</a>
     </h2>
     <p style="padding: 10px;word-wrap: break-word;word-break: normal;word-break:break-all;">
         本站信息如下：<br>
-        网站名称：<a href="/" title="臭大佬" target="_blank">Vijay</a> <br>
+        网站名称：<a href="/" title="臭大佬" target="_blank">臭大佬</a> <br>
         网站链接:<a href="/" title="臭大佬">https://www.choudalao.com</a><br>
         网站logo:<a href="https://www.choudalao.com/images/config/avatar.jpg" title="臭大佬" target="_blank">https://www.choudalao.com/images/config/avatar.jpg</a><br>
-        <b><span style="color: red;">注：</span>申请友链之前，请务必先将本站添置友链，Vijay收到后会立马处理，处理结果会以邮件形式通知您~</b>
+        <b><span style="color: red;">注：</span>申请友链之前，请务必先将本站添置友链，臭大佬收到后会立马处理，处理结果会以邮件形式通知您~</b>
     </p>
     <ul style="padding: 10px 20px;" id="friendLinks">
     </ul>
