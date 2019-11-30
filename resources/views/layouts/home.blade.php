@@ -106,6 +106,11 @@
 
 @section('script')
     <script>
+        layui.use(['layer'], function() {
+            layer = layui.layer
+        });
+    </script>
+    <script>
         {{-- 自动推送功能--}}
         (function(){
             var bp = document.createElement('script');
