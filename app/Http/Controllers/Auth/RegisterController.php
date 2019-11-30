@@ -64,7 +64,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -73,8 +73,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
-            'captcha' => ['required','captcha'],
-        ],[
+            'captcha' => ['required', 'captcha'],
+        ], [
             'captcha.required' => trans('validation.required'),
             'captcha.captcha' => trans('validation.captcha'),
         ]);
@@ -83,7 +83,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\Models\User
      */
     protected function create(array $data)
@@ -98,14 +98,16 @@ class RegisterController extends Controller
     /**
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
+        $data = array_merge($request->all(), [
+            'avatar' => $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/avatar_medium.jpg'
+        ]);
+        event(new Registered($user = $this->create($data)));
 
         $this->guard()->login($user);
 

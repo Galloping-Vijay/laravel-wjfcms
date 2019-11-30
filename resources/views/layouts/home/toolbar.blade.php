@@ -8,43 +8,59 @@
             <li>
                 <i class="side-icon-user"></i>
                 <section>
-                    <div class="login_herder">
-                        <img src="/images/config/avatar.jpg" class="huiyuan-img" alt="臭大佬" title="臭大佬">
-                        <span>登录</span>
-                    </div>
-                    <div class="userinfo">
-                        <form class="layui-form" name="login" method="post" action="">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input name="email" type="text" class="inputText" required lay-verify="email" size="16" placeholder="邮箱">
-                            <input name="password" required lay-verify="required" type="password" class="inputText" size="16" placeholder="密码">
-                            <div class="captcha">
-                                <div class="layui-input-inline" style="width: 100px;">
-                                    <img src="{{captcha_src()}}" style="cursor: pointer;height: 32px;height: 32px;"
-                                         onclick="this.src='{{captcha_src()}}'+Math.random()">
-                                </div>
-                                <div class="layui-input-inline" style="width: 100px;">
-                                    <input type="text"  required lay-verify="required" name="captcha" placeholder="验证码" class="layui-input" style="height: 32px;">
-                                </div>
-                            </div>
-                            <input type="button" lay-submit  lay-filter="ajaxLogin" value="登陆" class="inputsub-dl">
-                            <a href="/register" class="inputsub-zc">注册</a>
-                        </form>
-                        <div class="auth-group">
-                            <div class="auth-title">—— 社交账号登入 ——</div>
-                            <div class="auth-apps">
-                                <a href="/auth/github" data-type="github">
-                                    <img src="/images/home/app_logo/github.png">
-                                </a>
-                                <a href="/auth/qq" data-type="qq">
-                                    <img src="/images/home/app_logo/qq.png">
-                                </a>
-                                <a href="/auth/weibo" data-type="weibo">
-                                    <img src="/images/home/app_logo/weibo.png">
-                                </a>
+                    @if (Auth::check())
+                        <div class="login_herder">
+                            <a href="https://www.yxiaowei.com/mine/index.html">
+                                <img src="{{ Auth::user()->avatar??'/images/config/avatar_min.jpg' }}" class="huiyuan-img" alt="臭大佬" title="臭大佬">
+                            </a>
+                        </div>
+                        <div class="userinfo">
+                            <div class="clear"></div>
+                            <div class="logged">
+                                <b>{{ Auth::user()->name }}，您好！</b>
+                                <a href="/user/mine">个人中心</a>
+                                <a href="/auth/logout">退出</a>
                             </div>
                         </div>
+                    @else
+                        <div class="login_herder">
+                            <img src="/images/config/avatar.jpg" class="huiyuan-img" alt="臭大佬" title="臭大佬">
+                            <span>登录</span>
+                        </div>
+                        <div class="userinfo">
+                            <form class="layui-form" name="login" method="post" action="">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input name="email" type="text" class="inputText" required lay-verify="email" size="16" placeholder="邮箱">
+                                <input name="password" required lay-verify="required" type="password" class="inputText" size="16" placeholder="密码">
+                                <div class="captcha">
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <img src="{{captcha_src()}}" style="cursor: pointer;height: 32px;height: 32px;"
+                                             onclick="this.src='{{captcha_src()}}'+Math.random()">
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text"  required lay-verify="required" name="captcha" placeholder="验证码" class="layui-input" style="height: 32px;">
+                                    </div>
+                                </div>
+                                <input type="button" lay-submit  lay-filter="ajaxLogin" value="登陆" class="inputsub-dl">
+                                <a href="/register" class="inputsub-zc">注册</a>
+                            </form>
+                            <div class="auth-group">
+                                <div class="auth-title">—— 社交账号登入 ——</div>
+                                <div class="auth-apps">
+                                    <a href="/auth/github" data-type="github">
+                                        <img src="/images/home/app_logo/github.png">
+                                    </a>
+                                    <a href="/auth/qq" data-type="qq">
+                                        <img src="/images/home/app_logo/qq.png">
+                                    </a>
+                                    <a href="/auth/weibo" data-type="weibo">
+                                        <img src="/images/home/app_logo/weibo.png">
+                                    </a>
+                                </div>
+                            </div>
 
-                    </div>
+                        </div>
+                    @endif
                 </section>
             </li>
             <li>

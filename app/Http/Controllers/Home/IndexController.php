@@ -47,8 +47,6 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-//        $id = Auth::guard('web')->id();
-//        dd($id);
         $keytitle = $request->input('keytitle', '');
         $topArticle = Article::where([
             ['is_top', '=', '1'],

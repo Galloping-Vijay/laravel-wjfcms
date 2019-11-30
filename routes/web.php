@@ -18,6 +18,22 @@ Route::get('test', function () {
     pr(2);
 });
 
+//用户登录注册
+Auth::routes();
+Route::namespace('Auth')->prefix('auth')->group(function () {
+    Route::post('ajaxLogin', 'LoginController@ajaxLogin');
+    // 退出登录
+    Route::get('logout', 'AuthenticationController@logout');
+    // 第三方登录
+    Route::get('/{social}', 'AuthenticationController@getSocialRedirect')
+        ->middleware('guest');
+    Route::get('/{social}/callback', 'AuthenticationController@getSocialCallback')
+        ->middleware('guest');
+    // 后台登录
+    Route::prefix('admin')->group(function () {
+        Route::post('login', 'AdminController@login');
+    });
+});
 
 // Home 模块
 Route::namespace('Home')->group(function () {
@@ -69,24 +85,6 @@ Route::namespace('Home')->group(function () {
     });
 });
 
-//用户登录注册
-Auth::routes();
-Route::namespace('Auth')->prefix('auth')->group(function () {
-    Route::post('ajaxLogin', 'LoginController@ajaxLogin');
-    // 退出登录
-    Route::get('logout', 'AuthenticationController@logout');
-    // 第三方登录
-    Route::get('/{social}', 'AuthenticationController@getSocialRedirect')
-        ->middleware('guest');
-    Route::get('/{social}/callback', 'AuthenticationController@getSocialCallback')
-        ->middleware('guest');
-    // 后台登录
-    Route::prefix('admin')->group(function () {
-        Route::post('login', 'AdminController@login');
-    });
-
-});
-
 // 后台登录页面
 Route::namespace('Admin')->prefix('admin')->group(function () {
     // 登录页面
@@ -98,7 +96,6 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
     Route::get('register', 'RegisterController@showRegistrationForm')->name('admin.register');
     Route::post('register', 'RegisterController@register');
 });
-
 
 // Admin 模块
 Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function () {
