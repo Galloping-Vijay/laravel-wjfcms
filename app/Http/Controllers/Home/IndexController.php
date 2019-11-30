@@ -10,6 +10,7 @@ use App\Models\FriendLink;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Vijay\Curl\Curl;
 use App\Models\Nav;
@@ -46,6 +47,9 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
+        //Auth::guard('web')->logout();
+//        $id = Auth::guard('web')->id();
+//        dd($id);
         $keytitle = $request->input('keytitle', '');
         $topArticle = Article::where([
             ['is_top', '=', '1'],

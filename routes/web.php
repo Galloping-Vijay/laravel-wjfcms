@@ -18,8 +18,6 @@ Route::get('test', function () {
     pr(2);
 });
 
-//用户登录注册
-Auth::routes();
 
 // Home 模块
 Route::namespace('Home')->group(function () {
@@ -71,15 +69,17 @@ Route::namespace('Home')->group(function () {
     });
 });
 
+//用户登录注册
+Auth::routes();
 // auth
 Route::namespace('Auth')->prefix('auth')->group(function () {
+    // 退出登录
+    Route::get('logout', 'AuthenticationController@logout');
     // 第三方登录
     Route::get('/{social}', 'AuthenticationController@getSocialRedirect')
         ->middleware('guest');
     Route::get('/{social}/callback', 'AuthenticationController@getSocialCallback')
         ->middleware('guest');
-    // 退出登录
-    Route::get('logout', 'AuthenticationController@logout');
 
     // 后台登录
     Route::prefix('admin')->group(function () {
