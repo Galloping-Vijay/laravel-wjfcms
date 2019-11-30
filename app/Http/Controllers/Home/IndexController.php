@@ -47,7 +47,6 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        //Auth::guard('web')->logout();
 //        $id = Auth::guard('web')->id();
 //        dd($id);
         $keytitle = $request->input('keytitle', '');

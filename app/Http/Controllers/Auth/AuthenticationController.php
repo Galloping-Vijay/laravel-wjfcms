@@ -71,17 +71,14 @@ class AuthenticationController extends Controller
      * Description:
      * User: Vijay <1937832819@qq.com>
      * Date: 2019/11/30
-     * Time: 10:11
+     * Time: 12:53
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function logout()
+    public function logout(Request $request)
     {
-      Auth::guard('web')->logout();
-//        Session::flush();
-        $id = Auth::guard('web')->id();
-        dd($id);
-        dd(Auth::guard()->logout());
-        Auth::guard()->logout();
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
         return redirect('/');
     }
 }
