@@ -219,11 +219,11 @@
                                 <input name="password" type="password" class="inputText" size="16" placeholder="密码">
                                 <div class="captcha">
                                     <div class="layui-input-inline" style="width: 100px;">
-                                        <img src="{{captcha_src()}}" style="cursor: pointer"
+                                        <img src="{{captcha_src()}}" style="cursor: pointer;height: 32px;height: 32px;"
                                              onclick="this.src='{{captcha_src()}}'+Math.random()">
                                     </div>
                                     <div class="layui-input-inline" style="width: 100px;">
-                                        <input type="text" name="captcha" placeholder="验证码" class="layui-input">
+                                        <input type="text" name="captcha" placeholder="验证码" class="layui-input" style="height: 32px;">
                                     </div>
                                 </div>
                                 <input type="submit" value="登陆" class="inputsub-dl">
