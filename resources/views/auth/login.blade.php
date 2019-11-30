@@ -28,7 +28,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">邮箱账号</label>
                         <div class="layui-input-block">
-                            <input type="email" name="email" required lay-verify="email" placeholder="请输入邮箱账号"
+                            <input type="email" name="email" value="{{ old('email') }}" required lay-verify="email" placeholder="请输入邮箱账号"
                                    autocomplete="off" class="layui-input">
                         </div>
                         @if ($errors->has('email'))

@@ -116,6 +116,7 @@ return [
     'uploaded'    => ':attribute 上传失败。',
     'url'         => ':attribute 格式不正确。',
     'uuid'        => ':attribute 必须是有效的 UUID。',
+    'captcha'     => ':attribute 必须是有效的。',
 
     /*
     |--------------------------------------------------------------------------
@@ -175,5 +176,6 @@ return [
         'time'                  => '时间',
         'available'             => '可用的',
         'size'                  => '大小',
+        'captcha'               => '验证码',
     ],
 ];

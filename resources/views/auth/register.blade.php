@@ -20,8 +20,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">昵称</label>
                         <div class="layui-input-block">
-                            <input type="text" name="name" required lay-verify="required" placeholder="请输入昵称"
-                                   autocomplete="off" class="layui-input">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入昵称" value="{{ old('name') }}" autocomplete="off" class="layui-input">
                         </div>
                         @if ($errors->has('name'))
                             <div class="layui-form-mid layui-word-aux">{{ $errors->first('name') }}</div>
@@ -30,7 +29,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">邮箱账号</label>
                         <div class="layui-input-block">
-                            <input type="email" name="email" required lay-verify="email" placeholder="请输入邮箱账号"
+                            <input type="email" value="{{ old('email') }}" name="email" required lay-verify="email" placeholder="请输入邮箱账号"
                                    autocomplete="off" class="layui-input">
                         </div>
                         @if ($errors->has('email'))
@@ -52,6 +51,9 @@
                         <div class="layui-input-block">
                             <input type="password" name="password_confirmation" required lay-verify="required"  placeholder="请输入确认密码" autocomplete="off" class="layui-input">
                         </div>
+                        @if ($errors->has('password_confirmation'))
+                            <div class="layui-form-mid layui-word-aux">{{ $errors->first('password_confirmation') }}</div>
+                        @endif
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">验证码</label>
@@ -60,11 +62,11 @@
                                  onclick="this.src='{{captcha_src()}}'+Math.random()">
                         </div>
                         <div class="layui-input-inline" style="width: 192px;">
-                            <input type="text" required lay-verify="required" placeholder="请输入验证码" class="layui-input">
+                            <input type="text" required lay-verify="required" placeholder="请输入验证码" class="layui-input" name="captcha">
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <p class="error-msg"></p>
+                        @if ($errors->has('captcha'))
+                            <div class="layui-form-mid layui-word-aux">{{ $errors->first('captcha') }}</div>
+                        @endif
                     </div>
                     <div class="login-button-box">
                         <button type="submit" class="btn-login">开始注册</button>
