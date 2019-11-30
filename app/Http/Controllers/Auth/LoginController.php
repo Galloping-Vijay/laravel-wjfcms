@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Nav;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
 class LoginController extends Controller
@@ -54,5 +55,23 @@ class LoginController extends Controller
             'category_list' => $categories,
         ]);
         return view('auth.login');
+    }
+
+    /**
+     * Description:
+     * User: Vijay <1937832819@qq.com>
+     * Date: 2019/11/30
+     * Time: 17:53
+     * @param Request $request
+     */
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            'captcha' => 'required|captcha',
+        ],[
+            'captcha.captcha' => trans('validation.captcha'),
+        ]);
     }
 }

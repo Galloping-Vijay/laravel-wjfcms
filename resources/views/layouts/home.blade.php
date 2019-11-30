@@ -22,6 +22,7 @@
     <script src="{{ asset('js/home/modernizr.js') }}"></script>
     <![endif]-->
     <script type="text/javascript" src="{{ asset('js/home/jquery-2.1.1.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('static/layuiadmin/layui/css/layui.css') }}" media="all">
     <script src="{{ asset('static/layuiadmin/layui/layui.js') }}"></script>
     @yield('header')
     <script>
@@ -38,6 +39,9 @@
         .pics a img:hover {
             transition: all 1s;
             transform: scale(1.2)
+        }
+        .captcha{
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -210,8 +214,18 @@
                         </div>
                         <div class="userinfo">
                             <form name="login" method="post" action="/login">
-                                <input name="username" type="text" class="inputText" size="16" placeholder="用户名">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input name="email" type="text" class="inputText" size="16" placeholder="邮箱">
                                 <input name="password" type="password" class="inputText" size="16" placeholder="密码">
+                                <div class="captcha">
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <img src="{{captcha_src()}}" style="cursor: pointer"
+                                             onclick="this.src='{{captcha_src()}}'+Math.random()">
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" name="captcha" placeholder="验证码" class="layui-input">
+                                    </div>
+                                </div>
                                 <input type="submit" value="登陆" class="inputsub-dl">
                                 <a href="/register" class="inputsub-zc">注册</a>
                             </form>

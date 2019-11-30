@@ -1,36 +1,10 @@
 @extends('layouts.home')
 @section('title', '注册 | '.\App\Models\SystemConfig::getConfigCache('seo_title'))
 @section('header')
-    <link href="{{ asset('/css/home/easyForm.css') }}" rel="stylesheet">
     <style>
-        .error-msg {
-            color: red;
-        }
-
-        .blogsbox {
-            width: 100%;
-        }
-
-        #img-vali-code {
-            margin-left: 18px;
-            height: 25px;
-        }
-
-        .vali-code img {
-            vertical-align: middle;
-            display: inline-block;
-            border-radius: 8px;
-        }
-
-        .vali-code input {
-            /* display: none;*/
-            display: inline-block;
-            width: 40%;
-        }
-
-        .blogsbox {
-            text-align: center;
-        }
+        .blogsbox{width: 100%;}
+        .blogsbox{text-align:center;}
+        .btn-login{cursor: pointer;}
     </style>
 @endsection
 @section('content')
@@ -38,33 +12,65 @@
         <div style="width: 100%;height: 76px;"></div>
         <div class="blogsbox">
             <div id="content">
-                <div class="login-header">
-                    注册
-                </div>
-                <div class="login-input-box">
-                    <input type="text" name="name" id="name" placeholder="昵称">
-                </div>
-                <div class="login-input-box">
-                    <input type="email" name="email" id="email" placeholder="邮箱账号">
-                </div>
-                <div class="login-input-box">
-                    <input type="password" name="password" id="password" autocomplete="new-password" placeholder="密码">
-                </div>
-                <div class="login-input-box">
-                    <input type="password" id="password_confirmation" placeholder="确认密码">
-                </div>
-
-                <div class="login-input-box vali-code">
-                    <img src="{{captcha_src()}}" style="cursor: pointer"
-                         onclick="this.src='{{captcha_src()}}'+Math.random()">
-                    <input type="text" id="code" placeholder="请输入验证码">
-                </div>
-                <div class="remember-box">
-                    <p class="error-msg"></p>
-                </div>
-                <div class="login-button-box">
-                    <button type="button" class="btn-login">开始注册</button>
-                </div>
+                <form class="layui-form layui-form-pane" method="post" action="/register">
+                    <div class="login-header">
+                        注册
+                    </div>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">昵称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入昵称"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                        @if ($errors->has('name'))
+                            <div class="layui-form-mid layui-word-aux">{{ $errors->first('name') }}</div>
+                        @endif
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱账号</label>
+                        <div class="layui-input-block">
+                            <input type="email" name="email" required lay-verify="email" placeholder="请输入邮箱账号"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                        @if ($errors->has('email'))
+                            <div class="layui-form-mid layui-word-aux">{{ $errors->first('email') }}</div>
+                        @endif
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                        @if ($errors->has('password'))
+                            <div class="layui-form-mid layui-word-aux">{{ $errors->first('password') }}</div>
+                        @endif
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">确认密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password_confirmation" required lay-verify="required"
+                                   placeholder="请输入确认密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">验证码</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <img src="{{captcha_src()}}" style="cursor: pointer"
+                                 onclick="this.src='{{captcha_src()}}'+Math.random()">
+                        </div>
+                        <div class="layui-input-inline" style="width: 192px;">
+                            <input type="text" id="code" placeholder="请输入验证码" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <p class="error-msg"></p>
+                    </div>
+                    <div class="login-button-box">
+                        <button type="submit" class="btn-login">开始注册</button>
+                    </div>
+                </form>
                 <div class="logon-box">
                     <a href="/login">去登陆</a>
                 </div>
@@ -84,3 +90,4 @@
         </div>
     </article>
 @endsection
+
