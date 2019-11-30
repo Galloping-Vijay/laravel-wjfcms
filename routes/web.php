@@ -71,8 +71,8 @@ Route::namespace('Home')->group(function () {
 
 //用户登录注册
 Auth::routes();
-// auth
 Route::namespace('Auth')->prefix('auth')->group(function () {
+    Route::post('ajaxLogin', 'LoginController@ajaxLogin');
     // 退出登录
     Route::get('logout', 'AuthenticationController@logout');
     // 第三方登录
@@ -80,7 +80,6 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
         ->middleware('guest');
     Route::get('/{social}/callback', 'AuthenticationController@getSocialCallback')
         ->middleware('guest');
-
     // 后台登录
     Route::prefix('admin')->group(function () {
         Route::post('login', 'AdminController@login');

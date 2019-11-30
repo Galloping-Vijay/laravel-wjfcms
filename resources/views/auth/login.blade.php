@@ -52,7 +52,7 @@
                                  onclick="this.src='{{captcha_src()}}'+Math.random()">
                         </div>
                         <div class="layui-input-inline" style="width: 192px;">
-                            <input type="text" name="captcha" placeholder="请输入验证码" class="layui-input">
+                            <input type="text" required lay-verify="required" name="captcha" placeholder="请输入验证码" class="layui-input">
                         </div>
                         @if ($errors->has('captcha'))
                             <div class="layui-form-mid layui-word-aux">{{ $errors->first('captcha') }}</div>
@@ -85,19 +85,4 @@
 
 @section('script')
     @parent
-
-{{--    <script>--}}
-{{--        $(function () {--}}
-{{--            var layer = null;--}}
-{{--            //一般直接写在一个js文件中--}}
-{{--            layui.use(['layer'], function () {--}}
-{{--                layer = layui.layer;--}}
-
-{{--                $('.btn-login').click(function () {--}}
-{{--                    layer.msg(11)--}}
-{{--                })--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-
 @endsection

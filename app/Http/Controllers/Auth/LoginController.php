@@ -70,8 +70,64 @@ class LoginController extends Controller
             $this->username() => 'required|string',
             'password' => 'required|string',
             'captcha' => 'required|captcha',
-        ],[
+        ], [
+            'captcha.required' => trans('validation.required'),
             'captcha.captcha' => trans('validation.captcha'),
         ]);
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/11/30
+     * Time: 19:16
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|void
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function ajaxLogin(Request $request)
+    {
+        try {
+            $request->validate([
+                $this->username() => 'required|string',
+                'password' => 'required|string',
+                'captcha' => 'required|captcha',
+            ], [
+                'captcha.required' => trans('validation.required'),
+                'captcha.captcha' => trans('validation.captcha'),
+            ]);
+        } catch (\Exception $e) {
+            $data = [
+                'code' => 1,
+                'msg' => $e->getMessage(),
+                'data' => []
+            ];
+            return response($data);
+        }
+
+        /* If the class is using the ThrottlesLogins trait, we can automatically throttle
+         the login attempts for this application. We'll key this by the username and
+         the IP address of the client making these requests into this application.*/
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        $data = [
+            'code' => 1,
+            'msg' => '登录失败',
+            'data' => []
+        ];
+        if ($this->attemptLogin($request)) {
+            $data = [
+                'code' => 0,
+                'msg' => '登录成功',
+                'data' => []
+            ];
+
+        }
+        return response($data);
     }
 }
