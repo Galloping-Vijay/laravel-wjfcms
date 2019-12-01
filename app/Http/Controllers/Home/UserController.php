@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Traits\TraitResource;
 use App\Http\Traits\TraitUpload;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
@@ -50,13 +51,23 @@ class UserController extends Controller
      * Description:
      * User: Vijay
      * Date: 2019/12/1
-     * Time: 11:44
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Time: 23:49
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function modify()
+    public function modify(Request $request)
     {
         $info = Auth::user();
+        if ($request->isMethod('post')) {
+            $avatar = $request->input('avatar', '');
+            if ($avatar == '') {
+                return $this->resJson(1, '图像不能为空');
+            }
+            $info->avatar = $avatar;
+            $res = $info->save();
+            return $this->resJson(0, '操作成功', $res);
+        }
+
         $sexList = User::$sexList;
         return view('home.user.modify', [
             'user' => $info,

@@ -82,7 +82,7 @@
                         //上传成功
                         $.ajax({
                             type: "POST",
-                            url: "/user/update",
+                            url: "/user/modify",
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },

@@ -73,7 +73,7 @@
                         <label class="layui-form-label">验证码</label>
                         <div class="layui-input-inline" style="width: 100px;">
                             <img src="{{captcha_src()}}" style="cursor: pointer"
-                                 onclick="this.src='{{captcha_src()}}'+Math.random()">
+                                 onclick="this.src='{{captcha_src()}}'+Math.random()" class="captcha_src_class">
                         </div>
                         <div class="layui-input-inline" style="width: 192px;">
                             <input type="text" required lay-verify="required" placeholder="请输入验证码" class="layui-input" name="captcha">
@@ -109,58 +109,63 @@
 @section('script')
     @parent
     <script>
-        var seconds = 60;
-        var disabledClass = 'layui-disabled';
-        function countdown(loop){
-            seconds--;
-            if(seconds < 0){
-                $("#getEmailCode").removeClass(disabledClass).html('获取验证码');
-                seconds = 60;
-                clearInterval(timer);
-            } else {
-                $("#getEmailCode").addClass(disabledClass).html(seconds + '秒后重获');
-            }
-            if(!loop){
-                timer = setInterval(function(){
-                    countdown(true);
-                }, 1000);
-            }
-        }
-        $('#getEmailCode').click(function () {
-            if(seconds != 60)  return false;
-            var email =  $("input[name='email']").val();
-            if(!email){
-                layer.msg('请输入正确的邮箱!');
-                return false;
-            }
-            $.ajax({
-                type: 'post',
-                dataType: 'json',
-                data: {email:email,_token:"{{ csrf_token() }}"},
-                url: '/tools/getEmailCode',
-                success: function (res) {
-                    if(res.code === 0){
-                        layer.msg(res.msg, {
-                            offset: '15px'
-                            , icon: 1
-                            , time: 1000
-                        }, function () {
-                            //成功开始倒计时
-                            countdown(false);
-                        });
-                    }else{
-                        layer.msg(res.msg, {
-                            offset: '15px'
-                            , icon: 2
-                            , time: 1000
-                        }, function () {
+        $(document).ready(function(){
+            //触发点击事件
+            $("captcha_src_class").trigger("click");
 
-                        });
-                    }
+
+            var seconds = 60;
+            var disabledClass = 'layui-disabled';
+            function countdown(loop){
+                seconds--;
+                if(seconds < 0){
+                    $("#getEmailCode").removeClass(disabledClass).html('获取验证码');
+                    seconds = 60;
+                    clearInterval(timer);
+                } else {
+                    $("#getEmailCode").addClass(disabledClass).html(seconds + '秒后重获');
                 }
+                if(!loop){
+                    timer = setInterval(function(){
+                        countdown(true);
+                    }, 1000);
+                }
+            }
+            $('#getEmailCode').click(function () {
+                if(seconds != 60)  return false;
+                var email =  $("input[name='email']").val();
+                if(!email){
+                    layer.msg('请输入正确的邮箱!');
+                    return false;
+                }
+                $.ajax({
+                    type: 'post',
+                    dataType: 'json',
+                    data: {email:email,_token:"{{ csrf_token() }}"},
+                    url: '/tools/getEmailCode',
+                    success: function (res) {
+                        if(res.code === 0){
+                            layer.msg(res.msg, {
+                                offset: '15px'
+                                , icon: 1
+                                , time: 1000
+                            }, function () {
+                                //成功开始倒计时
+                                countdown(false);
+                            });
+                        }else{
+                            layer.msg(res.msg, {
+                                offset: '15px'
+                                , icon: 2
+                                , time: 1000
+                            }, function () {
+
+                            });
+                        }
+                    }
+                });
             });
         });
-
     </script>
 @endsection
 

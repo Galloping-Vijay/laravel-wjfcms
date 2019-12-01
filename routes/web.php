@@ -69,8 +69,8 @@ Route::namespace('Home')->group(function () {
         Route::get('/', 'UserController@index');
         // 上传图片
         Route::post('uploadImage', 'UserController@uploadImage');
-        //编辑
-        Route::get('modify', 'UserController@modify');
+        //编辑(修改头像)
+        Route::any('modify', 'UserController@modify');
         Route::post('update', 'UserController@update');
         //文章评论
         Route::post('comment', 'UserController@comment');
