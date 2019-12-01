@@ -45,25 +45,12 @@ Route::namespace('Home')->group(function () {
     Route::get('tag/{tag}', 'IndexController@tag');
     // 随言碎语
     Route::get('chat', 'IndexController@chat');
-    // 开源项目
-    Route::get('git', 'IndexController@git');
     // 文章详情
     Route::get('article/{id}', 'IndexController@article');
-    // 文章评论
-    Route::post('comment', 'IndexController@comment')->middleware('auth.oauth');
-    // 检测是否登录
-    Route::get('checkLogin', 'IndexController@checkLogin');
     // 搜索文章
     Route::post('search', 'IndexController@search');
     //申请友情链接
     Route::post('applyLink', 'IndexController@applyLink');
-    // feed
-    Route::get('feed', 'IndexController@feed');
-    // 推荐博客
-    Route::prefix('site')->group(function () {
-        Route::get('/', 'SiteController@index');
-        Route::post('store', 'SiteController@store')->middleware('auth.oauth', 'clean.xss');
-    });
     //历史上的今天
     Route::any('history', 'IndexController@history');
     //热度榜
@@ -72,6 +59,16 @@ Route::namespace('Home')->group(function () {
     Route::any('friendLinks', 'IndexController@friendLinks');
     //标签云
     Route::any('ajaxTags', 'IndexController@ajaxTags');
+
+    //用户
+    Route::prefix('user')->middleware('auth:web')->group(function () {
+        //个人中心
+        Route::get('/', 'UserController@index');
+        //文章评论
+        Route::post('edit', 'UserController@edit');
+        //文章评论
+        Route::post('comment', 'UserController@comment');
+    });
 
     // 工具类
     Route::prefix('tools')->group(function () {

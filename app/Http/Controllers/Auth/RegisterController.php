@@ -92,6 +92,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'avatar' => $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/avatar_l.jpg'
         ]);
     }
 
@@ -104,10 +105,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-        $data = array_merge($request->all(), [
-            'avatar' => $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/avatar_medium.jpg'
-        ]);
-        event(new Registered($user = $this->create($data)));
+        event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
 

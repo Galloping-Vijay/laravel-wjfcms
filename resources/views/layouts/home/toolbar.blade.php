@@ -18,7 +18,7 @@
                             <div class="clear"></div>
                             <div class="logged">
                                 <b>{{ Auth::user()->name }}，您好！</b>
-                                <a href="/user/mine">个人中心</a>
+                                <a href="/user">个人中心</a>
                                 <a href="/auth/logout">退出</a>
                             </div>
                         </div>
