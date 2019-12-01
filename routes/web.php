@@ -18,6 +18,9 @@ Route::get('test', function () {
     pr(2);
 });
 
+//错误页
+Route::get('blank', 'Home\BlankController@index');
+
 //用户登录注册
 Auth::routes();
 Route::namespace('Auth')->prefix('auth')->group(function () {
@@ -64,8 +67,11 @@ Route::namespace('Home')->group(function () {
     Route::prefix('user')->middleware('auth:web')->group(function () {
         //个人中心
         Route::get('/', 'UserController@index');
-        //文章评论
-        Route::post('edit', 'UserController@edit');
+        // 上传图片
+        Route::post('uploadImage', 'UserController@uploadImage');
+        //编辑
+        Route::get('modify', 'UserController@modify');
+        Route::post('update', 'UserController@update');
         //文章评论
         Route::post('comment', 'UserController@comment');
     });

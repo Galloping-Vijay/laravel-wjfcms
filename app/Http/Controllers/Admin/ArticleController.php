@@ -11,8 +11,6 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use function foo\func;
-use phpDocumentor\Reflection\Types\Self_;
 
 class ArticleController extends Controller
 {
@@ -242,78 +240,5 @@ class ArticleController extends Controller
             DB::rollBack();
             return $this->resJson(1, $e->getMessage());
         }
-    }
-
-    /**
-     * Description:上传图片
-     * User: Vijay
-     * Date: 2019/6/29
-     * Time: 20:37
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
-    public function uploadImage(Request $request)
-    {
-        $date = date('Ymd');
-        //复制到编辑器的图片,直接base64的图片
-        if ($request->input('base64_img')) {
-            //正则匹配
-            if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $request->input('base64_img'), $result)) {
-                //获取图片
-                $base64_img = base64_decode(str_replace($result[1], '', $request->input('base64_img')));
-                //设置名称
-                $src = date("YmdHis") . getRandomStr(6) . '.png';
-                //设置路径
-                $path = 'uploads/' . $date;
-                //拼接完整文件路径
-                $pathSrc = $path . '/' . $src;
-                //路径检测和创建
-                if (!is_dir($path)) {
-                    mkdir($path, 0777, true);
-                }
-                //存储图片
-                file_put_contents($pathSrc, $base64_img);//保存图片，返回的是字节数
-                //设置返回值
-                $data['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $path . '/' . $src;
-                $data['title'] = '文章图片';
-                if (file_exists($pathSrc)) {
-                    waterMarkImage($data['src']);
-                    return self::resJson(0, '上传成功', $data);
-                }
-                return self::resJson(1, '上传失败');
-            }
-            return self::resJson(1, '不是base64格式');
-        } elseif ($request->hasFile('file')) {
-            //文件请求方式
-            $path = $request->file('file')->store('', 'uploads');
-            if ($path) {
-                $data['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/uploads/' . $date . '/' . $path;
-                $data['title'] = '文章图片';
-                waterMarkImage($data['src'], true);
-                return self::resJson(0, '上传成功', $data);
-            } else {
-                return self::resJson(1, '上传失败');
-            }
-        } elseif ($request->hasFile('editormd-image-file')) {
-            //markdown添加图片
-            $result = self::imageUpload('editormd-image-file');
-            if ($result['status_code'] === 200) {
-                $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $result['data'][0]['path'];
-                waterMarkImage($url);
-                $data = [
-                    'success' => 1,
-                    'message' => $result['message'],
-                    'url' => $url,
-                ];
-            } else {
-                $data = [
-                    'success' => 0,
-                    'message' => $result['message'],
-                    'url' => '',
-                ];
-            }
-            return response()->json($data);
-        }
-        return self::resJson(1, '没有要上传的文件');
     }
 }

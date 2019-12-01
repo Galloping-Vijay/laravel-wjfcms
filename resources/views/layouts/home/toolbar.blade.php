@@ -101,12 +101,11 @@
 <script>
     layui.config({
         base: "/static/layuiadmin/"
-    }).use([ 'table', 'form'], function () {
+    }).use(['form'], function () {
         var layer = layui.layer;
         var form = layui.form;
         //提交
         form.on('submit(ajaxLogin)', function(data){
-
             $.ajax({
                 type: 'post',
                 dataType: 'json',

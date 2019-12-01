@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Validation\Rule;
+
+class UserRequest extends RequestPost
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name' => ['required', 'max:255', Rule::unique('users')->ignore($this->id)],
+            'tel' => ['required', function ($attribute, $value, $fail) {
+                if (!preg_match("/^1[345678]{1}\d{9}$/", $value)) {
+                    $fail('请输入正确的手机号码');
+                }
+            }],
+        ];
+    }
+}

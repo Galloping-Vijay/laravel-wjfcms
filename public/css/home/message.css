@@ -24,7 +24,7 @@
     font-size: 14px;
     color: #545454;
     line-height: 2.5;
-    width: 45%;
+    width: 46%;
     float: left;
 }
 .links-lists li{
@@ -38,7 +38,7 @@
     text-align: center;
 }
 .links-lists .user-edit a{
-    background: #00b4aa;
+    background: #2e74e5;;
     padding: 10px;
     border-radius: 15px;
     color: #fff;

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Traits\TraitsModel;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use phpDocumentor\Reflection\Types\Self_;
 
 class User extends Authenticatable
 {
@@ -37,4 +38,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @var array
+     */
+    public static $sexList = [
+        '保密', '男', '女'
+    ];
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/12/1
+     * Time: 9:34
+     * @return mixed
+     */
+    public function getSexTextAttribute()
+    {
+        return Self::$sexList[$this->sex];
+    }
 }
