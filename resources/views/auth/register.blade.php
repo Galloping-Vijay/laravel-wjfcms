@@ -37,6 +37,20 @@
                         @endif
                     </div>
                     <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱验证</label>
+                        <div class="layui-col-xs4">
+                            <input type="text" required lay-verify="required" placeholder="邮箱验证码" class="layui-input" name="email_code">
+                        </div>
+                        <div class="layui-col-xs4">
+                            <div style="margin-left: 10px;">
+                                <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid" id="getEmailCode">获取验证码</button>
+                            </div>
+                        </div>
+                        @if ($errors->has('email_code'))
+                            <div class="layui-form-mid layui-word-aux">{{ $errors->first('email_code') }}</div>
+                        @endif
+                    </div>
+                    <div class="layui-form-item">
                         <label class="layui-form-label">密码</label>
                         <div class="layui-input-block">
                             <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
@@ -91,4 +105,63 @@
         </div>
     </article>
 @endsection
+
+@section('script')
+    @parent
+    <script>
+        var seconds = 60;
+        var disabledClass = 'layui-disabled';
+        function countdown(loop){
+            seconds--;
+            if(seconds < 0){
+                $("#getEmailCode").removeClass(disabledClass).html('获取验证码');
+                seconds = 60;
+                clearInterval(timer);
+            } else {
+                $("#getEmailCode").addClass(disabledClass).html(seconds + '秒后重获');
+            }
+            if(!loop){
+                timer = setInterval(function(){
+                    countdown(true);
+                }, 1000);
+            }
+        }
+        $('#getEmailCode').click(function () {
+            if(seconds != 60)  return false;
+            var email =  $("input[name='email']").val();
+            if(!email){
+                layer.msg('请输入正确的邮箱!');
+                return false;
+            }
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                data: {email:email,_token:"{{ csrf_token() }}"},
+                url: '/tools/getEmailCode',
+                success: function (res) {
+                    if(res.code === 0){
+                        layer.msg(res.msg, {
+                            offset: '15px'
+                            , icon: 1
+                            , time: 1000
+                        }, function () {
+                            //成功开始倒计时
+                            countdown(false);
+                        });
+                    }else{
+                        layer.msg(res.msg, {
+                            offset: '15px'
+                            , icon: 2
+                            , time: 1000
+                        }, function () {
+
+                        });
+                    }
+                }
+            });
+        });
+
+    </script>
+@endsection
+
 

@@ -6,12 +6,14 @@ use App\Models\Category;
 use App\Models\Nav;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -74,6 +76,12 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
             'captcha' => ['required', 'captcha'],
+            'email_code' => ['required', function ($attribute, $value, $fail) use ($data) {
+                $cacheEmail = Cache::get($data['email']);
+                if ($cacheEmail != $value) {
+                    $fail('邮箱验证失败!');
+                }
+            }]
         ], [
             'captcha.required' => trans('validation.required'),
             'captcha.captcha' => trans('validation.captcha'),
@@ -92,7 +100,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'avatar' => $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/avatar_l.jpg'
+            'avatar' => $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/avatar_l.jpg',
+            'email_verified_at' => date('Y-m-d H:i:s'),
         ]);
     }
 

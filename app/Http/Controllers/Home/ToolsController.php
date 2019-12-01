@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Home;
 
 use App\Libs\Tuling;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 use Vijay\Curl\Curl;
 
 class ToolsController extends Controller
@@ -57,10 +59,66 @@ class ToolsController extends Controller
         return response()->json($res);
     }
 
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/12/1
+     * Time: 21:03
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function tuling()
     {
         $res = Tuling::handle()->param('德玛西亚')->answer();
         dd($res);
         return response()->json($res);
+    }
+
+    /**
+     * Description:验证邮箱
+     * User: Vijay
+     * Date: 2019/12/1
+     * Time: 21:39
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getEmailCode(Request $request)
+    {
+        $email = $request->input('email');
+        $info = User::where('email', $email)->first();
+        if ($info) {
+            $data = [
+                'code' => 1,
+                'msg' => '该邮箱已被注册',
+                'data' => [],
+                'create_time' => date('Y-m-d H:i:s', time())
+            ];
+            return response()->json($data);
+        }
+        //发送验证码
+        $code = mt_rand(1000, 9999);
+        Cache::put($email, $code, 60);
+        $subject = env('MAIL_FROM_NAME');
+        $msg = '【臭大佬】邮箱验证码：' . $code . '，如非本人操作，请忽略本消息。';
+        Mail::raw($msg, function ($message) use ($email, $subject) {
+            $message->to($email)->subject($subject);
+        });
+        //错误处理
+        if (count(Mail::failures()) < 1) {
+            $data = [
+                'code' => 0,
+                'msg' => '发送邮件成功，请查收！',
+                'data' => [],
+                'create_time' => date('Y-m-d H:i:s', time())
+            ];
+            return response()->json($data);
+        } else {
+            $data = [
+                'code' => 1,
+                'msg' => '邮箱验证码发送失败,请联系臭大佬(微信:wjf1937832819)',
+                'data' => [],
+                'create_time' => date('Y-m-d H:i:s', time())
+            ];
+            return response()->json($data);
+        }
     }
 }
