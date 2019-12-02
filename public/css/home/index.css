@@ -76,7 +76,7 @@ h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0;overflow: hidden;
 .paihang li img { height: 100%; margin: auto; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; transition: all .5s ease; }
 .paihang ul li:hover i img { transform: scale(1.1) }
 /*links*/
-.links { width: 100%; background: #FFF; overflow: hidden; }
+.links { width: 100%; background: #FFF; overflow: hidden;margin-bottom: 20px; }
 .links ul { padding: 20px; overflow: hidden }
 .links ul a { line-height: 24px; margin: 0 10px 0 0; display: block; float: left }
 .links ul a:hover { text-decoration: underline }

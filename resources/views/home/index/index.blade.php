@@ -66,15 +66,15 @@
             @endcomponent
             @component('./layouts/home/search')
             @endcomponent
+            @component('./layouts/home/publicwx')
+            @endcomponent
+            @component('./layouts/home/links')
+            @endcomponent
             @component('./layouts/home/tag')
             @endcomponent
             @component('./layouts/home/hot')
             @endcomponent
-            @component('./layouts/home/links')
-            @endcomponent
             @component('./layouts/home/cloud')
-            @endcomponent
-            @component('./layouts/home/history')
             @endcomponent
         </div>
     </article>
