@@ -97,7 +97,7 @@
             </script>
             <!--评论PC版-->
             <div id="SOHUCS" sid="{{ $info->id }}" style="width: 84%;"></div>
-            <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+            <script charset="utf-8" type="text/javascript" src="{{ asset('js/home/changyan/changyan.js') }}" ></script>
             <script type="text/javascript">
                 window.changyan.api.config({
                     appid: 'cyuz620gF',
