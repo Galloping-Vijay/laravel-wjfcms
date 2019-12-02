@@ -73,7 +73,7 @@
                         <label class="layui-form-label">验证码</label>
                         <div class="layui-input-inline" style="width: 100px;">
                             <img src="{{captcha_src()}}" style="cursor: pointer"
-                                 onclick="this.src='{{captcha_src()}}'+Math.random()" class="captcha_src_class">
+                                 onclick="this.src='{{captcha_src()}}'+Math.random()" id="captcha_src_class">
                         </div>
                         <div class="layui-input-inline" style="width: 192px;">
                             <input type="text" required lay-verify="required" placeholder="请输入验证码" class="layui-input" name="captcha">
@@ -111,7 +111,10 @@
     <script>
         $(document).ready(function(){
             //触发点击事件
-            $("captcha_src_class").trigger("click");
+            setTimeout( function(){
+                //更新验证码
+                document.getElementById('captcha_src_class').click();
+            }, 5 * 1000 );
 
 
             var seconds = 60;
