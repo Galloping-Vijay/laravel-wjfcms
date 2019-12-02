@@ -56,7 +56,7 @@
                 <h3 class="news_title">{{ $info->title }}</h3>
                 <div class="news_author">
                     <span class="au01">{{ $info->author }}</span>
-                    <span class="au02">{{ $info->updated_at }}</span>
+                    <span class="au02">{{ $info->created_at }}</span>
                     <span class="viewnum">{{ $info->click }}</span>
                 </div>
                 <div class="tags">
