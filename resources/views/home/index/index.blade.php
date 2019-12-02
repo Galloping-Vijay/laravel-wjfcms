@@ -70,11 +70,11 @@
             @endcomponent
             @component('./layouts/home/links')
             @endcomponent
+            @component('./layouts/home/cloud')
+            @endcomponent
             @component('./layouts/home/tag')
             @endcomponent
             @component('./layouts/home/hot')
-            @endcomponent
-            @component('./layouts/home/cloud')
             @endcomponent
         </div>
     </article>
