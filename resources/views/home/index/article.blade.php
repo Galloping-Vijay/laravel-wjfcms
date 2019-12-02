@@ -1,49 +1,56 @@
 @extends('layouts.home')
 @section('header')
-{{--高亮  --}}
-<script src="{{ asset('static/highlight/highlight.pack.js') }}"></script>
-<link href="{{ asset('static/highlight/styles/sunburst.css') }}" rel="stylesheet">
-<script>hljs.initHighlightingOnLoad();</script>
-{{--复制--}}
-<script src="{{ asset('static/clipboard/dist/clipboard.min.js') }}" type="text/javascript" ></script>
-<style>
-    pre{
-        position: relative;
-        padding: 0;
-        display: inherit;
-    }
-    pre:hover .btn-copy{
-        opacity: 1;
-    }
-    .btn-copy {
-        display: inline-block;
-        cursor: pointer;
-        background-color: #eee;
-        background-image: linear-gradient(#fcfcfc,#eee);
-        border: 1px solid #d5d5d5;
-        border-radius: 3px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-appearance: none;
-        font-size: 13px;
-        font-weight: 700;
-        line-height: 20px;
-        color: #333;
-        -webkit-transition: opacity .3s ease-in-out;
-        -o-transition: opacity .3s ease-in-out;
-        transition: opacity .3s ease-in-out;
-        padding: 2px 6px;
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        opacity: 0;
-    }
-    .btn-copy span {
-        margin-left: 5px;
-    }
-</style>
+    <script src="{{ asset('static/highlight/highlight.pack.js') }}"></script>
+    <link href="{{ asset('static/highlight/styles/sunburst.css') }}" rel="stylesheet">
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="{{ asset('static/clipboard/dist/clipboard.min.js') }}" type="text/javascript"></script>
+    <link href="{{ asset('static/layuiadmin/style/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('static/layuiadmin/style/template.css') }}" rel="stylesheet">
+    <style>
+        pre {
+            position: relative;
+            padding: 0;
+            display: inherit;
+        }
+
+        pre:hover .btn-copy {
+            opacity: 1;
+        }
+
+        .btn-copy {
+            display: inline-block;
+            cursor: pointer;
+            background-color: #eee;
+            background-image: linear-gradient(#fcfcfc, #eee);
+            border: 1px solid #d5d5d5;
+            border-radius: 3px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 20px;
+            color: #333;
+            -webkit-transition: opacity .3s ease-in-out;
+            -o-transition: opacity .3s ease-in-out;
+            transition: opacity .3s ease-in-out;
+            padding: 2px 6px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            opacity: 0;
+        }
+
+        .btn-copy span {
+            margin-left: 5px;
+        }
+        .infos-aid{
+            width: 85%;
+            margin: 0 auto;
+        }
+    </style>
 @endsection
 @section('title', $info->title.' | '.\App\Models\SystemConfig::getConfigCache('seo_title'))
 @section('keywords', $info->title)
@@ -72,55 +79,47 @@
                     {!! htmlspecialchars_decode($info->content) !!}
                 </div>
             </div>
-           {{-- <div class="share"></div>--}}
-            {{--<p>--}}
-            {{--<span class="diggits praise">--}}
-            {{--<a href="javascript:;"> 很赞哦！ </a>--}}
-            {{--(<b>0</b>)--}}
-            {{--</span>--}}
-            {{--</p>--}}
-            <p>
-    <span class="diggit award">
-        赏
-    </span>
-            </p>
-            <script>
-                $('.award').click(function () {
-                    layer.open({
-                        title: '谢谢臭大佬的打赏',
-                        type: 1,
-                        area: ['25rem', '15rem'],
-                        shadeClose: true,
-                        content: '<img src="/images/home/award.jpg"  style="width:100%"/>'
-                    });
-                })
-            </script>
-            <!--评论PC版-->
-            <div id="SOHUCS" sid="{{ $info->id }}" style="width: 84%;"></div>
-            <script charset="utf-8" type="text/javascript" src="{{ asset('js/home/changyan/changyan.js') }}" ></script>
-            <script type="text/javascript">
-                window.changyan.api.config({
-                    appid: 'cyuz620gF',
-                    conf: 'prod_3ef1231e159e9e6b689e2bd15babaa0c'
-                });
-            </script>
-            <div class="nextinfo">
-                <p>上一篇：
-                    @if(!empty($pre))
-                        <a href="/article/{{ $pre->id }}" title="{{ $pre->title }}">{{ $pre->title }}</a>
-                    @else
-                        <a href="javascript:void(0);">已经是第一篇了</a>
-                    @endif
-                </p>
-                <p>下一篇：
-                    @if(!empty($next))
-                        <a href="/article/{{ $next->id }}" title="{{ $next->title }}">{{ $next->title }}</a>
-                    @else
-                        <a href="javascript:void(0);">已经是最后一篇了</a>
-                    @endif
-                </p>
-
+            <div class="infos-aid">
+                {{-- <div class="share"></div>--}}
+                {{--<p>--}}
+                {{--<span class="diggits praise">--}}
+                {{--<a href="javascript:;"> 很赞哦！ </a>--}}
+                {{--(<b>0</b>)--}}
+                {{--</span>--}}
+                {{--</p>--}}
+                <p><span class="diggit award">赏</span></p>
+                <script>
+                    $('.award').click(function () {
+                        layer.open({
+                            title: '谢谢臭大佬的打赏',
+                            type: 1,
+                            area: ['25rem', '15rem'],
+                            shadeClose: true,
+                            content: '<img src="/images/home/award.jpg"  style="width:100%"/>'
+                        });
+                    })
+                </script>
+                <div class="nextinfo">
+                    <p>上一篇：
+                        @if(!empty($pre))
+                            <a href="/article/{{ $pre->id }}" title="{{ $pre->title }}">{{ $pre->title }}</a>
+                        @else
+                            <a href="javascript:void(0);">已经是第一篇了</a>
+                        @endif
+                    </p>
+                    <p>下一篇：
+                        @if(!empty($next))
+                            <a href="/article/{{ $next->id }}" title="{{ $next->title }}">{{ $next->title }}</a>
+                        @else
+                            <a href="javascript:void(0);">已经是最后一篇了</a>
+                        @endif
+                    </p>
+                </div>
             </div>
+            {{-- 留言开始--}}
+            @component('./layouts/home/msgboard')
+            @endcomponent
+            {{-- 留言结束--}}
         </div>
         <div class="sidebar">
             @component('./layouts/home/search')
@@ -141,28 +140,28 @@
     @parent
 
     <script>
-        $(function() {
+        $(function () {
             var layer = null;
             //一般直接写在一个js文件中
-            layui.use(['layer'], function(){
+            layui.use(['layer'], function () {
                 layer = layui.layer;
             });
             /* code */
-            var initCopyCode = function(){
+            var initCopyCode = function () {
                 var copyHtml = '';
                 copyHtml += '<button class="btn-copy" data-clipboard-action="copy" data-clipboard-target=".copyCode">';
                 copyHtml += '  <i class="fa fa-globe"></i><span>copy</span>';
                 copyHtml += '</button>';
                 $("pre code").before(copyHtml);
-                var clipboard  = new ClipboardJS('.btn-copy', {
-                    target: function(trigger) {
+                var clipboard = new ClipboardJS('.btn-copy', {
+                    target: function (trigger) {
                         return trigger.nextElementSibling;
                     }
                 });
-                clipboard.on('success', function(e) {
+                clipboard.on('success', function (e) {
                     layer.msg('复制成功');
                 });
-                clipboard.on('error', function(e) {
+                clipboard.on('error', function (e) {
                     console.log(e);
                 });
             };
