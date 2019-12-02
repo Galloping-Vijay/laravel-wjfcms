@@ -110,12 +110,9 @@
     @parent
     <script>
         $(document).ready(function(){
-            //触发点击事件
             setTimeout( function(){
-                //更新验证码
                 document.getElementById('captcha_src_class').click();
             }, 5 * 1000 );
-
 
             var seconds = 60;
             var disabledClass = 'layui-disabled';
