@@ -99,7 +99,7 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             $data = [
                 'code' => 1,
-                'msg' => $e->getMessage(),
+                'msg' => '登录失败,请检查账号密码',
                 'data' => []
             ];
             return response($data);

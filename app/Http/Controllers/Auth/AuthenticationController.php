@@ -64,7 +64,9 @@ class AuthenticationController extends Controller
         // 手动登录该用户
         Auth::guard('web')->login($user);
         // 登录成功后将用户重定向到首页
-        return redirect('/');
+        //return redirect('/');
+        //登录成功后跳转登录前的那页
+        return redirect()->back();
     }
 
     /**

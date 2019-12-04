@@ -6,6 +6,7 @@ use App\Http\Traits\TraitFront;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Chat;
+use App\Models\Comment;
 use App\Models\FriendLink;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -83,7 +84,7 @@ class IndexController extends Controller
     {
         $info = Article::find($id);
         if (empty($info) || $info->status == 0) {
-            return redirect('/');
+            return redirect()->back();
         }
         $info->click += 1;
         $info->save();
@@ -257,5 +258,27 @@ class IndexController extends Controller
     {
         $tags = Tag::select('id', 'name')->get();
         return $this->resJson('0', '获取成功', $tags);
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/12/4
+     * Time: 22:54
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function ajaxComment(Request $request)
+    {
+        $article_id = $request->input('article_id');
+        $comment_limit = $request->input('comment_limit', 5);
+        $comment_page = $request->input('comment_page', 1);
+        $art = Article::find($article_id);
+        if (!$art) {
+            return $this->resJson('1', '不存在该文章', []);
+        }
+        //获取评论
+        $comments = Comment::getComment($article_id, $comment_page, $comment_limit);
+        return $this->resJson('0', '获取成功', $comments);
     }
 }

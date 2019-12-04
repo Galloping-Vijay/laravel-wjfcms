@@ -34,7 +34,7 @@
                                 <input name="password" required lay-verify="required" type="password" class="inputText" size="16" placeholder="密码">
                                 <div class="captcha">
                                     <div class="layui-input-inline" style="width: 100px;">
-                                        <img src="{{captcha_src()}}" style="cursor: pointer;height: 32px;height: 32px;"
+                                        <img class="captcha_src_ajax" src="{{captcha_src()}}" style="cursor: pointer;height: 32px;height: 32px;"
                                              onclick="this.src='{{captcha_src()}}'+Math.random()">
                                     </div>
                                     <div class="layui-input-inline" style="width: 100px;">
@@ -118,7 +118,7 @@
                             , icon: 1
                             , time: 1000
                         }, function () {
-                            location.href = '/'; //主页
+                            location.reload();
                         });
                     }else{
                         layer.msg(res.msg, {
@@ -126,7 +126,7 @@
                             , icon: 2
                             , time: 1000
                         }, function () {
-
+                            $('.captcha_src_ajax').click();
                         });
                     }
                 }

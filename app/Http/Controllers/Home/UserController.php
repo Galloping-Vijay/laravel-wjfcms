@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Traits\TraitResource;
 use App\Http\Traits\TraitUpload;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -113,6 +115,31 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return $this->resJson(1, $e->getMessage());
         }
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/12/4
+     * Time: 22:16
+     * @param CommentRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function comment(CommentRequest $request)
+    {
+        $data = [
+            'user_id' => $request->input('user_id'),
+            'article_id' => $request->input('article_id'),
+            'type' => 1,
+            'pid' => $request->input('pid', 0),
+            'status' => 0,
+            'content' => htmlspecialchars($request->input('content')),
+        ];
+        $res = Comment::create($data);
+        if (!$res) {
+            return $this->resJson(1, '评论失败', []);
+        }
+        return $this->resJson(0, '评论成功',[]);
     }
 
     /**

@@ -46,7 +46,8 @@
         .btn-copy span {
             margin-left: 5px;
         }
-        .infos-aid{
+
+        .infos-aid {
             width: 85%;
             margin: 0 auto;
         }
@@ -117,7 +118,7 @@
                 </div>
             </div>
             {{-- 留言开始--}}
-            @component('./layouts/home/msgboard')
+            @component('./layouts/home/msgboard', ['article_id' =>$info->id])
             @endcomponent
             {{-- 留言结束--}}
         </div>
