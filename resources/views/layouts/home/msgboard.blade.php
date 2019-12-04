@@ -25,6 +25,10 @@
         padding-bottom: 0;
     }
 
+    .media-left {
+        float: left;
+    }
+
     .message-text {
         margin-top: -30px;
     }
@@ -38,25 +42,37 @@
         margin-top: 0;
         margin-bottom: 3px;
     }
+
     .layui-breadcrumb {
         visibility: inherit;
         font-size: 2px;
     }
-    .message-content-btn{
+
+    .message-content-btn {
         margin-bottom: 30px;
     }
-    .message-action{
+
+    .message-action {
         text-align: right;
         cursor: pointer;
         margin-bottom: 5px;
         color: #009688;
     }
-    .message-action span{
+
+    .message-action span {
         margin-left: 8px;
     }
-    .message-action span img:hover{
-        content: url('/images/home/icon/cai.png');
-        /*filter:drop-shadow(#e74851 0 1px);*/
+
+    .message-action .message-reply img:hover {
+        content: url('/images/home/icon/reply_red.png');
+    }
+
+    .message-action .message-zan img:hover {
+        content: url('/images/home/icon/zan_red.png');
+    }
+
+    .message-action .message-cai img:hover {
+        content: url('/images/home/icon/cai_red.png');
     }
 </style>
 <div class="layui-fluid layadmin-message-fluid">
@@ -82,17 +98,17 @@
         </div>
         <div class="layui-col-md12 layadmin-homepage-list-imgtxt message-content">
             <div class="media-body">
-                <a href="javascript:;" class="media-left" style="float: left;">
+                <a href="javascript:;" class="media-left">
                     <img src="/images/config/avatar_l.jpg" height="46px" width="46px">
                 </a>
                 <div class="pad-btm">
                     <p class="fontColor"><a href="javascript:;">胡歌</a></p>
                     <p class="min-font">
-              <span class="layui-breadcrumb" lay-separator="-">
-                <a href="javascript:;" class="">设备</a>
-                <a href="javascript:;">从移动</a>
-                <a href="javascript:;">11分钟前</a>
-              </span>
+                     <span class="layui-breadcrumb" lay-separator="-">
+                        <a href="javascript:;" class="layui-icon layui-icon-cellphone"></a>
+                        <a href="javascript:;">从移动</a>
+                        <a href="javascript:;">11分钟前</a>
+                      </span>
                     </p>
                 </div>
                 <p class="message-text">@索尼中国
@@ -103,9 +119,29 @@
                     <span class="message-zan"><img src="/images/home/icon/zan.png" alt="点赞" title="点赞"></span>
                     <span class="message-cai"><img src="/images/home/icon/cai.png" alt="狂踩" title="狂踩"></span>
                 </p>
+                <div class="layui-col-md12">
+                    <form class="layui-form">
+                        <div class="layui-form-item layui-form-text">
+                            <div class="layui-input-block">
+                                <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="overflow: hidden;">
+                            <div class="layui-input-block layui-input-right">
+                                <button class="layui-btn" lay-submit lay-filter="formDemo">发表</button>
+                            </div>
+                            <div class="layadmin-messag-icon">
+                                <a href="javascript:;"><i class="layui-icon layui-icon-face-smile-b"></i></a>
+                                <a href="javascript:;"><i class="layui-icon layui-icon-picture"></i></a>
+                                <a href="javascript:;"><i class="layui-icon layui-icon-link"></i></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
+
             <div class="media-body">
-                <a href="javascript:;" class="media-left" style="float: left;">
+                <a href="javascript:;" class="media-left">
                     <img src="/images/config/avatar_l.jpg" height="46px" width="46px">
                 </a>
                 <div class="pad-btm">
