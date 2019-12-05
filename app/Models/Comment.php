@@ -14,7 +14,7 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'type', 'pid', 'article_id', 'content', 'status', 'created_at'
+        'user_id', 'type', 'pid', 'origin_id', 'article_id', 'content', 'status', 'created_at'
     ];
 
     /**
@@ -96,41 +96,56 @@ class Comment extends Model
                 ['comments.status', '=', 1],
                 ['comments.type', '=', 1],
                 ['comments.pid', '=', 0],
-            ])->select('comments.id', 'comments.pid', 'comments.content', 'comments.created_at', 'comments.user_id', 'users.name', 'users.avatar')
+            ])->select('comments.id', 'comments.pid', 'comments.origin_id', 'comments.content', 'comments.created_at', 'comments.user_id', 'users.name as user_name', 'users.avatar')
             ->orderBy('comments.created_at', 'desc')
             ->paginate($comment_limit, ['*'], 'comment_page', $comment_page);
         //第二级
         if (!$comments->isEmpty()) {
             foreach ($comments as $key => $val) {
                 $comments[$key]['content'] = htmlspecialchars_decode($val['content']);
-                $comments[$key]['child'] = self::getChild($val['id']);
+                $comments[$key]['child'] = self::getTwoLevels($val['id']);
             }
         }
         return $comments;
     }
 
-    public static function getTwoLevels($pid)
+    /**
+     * Description:两级评论
+     * User: Vijay
+     * Date: 2019/12/5
+     * Time: 21:29
+     * @param $origin_id
+     * @return mixed
+     */
+    public static function getTwoLevels($origin_id)
     {
         $commentArr = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
             ->where([
                 ['comments.status', '=', 1],
                 ['comments.type', '=', 1],
-                ['comments.pid', '=', $pid],
-            ])->select('comments.id', 'comments.pid', 'comments.content', 'comments.created_at', 'comments.user_id', 'users.name', 'users.avatar')
+                ['comments.origin_id', '=', $origin_id],
+            ])->select('comments.id', 'comments.pid', 'comments.origin_id', 'comments.content', 'comments.created_at', 'comments.user_id', 'users.name as user_name', 'users.avatar')
             ->orderBy('comments.created_at', 'desc')
             ->get()
             ->toArray();
 
-        $func = '';
         if (count($commentArr) > 0) {
             foreach ($commentArr as $key => &$val) {
                 $commentArr[$key]['content'] = htmlspecialchars_decode($val['content']);
-                $commentArr[$key]['child'] = self::getChild($val['id']);
+                $commentArr[$key]['answered_user_name'] = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')->where('comments.id', $val['pid'])->select('users.name')->first()->name;
             }
         }
         return $commentArr;
     }
 
+    /**
+     * Description:树形评论
+     * User: Vijay
+     * Date: 2019/12/5
+     * Time: 21:30
+     * @param $pid
+     * @return mixed
+     */
     public static function getChild($pid)
     {
         $commentArr = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')

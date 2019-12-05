@@ -28,6 +28,10 @@
     .media-left {
         float: left;
     }
+    .media-left img{
+        width: 46px;
+        height:46px;
+    }
 
     .message-text {
         margin-top: -30px;
@@ -110,6 +114,8 @@
         margin-left: 50px;
     }
 </style>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/axios.min.js"></script>
 <div class="layui-fluid layadmin-message-fluid">
     <div class="layui-row">
         <div class="layui-col-md12">
@@ -132,7 +138,7 @@
                 </div>
             </form>
         </div>
-        <div class="layui-col-md12 layadmin-homepage-list-imgtxt message-content">
+        <div class="layui-col-md12 layadmin-homepage-list-imgtxt message-content" id="vue_app">
             <div class="media-body">
                 <a href="javascript:;" class="media-left">
                     <img src="/images/home/girl_46.jpg" height="46px" width="46px">
@@ -301,6 +307,32 @@
         }
     };
 
+    new Vue({
+        el: '#vue_app',
+        data: {
+            current_page:1,
+            comment:[
+                {
+                    id:1,
+                    pid:0,
+                    origin_id:1,
+                    content:'评论内容',
+                    created_at:'2019-12-1 00:00:00',
+                    user_id:9,
+                    
+                }
+            ]
+        },
+        mounted () {
+            axios
+                .post('https://www.runoob.com/try/ajax/demo_axios_post.php')
+                .then(response => (this.info = response))
+                .catch(function (error) { // 请求失败处理
+                    console.log(error);
+                });
+        }
+    });
+
     layui.config({
         base: "/static/layuiadmin/"
     }).use(['form'], function () {
@@ -310,22 +342,21 @@
         var article_id = "{{ $article_id }}";
         var user_id = "{{ auth()->id() }}";
 
-        //获取评论
-        $.ajax({
-            type: 'post',
-            dataType: 'json',
-            data: {article_id:article_id},
-            headers: {
-                'X-CSRF-TOKEN': csrf_token
-            },
-            url: '/ajaxComment',
-            success: function (res) {
-                console.log(res);
-                if (res.code === 0) {
-                    var html = '';
-                }
-            }
-        });
+        // //获取评论
+        // $.ajax({
+        //     type: 'post',
+        //     dataType: 'json',
+        //     data: {article_id:article_id},
+        //     headers: {
+        //         'X-CSRF-TOKEN': csrf_token
+        //     },
+        //     url: '/ajaxComment',
+        //     success: function (res) {
+        //         if (res.code === 0) {
+        //             var html = '';
+        //         }
+        //     }
+        // });
 
         form.on('submit(ajaxComment)', function (data) {
             if (!user_id) {
@@ -373,22 +404,21 @@
             });
             return false;
         });
-
-        $('.message-reply').on('click', function () {
+        $("body").delegate(".message-reply","click", function(){
             $(this).parent().next().toggle();
         });
-        $('.message-zan').on('click', function () {
+        $("body").delegate(".message-zan","click", function(){
             layer.msg('点赞加1,变红');
             //$.ajax();
             var html = '<img src="/images/home/icon/zan_red.png" alt="点赞" title="点赞"><em class="succeed">+3</em>';
             $(this).html(html);
         });
-        $('.message-cai').on('click', function () {
+        $("body").delegate(".message-cai","click", function(){
             layer.msg('踩加1,变红');
             var html = '<img src="/images/home/icon/cai_red.png" alt="狂踩" title="狂踩"><em class="succeed">+31</em>';
             $(this).html(html);
         });
-        $('.layui-btn-primary').on('click', function () {
+        $("body").delegate(".layui-btn-primary","click", function(){
             $(this).parents('.reply-content').hide();
             return false;
         })

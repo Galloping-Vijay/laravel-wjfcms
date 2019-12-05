@@ -132,6 +132,7 @@ class UserController extends Controller
             'article_id' => $request->input('article_id'),
             'type' => 1,
             'pid' => $request->input('pid', 0),
+            'origin_id' => $request->input('origin_id', 0),
             'status' => 0,
             'content' => htmlspecialchars($request->input('content')),
         ];
@@ -142,20 +143,4 @@ class UserController extends Controller
         return $this->resJson(0, '评论成功',[]);
     }
 
-    /**
-     * Description:
-     * User: Vijay
-     * Date: 2019/12/1
-     * Time: 11:52
-     * @param $id
-     * @return bool
-     */
-    public static function Rule($id)
-    {
-        $user = Auth::user();
-        if ($user->id != $id) {
-            return false;
-        }
-        return true;
-    }
 }

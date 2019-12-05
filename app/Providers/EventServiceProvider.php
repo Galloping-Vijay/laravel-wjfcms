@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Article;
+use App\Models\Comment;
 use App\Observers\ArticleObserver;
+use App\Observers\CommentObserver;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -32,5 +34,6 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
         //观察者监听模型事件
         //Article::observe(ArticleObserver::class);
+        Comment::observe(CommentObserver::class);
     }
 }
