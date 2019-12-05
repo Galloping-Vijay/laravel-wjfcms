@@ -55,7 +55,7 @@ Route::namespace('Home')->group(function () {
     //申请友情链接
     Route::post('applyLink', 'IndexController@applyLink');
     //获取评论
-    Route::post('ajaxComment', 'IndexController@ajaxComment');
+    Route::any('ajaxComment', 'IndexController@ajaxComment');
     //历史上的今天
     Route::any('history', 'IndexController@history');
     //热度榜

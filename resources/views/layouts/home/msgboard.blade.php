@@ -311,7 +311,7 @@
         var user_id = "{{ auth()->id() }}";
 
         //获取评论
-       /* $.ajax({
+        $.ajax({
             type: 'post',
             dataType: 'json',
             data: {article_id:article_id},
@@ -325,7 +325,7 @@
                     var html = '';
                 }
             }
-        });*/
+        });
 
         form.on('submit(ajaxComment)', function (data) {
             if (!user_id) {

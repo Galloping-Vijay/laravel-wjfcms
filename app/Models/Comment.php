@@ -90,7 +90,7 @@ class Comment extends Model
     public static function getComment($art_id, $comment_page = 1, $comment_limit = 5)
     {
         //第一级
-        $commentArray = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
+        $comments = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
             ->where([
                 ['comments.article_id', '=', $art_id],
                 ['comments.status', '=', 1],
@@ -100,24 +100,54 @@ class Comment extends Model
             ->orderBy('comments.created_at', 'desc')
             ->paginate($comment_limit, ['*'], 'comment_page', $comment_page);
         //第二级
-        $commentArray['child'] = [];
-        if (!$commentArray->isEmpty()) {
-            foreach ($commentArray as $key => $val) {
-                $commentArray[$key]['content'] = htmlspecialchars_decode($val['content']);
-
-                $commentArr = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
-                    ->where([
-                        ['comments.article_id', '=', $art_id],
-                        ['comments.status', '=', 1],
-                        ['comments.type', '=', 1],
-                        ['comments.pid', '=', $val['id']],
-                    ])->select('comments.id', 'comments.pid', 'comments.content', 'comments.created_at', 'comments.user_id', 'users.name', 'users.avatar')
-                    ->orderBy('comments.created_at', 'desc')
-                    ->get()
-                    ->toArray();
-                //三级一下都遍历到二级里面
+        if (!$comments->isEmpty()) {
+            foreach ($comments as $key => $val) {
+                $comments[$key]['content'] = htmlspecialchars_decode($val['content']);
+                $comments[$key]['child'] = self::getChild($val['id']);
             }
         }
-        return $commentArray;
+        return $comments;
+    }
+
+    public static function getTwoLevels($pid)
+    {
+        $commentArr = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
+            ->where([
+                ['comments.status', '=', 1],
+                ['comments.type', '=', 1],
+                ['comments.pid', '=', $pid],
+            ])->select('comments.id', 'comments.pid', 'comments.content', 'comments.created_at', 'comments.user_id', 'users.name', 'users.avatar')
+            ->orderBy('comments.created_at', 'desc')
+            ->get()
+            ->toArray();
+
+        $func = '';
+        if (count($commentArr) > 0) {
+            foreach ($commentArr as $key => &$val) {
+                $commentArr[$key]['content'] = htmlspecialchars_decode($val['content']);
+                $commentArr[$key]['child'] = self::getChild($val['id']);
+            }
+        }
+        return $commentArr;
+    }
+
+    public static function getChild($pid)
+    {
+        $commentArr = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
+            ->where([
+                ['comments.status', '=', 1],
+                ['comments.type', '=', 1],
+                ['comments.pid', '=', $pid],
+            ])->select('comments.id', 'comments.pid', 'comments.content', 'comments.created_at', 'comments.user_id', 'users.name', 'users.avatar')
+            ->orderBy('comments.created_at', 'desc')
+            ->get()
+            ->toArray();
+        if (count($commentArr) > 0) {
+            foreach ($commentArr as $key => &$val) {
+                $commentArr[$key]['content'] = htmlspecialchars_decode($val['content']);
+                $commentArr[$key]['child'] = self::getChild($val['id']);
+            }
+        }
+        return $commentArr;
     }
 }
