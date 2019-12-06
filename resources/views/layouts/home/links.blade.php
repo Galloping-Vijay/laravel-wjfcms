@@ -39,9 +39,9 @@
         $('.add_links').click(function () {
             layer.open({
                 title: '友链提交',
-                content: '网站名称:<input type="text" name="name" class="layui-layer-input" placeholder="请输入网站名称" value=""></p ><p>网站链接<input type="text" name="url" class="layui-layer-input" placeholder="请输入以http或https开头的url" value=""></p >联系邮箱:<input type="text" name="email" class="layui-layer-input" placeholder="联系邮箱" value=""></p >',
+                content: '网站名称:<input type="text" name="link_name" class="layui-layer-input" placeholder="请输入网站名称" value=""></p ><p>网站链接<input type="text" name="link_url" class="layui-layer-input" placeholder="请输入以http或https开头的url" value=""></p >联系邮箱:<input type="text" name="link_email" class="layui-layer-input" placeholder="联系邮箱" value=""></p >',
                 yes: function () {
-                    if ($("input[name='name']").val() != "" && $("input[name='url']").val() != "" && $("input[name='email']").val() != "") {
+                    if ($("input[name='link_name']").val() != "" && $("input[name='link_url']").val() != "" && $("input[name='link_email']").val() != "") {
                         $.ajax({
                             type: "POST",
                             url: "/applyLink",
@@ -49,9 +49,9 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             data: {
-                                name: $("input[name='name']").val(),
-                                url: $("input[name='url']").val(),
-                                email: $("input[name='email']").val()
+                                name: $("input[name='link_name']").val(),
+                                url: $("input[name='link_url']").val(),
+                                email: $("input[name='link_email']").val()
                             },
                             dataType: "json",
                             success: function (data) {
