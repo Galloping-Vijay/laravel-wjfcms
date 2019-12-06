@@ -28,9 +28,10 @@
     .media-left {
         float: left;
     }
-    .media-left img{
+
+    .media-left img {
         width: 46px;
-        height:46px;
+        height: 46px;
     }
 
     .message-text {
@@ -122,7 +123,8 @@
             <form class="layui-form" method="post" action="">
                 <div class="layui-form-item layui-form-text">
                     <div class="layui-input-block">
-                        <textarea name="content"  required  lay-verify="required" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea name="content" required lay-verify="required" placeholder="请输入内容"
+                                  class="layui-textarea"></textarea>
                     </div>
                 </div>
                 <input type="hidden" name="pid" value="0">
@@ -139,23 +141,21 @@
             </form>
         </div>
         <div class="layui-col-md12 layadmin-homepage-list-imgtxt message-content" id="vue_app">
-            <div class="media-body">
+            <div class="media-body" v-for="comment in comments">
                 <a href="javascript:;" class="media-left">
-                    <img src="/images/home/girl_46.jpg" height="46px" width="46px">
+                    <img  v-bind:src="comment.avatar" >
                 </a>
                 <div class="pad-btm">
-                    <p class="fontColor"><a href="javascript:;">猪猪</a></p>
+                    <p class="fontColor"><a href="javascript:;"> @{{ comment.user_name }} </a></p>
                     <p class="min-font">
                      <span class="layui-breadcrumb" lay-separator="-">
                         <a href="javascript:;" class="layui-icon layui-icon-cellphone"></a>
-                        <a href="javascript:;">从移动</a>
-                        <a href="javascript:;">11分钟前</a>
+                        <a href="javascript:;">@{{ comment.created_at }}</a>
+                      {{--  <a href="javascript:;">11分钟前</a>--}}
                       </span>
                     </p>
                 </div>
-                <p class="message-text">@索尼中国
-                    再献新作品—OLED电视A8F完美诞生。很开心一起参加了A8F的“首映礼”！[鼓掌]正如我们演员对舞台的热爱，索尼对科技与艺术的追求才创造出了让人惊喜的作品。作为A1兄弟款，A8F沿袭了黑科技“屏幕发声技术”和高清画质，色彩的出众表现和高端音质，让人在体验的时候如同身临其境。A8F，这次的“视帝”要颁发给你！
-                    索尼官网预售： O网页链接 索尼旗舰店预售：</p>
+                <p class="message-text">@{{ comment.content }}</p>
                 <p class="message-action">
                     <span class="message-reply"><img src="/images/home/icon/reply.png" alt="回复"
                                                      title="回复"><em>+2</em></span>
@@ -177,6 +177,9 @@
                                 </button>
                                 <button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">发表</button>
                             </div>
+                            @csrf
+                            <input type="hidden" v-model="comment.id" name="origin_id">
+                            <input type="hidden" v-model="comment.pid" name="pid">
                             <div class="layadmin-messag-icon">
                                 <a href="javascript:;"><i class="layui-icon layui-icon-face-smile-b"></i></a>
                                 <a href="javascript:;"><i class="layui-icon layui-icon-picture"></i></a>
@@ -185,99 +188,56 @@
                         </div>
                     </form>
                 </div>
-                <div class="layui-col-md12">
-                    <div class="media-body-child">
-                        <a href="javascript:;" class="media-left">
-                            <img src="/images/home/boy_46.jpg" height="46px" width="46px">
-                        </a>
-                        <div class="pad-btm">
-                            <p class="fontColor"><a href="javascript:;">花花</a></p>
-                            <p class="min-font">
-                     <span class="layui-breadcrumb" lay-separator="-">
-                        <a href="javascript:;" class="layui-icon layui-icon-cellphone"></a>
-                        <a href="javascript:;">从移动</a>
-                        <a href="javascript:;">11分钟前</a>
-                      </span>
+                <template v-if="comment.child.length>0">
+                    <div class="layui-col-md12"  v-for="child in comment.child">
+                        <div class="media-body-child">
+                            <a href="javascript:;" class="media-left">
+                                <img v-bind:src="child.avatar">
+                            </a>
+                            <div class="pad-btm">
+                                <p class="fontColor"><a href="javascript:;">@{{ child.user_name }}</a></p>
+                                <p class="min-font">
+                                 <span class="layui-breadcrumb" lay-separator="-">
+                                    <a href="javascript:;" class="layui-icon layui-icon-cellphone"></a>
+                                    <a href="javascript:;">@{{ child.created_at }}</a>
+                                   {{-- <a href="javascript:;">11分钟前</a>--}}
+                                  </span>
+                                </p>
+                            </div>
+                            <p class="message-text"><strong>@ @{{ child.answered_user_name }}:</strong>@{{ child.content }}</p>
+                            <p class="message-action">
+                                <span class="message-reply"><img src="/images/home/icon/reply.png" alt="回复" title="回复"><em>+2</em></span>
+                                <span class="message-zan"><img src="/images/home/icon/zan.png" alt="点赞"
+                                                               title="点赞"> <em>+2</em></span>
+                                <span class="message-cai"><img src="/images/home/icon/cai.png" alt="狂踩"
+                                                               title="狂踩"> <em>+30</em></span>
                             </p>
-                        </div>
-                        <p class="message-text"><strong>@猪猪:</strong>
-                            再献新作品—OLED电视A8F完美诞生。很开心一起参加了A8F的“首映礼”！[鼓掌]正如我们演员对舞台的热爱，索尼对科技与艺术的追求才创造出了让人惊喜的作品。作为A1兄弟款，A8F沿袭了黑科技“屏幕发声技术”和高清画质，色彩的出众表现和高端音质，让人在体验的时候如同身临其境。A8F，这次的“视帝”要颁发给你！
-                            索尼官网预售： O网页链接 索尼旗舰店预售：</p>
-                        <p class="message-action">
-                            <span class="message-reply"><img src="/images/home/icon/reply.png" alt="回复" title="回复"><em>+2</em></span>
-                            <span class="message-zan"><img src="/images/home/icon/zan.png" alt="点赞"
-                                                           title="点赞"> <em>+2</em></span>
-                            <span class="message-cai"><img src="/images/home/icon/cai.png" alt="狂踩"
-                                                           title="狂踩"> <em>+30</em></span>
-                        </p>
-                        <div class="layui-col-md12 reply-content">
-                            <form class="layui-form"  method="post" action="">
-                                <div class="layui-form-item layui-form-text">
-                                    <div class="layui-input-block">
-                                        <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            <div class="layui-col-md12 reply-content">
+                                <form class="layui-form" method="post" action="">
+                                    <div class="layui-form-item layui-form-text">
+                                        <div class="layui-input-block">
+                                            <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="layui-form-item" style="overflow: hidden;">
-                                    <div class="layui-input-block layui-input-right">
-                                        <button class="layui-btn layui-btn-primary" lay-filter="primary">取消</button>
-                                        <button class="layui-btn" lay-submit lay-filter="formDemo">发表</button>
+                                    @csrf
+                                    <input type="hidden" v-model="comment.id" name="origin_id">
+                                    <input type="hidden" v-model="child.pid" name="pid">
+                                    <div class="layui-form-item" style="overflow: hidden;">
+                                        <div class="layui-input-block layui-input-right">
+                                            <button class="layui-btn layui-btn-primary" lay-filter="primary">取消</button>
+                                            <button class="layui-btn" lay-submit lay-filter="formDemo">发表</button>
+                                        </div>
+                                        <div class="layadmin-messag-icon">
+                                            <a href="javascript:;"><i class="layui-icon layui-icon-face-smile-b"></i></a>
+                                            <a href="javascript:;"><i class="layui-icon layui-icon-picture"></i></a>
+                                            <a href="javascript:;"><i class="layui-icon layui-icon-link"></i></a>
+                                        </div>
                                     </div>
-                                    <div class="layadmin-messag-icon">
-                                        <a href="javascript:;"><i class="layui-icon layui-icon-face-smile-b"></i></a>
-                                        <a href="javascript:;"><i class="layui-icon layui-icon-picture"></i></a>
-                                        <a href="javascript:;"><i class="layui-icon layui-icon-link"></i></a>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="media-body">
-                <a href="javascript:;" class="media-left">
-                    <img src="/images/home/boy_46.jpg" height="46px" width="46px">
-                </a>
-                <div class="pad-btm">
-                    <p class="fontColor"><a href="javascript:;">花花</a></p>
-                    <p class="min-font">
-                     <span class="layui-breadcrumb" lay-separator="-">
-                        <a href="javascript:;" class="layui-icon layui-icon-cellphone"></a>
-                        <a href="javascript:;">从移动</a>
-                        <a href="javascript:;">11分钟前</a>
-                      </span>
-                    </p>
-                </div>
-                <p class="message-text">@索尼中国
-                    再献新作品—OLED电视A8F完美诞生。很开心一起参加了A8F的“首映礼”！[鼓掌]正如我们演员对舞台的热爱，索尼对科技与艺术的追求才创造出了让人惊喜的作品。作为A1兄弟款，A8F沿袭了黑科技“屏幕发声技术”和高清画质，色彩的出众表现和高端音质，让人在体验的时候如同身临其境。A8F，这次的“视帝”要颁发给你！
-                    索尼官网预售： O网页链接 索尼旗舰店预售：</p>
-                <p class="message-action">
-                    <span class="message-reply"><img src="/images/home/icon/reply.png" alt="回复"
-                                                     title="回复"><em>+2</em></span>
-                    <span class="message-zan"><img src="/images/home/icon/zan.png" alt="点赞"
-                                                   title="点赞"> <em>+2</em></span>
-                    <span class="message-cai"><img src="/images/home/icon/cai.png" alt="狂踩"
-                                                   title="狂踩"> <em>+30</em></span>
-                </p>
-                <div class="layui-col-md12 reply-content">
-                    <form class="layui-form">
-                        <div class="layui-form-item layui-form-text">
-                            <div class="layui-input-block">
-                                <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
-                            </div>
-                        </div>
-                        <div class="layui-form-item" style="overflow: hidden;">
-                            <div class="layui-input-block layui-input-right">
-                                <button class="layui-btn layui-btn-primary" lay-filter="primary">取消</button>
-                                <button class="layui-btn" lay-submit lay-filter="formDemo">发表</button>
-                            </div>
-                            <div class="layadmin-messag-icon">
-                                <a href="javascript:;"><i class="layui-icon layui-icon-face-smile-b"></i></a>
-                                <a href="javascript:;"><i class="layui-icon layui-icon-picture"></i></a>
-                                <a href="javascript:;"><i class="layui-icon layui-icon-link"></i></a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                </template>
             </div>
             <div class="layui-row message-content-btn">
                 <a href="javascript:;" class="layui-btn">更多</a>
@@ -287,47 +247,60 @@
     </div>
 </div>
 <script>
-    window.onbeforeunload = function() {
+    window.onbeforeunload = function () {
         var scrollPos;
-        if(typeof window.pageYOffset != 'undefined') {
+        if (typeof window.pageYOffset != 'undefined') {
             scrollPos = window.pageYOffset;
-        } else if(typeof document.compatMode != 'undefined' &&
+        } else if (typeof document.compatMode != 'undefined' &&
             document.compatMode != 'BackCompat') {
             scrollPos = document.documentElement.scrollTop;
-        } else if(typeof document.body != 'undefined') {
+        } else if (typeof document.body != 'undefined') {
             scrollPos = document.body.scrollTop;
         }
         document.cookie = "scrollTop=" + scrollPos; //存储滚动条位置到cookies中
     };
-    window.onload = function() {
-        if(document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
+    window.onload = function () {
+        if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
             var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
             document.documentElement.scrollTop = parseInt(arr[1]);
             document.body.scrollTop = parseInt(arr[1]);
         }
     };
 
-    new Vue({
+   var vueObj =  new Vue({
         el: '#vue_app',
-        data: {
-            current_page:1,
-            comment:[
-                {
-                    id:1,
-                    pid:0,
-                    origin_id:1,
-                    content:'评论内容',
-                    created_at:'2019-12-1 00:00:00',
-                    user_id:9,
-                    
-                }
-            ]
+        data() {
+           return {
+               comments:[],
+               csrf_token: "{{ csrf_token() }}",
+               article_id: "{{ $article_id }}",
+               user_id: "{{ auth()->id() }}",
+               current_page:1,
+               per_page:5,
+               total:0,
+           }
         },
-        mounted () {
-            axios
-                .post('https://www.runoob.com/try/ajax/demo_axios_post.php')
-                .then(response => (this.info = response))
-                .catch(function (error) { // 请求失败处理
+        mounted() {
+            var that =this;
+            axios.post('/ajaxComment', {
+                article_id: this.article_id,
+                _token: this.csrf_token
+            })
+                .then(function (response) {
+                    //console.log(response);
+                    that.comments = response.data.data.data;
+                    that.current_page = response.data.data.current_page;
+                    that.per_page = response.data.data.per_page;
+                    that.total = response.data.data.total;
+                })
+                .catch(function (error) {
+                    layer.msg('获取失败', {
+                        offset: '15px'
+                        , icon: 2
+                        , time: 1000
+                    }, function () {
+
+                    });
                     console.log(error);
                 });
         }
@@ -338,9 +311,7 @@
     }).use(['form'], function () {
         var layer = layui.layer;
         var form = layui.form;
-        var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        var article_id = "{{ $article_id }}";
-        var user_id = "{{ auth()->id() }}";
+
 
         // //获取评论
         // $.ajax({
@@ -359,12 +330,15 @@
         // });
 
         form.on('submit(ajaxComment)', function (data) {
+            console.log(vueObj.data.user_id);
+            return false;
+            var user_id = "{{ auth()->id() }}";
             if (!user_id) {
                 layer.msg('请从右侧登录,再进行评论');
                 $('.side-icon-user').click();
                 return false;
             }
-            if(!data.field.content){
+            if (!data.field.content) {
                 layer.msg('评论内容不能为空');
                 return false;
             }
@@ -377,9 +351,9 @@
             $.ajax({
                 type: 'post',
                 dataType: 'json',
-                data: postData, //传接收到的参数id
+                data: postData,
                 headers: {
-                    'X-CSRF-TOKEN': csrf_token
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 },
                 url: '/user/comment',
                 success: function (res) {
@@ -404,21 +378,22 @@
             });
             return false;
         });
-        $("body").delegate(".message-reply","click", function(){
+
+        $("body").delegate(".message-reply", "click", function () {
             $(this).parent().next().toggle();
         });
-        $("body").delegate(".message-zan","click", function(){
+        $("body").delegate(".message-zan", "click", function () {
             layer.msg('点赞加1,变红');
             //$.ajax();
             var html = '<img src="/images/home/icon/zan_red.png" alt="点赞" title="点赞"><em class="succeed">+3</em>';
             $(this).html(html);
         });
-        $("body").delegate(".message-cai","click", function(){
+        $("body").delegate(".message-cai", "click", function () {
             layer.msg('踩加1,变红');
             var html = '<img src="/images/home/icon/cai_red.png" alt="狂踩" title="狂踩"><em class="succeed">+31</em>';
             $(this).html(html);
         });
-        $("body").delegate(".layui-btn-primary","click", function(){
+        $("body").delegate(".layui-btn-primary", "click", function () {
             $(this).parents('.reply-content').hide();
             return false;
         })

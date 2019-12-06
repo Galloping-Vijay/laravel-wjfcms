@@ -10,7 +10,7 @@
                 <section>
                     @if (Auth::check())
                         <div class="login_herder">
-                            <a href="https://www.yxiaowei.com/mine/index.html">
+                            <a href="/user">
                                 <img src="{{ Auth::user()->avatar??'/images/config/avatar_min.jpg' }}" class="huiyuan-img" alt="臭大佬" title="臭大佬">
                             </a>
                         </div>
