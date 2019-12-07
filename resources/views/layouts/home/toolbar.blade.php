@@ -30,7 +30,7 @@
                         <div class="userinfo">
                             <form class="layui-form" name="login" method="post" action="">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input name="email" type="text" class="inputText" required lay-verify="email" size="16" placeholder="邮箱">
+                                <input name="account" type="text" class="inputText" required lay-verify="account" size="16" placeholder="邮箱或账号">
                                 <input name="password" required lay-verify="required" type="password" class="inputText" size="16" placeholder="密码">
                                 <div class="captcha">
                                     <div class="layui-input-inline" style="width: 100px;">

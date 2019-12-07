@@ -22,7 +22,11 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">邮箱</label>
                                 <div class="layui-input-block">
-                                    <input type="text" value="{{ $user->email }}" autocomplete="off" class="layui-input" readonly disabled>
+                                    @if($user->email)
+                                        <input name="email" type="text" value="{{ $user->email }}" autocomplete="off" class="layui-input" readonly disabled>
+                                    @else
+                                        <input name="email" type="text" value="" autocomplete="off" class="layui-input">
+                                    @endif
                                 </div>
                             </div>
                             <div class="layui-form-item">

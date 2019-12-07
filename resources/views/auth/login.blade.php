@@ -26,13 +26,13 @@
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">邮箱账号</label>
+                        <label class="layui-form-label">邮箱或账号</label>
                         <div class="layui-input-block">
-                            <input type="email" name="email" value="{{ old('email') }}" required lay-verify="email" placeholder="请输入邮箱账号"
+                            <input type="text" name="account" value="{{ old('account') }}" required lay-verify="account" placeholder="请输入邮箱或账号"
                                    autocomplete="off" class="layui-input">
                         </div>
-                        @if ($errors->has('email'))
-                            <div class="layui-form-mid layui-word-aux">{{ $errors->first('email') }}</div>
+                        @if ($errors->has('account'))
+                            <div class="layui-form-mid layui-word-aux">{{ $errors->first('account') }}</div>
                         @endif
                     </div>
                     <div class="layui-form-item">
@@ -49,7 +49,7 @@
                         <label class="layui-form-label">验证码</label>
                         <div class="layui-input-inline" style="width: 100px;">
                             <img src="{{captcha_src()}}" style="cursor: pointer"
-                                 onclick="this.src='{{captcha_src()}}'+Math.random()">
+                                 onclick="this.src='{{captcha_src()}}'+Math.random()" id="captcha_src_class">
                         </div>
                         <div class="layui-input-inline" style="width: 192px;">
                             <input type="text" required lay-verify="required" name="captcha" placeholder="请输入验证码" class="layui-input">
@@ -85,4 +85,11 @@
 
 @section('script')
     @parent
+    <script>
+        $(document).ready(function(){
+            setTimeout( function(){
+                document.getElementById('captcha_src_class').click();
+            }, 3 * 1000 );
+        });
+    </script>
 @endsection

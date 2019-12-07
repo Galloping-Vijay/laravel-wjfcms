@@ -112,7 +112,7 @@
         $(document).ready(function(){
             setTimeout( function(){
                 document.getElementById('captcha_src_class').click();
-            }, 5 * 1000 );
+            }, 3 * 1000 );
 
             var seconds = 60;
             var disabledClass = 'layui-disabled';

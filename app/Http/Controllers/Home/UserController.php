@@ -87,6 +87,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request)
     {
+        $email = $request->input('email', '');
         $name = $request->input('name', '');
         $sex = $request->input('sex', '');
         $tel = $request->input('tel', '');
@@ -94,6 +95,9 @@ class UserController extends Controller
         $intro = $request->input('intro', '');
 
         $info = Auth::user();
+        if ($email != '') {
+            $info->email = $email;
+        }
         if ($name != '') {
             $info->name = $name;
         }

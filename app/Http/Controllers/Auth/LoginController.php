@@ -59,21 +59,54 @@ class LoginController extends Controller
 
     /**
      * Description:
-     * User: Vijay <1937832819@qq.com>
-     * Date: 2019/11/30
-     * Time: 17:53
+     * User: Vijay
+     * Date: 2019/12/7
+     * Time: 17:15
      * @param Request $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request)
+    {
+        return collect(['name', 'email', 'tel'])->contains(function ($value) use ($request) {
+            $account = $request->get('account');
+            $password = $request->get('password');
+            return $this->guard()->attempt([$value => $account, 'password' => $password], $request->filled('remember'));
+        });
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/12/7
+     * Time: 17:18
+     * @param Request $request
+     * @throws \Illuminate\Validation\ValidationException
      */
     protected function validateLogin(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             $this->username() => 'required|string',
             'password' => 'required|string',
             'captcha' => 'required|captcha',
         ], [
-            'captcha.required' => trans('validation.required'),
-            'captcha.captcha' => trans('validation.captcha'),
+            'captcha.required' => ':attribute 不能为空',
+            'captcha.captcha' => '请输入正确的 :attribute',
+        ], [
+            $this->username() => '账号',
+            'captcha' => '验证码',
         ]);
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/12/7
+     * Time: 17:18
+     * @return string
+     */
+    public function username()
+    {
+        return 'account';
     }
 
     /**
@@ -88,14 +121,7 @@ class LoginController extends Controller
     public function ajaxLogin(Request $request)
     {
         try {
-            $request->validate([
-                $this->username() => 'required|string',
-                'password' => 'required|string',
-                'captcha' => 'required|captcha',
-            ], [
-                'captcha.required' => trans('validation.required'),
-                'captcha.captcha' => trans('validation.captcha'),
-            ]);
+            $this->validateLogin($request);
         } catch (\Exception $e) {
             $data = [
                 'code' => 1,
