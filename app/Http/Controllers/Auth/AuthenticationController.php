@@ -41,11 +41,15 @@ class AuthenticationController extends Controller
     public function getSocialCallback($account)
     {
         $socialUser = Socialite::with($account)->user();
-        dd($socialUser);
+        //获取名称
+        $name = $socialUser->getName() == '' ? $socialUser->getNickname() : $socialUser->getName();
+        $email = $socialUser->getEmail() == '' ? '' : $socialUser->getEmail();
         // 在本地 users 表中查询该用户来判断是否已存在
-        if($socialUser->getEmail()){
-            $user = User::where('email',$socialUser->getEmail())->first();
-        }else{
+        if ($email) {
+            $user = User::where('email', $email)->first();
+        } else if ($name) {
+            $user = User::where('name', $name)->first();
+        } else {
             $user = User::where('provider_id', '=', $socialUser->id)
                 ->where('provider', '=', $account)
                 ->first();
@@ -53,8 +57,8 @@ class AuthenticationController extends Controller
         if ($user == null) {
             // 如果该用户不存在则将其保存到 users 表
             $newUser = new User();
-            $newUser->name = $socialUser->getName();
-            $newUser->email = $socialUser->getEmail() == '' ? '' : $socialUser->getEmail();
+            $newUser->name = $name;
+            $newUser->email = $email;
             $newUser->avatar = $socialUser->getAvatar();
             $newUser->password = Hash::make('123456');
             $newUser->provider = $account;
