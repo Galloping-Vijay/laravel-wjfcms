@@ -41,6 +41,7 @@ class AuthenticationController extends Controller
     public function getSocialCallback($account)
     {
         $socialUser = Socialite::with($account)->user();
+        dd($socialUser);
         // 在本地 users 表中查询该用户来判断是否已存在
         if($socialUser->getEmail()){
             $user = User::where('email',$socialUser->getEmail())->first();
