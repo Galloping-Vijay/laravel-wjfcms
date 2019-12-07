@@ -81,6 +81,6 @@ class AuthenticationController extends Controller
     {
         Auth::guard('web')->logout();
         $request->session()->invalidate();
-        return redirect('/');
+        return redirect()->back();
     }
 }

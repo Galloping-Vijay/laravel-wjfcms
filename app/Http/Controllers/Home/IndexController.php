@@ -271,7 +271,7 @@ class IndexController extends Controller
     public function ajaxComment(Request $request)
     {
         $article_id = $request->input('article_id');
-        $comment_limit = $request->input('comment_limit', 5);
+        $comment_limit = $request->input('comment_limit', 2);
         $comment_page = $request->input('comment_page', 1);
         $art = Article::find($article_id);
         if (!$art) {

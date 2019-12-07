@@ -76,6 +76,7 @@ Route::namespace('Home')->group(function () {
         Route::post('update', 'UserController@update');
         //文章评论
         Route::post('comment', 'UserController@comment');
+        Route::post('commentAction', 'UserController@commentAction');
     });
 
     // 工具类

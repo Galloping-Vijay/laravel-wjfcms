@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Traits\TraitsModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Comment extends Model
 {
@@ -96,7 +97,7 @@ class Comment extends Model
                 ['comments.status', '=', 1],
                 ['comments.type', '=', 1],
                 ['comments.pid', '=', 0],
-            ])->select('comments.id', 'comments.pid', 'comments.origin_id', 'comments.content', 'comments.created_at', 'comments.user_id', 'users.name as user_name', 'users.avatar')
+            ])->select('comments.id', 'comments.pid', 'comments.origin_id', 'comments.content', 'comments.created_at', 'comments.user_id', 'comments.zan', 'comments.cai', 'users.name as user_name', 'users.avatar')
             ->orderBy('comments.created_at', 'desc')
             ->paginate($comment_limit, ['*'], 'comment_page', $comment_page);
         //第二级
@@ -124,7 +125,7 @@ class Comment extends Model
                 ['comments.status', '=', 1],
                 ['comments.type', '=', 1],
                 ['comments.origin_id', '=', $origin_id],
-            ])->select('comments.id', 'comments.pid', 'comments.origin_id', 'comments.content', 'comments.created_at', 'comments.user_id', 'users.name as user_name', 'users.avatar')
+            ])->select('comments.id', 'comments.pid', 'comments.origin_id', 'comments.content', 'comments.zan', 'comments.cai', 'comments.created_at', 'comments.user_id', 'users.name as user_name', 'users.avatar')
             ->orderBy('comments.created_at', 'desc')
             ->get()
             ->toArray();

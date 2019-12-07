@@ -133,14 +133,25 @@ class UserController extends Controller
             'type' => 1,
             'pid' => $request->input('pid', 0),
             'origin_id' => $request->input('origin_id', 0),
-            'status' => 0,
+            'status' => 1,
             'content' => htmlspecialchars($request->input('content')),
         ];
         $res = Comment::create($data);
         if (!$res) {
             return $this->resJson(1, '评论失败', []);
         }
-        return $this->resJson(0, '评论成功',[]);
+        return $this->resJson(0, '评论成功', []);
+    }
+
+
+    public function commentAction(Request $request)
+    {
+        $action_type = $request->input('action_type', '');
+        if (!in_array($action_type, ['zan', 'cai'])) {
+            return $this->resJson(1, '操作类型错误');
+        }
+        $comment_id = $request->input('comment_id', 0);
+        $info = Comment::find($comment_id);
     }
 
 }

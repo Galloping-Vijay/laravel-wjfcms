@@ -14,10 +14,6 @@ class CommentObserver
      */
     public function created(Comment $comment)
     {
-        if ($comment->origin_id == 0) {
-            $comment->origin_id = $comment->id;
-            $comment->save();
-        }
     }
 
     /**
@@ -40,10 +36,7 @@ class CommentObserver
      */
     public function saved(Comment $comment)
     {
-        if ($comment->origin_id == 0) {
-            $comment->origin_id = $comment->id;
-            $comment->save();
-        }
+
     }
 
     /**
