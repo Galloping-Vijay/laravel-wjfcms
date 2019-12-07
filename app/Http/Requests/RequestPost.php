@@ -67,11 +67,11 @@ class RequestPost extends FormRequest
      * Date: 2019/10/21
      * Time: 11:21
      * @param string $msg
-     * @param int $code
+     * @param int $code 1为错误,0为正常
      * @param null $data
      * @param int $status
      */
-    protected function getFailedResponse($msg = '', $code = 0, $data = null, $status = 200)
+    protected function getFailedResponse($msg = '', $code = 1, $data = null, $status = 200)
     {
         throw (new HttpResponseException(response()->json([
             'code' => $code,
