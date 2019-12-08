@@ -22,9 +22,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            'SocialiteProviders\\QQ\\QqExtendSocialite@handle',
-        ],
+        'SocialiteProviders\Manager\SocialiteWasCalled' => [
+            'SocialiteProviders\QQ\QqExtendSocialite@handle',
+        ]
     ];
 
     /**

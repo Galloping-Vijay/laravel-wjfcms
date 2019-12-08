@@ -162,7 +162,7 @@ return [
         Overtrue\LaravelLang\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        \SocialiteProviders\Manager\ServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
 
 /*
  * Package Service Providers...
@@ -233,6 +233,7 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
