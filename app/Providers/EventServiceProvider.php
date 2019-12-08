@@ -2,11 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Article;
 use App\Models\Comment;
-use App\Observers\ArticleObserver;
 use App\Observers\CommentObserver;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,9 +19,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        'SocialiteProviders\Manager\SocialiteWasCalled' => [
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             'SocialiteProviders\QQ\QqExtendSocialite@handle',
-        ]
+            'SocialiteProviders\\Weibo\\WeiboExtendSocialite@handle',
+        ],
     ];
 
     /**
