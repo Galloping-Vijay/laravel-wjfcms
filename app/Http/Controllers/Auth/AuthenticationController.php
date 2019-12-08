@@ -41,7 +41,6 @@ class AuthenticationController extends Controller
     public function getSocialCallback($account)
     {
         $socialUser = Socialite::with($account)->user();
-        
         //获取名称
         $name = $socialUser->getName() == '' ? $socialUser->getNickname() : $socialUser->getName();
         $email = $socialUser->getEmail() == '' ? '' : $socialUser->getEmail();
@@ -55,26 +54,23 @@ class AuthenticationController extends Controller
                 ->where('provider', '=', $account)
                 ->first();
         }
+        // 如果该用户不存在则将其保存到 users 表
         if ($user == null) {
-            // 如果该用户不存在则将其保存到 users 表
-            $newUser = new User();
-	    if($name){
-		$newUser->name = $name;
-	    }
-	   if($email){
-		$newUser->email = $email;
-	   }	
-            $newUser->avatar = $socialUser->getAvatar();
-            $newUser->password = Hash::make('123456');
-            $newUser->provider = $account;
-            $newUser->provider_id = $socialUser->getId();
-            $newUser->save();
-            $user = $newUser;
+            $user = new User();
+            if ($name) {
+                $user->name = $name;
+            }
+            if ($email) {
+                $user->email = $email;
+            }
+            $user->avatar = $socialUser->getAvatar();
+            $user->password = Hash::make('123456');
+            $user->provider = $account;
+            $user->provider_id = $socialUser->getId();
+            $user->save();
         }
         // 手动登录该用户
         Auth::guard('web')->login($user);
-        // 登录成功后将用户重定向到首页
-        //return redirect('/');
         //登录成功后跳转登录前的那页
         return redirect()->back();
     }
