@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use App\Models\Nav;
 
@@ -88,6 +89,7 @@ class UserController extends Controller
     public function update(UserRequest $request)
     {
         $email = $request->input('email', '');
+        $email_code = $request->input('email_code', '');
         $name = $request->input('name', '');
         $sex = $request->input('sex', '');
         $tel = $request->input('tel', '');
@@ -96,6 +98,13 @@ class UserController extends Controller
 
         $info = Auth::user();
         if ($email != '') {
+            if ($email_code != '') {
+                $cacheEmail = Cache::get($email);
+                if ($cacheEmail != $email_code) {
+                    return $this->resJson(1, '邮箱验证码错误');
+                }
+                $info->email_verified_at = date('Y-m-d H:i:s');
+            }
             $info->email = $email;
         }
         if ($name != '') {
