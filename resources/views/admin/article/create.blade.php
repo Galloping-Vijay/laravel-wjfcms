@@ -133,6 +133,7 @@
             var uploadImageUrl = '/admin/article/uploadImage';
             editor = editormd("editor", {
                 autoFocus : false,
+                emoji     : true,
                 width     : "100%",
                 height    : 640,
                 path : "/static/editor.md/lib/",  // Autoload modules mode, codemirror,
