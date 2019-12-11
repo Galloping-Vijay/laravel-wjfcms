@@ -3,6 +3,18 @@
 @section('header')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('static/editor.md/css/editormd.min.css') }}" media="all">
+    <style>
+        .editormd-preformatted-text-dialog,.editormd-code-block-dialog{
+            width:600px !important;
+            height:400px !important;
+        }
+        .editormd-preformatted-text-dialog .CodeMirror-empty{
+            height: 270px !important
+        }
+        .editormd-code-block-dialog .CodeMirror-empty{
+            height: 240px !important
+        }
+    </style>
 @endsection
 @section('content')
     <div class="layui-form" lay-filter="layuiadmin-app-list" id="layuiadmin-app-form-list"
