@@ -6,6 +6,17 @@
     <script src="{{ asset('static/clipboard/dist/clipboard.min.js') }}" type="text/javascript"></script>
     <link href="{{ asset('static/layuiadmin/style/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('static/layuiadmin/style/template.css') }}" rel="stylesheet">
+
+    <!--必填-->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="/article/{{ $info->id }}" />
+    <meta property="og:title" content="{{ $info->title }}" />
+    <meta property="og:description" content="{{ $info->description }}" />
+    <!--选填-->
+    <meta property="og:image" content="{{ $info->cover }}" />
+    <meta name="weibo: article:create_at" content="{{ $info->created_at }}" />
+    <meta name="weibo: article:update_at" content="{{ $info->updated_at }}" />
+
     <style>
         pre {
             position: relative;
@@ -81,13 +92,14 @@
                 </div>
             </div>
             <div class="infos-aid">
-                {{-- <div class="share"></div>--}}
-                {{--<p>--}}
-                {{--<span class="diggits praise">--}}
-                {{--<a href="javascript:;"> 很赞哦！ </a>--}}
-                {{--(<b>0</b>)--}}
-                {{--</span>--}}
-                {{--</p>--}}
+                 <div class="share"></div>
+                <p>
+                <span class="diggits praise">
+                    <wb:like appkey="57j2BX"></wb:like>
+               {{-- <a href="javascript:;"> 很赞哦！ </a>
+                (<b>0</b>)--}}
+                </span>
+                </p>
                 <p><span class="diggit award">赏</span></p>
                 <script>
                     $('.award').click(function () {
@@ -139,7 +151,7 @@
 
 @section('script')
     @parent
-
+    <script src="https://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
     <script>
         $(function () {
             var layer = null;
