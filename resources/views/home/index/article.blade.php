@@ -18,10 +18,15 @@
     <meta name="weibo: article:update_at" content="{{ $info->updated_at }}" />
 
     <style>
+        .news_infos h1,.news_infos h2,.news_infos h3,.news_infos h4,.news_infos h5,.news_infos h6{
+            font-weight: bold;
+            margin: 10px auto;
+        }
         pre {
             position: relative;
             padding: 0;
             display: inherit;
+            font-size: 16px;
         }
 
         pre:hover .btn-copy {
@@ -61,6 +66,21 @@
         .infos-aid {
             width: 85%;
             margin: 0 auto;
+        }
+        blockquote{
+            margin-top: 0;
+            margin-bottom: 16px;
+            padding-top: 0;
+            padding-right: 15px;
+            padding-left: 20px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            box-sizing: border-box;
+            color: rgb(102, 102, 102);
+            font-style: italic;
+            font-family: "Microsoft YaHei", Helvetica, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Monaco, monospace, Tahoma, STXihei, 华文细黑, STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, 宋体, Heiti, 黑体, sans-serif;
+            text-align: left;
+            white-space: normal;
+            border-left: 4px solid rgb(221, 221, 221);
         }
     </style>
 @endsection
