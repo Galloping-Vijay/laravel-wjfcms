@@ -8,10 +8,10 @@
             width:600px !important;
             height:400px !important;
         }
-        .editormd-preformatted-text-dialog .CodeMirror-empty{
+        .editormd-preformatted-text-dialog .CodeMirror-empty,.editormd-preformatted-text-dialog .CodeMirror-wrap{
             height: 270px !important
         }
-        .editormd-code-block-dialog .CodeMirror-empty{
+        .editormd-code-block-dialog .CodeMirror-empty,.editormd-code-block-dialog .CodeMirror-wrap{
             height: 240px !important
         }
     </style>
