@@ -3365,7 +3365,7 @@
 
     // Emoji graphics files url path
     editormd.emoji     = {
-        path  : "/images/emojis/",
+        path  : "/static/editor.md/plugins/emoji-dialog/emoji/",
         ext   : ".png"
     };
 

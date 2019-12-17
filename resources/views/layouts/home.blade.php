@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:wb=“http://open.weibo.com/wb”>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     {{--百度平台--}}

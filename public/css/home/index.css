@@ -221,14 +221,8 @@ h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0;overflow: hidden;
 .diggits{
     cursor: pointer;
     display: block;
-    width: 160px;
-    margin: 20px auto;
-    background: #E2523A;
-    color: #fff;
-    box-shadow: 1px 2px 6px 0px rgba(0,0,0,.2);
-    border-radius: 3px;
     line-height: 40px;
-    text-align: center;
+    height: 40px;
 }
 .diggits a{
     color: #fff !important;

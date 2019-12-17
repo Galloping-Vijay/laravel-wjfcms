@@ -6,11 +6,27 @@
     <script src="{{ asset('static/clipboard/dist/clipboard.min.js') }}" type="text/javascript"></script>
     <link href="{{ asset('static/layuiadmin/style/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('static/layuiadmin/style/template.css') }}" rel="stylesheet">
+
+    <!--必填-->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="/article/{{ $info->id }}" />
+    <meta property="og:title" content="{{ $info->title }}" />
+    <meta property="og:description" content="{{ $info->description }}" />
+    <!--选填-->
+    <meta property="og:image" content="{{ $info->cover }}" />
+    <meta name="weibo: article:create_at" content="{{ $info->created_at }}" />
+    <meta name="weibo: article:update_at" content="{{ $info->updated_at }}" />
+
     <style>
+        .news_infos h1,.news_infos h2,.news_infos h3,.news_infos h4,.news_infos h5,.news_infos h6{
+            font-weight: bold;
+            margin: 10px auto;
+        }
         pre {
             position: relative;
             padding: 0;
             display: inherit;
+            font-size: 16px;
         }
 
         pre:hover .btn-copy {
@@ -51,6 +67,21 @@
             width: 85%;
             margin: 0 auto;
         }
+        blockquote{
+            margin-top: 0;
+            margin-bottom: 16px;
+            padding-top: 0;
+            padding-right: 15px;
+            padding-left: 20px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            box-sizing: border-box;
+            color: rgb(102, 102, 102);
+            font-style: italic;
+            font-family: "Microsoft YaHei", Helvetica, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Monaco, monospace, Tahoma, STXihei, 华文细黑, STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, 宋体, Heiti, 黑体, sans-serif;
+            text-align: left;
+            white-space: normal;
+            border-left: 4px solid rgb(221, 221, 221);
+        }
     </style>
 @endsection
 @section('title', $info->title.' | '.\App\Models\SystemConfig::getConfigCache('seo_title'))
@@ -81,13 +112,14 @@
                 </div>
             </div>
             <div class="infos-aid">
-                {{-- <div class="share"></div>--}}
-                {{--<p>--}}
-                {{--<span class="diggits praise">--}}
-                {{--<a href="javascript:;"> 很赞哦！ </a>--}}
-                {{--(<b>0</b>)--}}
-                {{--</span>--}}
-                {{--</p>--}}
+                 <div class="share"></div>
+                <p>
+                <span class="diggits praise">
+                    <wb:like appkey="57j2BX"></wb:like>
+               {{-- <a href="javascript:;"> 很赞哦！ </a>
+                (<b>0</b>)--}}
+                </span>
+                </p>
                 <p><span class="diggit award">赏</span></p>
                 <script>
                     $('.award').click(function () {
@@ -139,7 +171,7 @@
 
 @section('script')
     @parent
-
+    <script src="https://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
     <script>
         $(function () {
             var layer = null;
