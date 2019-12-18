@@ -29,7 +29,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">分类</label>
             <div class="layui-input-block">
-                <select name="category_id">
+                <select name="category_id" lay-verify="required">
                     <option value="">全部分类</option>
                     @foreach($category_list as $ck=>$cv)
                         @if($category_id == $cv['id'])
@@ -44,8 +44,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">作者</label>
             <div class="layui-input-block">
-                <input type="text" name="author" placeholder="admin" value="臭大佬" autocomplete="off"
-                       class="layui-input">
+                <input type="text" name="author" placeholder="admin" value="臭大佬" autocomplete="off"  lay-verify="required" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -72,14 +71,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">描述</label>
             <div class="layui-input-block">
-                <textarea name="description" class="layui-textarea"></textarea>
+                <textarea name="description" class="layui-textarea"  lay-verify="required"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">内容</label>
             <div class="layui-input-block">
                 <div id="editor">
-                    <textarea class="editormd-markdown-textarea" name="editor-html-doc"></textarea>
+                    <textarea class="editormd-markdown-textarea" name="editor-html-doc" ></textarea>
                     <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
                    {{-- <textarea class="editormd-html-textarea" name="content-code"></textarea>--}}
                 </div>

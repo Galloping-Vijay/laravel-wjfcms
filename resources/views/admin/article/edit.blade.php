@@ -31,7 +31,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">分类</label>
             <div class="layui-input-block">
-                <select name="category_id">
+                <select name="category_id" lay-verify="required">
                     <option value="">全部分类</option>
                     @foreach($category_list as $ck=>$cv)
                         @if($info->category_id == $cv['id'])
@@ -47,7 +47,7 @@
             <label class="layui-form-label">作者</label>
             <div class="layui-input-block">
                 <input type="text" name="author" placeholder="admin" value="{{ $info->author }}" autocomplete="off"
-                       class="layui-input">
+                       class="layui-input" lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
@@ -79,7 +79,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">描述</label>
             <div class="layui-input-block">
-                <textarea name="description" class="layui-textarea">{{ $info->description }}</textarea>
+                <textarea name="description" class="layui-textarea" lay-verify="required">{{ $info->description }}</textarea>
             </div>
         </div>
         <div class="layui-form-item">
