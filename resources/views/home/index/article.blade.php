@@ -116,7 +116,7 @@
                  <div class="share"></div>
                 <p>
                 <span class="diggits praise">
-                    <wb:like appkey="57j2BX"></wb:like>
+                    <wb:like appkey="3174538273"></wb:like>
                {{-- <a href="javascript:;"> 很赞哦！ </a>
                 (<b>0</b>)--}}
                 </span>
