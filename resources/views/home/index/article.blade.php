@@ -17,6 +17,7 @@
     <meta name="weibo: article:create_at" content="{{ $info->created_at }}" />
     <meta name="weibo: article:update_at" content="{{ $info->updated_at }}" />
 
+    <script src="https://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
     <style>
         .news_infos h1,.news_infos h2,.news_infos h3,.news_infos h4,.news_infos h5,.news_infos h6{
             font-weight: bold;
@@ -171,7 +172,6 @@
 
 @section('script')
     @parent
-    <script src="https://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
     <script>
         $(function () {
             var layer = null;
