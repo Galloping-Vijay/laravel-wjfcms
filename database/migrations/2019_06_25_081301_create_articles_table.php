@@ -17,10 +17,10 @@ class CreateArticlesTable extends Migration
             Schema::create('articles', function (Blueprint $table) {
                 $table->bigIncrements('id')->comment('文章表');
                 $table->integer('category_id')->default(0)->comment('分类id');
-                $table->string('title')->default('')->comment('标题');
+                $table->string('title',255)->default('')->comment('标题');
                 $table->string('author')->default('')->comment('作者');
                 $table->mediumText('content')->comment('内容');
-                $table->string('description')->default('')->comment('描述');
+                $table->string('description',255)->default('')->comment('描述');
                 $table->string('keywords')->default('')->comment('关键词');
                 $table->string('cover')->default('')->comment('封面图');
                 $table->boolean('is_top')->default(0)->comment('是否置顶 1是 0否');
