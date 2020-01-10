@@ -56,6 +56,15 @@
             </div>
         </div>
     </div>
+    <div class="layui-trans layadmin-user-login-footer">
+
+        <p>© 2017~2020 <a href="https://www.choudalao.com" target="_blank">厦门悦遇科技有限公司</a> 版权所有</p>
+        <p>
+            <span><a href="https://www.kancloud.cn/wjf19940211/laravel-wjfcms/1132641" target="_blank">开发文档</a></span>
+            <span><a href="https://www.choudalao.com" target="_blank">臭大佬首页</a></span>
+            <span><a href="https://github.com/Galloping-Vijay/laravel-wjfcms" target="_blank">Github</a></span>
+        </p>
+    </div>
 </div>
 
 <script src="{{ asset('static/layuiadmin/layui/layui.js') }}"></script>
