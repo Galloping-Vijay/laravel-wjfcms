@@ -246,7 +246,11 @@ class IndexController extends Controller
      */
     public function friendLinks(Request $request)
     {
-        $links = FriendLink::where('status', 1)->select('name', 'url')->get();
+        $links = FriendLink::query()
+            ->where('status', 1)
+            ->select('name', 'url')
+            ->orderBy('sort', 'desc')
+            ->get();
         return $this->resJson('0', '获取成功', $links);
     }
 
