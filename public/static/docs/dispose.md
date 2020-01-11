@@ -22,9 +22,9 @@ win下没有laravel5,选择thinkphp
 
  
 
-\# linu权限问题
+# linux权限问题
 
-在安装 Laravel 后，你可能需要配置一些权限。`storage`和`bootstrap/cache`目录在你的 web 服务下应该是可写的权限，否则 Laravel 将无法运行。
+在安装 Laravel 后，你可能需要配置一些权限。`storage`和`bootstrap/cache` 、`public`目录在你的 web 服务下应该是可写的权限，否则 Laravel 将无法运行。
 
 报错如下:
 
