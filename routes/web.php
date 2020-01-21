@@ -19,7 +19,7 @@ Route::get('test', function () {
 });
 
 //错误页
-Route::get('blank', 'Home\BlankController@index');
+Route::get('blank', 'Home\BlankController@index')->name('blank');
 
 //用户登录注册
 Auth::routes();

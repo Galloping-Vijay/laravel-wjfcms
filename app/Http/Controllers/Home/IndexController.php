@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Vijay\Curl\Curl;
 use App\Models\Nav;
@@ -87,7 +88,7 @@ class IndexController extends Controller
     {
         $info = Article::find($id);
         if (empty($info) || $info->status == 0) {
-            return redirect()->back();
+            return redirect()->route('blank');
         }
         $info->click += 1;
         $info->save();
