@@ -1,81 +1,72 @@
 <?php
-/**
- * Description:资源操作
- * Created by PhpStorm.
- * User: Vijay
- * Date: 2019/5/26
- * Time: 12:06
- */
 
-namespace App\Http\Traits;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\KeywordRequest;
+use App\Models\WxKeyword;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-trait TraitResource
+class WeChatController extends Controller
 {
     /**
-     * @var null|string
-     */
-    private static $controlName = null;
-
-    /**
-     * @var null|string
-     */
-    private static $model = null;
-
-    /**
-     * Description:展示列表
+     * Description:
      * User: Vijay
-     * Date: 2019/5/27
-     * Time: 22:28
+     * Date: 2020/3/3
+     * Time: 23:39
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function keywordIndex(Request $request)
     {
         if ($request->isMethod('post')) {
             $page = $request->input('page', 1);
             $limit = $request->input('limit', 10);
             $where = [];
-            $list = self::$model::where($where)->orderBy('id', 'desc')->get();
-            $data = self::getPageData($list, $page, $limit);
-            return response($data);
+            $name = $request->input('name', '');
+            if ($name != '') {
+                $where[] = ['key_name', 'like', '%' . $name . '%'];
+            }
+            $list = WxKeyword::query()->where($where)->orderBy('id', 'desc')->get();
+            $res = self::getPageData($list, $page, $limit);
+            return self::resJson(0, '获取成功', $res['data'], [
+                    'count' => $res['count']]
+            );
         }
-        return view('admin.' . self::$controlName . '.index',
-            [
-                'control_name' => self::$controlName,
-            ]);
+        return view('admin.weChat.keywordIndex', [
+            'control_name' => 'weChat',
+        ]);
     }
 
     /**
      * Description:
      * User: Vijay
-     * Date: 2019/5/27
-     * Time: 22:28
+     * Date: 2020/3/3
+     * Time: 23:39
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function keywordCreate()
     {
-        return view('admin.' . self::$controlName . '.create',
+        return view('admin.weChat.keywordCreate',
             [
-                'control_name' => self::$controlName,
+                'control_name' => 'weChat',
             ]);
     }
 
     /**
      * Description:
      * User: Vijay
-     * Date: 2019/5/27
-     * Time: 22:28
-     * @param Request $request
+     * Date: 2020/3/3
+     * Time: 23:39
+     * @param KeywordRequest $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function keywordStore(KeywordRequest $request)
     {
-        $model = new self::$model;
+        $data = $request->input();
         try {
-            $model::create($request->input());
+            WxKeyword::query()->create($data);
             return $this->resJson(0, '操作成功');
         } catch (\Exception $e) {
             return $this->resJson(1, $e->getMessage());
@@ -85,50 +76,51 @@ trait TraitResource
     /**
      * Description:
      * User: Vijay
-     * Date: 2019/5/27
-     * Time: 22:28
+     * Date: 2020/3/3
+     * Time: 23:40
      * @param $id
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function show($id)
+    public function keywordShow($id)
     {
-        $info = self::$model::find($id);
+        $info = WxKeyword::query()->find($id);
         return $this->resJson(0, '操作成功', $info);
     }
 
     /**
      * Description:
      * User: Vijay
-     * Date: 2019/5/27
-     * Time: 22:29
+     * Date: 2020/3/3
+     * Time: 23:40
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function keywordEdit($id)
     {
-        $info = self::$model::find($id);
-        return view('admin.' . self::$controlName . '.edit', [
+        $info = WxKeyword::query()->find($id);
+        return view('admin.weChat.keywordEdit', [
             'info' => $info,
-            'control_name' => self::$controlName,
+            'control_name' => 'weChat',
         ]);
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Description:
      * User: Vijay
-     * Date: 2019/5/26
-     * Time: 21:20
+     * Date: 2020/3/3
+     * Time: 23:40
+     * @param KeywordRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function keywordUpdate(KeywordRequest $request)
     {
-        $info = self::$model::find($request->id);
+        $info = WxKeyword::query()->find($request->id);
         if (empty($info)) {
             return $this->resJson(1, '没有该条记录');
         }
+        $data = $request->input();
         try {
-            $res = $info->update($request->input());
+            $res = $info->update($data);
             return $this->resJson(0, '操作成功', $res);
         } catch (\Exception $e) {
             return $this->resJson(1, $e->getMessage());
@@ -136,61 +128,17 @@ trait TraitResource
     }
 
     /**
-     * Description:删除
+     * Description:
      * User: Vijay
-     * Date: 2019/5/27
-     * Time: 22:11
+     * Date: 2020/3/3
+     * Time: 23:41
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function keywordDestroy(Request $request)
     {
         try {
-            $res = self::$model::destroy($request->id);
-            return $this->resJson(0, '操作成功', $res);
-        } catch (\Exception $e) {
-            return $this->resJson(1, $e->getMessage());
-        }
-    }
-
-    /**
-     * Description:恢复数据
-     * User: Vijay
-     * Date: 2019/5/27
-     * Time: 22:18
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
-    public function restore(Request $request)
-    {
-        $info = self::$model::onlyTrashed()->find($request->id);
-        if (empty($info)) {
-            return $this->resJson(1, '没有该条记录');
-        }
-        try {
-            $res = $info->restore();
-            return $this->resJson(0, '操作成功', $res);
-        } catch (\Exception $e) {
-            return $this->resJson(1, $e->getMessage());
-        }
-    }
-
-    /**
-     * Description:彻底删除
-     * User: Vijay
-     * Date: 2019/5/27
-     * Time: 22:18
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
-    public function forceDelete(Request $request)
-    {
-        $info = self::$model::onlyTrashed()->find($request->id);
-        if (empty($info)) {
-            return $this->resJson(1, '没有该条记录');
-        }
-        try {
-            $res = $info->forceDelete();
+            $res = WxKeyword::destroy($request->id);
             return $this->resJson(0, '操作成功', $res);
         } catch (\Exception $e) {
             return $this->resJson(1, $e->getMessage());

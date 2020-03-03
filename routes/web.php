@@ -368,5 +368,17 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::post('forceDelete', 'FriendLinksController@forceDelete');
     });
 
+    // 微信
+    Route::prefix('weChat')->group(function () {
+        // 关键字操作
+        Route::any('keywordIndex', 'WeChatController@keywordIndex');
+        Route::get('keywordCreate', 'WeChatController@keywordCreate');
+        Route::post('keywordStore', 'WeChatController@keywordStore');
+        Route::get('keywordShow/{id}', 'WeChatController@keywordShow');
+        Route::get('keywordEdit/{id}', 'WeChatController@keywordEdit');
+        Route::post('keywordUpdate', 'WeChatController@keywordUpdate');
+        Route::post('keywordDestroy', 'WeChatController@keywordDestroy');
+    });
+
 });
 

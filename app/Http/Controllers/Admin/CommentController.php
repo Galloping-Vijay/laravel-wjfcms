@@ -54,6 +54,7 @@ class CommentController extends Controller
                         ->leftJoin('users', 'users.id', '=', 'comments.user_id')
                         ->leftJoin('articles', 'articles.id', '=', 'comments.article_id')
                         ->select('comments.*', 'users.name as username', 'articles.title')
+                        ->orderBy('comments.id', 'desc')
                         ->get();
                     break;
                 case '2':
@@ -62,6 +63,7 @@ class CommentController extends Controller
                         ->leftJoin('users', 'users.id', '=', 'comments.user_id')
                         ->leftJoin('articles', 'articles.id', '=', 'comments.article_id')
                         ->select('comments.*', 'users.name as username', 'articles.title')
+                        ->orderBy('comments.id', 'desc')
                         ->get();
                     break;
                 default:
@@ -69,6 +71,7 @@ class CommentController extends Controller
                         ->leftJoin('users', 'users.id', '=', 'comments.user_id')
                         ->leftJoin('articles', 'articles.id', '=', 'comments.article_id')
                         ->select('comments.*', 'users.name as username', 'articles.title')
+                        ->orderBy('comments.id', 'desc')
                         ->get();
                     break;
             }
