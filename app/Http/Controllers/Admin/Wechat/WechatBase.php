@@ -17,8 +17,8 @@ class WechatBase extends Controller
 
     public function __construct()
     {
-        if(is_null($this->app)){
-            $this->app =  app('wechat.official_account');
-        }
+//        if(is_null($this->app)){
+//            $this->app =  app('wechat.official_account');
+//        }
     }
 }
