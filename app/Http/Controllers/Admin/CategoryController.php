@@ -42,13 +42,13 @@ class CategoryController extends Controller
             }
             switch ($delete) {
                 case '1':
-                    $list = self::$model::onlyTrashed()->where($where)->get();
+                    $list = self::$model::onlyTrashed()->where($where)->orderBy('id', 'desc')->get();
                     break;
                 case '2':
-                    $list = self::$model::withTrashed()->where($where)->get();
+                    $list = self::$model::withTrashed()->where($where)->orderBy('id', 'desc')->get();
                     break;
                 default:
-                    $list = self::$model::where($where)->get();
+                    $list = self::$model::where($where)->orderBy('id', 'desc')->get();
                     break;
             }
             return self::resJson(0, '获取成功', $list);
