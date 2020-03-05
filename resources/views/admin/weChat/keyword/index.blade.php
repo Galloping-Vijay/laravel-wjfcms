@@ -70,7 +70,7 @@
         //表格数据
         table.render({
             elem: '#LAY-app-list'
-            , url: '/admin/' + control_name + '/keywordIndex'
+            , url: '/admin/' + control_name + '/index'
             , method: 'post'
             , where: {}
             , headers: {
@@ -112,7 +112,7 @@
                 , [field_name]: value
             };
             admin.req({
-                url: '/admin/' + control_name + '/keywordUpdate'
+                url: '/admin/' + control_name + '/update'
                 , data: field
                 , method: 'POST'
                 , headers: {
@@ -144,7 +144,7 @@
                 id: $(this).data('id')
             };
             admin.req({
-                url: '/admin/' + control_name + '/keywordUpdate'
+                url: '/admin/' + control_name + '/update'
                 , data: field
                 , method: 'POST'
                 , headers: {
@@ -175,7 +175,7 @@
             if (obj.event === 'del') {
                 layer.confirm('确定删除数据吗?', function (index) {
                     admin.req({
-                        url: '/admin/' + control_name + '/keywordDestroy'
+                        url: '/admin/' + control_name + '/destroy'
                         , data: {id: obj.data.id}
                         , method: 'POST'
                         , headers: {
@@ -205,7 +205,7 @@
                 layer.open({
                     type: 2
                     , title: '编辑'
-                    , content: '/admin/' + control_name + '/keywordEdit/' + obj.data.id
+                    , content: '/admin/' + control_name + '/edit/' + obj.data.id
                     , maxmin: true
                     , area: ['400px', '400px']
                     , btn: ['确定', '取消']
@@ -217,7 +217,7 @@
                             var field = data.field; //获取提交的字段
                             //提交 Ajax 成功后，静态更新表格中的数据
                             admin.req({
-                                url: '/admin/' + control_name + '/keywordUpdate'
+                                url: '/admin/' + control_name + '/update'
                                 , data: field
                                 , method: 'POST'
                                 , headers: {
@@ -263,7 +263,7 @@
                 }
                 layer.confirm('确定批量删除吗？', function (index) {
                     admin.req({
-                        url: '/admin/' + control_name + '/keywordDestroy'
+                        url: '/admin/' + control_name + '/destroy'
                         , data: {id: ids}
                         , method: 'POST'
                         , headers: {
@@ -294,7 +294,7 @@
                 layer.open({
                     type: 2
                     , title: '添加'
-                    , content: '/admin/' + control_name + '/keywordCreate'
+                    , content: '/admin/' + control_name + '/create'
                     , maxmin: true
                     , area: ['400px', '400px']
                     , btn: ['确定', '取消']
@@ -307,7 +307,7 @@
                             var field = data.field;
                             //提交 Ajax 成功后，静态更新表格中的数据
                             admin.req({
-                                url: '/admin/' + control_name + '/keywordStore'
+                                url: '/admin/' + control_name + '/store'
                                 , data: field
                                 , method: 'POST'
                                 , headers: {

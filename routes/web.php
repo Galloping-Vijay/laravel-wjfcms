@@ -371,13 +371,15 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
     // 微信
     Route::prefix('weChat')->group(function () {
         // 关键字操作
-        Route::any('keywordIndex', 'WeChatController@keywordIndex');
-        Route::get('keywordCreate', 'WeChatController@keywordCreate');
-        Route::post('keywordStore', 'WeChatController@keywordStore');
-        Route::get('keywordShow/{id}', 'WeChatController@keywordShow');
-        Route::get('keywordEdit/{id}', 'WeChatController@keywordEdit');
-        Route::post('keywordUpdate', 'WeChatController@keywordUpdate');
-        Route::post('keywordDestroy', 'WeChatController@keywordDestroy');
+        Route::prefix('keyword')->group(function () {
+            Route::any('index', 'weChat\KeywordController@Index');
+            Route::get('create', 'weChat\KeywordController@Create');
+            Route::post('store', 'weChat\KeywordController@Store');
+            Route::get('show/{id}', 'weChat\KeywordController@Show');
+            Route::get('edit/{id}', 'weChat\KeywordController@Edit');
+            Route::post('update', 'weChat\KeywordController@Update');
+            Route::post('destroy', 'weChat\KeywordController@destroy');
+        });
     });
 
 });
