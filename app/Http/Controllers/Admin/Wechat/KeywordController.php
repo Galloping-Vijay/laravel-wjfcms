@@ -31,6 +31,7 @@ class KeywordController extends WechatBase
      */
     public function index(Request $request)
     {
+        dd(22);
         if ($request->isMethod('post')) {
             $page = $request->input('page', 1);
             $limit = $request->input('limit', 10);

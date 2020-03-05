@@ -372,7 +372,6 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
     Route::prefix('weChat')->group(function () {
         // 关键字操作
         Route::prefix('keyword')->group(function () {
-            dd(111);
             Route::any('index', 'weChat\KeywordController@Index');
             Route::get('create', 'weChat\KeywordController@Create');
             Route::post('store', 'weChat\KeywordController@Store');
