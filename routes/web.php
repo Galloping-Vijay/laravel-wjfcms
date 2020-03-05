@@ -380,6 +380,16 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
             Route::post('update', 'Wechat\KeywordController@Update');
             Route::post('destroy', 'Wechat\KeywordController@destroy');
         });
+        //素材管理
+        Route::prefix('article')->group(function () {
+            Route::any('index', 'Wechat\ArticleController@Index');
+            Route::get('create', 'Wechat\ArticleController@Create');
+            Route::post('store', 'Wechat\ArticleController@Store');
+            Route::get('show/{id}', 'Wechat\ArticleController@Show');
+            Route::get('edit/{id}', 'Wechat\ArticleController@Edit');
+            Route::post('update', 'Wechat\ArticleController@Update');
+            Route::post('destroy', 'Wechat\ArticleController@destroy');
+        });
     });
 
 });
