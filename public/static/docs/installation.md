@@ -24,10 +24,9 @@ ubuntu下(注意权限)
 
 > 如果github访问慢,可以换码云链接 
 
-```shell
+~~~shell
 git clone https://gitee.com/Galloping-Vijay/laravel-wjfcms.git
-​```
-```
+~~~
 
 
 
