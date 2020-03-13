@@ -7,6 +7,10 @@
 
 <a href="https://github.com/Galloping-Vijay/laravel-wjfcms/blob/master/README_EN.md">English readme</a>
 
+# 安装文档
+
+https://www.choudalao.com/static/docs/_book/installation.html
+
 # 前言
 
 **laravel-wjfcms是基于laravel5.8及layui开发的后台管理系统。**
