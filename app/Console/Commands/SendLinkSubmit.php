@@ -57,6 +57,7 @@ class SendLinkSubmit extends Command
         'https://www.choudalao.com/tag/6',
         'https://www.choudalao.com/tag/7',
         'https://www.choudalao.com/tag/8',
+        'https://www.choudalao.com/article/88'
     ];
 
     /**

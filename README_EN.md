@@ -7,6 +7,10 @@
 
 <a href="https://github.com/Galloping-Vijay/laravel-wjfcms/blob/master/README_CN.md">中文 readme</a>
 
+# Installation documentation
+
+https://www.choudalao.com/static/docs/_book/installation.html
+
 # Foreword
 
 **Laravel-wjfcms is a back-end management system based on laravel5.8 and layui.**

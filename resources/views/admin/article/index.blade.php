@@ -266,6 +266,32 @@
                             //监听提交
                             iframeWindow.layui.form.on('submit(layuiadmin-app-form-edit)', function (data) {
                                 var field = data.field; //获取提交的字段
+                                if(!field.title){
+                                    layer.msg('"标题"不能为空', {icon: 2});
+                                    return false;
+                                }
+                                if(!field.category_id){
+                                    layer.msg('请选择分类', {icon: 2});
+                                    return false;
+                                }
+                                if(!field.author){
+                                    layer.msg('作者不能为空', {icon: 2});
+                                    return false;
+                                }
+                                if(!field.description){
+                                    layer.msg('描述不能为空', {icon: 2});
+                                    return false;
+                                }
+                                var code_html = 'editor-html-code';
+                                if(!field[code_html]){
+                                    layer.msg('内容不能为空', {icon: 2});
+                                    return false;
+                                }
+                                var doc_html = 'editor-html-doc';
+                                if(!field[doc_html]){
+                                    layer.msg('内容不能为空', {icon: 2});
+                                    return false;
+                                }
                                 //提交 Ajax 成功后，静态更新表格中的数据
                                 admin.req({
                                     url: '/admin/' + control_name + '/update'
@@ -417,6 +443,32 @@
                                 var field = data.field;
                                 if (!field.cover) {
                                     field.cover = window.location.protocol + "//" + window.location.host + '/images/config/default-img.jpg';
+                                }
+                                if(!field.title){
+                                    layer.msg('"标题"不能为空', {icon: 2});
+                                    return false;
+                                }
+                                if(!field.category_id){
+                                   layer.msg('请选择分类', {icon: 2});
+                                    return false;
+                                }
+                                if(!field.author){
+                                    layer.msg('作者不能为空', {icon: 2});
+                                    return false;
+                                }
+                                if(!field.description){
+                                    layer.msg('描述不能为空', {icon: 2});
+                                    return false;
+                                }
+                                var code_html = 'editor-html-code';
+                                if(!field[code_html]){
+                                    layer.msg('内容不能为空', {icon: 2});
+                                    return false;
+                                }
+                                var doc_html = 'editor-html-doc';
+                                if(!field[doc_html]){
+                                    layer.msg('内容不能为空', {icon: 2});
+                                    return false;
                                 }
                                 //提交 Ajax 成功后，静态更新表格中的数据
                                 admin.req({

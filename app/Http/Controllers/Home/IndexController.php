@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Requests\LinkRequest;
 use App\Http\Traits\TraitFront;
+use App\Mail\Alarm;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Chat;
@@ -12,6 +14,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Vijay\Curl\Curl;
 use App\Models\Nav;
@@ -199,14 +202,15 @@ class IndexController extends Controller
      * User: Vijay
      * Date: 2019/9/21
      * Time: 14:08
-     * @param Request $request
+     * @param LinkRequest $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function applyLink(Request $request)
+    public function applyLink(LinkRequest $request)
     {
         $model = new FriendLink();
         try {
             $model::create($request->input());
+            Mail::to(env('MAIL_TO_ADDRESS'))->send(new Alarm('友情链接申请,请及时处理'));
             return $this->resJson(0, '操作成功');
         } catch (\Exception $e) {
             return $this->resJson(1, $e->getMessage());
