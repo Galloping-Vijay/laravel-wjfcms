@@ -6,6 +6,7 @@ use App\Http\Traits\TraitResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,7 +14,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        self::$model = User::class;
+        self::$model       = User::class;
         self::$controlName = 'user';
     }
 
@@ -28,10 +29,10 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->isMethod('post')) {
-            $page = $request->input('page', 1);
-            $limit = $request->input('limit', 10);
-            $where = [];
-            $name = $request->input('name', '');
+            $page   = $request->input('page', 1);
+            $limit  = $request->input('limit', 10);
+            $where  = [];
+            $name   = $request->input('name', '');
             $delete = $request->input('delete', 0);
             if ($name != '') {
                 $where[] = ['name', 'like', '%' . $name . '%'];
@@ -54,7 +55,32 @@ class UserController extends Controller
         }
         return view('admin.' . self::$controlName . '.index', [
             'control_name' => self::$controlName,
-            'delete_list' => self::$model::$delete,
+            'delete_list'  => self::$model::$delete,
         ]);
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2019/5/27
+     * Time: 22:28
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $model = new self::$model;
+        try {
+            $model::create([
+                'name'              => $request->name,
+                'email'             => $request->email,
+                'password'          => Hash::make($request->password),
+                'avatar'            => $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/images/config/avatar_l.jpg',
+                'email_verified_at' => date('Y-m-d H:i:s'),
+            ]);
+            return $this->resJson(0, '操作成功');
+        } catch (\Exception $e) {
+            return $this->resJson(1, $e->getMessage());
+        }
     }
 }
