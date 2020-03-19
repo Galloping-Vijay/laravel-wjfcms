@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Home;
 
 use App\Libs\Tuling;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,25 +23,38 @@ class ToolsController extends Controller
      */
     public function linkSubmit()
     {
-        $urls    = array(
-            'https://www.choudalao.com/',
-            'https://www.choudalao.com/chat',
-            'https://www.choudalao.com/category/1',
-            'https://www.choudalao.com/category/3',
-            'https://www.choudalao.com/category/4',
-            'https://www.choudalao.com/category/5',
-            'https://www.choudalao.com/category/6',
-            'https://www.choudalao.com/category/7',
-            'https://www.choudalao.com/category/8',
-            'https://www.choudalao.com/tag/1',
-            'https://www.choudalao.com/tag/2',
-            'https://www.choudalao.com/tag/3',
-            'https://www.choudalao.com/tag/4',
-            'https://www.choudalao.com/tag/5',
-            'https://www.choudalao.com/tag/6',
-            'https://www.choudalao.com/tag/7',
-            'https://www.choudalao.com/tag/8',
-        );
+        $baseUrl = 'https://www.choudalao.com/';
+        $urls    = [
+            $baseUrl,
+            $baseUrl . 'register',
+            $baseUrl . 'login',
+            $baseUrl . 'chat',
+            $baseUrl . 'admin/login',
+        ];
+        $artIds  = cache::remember('artIds', 86400, function () {
+            return Article::query()->pluck('id');
+        });
+        if ($artIds) {
+            foreach ($artIds as $ak => $av) {
+                $urls[] = $baseUrl . 'article/' . $av;
+            }
+        }
+        $categoryIds = Cache::remember('categoryIds', 86400, function () {
+            return Category::query()->pluck('id');
+        });
+        if ($categoryIds) {
+            foreach ($categoryIds as $ck => $cv) {
+                $urls[] = $baseUrl . 'category/' . $cv;
+            }
+        }
+        $tagIds = Cache::remember('tagIds', 86400, function () {
+            return Tag::query()->pluck('id');
+        });
+        if ($tagIds) {
+            foreach ($tagIds as $tk => $tv) {
+                $urls[] = $baseUrl . 'tag/' . $tv;
+            }
+        }
         $api     = 'http://data.zz.baidu.com/urls?site=https://www.choudalao.com&token=nsdmyfRcySMSxYl1';
         $ch      = curl_init();
         $options = array(
@@ -69,7 +85,6 @@ class ToolsController extends Controller
     public function tuling()
     {
         $res = Tuling::handle()->param('德玛西亚')->answer();
-        dd($res);
         return response()->json($res);
     }
 
