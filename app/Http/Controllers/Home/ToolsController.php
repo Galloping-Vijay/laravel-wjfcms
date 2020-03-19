@@ -23,7 +23,7 @@ class ToolsController extends Controller
      */
     public function linkSubmit()
     {
-        $baseUrl = 'https://www.choudalao.com/';
+        $baseUrl =  env('BAIDU_SITE_BASE');
         $urls    = [
             $baseUrl,
             $baseUrl . 'register',
@@ -55,7 +55,7 @@ class ToolsController extends Controller
                 $urls[] = $baseUrl . 'tag/' . $tv;
             }
         }
-        $api     = 'http://data.zz.baidu.com/urls?site=https://www.choudalao.com&token=nsdmyfRcySMSxYl1';
+        $api     = env('BAIDU_SITE_API');
         $ch      = curl_init();
         $options = array(
             CURLOPT_URL            => $api,
