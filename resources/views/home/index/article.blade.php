@@ -73,6 +73,9 @@
             white-space: normal;
             border-left: 4px solid rgb(221, 221, 221);
         }
+        .zoomify.zoomed{
+            position: absolute;
+        }
     </style>
 @endsection
 @section('title', $info->title.' | '.\App\Models\SystemConfig::getConfigCache('seo_title'))
