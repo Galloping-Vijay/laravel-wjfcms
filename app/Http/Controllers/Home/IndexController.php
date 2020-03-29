@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Vijay\Curl\Curl;
 use App\Models\Nav;
@@ -87,7 +88,7 @@ class IndexController extends Controller
     {
         $info = Article::find($id);
         if (empty($info) || $info->status == 0) {
-            return redirect()->back();
+            return redirect()->route('blank');
         }
         $info->click += 1;
         $info->save();
@@ -246,7 +247,11 @@ class IndexController extends Controller
      */
     public function friendLinks(Request $request)
     {
-        $links = FriendLink::where('status', 1)->select('name', 'url')->get();
+        $links = FriendLink::query()
+            ->where('status', 1)
+            ->select('name', 'url')
+            ->orderBy('sort', 'desc')
+            ->get();
         return $this->resJson('0', '获取成功', $links);
     }
 

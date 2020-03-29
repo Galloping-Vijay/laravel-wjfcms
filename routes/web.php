@@ -19,7 +19,7 @@ Route::get('test', function () {
 });
 
 //错误页
-Route::get('blank', 'Home\BlankController@index');
+Route::get('blank', 'Home\BlankController@index')->name('blank');
 
 //用户登录注册
 Auth::routes();
@@ -366,6 +366,20 @@ Route::namespace('Admin')->middleware('admin')->prefix('admin')->group(function 
         Route::post('restore', 'FriendLinksController@restore');
         // 彻底删除
         Route::post('forceDelete', 'FriendLinksController@forceDelete');
+    });
+
+    // 微信
+    Route::prefix('weChat')->group(function () {
+        // 关键字操作
+        Route::prefix('keyword')->group(function () {
+            Route::any('index', 'Wechat\KeywordController@Index');
+            Route::get('create', 'Wechat\KeywordController@Create');
+            Route::post('store', 'Wechat\KeywordController@Store');
+            Route::get('show/{id}', 'Wechat\KeywordController@Show');
+            Route::get('edit/{id}', 'Wechat\KeywordController@Edit');
+            Route::post('update', 'Wechat\KeywordController@Update');
+            Route::post('destroy', 'Wechat\KeywordController@destroy');
+        });
     });
 
 });

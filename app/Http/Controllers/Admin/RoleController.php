@@ -50,13 +50,13 @@ class RoleController extends Controller
             }
             switch ($delete) {
                 case '1':
-                    $list = Role::onlyTrashed()->where($where)->get();
+                    $list = Role::onlyTrashed()->where($where)->orderBy('id', 'desc')->get();
                     break;
                 case '2':
-                    $list = Role::withTrashed()->where($where)->get();
+                    $list = Role::withTrashed()->where($where)->orderBy('id', 'desc')->get();
                     break;
                 default:
-                    $list = Role::where($where)->get();
+                    $list = Role::where($where)->orderBy('id', 'desc')->get();
                     break;
             }
             $res = self::getPageData($list, $page, $limit);

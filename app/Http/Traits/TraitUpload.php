@@ -10,6 +10,8 @@
 namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
+use Qiniu\Auth;
+use Qiniu\Storage\UploadManager;
 
 trait TraitUpload
 {
@@ -186,5 +188,42 @@ trait TraitUpload
             "jpg", "jpeg", "gif", "png", "bmp", "webp"
         ];
         return self::fileUpload($name, $path, $allowExtension);
+    }
+
+    /**
+     * Description:七牛云上传文件
+     * User: Vijay <1937832819@qq.com>
+     * Date: 2019/12/27
+     * Time: 17:22
+     * @param $filePath
+     * @return mixed
+     * @throws \Exception
+     */
+    public static function qiniuUpload($filePath)
+    {
+        if (strpos($filePath, $_SERVER['REQUEST_SCHEME']) !== false) {
+            $domain = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
+            $filePath = public_path(str_ireplace($domain, '', $filePath));
+        }
+        // 需要填写你的 Access Key 和 Secret Key
+        $accessKey = env('QINIUYUN_AK');
+        $secretKey = env('QINIUYUN_SK');
+        $bucket = env('QINIUYUN_BUCKET');
+        $qiniuDomain = env('QINIUYUN_DAMAIN');
+        // 初始化 UploadManager 对象并进行文件的上传。
+        $uploadMgr = new UploadManager();
+        // 构建鉴权对象
+        $auth = new Auth($accessKey, $secretKey);
+        // 生成上传 Token
+        $token = $auth->uploadToken($bucket);
+        // 要上传文件的本地路径
+        //$filePath = './php-logo.png';
+        // 上传到七牛后保存的文件名
+        $key = basename($filePath);
+        // 调用 UploadManager 的 putFile 方法进行文件的上传。
+        $res = $uploadMgr->putFile($token, $key, $filePath);
+        //删除本地图片
+        unlink($filePath);
+        return $qiniuDomain . '/' . $res[0]['key'];
     }
 }

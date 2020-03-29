@@ -20,6 +20,16 @@ ubuntu下(注意权限)
 
 ![screenshot_1565618633020](./images/screenshot_1565618633020.png)
 
+
+
+> 如果github访问慢,可以换码云链接 
+
+~~~shell
+git clone https://gitee.com/Galloping-Vijay/laravel-wjfcms.git
+~~~
+
+
+
 ## 进入项目目录
 
 ~~~shell
@@ -49,6 +59,38 @@ DB_DATABASE 数据库名；
 DB_USERNAME 数据库用户名 ；  
 
 DB_PASSWORD 数据库密码 ；
+
+APP_NAME="Vijay 个人博客"
+
+APP_ENV=local
+
+APP_KEY=
+
+APP_DEBUG=true
+
+APP_URL=www.choudalao.com
+
+ 
+
+LOG_CHANNEL=stack
+
+ 
+
+DB_CONNECTION=mysql
+
+DB_HOST=127.0.0.1
+
+DB_PORT=3306
+
+DB_DATABASE=blog
+
+DB_USERNAME=root
+
+DB_PASSWORD=root
+
+DB_PREFIX=wjf_
+
+
 
 > 你的`.env`文件不应该提交到应用程序的源代码控制系统中，因为每个使用你的应用程序的开发人员 / 服务器可能需要有一个不同的环境配置。此外，在入侵者获得你的源代码控制仓库的访问权的情况下，这会成为一个安全隐患，因为任何敏感的凭据都被暴露了。
 

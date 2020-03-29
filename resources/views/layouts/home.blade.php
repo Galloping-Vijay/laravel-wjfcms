@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:wb=“http://open.weibo.com/wb”>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     {{--百度平台--}}
@@ -97,7 +97,7 @@
 @section('footer')
 <footer>
     <p>Copyright © 2019 <a href="/" title="{{ \App\Models\SystemConfig::getConfigCache('site_name') }}">{{ \App\Models\SystemConfig::getConfigCache('site_name') }}</a>
-        All rights reserved&nbsp;<a href="#" title="臭大佬" rel="nofollow">{{ \App\Models\SystemConfig::getConfigCache('site_icp') }}</a>
+        All rights reserved&nbsp;<a href="http://www.beian.miit.gov.cn" target="_blank"  title="工信部" rel="nofollow">{{ \App\Models\SystemConfig::getConfigCache('site_icp') }}</a>
     </p>
     <p>所有文章未经授权禁止转载、摘编、复制或建立镜像，如有违反，追究法律责任。举报邮箱：<a
                 href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email={{ \App\Models\SystemConfig::getConfigCache('site_email') }}" rel="nofollow" target="_blank">{{ \App\Models\SystemConfig::getConfigCache('site_email') }}</a>

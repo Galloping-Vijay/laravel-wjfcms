@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Models\WxKeyword;
 use EasyWeChat\Factory;
 use App\Http\Traits\TraitUpload;
 use App\Libs\Tuling;
@@ -63,7 +64,11 @@ class WeChatController extends Controller
                     }
                     break;
                 case 'text':
-                    //Log::info($message['Content']);
+                    //查询数据库是否存在关键词
+                    $keyword = WxKeyword::query()->where('status', '=', 1)->where('key_name', 'like', '%' . $message['Content'] . '%')->first();
+                    if ($keyword) {
+                        return $keyword->key_value;
+                    }
                     $res = Tuling::handle()->param($message['Content'])->answer();
                     switch ($res['resultType']) {
                         case 'text':

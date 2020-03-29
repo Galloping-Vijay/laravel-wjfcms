@@ -2,10 +2,14 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 //use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use phpDocumentor\Reflection\Types\Self_;
 
 class SendLinkSubmit extends Command
 {
@@ -33,32 +37,9 @@ class SendLinkSubmit extends Command
     private $api = 'http://data.zz.baidu.com/urls?site=https://www.choudalao.com&token=nsdmyfRcySMSxYl1';
 
     /**
-     * @var array
-     * Description:
-     * User: Vijay <1937832819@qq.com>
-     * Date: 2019/11/25
-     * Time: 17:34
+     * @var string
      */
-    private static $urls = [
-        'https://www.choudalao.com/',
-        'https://www.choudalao.com/chat',
-        'https://www.choudalao.com/category/1',
-        'https://www.choudalao.com/category/3',
-        'https://www.choudalao.com/category/4',
-        'https://www.choudalao.com/category/5',
-        'https://www.choudalao.com/category/6',
-        'https://www.choudalao.com/category/7',
-        'https://www.choudalao.com/category/8',
-        'https://www.choudalao.com/tag/1',
-        'https://www.choudalao.com/tag/2',
-        'https://www.choudalao.com/tag/3',
-        'https://www.choudalao.com/tag/4',
-        'https://www.choudalao.com/tag/5',
-        'https://www.choudalao.com/tag/6',
-        'https://www.choudalao.com/tag/7',
-        'https://www.choudalao.com/tag/8',
-        'https://www.choudalao.com/article/88'
-    ];
+    private $baseUrl = 'https://www.choudalao.com/';
 
     /**
      * @var string
@@ -92,7 +73,7 @@ class SendLinkSubmit extends Command
             CURLOPT_URL => $this->api,
             CURLOPT_POST => true,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POSTFIELDS => implode("\n", self::$urls),
+            CURLOPT_POSTFIELDS => implode("\n", self::getUrl()),
             CURLOPT_HTTPHEADER => array('Content-Type: text/plain'),
         );
         curl_setopt_array($ch, $options);
@@ -149,5 +130,48 @@ class SendLinkSubmit extends Command
                 $this->info('发送邮件失败，请重试！');
             }
         }
+    }
+
+    /**
+     * Description:
+     * User: Vijay
+     * Date: 2020/1/10
+     * Time: 21:47
+     * @return array
+     */
+    public function getUrl()
+    {
+        $urls = [
+            $this->baseUrl,
+            $this->baseUrl . 'register',
+            $this->baseUrl . 'login',
+            $this->baseUrl . 'chat',
+            $this->baseUrl . 'admin/login',
+        ];
+        $artIds = cache::remember('artIds', 86400, function () {
+            return Article::query()->pluck('id');
+        });
+        if ($artIds) {
+            foreach ($artIds as $ak => $av) {
+                $urls[] = $this->baseUrl . 'article/' . $av;
+            }
+        }
+        $categoryIds = Cache::remember('categoryIds', 86400, function () {
+            return Category::query()->pluck('id');
+        });
+        if ($categoryIds) {
+            foreach ($categoryIds as $ck => $cv) {
+                $urls[] = $this->baseUrl . 'category/' . $cv;
+            }
+        }
+        $tagIds = Cache::remember('tagIds', 86400, function () {
+            return Tag::query()->pluck('id');
+        });
+        if ($tagIds) {
+            foreach ($tagIds as $tk => $tv) {
+                $urls[] = $this->baseUrl . 'tag/' . $tv;
+            }
+        }
+        return $urls;
     }
 }

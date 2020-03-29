@@ -38,7 +38,7 @@ trait TraitResource
             $page = $request->input('page', 1);
             $limit = $request->input('limit', 10);
             $where = [];
-            $list = self::$model::where($where)->get();
+            $list = self::$model::where($where)->orderBy('id', 'desc')->get();
             $data = self::getPageData($list, $page, $limit);
             return response($data);
         }

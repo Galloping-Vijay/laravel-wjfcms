@@ -25,6 +25,7 @@
   "dependencies": {
     "@websanova/vue-auth": "^2.21.14-beta",
     "editor.md": "^1.5.0",
+    "gitbook-plugin": "0.0.2",
     "querystringify": "^2.1.1"
   },
   "name": "dev.wjfcms.net",
