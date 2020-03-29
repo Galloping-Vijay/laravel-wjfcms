@@ -6,7 +6,8 @@
     <script src="{{ asset('static/clipboard/dist/clipboard.min.js') }}" type="text/javascript"></script>
     <link href="{{ asset('static/layuiadmin/style/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('static/layuiadmin/style/template.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/home/zoomify.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/home/zoomify.min.js') }}" type="text/javascript"></script>
     <style>
         .news_infos h1,.news_infos h2,.news_infos h3,.news_infos h4,.news_infos h5,.news_infos h6{
             font-weight: bold;
@@ -186,6 +187,7 @@
                 });
             };
             initCopyCode();
+            $('.news_infos img').zoomify();
         })
     </script>
 @endsection

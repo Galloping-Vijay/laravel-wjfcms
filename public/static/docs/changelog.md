@@ -4,6 +4,10 @@
 
 - 到github下载拉取最新文件,github地址[github](https://github.com/Galloping-Vijay/laravel-wjfcms),对比升级
 
+## v1.3.2 - 2020-03-29
+
+- 增加文章图片放缩功能
+
 ## v1.3.1 - 2020-03-04
 
 - 微信公众号关键词回复
