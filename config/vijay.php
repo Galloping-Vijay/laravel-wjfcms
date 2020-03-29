@@ -7,7 +7,7 @@
  */
 
 return [
-    'object_name' => 'wjfcms',
+    'object_name' => '臭大佬',
     'version' => 'v1.2.1',
     'branch' => env('DEPLOY_BRANCH', 'master'),
     'web_name' => '臭大佬',
@@ -28,7 +28,7 @@ return [
     'shop' => 'https://shop.choudalao.com',
     'development' => 'https://development.choudalao.com',
     'water' => [
-        'text' => 'wjfcms',
+        'text' => '臭大佬',
         'size' => '15',
         'color' => '#019683',
     ],
