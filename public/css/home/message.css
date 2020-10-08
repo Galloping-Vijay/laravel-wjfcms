@@ -1,0 +1,326 @@
+.article-text{
+
+}
+.blogs{
+    margin-top: 20px;
+    background: #fff;
+}
+.message_content{
+    padding: 30px 35px;
+}
+.links-title {
+    padding-left: 10px;
+    margin-bottom: 22px;
+    border-left: 5px solid #E2523A;
+    border-bottom: 1px solid #E2523A;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 2;
+    color: #545454;
+}
+.links-lists {
+    padding-left: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #545454;
+    line-height: 2.5;
+    width: 46%;
+    float: left;
+}
+.links-lists li{
+    padding: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    text-indent: 2em
+}
+.links-lists .user-edit{
+    font-size: 14px;
+    text-align: center;
+}
+.links-lists .user-edit a{
+    background: #2e74e5;;
+    padding: 10px;
+    border-radius: 15px;
+    color: #fff;
+}
+.user_pic{
+    text-align: center
+}
+.module-cmt-header {
+    width: 100%;
+    box-sizing: border-box;
+    /* height: 160px; */
+    background: #fff;
+    padding: 0;
+}
+.user-header-img {
+    height: 54px;
+    width: 54px;
+    border-radius: 50%;
+    position: absolute;
+    top: -44px;
+    left: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+.user-header-img .ct {
+    overflow: hidden;
+    border-radius: 50%;
+    height: 44px;
+    width: 44px;
+}
+.article-text img {
+    display: block;
+    max-width: 154px;
+    margin: 0 auto;
+    width: 100%;
+    border-radius: 50%;
+}
+.user-header-img:after {
+    content: "";
+    position: absolute;
+    bottom: 1px;
+    left: 50%;
+    transform: translate(-50%);
+    -webkit-transform: translate(-50%);
+    height: 56px;
+    width: 58px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #f17067;
+}
+.user-name {
+    position: absolute;
+    top: -13px;
+    left: 59px;
+    padding: 0 5px;
+    background-color: #fff;
+    color: #f06056;
+}
+.area-cont {
+    border: 1px solid #e74851;
+    border-radius: 6px;
+    padding: 20px 10px 10px;
+}
+.textarea {
+    width: 100%;
+    height: 70px;
+    background: 0 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 0;
+    font-size: 14px;
+    color: #545050;
+    resize: none;
+    outline: none;
+    line-height: normal;
+    text-align: left;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    resize:none;
+}
+.tools-box {
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 7px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    float: left;
+}
+.tools-box.main-tools-box .operator-box-btn {
+    width: 6%;
+}
+.tools-box .operator-box-btn {
+    width: 85%;
+    height: 30px;
+    float: left;
+}
+.tools-box .operator-box-btn .face-icon, .face-icon2 {
+    display: block;
+    float: left;
+    margin-top: -1px;
+    margin-left: 10px;
+    font-family: 微软雅黑;
+    font-size: 22px;
+    color: rgb(231, 72, 81);
+    cursor: pointer;
+}
+.tools-box.main-tools-box .e-mail {
+    width: 20%;
+    float: left;
+    padding-top: 2px;
+}
+.tools-box.main-tools-box .e-mail input {
+    outline: none;
+    border: 1px dashed #f17067;
+    padding: 0 8px;
+    border-radius: 4px;
+    color: #545050;
+    font-family: 微软雅黑;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0px auto;
+    list-style: none;
+    margin-left: 20px;
+    text-decoration: none;
+}
+.tools-box .submit-btn {
+    width: 15%;
+    height: 30px;
+    float: right;
+    margin-top: 3px;
+}
+.tools-box .submit-btn input {
+    width: 100%;
+    height: 100%;
+    font-family: 微软雅黑;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background-color: rgb(231, 72, 81);
+    line-height: 2.2;
+    border-radius: 4px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    outline: none;
+    -webkit-appearance:none;
+}
+.module-cmt-list {
+    background: #fff;
+    padding: 0;
+    color: #e74851;
+    margin-bottom: 25px;
+}
+.cmt-list {
+    padding-top: 2px;
+}
+.cmt-li {
+    border-bottom: 1px dashed #e5e5e5;
+    margin-bottom: 2px;
+    padding-bottom: 0px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.clear {
+    clear: both;
+}
+.cmt-li-title {
+    overflow: hidden;
+    float: left;
+    width: 6%;
+    height: 6%;
+}
+.cmt-li-title .headimg {
+    width: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.cmt-li-title .headimg img {
+    width: 100%;
+    height: 100%;
+}
+.cmt-li-r {
+    margin-left: 2%;
+    width:92%;
+    float: left;
+}
+.cmt-li-r .top {
+    height: 2.5em;
+    line-height: 2em;
+    width: 100%;
+}
+.cmt-li-r .top .nickname {
+    float: left;
+}
+.cmt-li-r .top * {
+    font-size: 12px;
+}
+.cmt-li-r .body-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 28px;
+    clear: both;;
+}
+.cmt-li-r .btns-bar {
+    height: 20px;
+    overflow: hidden;
+    margin-top: -10px;
+    margin-bottom: 4px;
+}
+.cmt-li-r .btns-bar span {
+    font-size: 12px;
+    color: silver;
+    cursor: pointer;
+    float: right;
+}
+.module-cmt-header {
+    width: 100%;
+    box-sizing: border-box;
+    /* height: 160px; */
+    background: #fff;
+    padding: 0;
+}
+.reply-list .li {
+    font-size: 12px;
+    color: #333;
+    line-height: 36px;
+    border-top: 1px dashed #e5e5e5;
+    margin-bottom: 6px;
+}
+.reply-list .li .date-reply {
+    float: right;
+    /* line-height: 36px; */
+    color: silver;
+}
+.reply-list .li .date-reply .date {
+    margin-right: 1px;
+}
+.reply-list .li .date-reply span {
+    font-size: 12px;
+    cursor: pointer;
+}
+.reply-list .li .li-t {
+    overflow: hidden;
+    position: relative;
+    top: 16px;
+}
+.reply-list .li .headimg {
+    width: 6%;
+    height: 6%;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    margin-right: 2%;
+}
+.reply-list .li span.username {
+    font-size: 12px;
+    float: left;
+    color: #e74851;
+    line-height: 36px;
+}
+.reply-list .li text {
+    font-size: 12px;
+    /* float: left; */
+    color: #333;
+    line-height: 36px;
+    margin-left: 10px;
+}
+.body-text img {
+    margin:0 2px;
+    display: inline-block;
+    vertical-align: middle;
+}
+/*.body-text{*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+/*}*/
+.replay_r{
+    width:92%;
+    float: left;
+}
