@@ -19,9 +19,10 @@ class ToolsController extends Controller
 {
     /**
      * Description:
-     * User: Vijay
-     * Date: 2019/11/7
-     * Time: 22:08
+     * User: Vijay <1937832819@qq.com>
+     * Date: 2020/10/17
+     * Time: 18:05
+     * @return \Illuminate\Http\JsonResponse
      */
     public function linkSubmit()
     {
@@ -58,7 +59,6 @@ class ToolsController extends Controller
             }
         }
         $api = env('BAIDU_SITE_API');
-        dd($api,$urls);
         $ch = curl_init();
         $options = array(
             CURLOPT_URL => $api,
