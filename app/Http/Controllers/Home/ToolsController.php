@@ -58,6 +58,7 @@ class ToolsController extends Controller
             }
         }
         $api = env('BAIDU_SITE_API');
+        dd($api,$urls);
         $ch = curl_init();
         $options = array(
             CURLOPT_URL => $api,
@@ -69,7 +70,6 @@ class ToolsController extends Controller
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
         $res = json_decode($result, true);
-        dd($res);
         if (isset($res['error'])) {
             return response()->json($res);
         } elseif (!isset($res['remain'])) {
