@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
+use phpDocumentor\Reflection\DocBlock;
 use Vijay\Curl\Curl;
 
 class ToolsController extends Controller
@@ -68,6 +69,7 @@ class ToolsController extends Controller
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
         $res = json_decode($result, true);
+        dd($res);
         if (isset($res['error'])) {
             return response()->json($res);
         } elseif (!isset($res['remain'])) {
