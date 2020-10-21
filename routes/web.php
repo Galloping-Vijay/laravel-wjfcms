@@ -47,7 +47,9 @@ Route::namespace('Home')->group(function () {
     Route::get('category/{category}', 'IndexController@category');
     // 标签
     Route::get('tag/{tag}', 'IndexController@tag');
-    // 随言碎语
+    // 归档文章
+    Route::get('archive', 'IndexController@archive');
+    // 有些话
     Route::get('chat', 'IndexController@chat');
     // 文章详情
     Route::get('article/{id}', 'IndexController@article');

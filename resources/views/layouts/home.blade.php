@@ -87,7 +87,7 @@
                 @endforeach
                 @foreach($nav_list as $vk=>$vv)
                     <li>
-                        <a href="{{ $vv['url'] }}" target="{{ $vv['target'] }}" @if((request()->path() === $vv["url"])) id="topnav_current" @endif title="{{ $vv['name'] }}">{{ $vv['name'] }}</a>
+                        <a href="{{ $vv['url'] }}" target="{{ $vv['target'] }}" @if(('/'.request()->path() === $vv["url"])) id="topnav_current" @endif title="{{ $vv['name'] }}">{{ $vv['name'] }}</a>
                     </li>
                 @endforeach
             </ul>

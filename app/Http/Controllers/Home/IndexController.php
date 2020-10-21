@@ -159,6 +159,47 @@ class IndexController extends Controller
     }
 
     /**
+     * @Description: 文章归档
+     * @User: Vijay <1937832819@qq.com>
+     * @Date: 2020-10-18 22:23:42
+     * @param {type} 
+     * @return {type} 
+     */
+    public function archive()
+    {
+        // 获取所有分类
+        $category = Category::query()
+            ->orderBy('sort')
+            ->orderBy('id')
+            ->select('id', 'name')
+            ->get();
+        // 获取分类下的文章
+        $arts = Article::query()
+            ->where('status', 1)
+            ->select('id', 'title', 'category_id')
+            ->orderBy('id', 'ASC')
+            ->get();
+        $res = [];
+        foreach ($category as $cat) {
+            $res[$cat['id']]['id'] = $cat['id'];
+            $res[$cat['id']]['name'] = $cat['name'];
+            $res[$cat['id']]['art'] = [];
+        }
+        foreach ($arts as $art) {
+            if (!isset($res[$art['category_id']])) {
+                continue;
+            }
+            $res[$art['category_id']]['art'][] = [
+                'id' => $art['id'],
+                'title' => $art['title'],
+            ];
+        }
+        return view('home.index.archive', [
+            'data' => $res
+        ]);
+    }
+
+    /**
      * Description:
      * User: Vijay
      * Date: 2019/8/11
