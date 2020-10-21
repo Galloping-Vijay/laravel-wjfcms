@@ -14,6 +14,16 @@ class NavsTableSeeder extends Seeder
     {
         $data = [
             [
+                'name' => '文章归档',
+                'sort' => 0,
+                'url' => '/archive',
+                'pid' => 0,
+                'target' => '_self',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'deleted_at' => null,
+            ],
+            [
                 'name' => '有些话',
                 'sort' => 0,
                 'url' => '/chat',
