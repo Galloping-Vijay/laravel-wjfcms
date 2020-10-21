@@ -177,7 +177,7 @@ class IndexController extends Controller
         $arts = Article::query()
             ->where('status', 1)
             ->select('id', 'title', 'category_id')
-            ->orderBy('id')
+            ->orderBy('id', 'ASC')
             ->get();
         $res = [];
         foreach ($category as $cat) {
