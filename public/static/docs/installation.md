@@ -152,3 +152,7 @@ php artisan list
 后台默认账号 :13000000000
 
 密码:123456
+
+## 常见问题
+环境不符合要求：[运行环境](https://www.choudalao.com/static/docs/_book/development.html)
+伪静态配置：[伪静态配置](https://www.choudalao.com/static/docs/_book/dispose.html)

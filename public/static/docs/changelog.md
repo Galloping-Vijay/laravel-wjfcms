@@ -4,6 +4,9 @@
 
 - 到github下载拉取最新文件,github地址[github](https://github.com/Galloping-Vijay/laravel-wjfcms),对比升级
 
+## v1.4.2 - 2020-10-12
+- 增加文章归档
+
 ## v1.4.0 - 2020-06-05
 - 升级到laravel6.0
 
