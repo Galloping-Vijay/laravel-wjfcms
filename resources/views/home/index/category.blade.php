@@ -55,9 +55,11 @@
             @endcomponent
             @component('./layouts/home/ad')
             @endcomponent
-            @component('./layouts/home/hot')
-            @endcomponent
             @component('./layouts/home/tag')
+            @endcomponent
+            @component('./layouts/home/links')
+            @endcomponent
+            @component('./layouts/home/hot')
             @endcomponent
             @component('./layouts/home/publicwx')
             @endcomponent

@@ -40,7 +40,7 @@
                             <a href="javascript:void(0);" title="{{ $article->keywords }}"
                                class="classname">{{ $article->keywords }}</a>
                         </span>
-                            <span class="dtime">{{ $article->updated_at }}</span>
+                            <span class="dtime">{{ $article->created_at }}</span>
                             <span class="viewnum">浏览（<a href="javascript:void(0);">{{ $article->click }}</a>）</span>
                             <span class="readmore"><a href="/article/{{ $article->id }}" title="{{ $article->title }}">阅读原文</a></span>
                         </div>
