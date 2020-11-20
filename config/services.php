@@ -58,4 +58,9 @@ return [
         'client_secret' => env('WEIBO_CLIENT_SECRET'),
         'redirect' => env('WEIBO_REDIRECT')
     ],
+    'wechat_web' => [
+        'client_id' => env('WECHATWEB_CLIENT_ID'),
+        'client_secret' => env('WECHATWEB_CLIENT_SECRET'),
+        'redirect' => env('WECHATWEB_REDIRECT_URI')
+    ],
 ];
