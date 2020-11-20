@@ -34,8 +34,10 @@
         "overtrue/laravel-wechat": "~5.0",
         "predis/predis": "^1.1",
         "qiniu/php-sdk": "^7.2",
+        "socialiteproviders/manager": "~3.0",
         "socialiteproviders/qq": "^3.0",
         "socialiteproviders/weibo": "^3.0",
+        "socialiteproviders/weixin-web": "v3.1.0",
         "spatie/laravel-permission": "^3.0",
         "tymon/jwt-auth": "1.0.0-rc.5.1"
     },
