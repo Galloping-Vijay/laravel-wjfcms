@@ -12,9 +12,7 @@
  .text img { width: 100% }
  .rightbox { margin-right: 0 }
  .picbox { width: 72%; }
- .picbox ul { width: 32%; margin-right: 0 }
- .picbox ul:nth-child(2) { margin: 0 5px }
-
+ .picbox ul { width: 100%; margin-right: 0 }
  .pics ul li img {
   width: 100% !important;
  }
@@ -35,8 +33,8 @@
  .text img { width: 100% }
  .news_infos img { width: 100% }
   h3.blogtitle { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
- .picbox { width: 67%; }
- .picbox ul { width: 32%; margin-right: 0 }
+ .picbox { width: 100%; }
+ .picbox ul { width:100%; margin-right: 0 }
  .picbox ul:nth-child(2) { margin: 0 5px }
  .paihang li i { width: 98% }
  .infos { width: 100%; }
@@ -64,7 +62,7 @@
  .picshow .font, .litle span { display: none }
  .text img { width: 100% }
  .blogs { width: 100% }
- .sidebar { /*width: 36%*/;display: none; }
+ .sidebar { /*width: 36%;*/display: none; }
  .rightbox { width: 40%; }
  .leftbox { width: 60% }
  .news_infos img { width: 100% }
@@ -72,9 +70,9 @@
  h3.blogtitle { clear: both; padding-top: 10px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
  .readmore { display: block; overflow: hidden; width: 100%; text-align: center; background: #f2f2f2; padding: 10px 0; margin-top: 10px; clear: both }
  .paihang li i { width: 98% }
- .picbox { width: 64%; }
- .picbox ul { width: 32%; margin-right: 0 }
- .picbox ul:nth-child(2) { margin: 0 5px }
+ .picbox { width: 100%; }
+ .picbox ul { width: 100%; margin-right: 0 }
+ .picbox ul li{ width: 40%; margin: 0 20px 20px 0;}
  h1.t_nav span { display: none }
  .infos { width: 100%; }
  .ad { display: none }
@@ -111,8 +109,24 @@
  .blogpic { width: 100%; height: 150px; display: block }
  h3.blogtitle { clear: both; padding-top: 10px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
  .readmore { display: block; overflow: hidden; width: 100%; text-align: center; background: #f2f2f2; padding: 10px 0; margin-top: 10px; clear: both }
- .picbox { width: 100% }
+ .picbox { width: 100%; margin-top: 20px;}
  .picbox ul { width: 100%; margin: 0 }
+ .picbox ul li{     
+  display: block;
+  background: #FFF;
+  margin: 0 0 20px 0;
+  border: 1px #d9d9d9 solid;
+  height: 410px;
+  overflow: hidden;
+  border-radius: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;}
+ .picbox ul li i {    
+   margin: 10px;
+  height: auto;
+  overflow: hidden;
+  display: block;}
+  .picbox ul li img { width: 100%;height: 338px;}
  h1.t_nav span { display: none }
  .infos { width: 100%; }
  .ad { display: none }
@@ -144,6 +158,7 @@
  .readmore { display: block; overflow: hidden; width: 100%; text-align: center; background: #f2f2f2; padding: 10px 0; margin-top: 10px; clear: both }
  .picbox { width: 100% }
  .picbox ul { width: 100%; margin: 0 }
+ .picbox ul li{ width: 100%; margin: 0 0 20px 0;}
  h1.t_nav span { display: none }
  .infos { width: 100%; }
  .ad { display: none }

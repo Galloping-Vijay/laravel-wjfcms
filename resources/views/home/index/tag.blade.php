@@ -22,17 +22,6 @@
         text-overflow: ellipsis;
         line-height: 30px;
     }
-    .picbox ul li {
-        display: block;
-        background: #FFF;
-        margin: 0 0 20px 0;
-        border: 1px #d9d9d9 solid;
-        height: 410px;
-        overflow: hidden;
-        border-radius: 20px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
 </style>
 @endsection
 @section('content')
