@@ -104,8 +104,8 @@
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 100, title: 'ID', sort: true, align: 'center'}
-                    , {field: 'title', title: '文章标题', align: 'center'}
+                    , {field: 'id', width: 100, hide: true, title: 'ID', sort: true, align: 'center'}
+                    , {field: 'title', title: '文章标题', align: 'center',minWidth: 200}
                     , {field: 'username', title: '评论者', align: 'center'}
                     , {field: 'content', title: '内容', align: 'center'}
                     , {field: 'created_at', title: '提交时间', sort: true, align: 'center'}
