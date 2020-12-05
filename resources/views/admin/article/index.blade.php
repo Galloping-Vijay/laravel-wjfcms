@@ -127,21 +127,19 @@
             var category_id = getQueryVariable('category_id');
 
             //将以下代码粘入相关页面中
-            $(document).off('mousedown','.layui-table-grid-down').
-            on('mousedown','.layui-table-grid-down',function (event) {
+            $(document).off('mousedown', '.layui-table-grid-down').on('mousedown', '.layui-table-grid-down', function (event) {
                 table._tableTrCurrr = $(this).closest('td');
             });
-            $(document).off('click','.layui-table-tips-main [lay-event]').
-            on('click','.layui-table-tips-main [lay-event]',function (event) {
+            $(document).off('click', '.layui-table-tips-main [lay-event]').on('click', '.layui-table-tips-main [lay-event]', function (event) {
                 var elem = $(this);
-                var tableTrCurrr =  table._tableTrCurrr;
-                if(!tableTrCurrr){
+                var tableTrCurrr = table._tableTrCurrr;
+                if (!tableTrCurrr) {
                     return;
                 }
                 var layerIndex = elem.closest('.layui-table-tips').attr('times');
                 console.log(layerIndex);
                 layer.close(layerIndex);
-                table._tableTrCurrr.find('[lay-event="' + elem.attr('lay-event') +           '"]').children("i").first().click();
+                table._tableTrCurrr.find('[lay-event="' + elem.attr('lay-event') + '"]').children("i").first().click();
             });
 
             //表格数据
@@ -157,14 +155,14 @@
                 }
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', width: 100, title: '文章ID', sort: true, align: 'center'}
-                    , {field: 'title', title: '文章标题', align: 'center'}
+                    , {field: 'id', width: 80, hide: true, title: '文章ID', sort: true, align: 'center'}
+                    , {field: 'title', title: '文章标题', minWidth: 200, align: 'center'}
+                    , {field: 'is_top', title: '是否置顶', templet: '#topTpl', minWidth: 80, align: 'center'}
+                    , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 100, align: 'center'}
                     , {field: 'cate_name', title: '文章分类', minWidth: 100, align: 'center'}
                     , {field: 'keywords', title: '文章标签', minWidth: 100, align: 'center'}
                     , {field: 'author', title: '作者', align: 'center'}
                     , {field: 'created_at', title: '提交时间', sort: true, align: 'center'}
-                    , {field: 'is_top', title: '是否置顶', templet: '#topTpl', minWidth: 80, align: 'center'}
-                    , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 80, align: 'center'}
                     , {title: '操作', minWidth: 200, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
                 , page: true
