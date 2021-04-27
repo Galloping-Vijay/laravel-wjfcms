@@ -17,4 +17,4 @@ npm-debug.log
 yarn-error.log
 .user.ini
 /public/verify/
-.history
+.history/
