@@ -32,6 +32,9 @@
     {{--谷歌广告--}}
     <script data-ad-client="ca-pub-4281894096969033" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <style>
+        body{
+            font: 15px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+        }
         header {
             color: #FFF;
             position: fixed;
