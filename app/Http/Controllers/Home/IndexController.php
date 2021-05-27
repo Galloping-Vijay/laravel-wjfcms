@@ -91,8 +91,19 @@ class IndexController extends Controller
                 ->select('id', 'name')
                 ->get()->toArray();
         }
-        $pre  = Article::select('id', 'title')->find($id - 1);
-        $next = Article::select('id', 'title')->find($id + 1);
+        if (!empty($info->keywords)) {
+            $infoTags = Tag::whereIn('name', explode(',', $info->keywords))
+                ->select('id', 'name')
+                ->get()->toArray();
+        }
+        $pre  = Article::select('id', 'title')
+            ->where('status', 1)
+            ->where('id', '<', $id)
+            ->first();
+        $next = Article::select('id', 'title')
+            ->where('status', 1)
+            ->where('id', '>', $id)
+            ->first();
         return view('home.index.article', [
             'is_article' => true,
             'info'       => $info,
