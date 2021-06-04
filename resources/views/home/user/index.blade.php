@@ -11,7 +11,7 @@
                 <div class="article-text">
                     <h1 class="links-title">个人资料</h1>
                     <ul class="links-lists">
-                        <li><strong>用户ID：</strong>{{ $user->id }}</li>
+                        <!-- <li><strong>用户ID：</strong>{{ $user->id }}</li> -->
                         <li><strong>邮箱：</strong>{{ $user->email }}</li>
                         <li><strong>昵称：</strong>{{ $user->name }}</li>
                         <li><strong>性别：</strong>{{ $user->sex_text }}</li>
