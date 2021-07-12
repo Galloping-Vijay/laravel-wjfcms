@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\LinkRequest;
 use App\Http\Traits\TraitFront;
 use App\Mail\Alarm;
@@ -10,13 +11,12 @@ use App\Models\Category;
 use App\Models\Chat;
 use App\Models\Comment;
 use App\Models\FriendLink;
+use App\Models\Nav;
 use App\Models\Tag;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Vijay\Curl\Curl;
-use App\Models\Nav;
 
 class IndexController extends Controller
 {
@@ -50,7 +50,7 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        $keytitle   = $request->input('keytitle', '');
+        $keytitle = $request->input('keytitle', '注释掉');
         $topArticle = Article::topArticle();
         $where      = [
             ['status', '=', '1']
@@ -62,6 +62,18 @@ class IndexController extends Controller
             ->orderBy('created_at', 'desc')
             ->orderBy('click', 'desc')
             ->paginate(15);
+        if ($articles->isEmpty()) {
+            $newWhere = [
+                ['status', '=', '1']
+            ];
+            if ($keytitle != '') {
+                $newWhere[] = ['content', 'like', '%' . $keytitle . '%'];
+            }
+            $articles = Article::where($newWhere)
+                ->orderBy('created_at', 'desc')
+                ->orderBy('click', 'desc')
+                ->paginate(15);
+        }
         return view('home.index.index', [
             'top_article' => $topArticle,
             'articles'    => $articles,
@@ -173,8 +185,8 @@ class IndexController extends Controller
      * @Description: 文章归档
      * @User: Vijay <1937832819@qq.com>
      * @Date: 2020-10-18 22:23:42
-     * @param {type} 
-     * @return {type} 
+     * @param {type}
+     * @return {type}
      */
     public function archive()
     {
