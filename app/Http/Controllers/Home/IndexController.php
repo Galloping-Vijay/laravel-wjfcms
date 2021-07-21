@@ -50,7 +50,7 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        $keytitle = $request->input('keytitle', '注释掉');
+        $keytitle = $request->input('keytitle', '');
         $topArticle = Article::topArticle();
         $where      = [
             ['status', '=', '1']
