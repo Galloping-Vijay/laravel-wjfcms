@@ -40,7 +40,9 @@ trait TraitResource
             $where = [];
             $list = self::$model::where($where)->orderBy('id', 'desc')->get();
             $data = self::getPageData($list, $page, $limit);
-            return response($data);
+            return $this->resJson(0, '获取成功', $data['data'], [
+                    'count' => $data['count']]
+            );
         }
         return view('admin.' . self::$controlName . '.index',
             [
