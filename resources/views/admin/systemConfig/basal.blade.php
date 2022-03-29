@@ -276,7 +276,7 @@
 
                             });
                         } else {
-                            layer.msg(res.msg, {icon: 2});;
+                            layer.msg(res.msg, {icon: 2});
                         }
                     }
                 });
