@@ -6,15 +6,15 @@
             <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">作者</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
                         <label class="layui-form-label">标题</label>
                         <div class="layui-input-inline">
                             <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">作者</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">

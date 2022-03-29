@@ -135,7 +135,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg(res.msg, {icon: 2});;
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -182,7 +182,7 @@
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg(res.msg, {icon: 2});;
+                                            layer.msg(res.msg, {icon: 2});
                                         }
 
                                     }
@@ -242,7 +242,7 @@
                                             layer.close(index); //关闭弹层
                                         });
                                     } else {
-                                        layer.msg(res.msg, {icon: 2});;
+                                        layer.msg(res.msg, {icon: 2});
                                     }
                                 }
                             });
@@ -275,7 +275,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg, {icon: 2});;
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -304,7 +304,7 @@
                                         layer.close(index);
                                     });
                                 } else {
-                                    layer.msg(res.msg, {icon: 2});;
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -347,7 +347,7 @@
                                         layer.close(index); //关闭弹层
                                     });
                                 } else {
-                                    layer.msg(res.msg, {icon: 2});;
+                                    layer.msg(res.msg, {icon: 2});
                                 }
                             }
                         });
@@ -391,7 +391,7 @@
                                                 layer.close(index); //关闭弹层
                                             });
                                         } else {
-                                            layer.msg(res.msg, {icon: 2});;
+                                            layer.msg(res.msg, {icon: 2});
                                         }
                                     }
                                 });

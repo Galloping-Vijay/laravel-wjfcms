@@ -150,7 +150,7 @@
                                 parent.layer.close(index); //再执行关闭
                             });
                         } else {
-                            layer.msg(res.msg, {icon: 2});;
+                            layer.msg(res.msg, {icon: 2});
                         }
                     }
                 });

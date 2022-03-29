@@ -45,12 +45,16 @@ class Permissions extends BasePermission
     public static function getMenuTree(array $data = [], int $parent_id = 0): array
     {
         $resArr = [];
+        //根据字段sort_order对数组$data进行降序排列
+        $sort_order = array_column($data, 'sort_order');
+        array_multisort($sort_order, SORT_DESC, $data);
         foreach ($data as $key => &$val) {
             if ($val['display_menu'] == 0) {
                 continue;
             }
             if ($val['parent_id'] == $parent_id) {
                 $val['child'] = self::getMenuTree($data, $val['id']);
+                unset($data[$key]);
                 $resArr[] = $val;
             }
         }

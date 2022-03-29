@@ -31,7 +31,7 @@ class PermissionstableSeeder extends Seeder
                     'id' => 2,
                     'name' => '系统管理',
                     'guard_name' => 'admin',
-                    'sort_order' => 10,
+                    'sort_order' => 0,
                     'url' => '/admin/system',
                     'level' => 0,
                     'icon' => 'layui-icon-set',
