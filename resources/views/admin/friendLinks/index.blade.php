@@ -101,7 +101,7 @@
                     , {field: 'url', title: '链接地址', align: 'center',}
                     , {field: 'email', title: '联系邮箱', align: 'center',}
                     , {field: 'status', title: '状态', templet: '#statusTpl', minWidth: 80, align: 'center'}
-                    , {field: 'created_at', title: '提交时间', sort: true}
+                    , {field: 'created_at', title: '提交时间', sort: true, align: 'center'}
                     , {title: '操作', minWidth: 200, align: 'center', fixed: 'right', toolbar: '#table-list'}
                 ]]
                 , page: true
