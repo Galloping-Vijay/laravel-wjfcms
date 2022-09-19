@@ -24,7 +24,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '网站地址',
                 'key' => 'site_url',
-                'value' => 'www.choudalao.com',
+                'value' => 'www.xxx.com',
                 'type' => 'text',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -48,7 +48,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '联系邮箱',
                 'key' => 'site_email',
-                'value' => '1937832819@qq.com',
+                'value' => '10086@qq.com',
                 'type' => 'text',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -56,7 +56,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '联系QQ',
                 'key' => 'site_qq',
-                'value' => '1937832819',
+                'value' => '10000',
                 'type' => 'text',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -64,7 +64,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '联系微信',
                 'key' => 'site_wechat',
-                'value' => 'wjf1937832819',
+                'value' => 'xxx',
                 'type' => 'text',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -72,7 +72,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '备案信息',
                 'key' => 'site_icp',
-                'value' => '闽ICP备17016331号-4',
+                'value' => 'xxx',
                 'type' => 'text',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -80,7 +80,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '公司/工作室名称',
                 'key' => 'site_co_name',
-                'value' => '厦门市悦遇科技有限公司',
+                'value' => 'xxx有限公司',
                 'type' => 'textarea',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -88,7 +88,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '联系地址',
                 'key' => 'address',
-                'value' => '厦门市思明区观音山',
+                'value' => 'xxx',
                 'type' => 'textarea',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -96,7 +96,7 @@ class SystemConfigsSeeder extends Seeder
             ], [
                 'title' => '版权信息',
                 'key' => 'site_copyright',
-                'value' => '悦遇科技',
+                'value' => 'xxx',
                 'type' => 'textarea',
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
