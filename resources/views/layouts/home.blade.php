@@ -30,7 +30,8 @@
         {!! htmlspecialchars_decode(\App\Models\SystemConfig::getConfigCache('site_tongji')) !!}
     </script>
     {{--谷歌广告--}}
-    <script data-ad-client="ca-pub-4281894096969033" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4281894096969033"
+            crossorigin="anonymous"></script>
     <style>
         body{
             font: 15px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
