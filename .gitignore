@@ -18,3 +18,4 @@ yarn-error.log
 .user.ini
 /public/verify/
 .history
+.claude/task/

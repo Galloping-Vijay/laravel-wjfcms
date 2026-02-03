@@ -68,6 +68,9 @@ Route::namespace('Home')->group(function () {
     //标签云
     Route::any('ajaxTags', 'IndexController@ajaxTags');
 
+    // SEO Sitemap
+    Route::get('sitemap.xml', 'SitemapController@index');
+
     //用户
     Route::prefix('user')->middleware('auth:web')->group(function () {
         //个人中心

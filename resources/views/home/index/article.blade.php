@@ -163,6 +163,63 @@
 
 @section('script')
     @parent
+    <!-- 文章结构化数据 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ $info->title }}",
+        "description": "{{ str_replace('"', '\\"', $info->description) }}",
+        "image": "{{ $info->cover ?? url('/images/config/default-img.jpg') }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ $info->author }}"
+        },
+        "datePublished": "{{ $info->created_at->format('Y-m-d\TH:i:sP') }}",
+        "dateModified": "{{ $info->updated_at ? $info->updated_at->format('Y-m-d\TH:i:sP') : $info->created_at->format('Y-m-d\TH:i:sP') }}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ url('/article/' . $info->id) }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ \App\Models\SystemConfig::getConfigCache('site_name') }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ url('/images/config/avatar.jpg') }}"
+            }
+        },
+        "keywords": "{{ $info->keywords }}"
+    }
+    </script>
+    <!-- 面包屑导航结构化数据 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "首页",
+                "item": "{{ url('/') }}"
+            },
+            @if($info->category)
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "{{ $info->category->name }}",
+                "item": "{{ url('/category/' . $info->category->id) }}"
+            },
+            @endif
+            {
+                "@type": "ListItem",
+                "position": {{ $info->category ? 3 : 2 }},
+                "name": "{{ $info->title }}"
+            }
+        ]
+    }
+    </script>
     <script>
         $(function () {
             var layer = null;

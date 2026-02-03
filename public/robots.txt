@@ -1,2 +1,29 @@
+# www.robotstxt.org
+# https://developers.google.com/search/docs/advanced/robots_intro
+
 User-agent: *
-Disallow:
+Allow: /
+
+# 禁止爬取后台管理页面
+Disallow: /admin
+Disallow: /auth
+Disallow: /user
+
+# 禁止爬取搜索相关页面
+Disallow: /search
+Disallow: /ajaxComment
+Disallow: /ajaxTags
+Disallow: /applyLink
+
+# 禁止爬取测试页面
+Disallow: /test
+Disallow: /blank
+
+# 禁止爬取API路由
+Disallow: /api
+
+# Sitemap位置
+Sitemap: http://blog.localhost/sitemap.xml
+
+# 爬取延迟（可选，对遵守Crawl-delay的爬虫有效）
+Crawl-delay: 1

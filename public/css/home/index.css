@@ -348,15 +348,16 @@ h3.blogtitle a:hover {
 .cloud ul a {
     line-height: 28px;
     height: 28px;
-    display: block;
+    display: inline-block;
     background: #999;
     float: left;
-    padding: 4px 16px;
+    padding: 0 16px;
     margin: 8px 8px 0 0;
-    border-radius: 20px;
+    border-radius: 14px;
     transition: all 0.3s ease;
     color: #fff;
     font-size: 14px;
+    text-align: center;
 }
 .cloud ul a:nth-child(8n-7) { background: #8a9b0f; }
 .cloud ul a:nth-child(8n-6) { background: #eb6841; }
@@ -382,6 +383,12 @@ h3.blogtitle a:hover {
     color: #333;
     position: relative;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hometitle .title-text {
+    flex: 1;
 }
 .hometitle:after {
     content: "";
@@ -397,6 +404,25 @@ h3.blogtitle a:hover {
 }
 .hometitle:hover:after {
     width: 80px;
+}
+/* 申请友链按钮样式优化 */
+.hometitle .add_links {
+    display: inline-block !important;
+    flex-shrink: 0;
+    font-size: 13px;
+    padding: 4px 14px;
+    white-space: nowrap;
+    background: #FC9D9A;
+    color: #FFF;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    line-height: 1.4;
+}
+.hometitle .add_links:hover {
+    background: #fa7e7b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(252, 157, 154, 0.4);
 }
 
 .paihang {

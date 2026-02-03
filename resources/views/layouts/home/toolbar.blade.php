@@ -145,9 +145,16 @@
             $(".toolbar-open").removeClass("openviewd");
             $(".toolbar").removeClass("guanbi");
         });
-        //toolbar-menu
+        //toolbar-menu - 点击切换显示/隐藏
         $('#toolbar-menu li').click(function () {
-            $(this).addClass('current').siblings().removeClass('current');
+            var $this = $(this);
+            // 如果当前已经是current状态，则关闭
+            if ($this.hasClass('current')) {
+                $this.removeClass('current');
+            } else {
+                // 否则显示当前，关闭其他
+                $this.addClass('current').siblings().removeClass('current');
+            }
         });
 
     })();
