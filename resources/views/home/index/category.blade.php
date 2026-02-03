@@ -3,7 +3,7 @@
 @section('keywords', $info->name)
 @section('description', $info->description)
 @section('content')
-    <div style="width: 100%;height: 76px;"></div>
+    <div class="header-spacer"></div>
     <article>
         <h1 class="t_nav"><span>{{ $info->description }} </span></h1>
         <div class="blogs">
