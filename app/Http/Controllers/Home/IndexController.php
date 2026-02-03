@@ -199,7 +199,7 @@ class IndexController extends Controller
         // 获取分类下的文章
         $arts = Article::query()
             ->where('status', 1)
-            ->select('id', 'title', 'category_id')
+            ->select('id', 'title', 'category_id', 'created_at', 'click')
             ->orderBy('id', 'ASC')
             ->get();
         $res = [];
@@ -215,6 +215,8 @@ class IndexController extends Controller
             $res[$art['category_id']]['art'][] = [
                 'id' => $art['id'],
                 'title' => $art['title'],
+                'created_at' => $art['created_at'],
+                'click' => $art['click'],
             ];
         }
         return view('home.index.archive', [
