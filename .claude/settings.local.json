@@ -9,7 +9,8 @@
       "Bash(php artisan view:clear:*)",
       "Bash(php artisan cache:clear:*)",
       "mcp__chrome-devtools__list_console_messages",
-      "mcp__chrome-devtools__emulate"
+      "mcp__chrome-devtools__emulate",
+      "mcp__chrome-devtools__new_page"
     ]
   }
 }

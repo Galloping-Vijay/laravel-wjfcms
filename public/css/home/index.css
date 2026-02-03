@@ -587,51 +587,75 @@ h3.blogtitle a:hover {
     left: -11px;
     position: absolute;
 }
+/*现代化图片盒子（标签页）*/
 .picbox {
-    width: 72%;
+    width: 68%;
     float: left;
     overflow: hidden;
     margin-top: 20px;
 }
 .picbox ul {
     width: 100%;
+    overflow: hidden;
+    margin-bottom: 10px;
 }
 .picbox ul li {
-    display: inline-block;
+    float: left;
     background: #fff;
     margin: 10px 6px;
-    border: 1px #d9d9d9 solid;
-    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    width: calc(33.333% - 12px);
+    box-sizing: border-box;
+}
+.picbox ul li:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    transform: translateY(-3px);
+}
+.picbox ul li a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }
 .picbox ul li i {
-    margin: 10px;
-    height: auto;
     overflow: hidden;
     display: block;
+    border-radius: 12px 12px 0 0;
 }
 .picbox ul li img {
-    width: 246px;
-    height: 246px;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+.picinfo {
+    padding: 15px;
+    text-align: center;
 }
 .picinfo h3 {
-    overflow: hidden;
-    border-bottom: #ccc 1px solid;
-    padding: 20px 0;
-    margin: 0 20px;
-    width: 228px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+    padding: 0;
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
+    border: none;
+    width: 100%;
 }
 .picinfo span {
-    padding: 20px;
-    display: block;
-    color: #666;
-    width: 228px;
-    white-space: break-spaces;
+    display: -webkit-box;
+    color: #999;
+    font-size: 13px;
+    line-height: 1.5;
     overflow: hidden;
-    height: 38px;
-    text-overflow: ellipsis;
-    line-height: 30px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: auto;
+    padding: 0;
 }
 .infos {
     float: left;
