@@ -271,16 +271,62 @@
     .paihang li i {
         width: 98%;
     }
+    /* 标签页手机端样式 - 单列布局 */
     .picbox {
         width: 100%;
+        margin-top: 20px;
     }
     .picbox ul {
         width: 100%;
-        margin-right: 0;
+        margin: 0;
     }
     .picbox ul li {
-        width: 45%;
-        margin: 0 2.5% 20px 0;
+        float: none;
+        width: 100% !important;
+        margin: 0 0 20px 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    .picbox ul li a {
+        display: block;
+    }
+    .picbox ul li i {
+        margin: 0;
+        overflow: hidden;
+        display: block;
+    }
+    .picbox ul li img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+    .picinfo {
+        padding: 15px;
+        text-align: left;
+    }
+    .picinfo h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin: 0 0 10px 0;
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: none;
+        width: 100%;
+    }
+    .picinfo span {
+        display: -webkit-box;
+        color: #999;
+        font-size: 14px;
+        line-height: 1.6;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: auto;
+        padding: 0;
     }
     h1.t_nav {
         display: none;
@@ -470,6 +516,7 @@
         clear: both;
         border-radius: 6px;
     }
+    /* 标签页手机端样式 - 单列布局 */
     .picbox {
         width: 100%;
         margin-top: 20px;
@@ -479,37 +526,52 @@
         margin: 0;
     }
     .picbox ul li {
-        display: block;
-        background: #fff;
+        float: none;
+        width: 100% !important;
         margin: 0 0 20px 0;
-        border: 1px #e0e0e0 solid;
+        border: 1px solid #e0e0e0;
         border-radius: 12px;
         overflow: hidden;
     }
+    .picbox ul li a {
+        display: block;
+    }
     .picbox ul li i {
-        margin: 10px;
-        height: auto;
+        margin: 0;
         overflow: hidden;
         display: block;
     }
     .picbox ul li img {
         width: 100%;
-        height: 280px;
+        height: 200px;
         object-fit: cover;
     }
+    .picinfo {
+        padding: 15px;
+        text-align: left;
+    }
     .picinfo h3 {
-        overflow: hidden;
-        border-bottom: #e0e0e0 1px solid;
-        padding: 15px 0;
-        margin: 0 15px;
-        width: calc(100% - 30px);
         font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin: 0 0 10px 0;
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: none;
+        width: 100%;
     }
     .picinfo span {
-        padding: 15px;
-        display: block;
-        color: #666;
+        display: -webkit-box;
+        color: #999;
         font-size: 14px;
+        line-height: 1.6;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: auto;
+        padding: 0;
     }
     h1.t_nav {
         display: none;
@@ -692,16 +754,62 @@
         clear: both;
         border-radius: 6px;
     }
+    /* 标签页手机端样式 - 单列布局 */
     .picbox {
         width: 100%;
+        margin-top: 20px;
     }
     .picbox ul {
         width: 100%;
         margin: 0;
     }
     .picbox ul li {
-        width: 100%;
+        float: none;
+        width: 100% !important;
         margin: 0 0 20px 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    .picbox ul li a {
+        display: block;
+    }
+    .picbox ul li i {
+        margin: 0;
+        overflow: hidden;
+        display: block;
+    }
+    .picbox ul li img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+    .picinfo {
+        padding: 12px;
+        text-align: left;
+    }
+    .picinfo h3 {
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+        margin: 0 0 8px 0;
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: none;
+        width: 100%;
+    }
+    .picinfo span {
+        display: -webkit-box;
+        color: #999;
+        font-size: 13px;
+        line-height: 1.5;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: auto;
+        padding: 0;
     }
     h1.t_nav {
         display: none;
