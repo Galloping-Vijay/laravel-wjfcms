@@ -58,6 +58,9 @@
     <link rel="stylesheet" href="{{ asset('static/layuiadmin/layui/css/layui.css') }}" media="all">
     <script src="{{ asset('static/layuiadmin/layui/layui.js') }}"></script>
 
+    <!-- Page Agent AI Assistant -->
+    <script src="https://registry.npmmirror.com/page-agent/1.8.1/files/dist/iife/page-agent.demo.js" crossorigin="true"></script>
+
     @yield('header')
 
     <!-- 统计代码 -->
